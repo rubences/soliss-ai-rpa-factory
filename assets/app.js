@@ -391,29 +391,15 @@ Keedio propone, diseña e integra el patrón P0. Soliss decide, valida, adquiere
 
   // V5 · Unified Access Hub
   const ACCESS_NAV={
-    public:[
-      ['Contexto','#why'],
-      ['P0 + Casos de uso','#factory'],
-      ['Assurance','#assurance']
-    ],
-    boardroom:[
-      ['Contexto','#why'],
-      ['Decisiones','#decision'],
-      ['Arquitectura','#twin'],
-      ['P0 + Casos de uso','#factory'],
-      ['Economics','#economics'],
-      ['Governance','#governance'],
-      ['Assurance','#assurance'],
-      ['Delivery','#delivery'],
-      ['Docs','#documents']
-    ]
+    public:[['Contexto','#why'],['P0 y casos','#factory'],['Confianza','#assurance']],
+    boardroom:[['Resumen','#hero'],['P0 y casos','#factory'],['Gobierno','#governance'],['Documentación','#documents']]
   };
   const ACCESS_COPY={
     public:{
-      badge:'PUBLIC',
+      badge:'PÚBLICO',
       ribbon:'Visión pública · estrategia, P0, casos de uso y assurance. Sin economics ni documentación interna.',
       brand:'AI/RPA Factory · Visión pública',
-      switchLabel:'Public',
+      switchLabel:'Público',
       title:'Soliss AI/RPA Factory · Visión pública | Keedio',
       scope:'P0 · AI/RPA Factory',
       status:'VISIÓN PÚBLICA',
@@ -425,7 +411,7 @@ Keedio propone, diseña e integra el patrón P0. Soliss decide, valida, adquiere
     boardroom:{
       badge:'BOARDROOM',
       ribbon:'Boardroom Keedio → Soliss · economics, arquitectura, gobierno, delivery, evidencias y documentación de propuesta.',
-      brand:'P0 Decision Room · Boardroom',
+      brand:'P0 · Boardroom Soliss',
       switchLabel:'Boardroom',
       title:'Keedio → Soliss · P0 Boardroom V5',
       scope:'P0 · Infraestructura crítica',

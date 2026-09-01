@@ -1,7 +1,7 @@
 {
-  "name": "Keedio → Soliss · AI/RPA Factory V6",
-  "short_name": "Soliss Factory V6",
-  "description": "Portal V6 con experiencia pública y Boardroom autenticable para Soliss AI/RPA Factory.",
+  "name": "Keedio → Soliss · AI/RPA Factory V6.2",
+  "short_name": "Soliss Factory V6.2",
+  "description": "V6.2 con experiencia pública concisa y Boardroom workspace optimizado para Consejo, Tecnología y Compliance.",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#071F2A",

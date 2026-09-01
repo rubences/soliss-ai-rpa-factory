@@ -195,7 +195,7 @@ python -m http.server 8000
 
 y abra `http://localhost:8000/`.
 
-En localhost, `allowLocalDemo=true` permite revisar Boardroom sin fingir un SSO productivo. Fuera de localhost, el acceso Boardroom usa el login directo (`simpleLogin`, ver V6.1) salvo que se desactive explícitamente; si además `auth.enabled=false` y `simpleLogin.enabled=false`, V6 bloquea el acceso Boardroom hasta configurar SSO.
+En localhost, `allowLocalDemo=true` permite revisar Boardroom sin fingir un SSO productivo. Fuera de localhost, si `auth.enabled=false`, V6 bloquea el acceso Boardroom.
 
 
 ## V6.1 — Acceso directo Boardroom
@@ -208,3 +208,21 @@ Para simplificar la demo/reunión se ha activado un login directo:
 La sesión se guarda únicamente en `sessionStorage`.
 
 Este mecanismo es una barrera de acceso de interfaz, no autenticación fuerte. Para producción real sigue disponible la integración Keycloak/OIDC preparada en V6.
+
+
+## V6.2 — UX/UI Refinement
+
+V6.2 no añade nuevas capacidades funcionales: reorganiza V6.1 para mejorar lectura, accesibilidad y uso real en reuniones.
+
+- tipografía mínima 12 px y jerarquía más consistente;
+- contraste base reforzado;
+- cabecera reducida a Buscar / Acceso / Herramientas;
+- Boardroom convertido en workspace con sidebar en desktop;
+- Public reducido a narrativa esencial;
+- perfiles Consejo / Tecnología / Compliance con profundidad realmente distinta;
+- login Boardroom simplificado con mostrar/ocultar contraseña y Enter;
+- herramientas accesibles en móvil;
+- modales/drawers con roles ARIA, focus trap y devolución de foco;
+- controles de al menos 40 px en desktop y 44 px en móvil;
+- etiquetas principales traducidas a español;
+- progressive disclosure en contenidos avanzados.

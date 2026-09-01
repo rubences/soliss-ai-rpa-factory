@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#FF006A">
   <meta name="description" content="Soliss AI/RPA Factory · una única web Keedio → Soliss con acceso a Visión pública o Boardroom P0.">
-  <title>Soliss AI/RPA Factory · Keedio → Soliss · V6</title>
+  <title>Soliss AI/RPA Factory · Keedio → Soliss · V6.2</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="assets/icon-192.png">
   <link rel="stylesheet" href="assets/styles.css">
@@ -16,6 +16,7 @@
   <script defer src="assets/v6-auth.js"></script>
   <script defer src="assets/app.js"></script>
   <script defer src="assets/v6-features.js"></script>
+  <script defer src="assets/v62-ui.js"></script>
 </head>
 <body data-audience="board" data-build="unified" data-access="portal">
 <a class="skip" href="#main">Ir al contenido</a>
@@ -23,73 +24,45 @@
 <div id="accessPortal" class="access-portal" aria-labelledby="accessPortalTitle">
   <div class="access-portal-shell">
     <header class="access-portal-head">
-      <div class="access-logos">
-        <img src="assets/brand/keedio-logo.png" alt="Keedio">
-        <span>→</span>
-        <img src="assets/brand/soliss-logo.png" alt="Soliss">
-      </div>
-      <span class="access-version">SOLISS AI/RPA FACTORY · V6.1</span>
-      <h1 id="accessPortalTitle">¿Qué experiencia quieres consultar?</h1>
-      <p>Una única web, dos niveles de lectura. El contenido compartido se mantiene una sola vez; economics, herramientas de comité y documentación se reservan a la vista Boardroom.</p>
+      <div class="access-logos"><img src="assets/brand/keedio-logo.png" alt="Keedio"><span>→</span><img src="assets/brand/soliss-logo.png" alt="Soliss"></div>
+      <span class="access-version">SOLISS AI/RPA FACTORY · V6.2</span>
+      <h1 id="accessPortalTitle">Elige tu experiencia</h1>
+      <p>La misma propuesta, con el nivel de detalle adecuado para cada momento.</p>
     </header>
 
     <div class="access-options">
       <button class="access-card public" type="button" data-access-choice="public">
-        <span class="access-icon">◎</span>
-        <small>ACCESO ABIERTO</small>
-        <h2>Visión pública</h2>
-        <p>Para explicar la estrategia AI/RPA Factory de forma clara, pedagógica y compartible.</p>
-        <ul>
-          <li>Why now + benchmark sectorial</li>
-          <li>P0 explicado en lenguaje claro</li>
-          <li>UC1–UC7 e historias de usuario</li>
-          <li>Factory Effect y futuros UC</li>
-          <li>Insurance AI Assurance</li>
-        </ul>
-        <b>Entrar a la visión pública →</b>
-        <em>Sin economics, documentos internos ni simuladores de comité.</em>
+        <span class="access-icon">◎</span><small>VISIÓN PÚBLICA</small>
+        <h2>Entender la propuesta</h2>
+        <p>P0, casos de uso, historias y principios de confianza en una lectura breve.</p>
+        <div class="access-meta"><span>5–10 min</span><span>Compartible</span></div>
+        <b>Explorar →</b>
       </button>
 
       <button class="access-card boardroom" type="button" data-access-choice="boardroom">
-        <span class="access-icon">◆</span>
-        <small>KEEDIO → SOLISS · USO RESTRINGIDO</small>
-        <h2>Boardroom P0</h2>
-        <p>Para Consejo, IT, Data, Security y Compliance durante revisión y toma de decisiones.</p>
-        <ul>
-          <li>Decision Room + Digital Twin</li>
-          <li>Economics y escenarios TCO</li>
-          <li>Governance + Evidence Registry</li>
-          <li>Delivery, Gates, RACI y riesgos</li>
-          <li>Document Center + Committee Toolkit</li>
-        </ul>
-        <b>Continuar al Boardroom →</b>
-        <em>Contiene información interna de propuesta.</em>
+        <span class="access-icon">◆</span><small>BOARDROOM SOLISS</small>
+        <h2>Revisar y decidir P0</h2>
+        <p>Arquitectura, economics, gobierno, evidencias, riesgos y documentación.</p>
+        <div class="access-meta"><span>Consejo / IT / Compliance</span><span>Área reservada</span></div>
+        <b>Acceder →</b>
       </button>
     </div>
 
     <div id="boardroomConsent" class="boardroom-consent" hidden>
-      <div>
-        <span>BOARDROOM · ACCESO AUTENTICADO</span>
-        <h3>Esta vista contiene información que no forma parte de la experiencia pública.</h3>
-        <p>Incluye economics, arquitectura detallada, matrices de responsabilidad, riesgos y documentos descargables. V6 incorpora integración OIDC/PKCE para Keycloak. Los recursos privados deben permanecer además protegidos por el reverse proxy/hosting.</p>
+      <div class="boardroom-login-copy">
+        <span>BOARDROOM SOLISS</span>
+        <h3>Área reservada para revisión de P0</h3>
+        <p>Introduce las credenciales facilitadas por Keedio.</p>
       </div>
-      <div id="authReadiness" class="auth-readiness">Acceso Boardroom mediante credenciales Keedio → Soliss.</div>
+      <div id="authReadiness" class="auth-readiness">Acceso Boardroom Keedio → Soliss</div>
       <div class="simple-login-grid">
-        <label>
-          <span>Usuario</span>
-          <input id="boardroomUser" type="text" autocomplete="username" placeholder="Usuario" value="">
-        </label>
-        <label>
-          <span>Contraseña</span>
-          <input id="boardroomPassword" type="password" autocomplete="current-password" placeholder="Contraseña" value="">
-        </label>
+        <label><span>Usuario</span><input id="boardroomUser" type="text" autocomplete="username" placeholder="Usuario"></label>
+        <label><span>Contraseña</span><div class="password-field"><input id="boardroomPassword" type="password" autocomplete="current-password" placeholder="Contraseña"><button id="toggleBoardroomPassword" type="button" aria-label="Mostrar contraseña">👁</button></div></label>
       </div>
       <div id="boardroomLoginError" class="boardroom-login-error" hidden>Usuario o contraseña incorrectos.</div>
-      <label class="boardroom-access-note"><input id="boardroomAck" type="checkbox"> Confirmo que este acceso es para revisión Keedio → Soliss.</label>
-      <div class="consent-actions">
-        <button id="boardroomCancel" type="button">← Volver</button>
-        <button id="boardroomEnter" class="primary" type="button" disabled>Entrar al Boardroom →</button>
-      </div>
+      <input id="boardroomAck" type="checkbox" checked hidden>
+      <div class="consent-actions"><button id="boardroomCancel" type="button">← Volver</button><button id="boardroomEnter" class="primary" type="button">Entrar al Boardroom →</button></div>
+      <small class="login-demo-note">Acceso de demostración Keedio → Soliss. Para producción se mantiene preparada la integración SSO.</small>
     </div>
 
     <footer class="access-portal-foot">
@@ -101,14 +74,32 @@
 
 <header class="topbar">
   <div class="shell navrow">
-    <a class="brand brand-lockup" href="#hero" aria-label="Keedio presenta a Soliss"><img src="assets/brand/keedio-logo.png" alt="Keedio"><span class="brand-arrow">→</span><img class="soliss-wordmark" src="assets/brand/soliss-logo.png" alt="Soliss Seguros desde 1933"><small id="brandModeText">AI/RPA Factory · V6.1</small></a>
+    <a class="brand brand-lockup" href="#hero" aria-label="Keedio presenta a Soliss"><img src="assets/brand/keedio-logo.png" alt="Keedio"><span class="brand-arrow">→</span><img class="soliss-wordmark" src="assets/brand/soliss-logo.png" alt="Soliss Seguros desde 1933"><small id="brandModeText">AI/RPA Factory · V6.2</small></a>
     <nav id="nav" aria-label="Principal">
       <a href="#why">Contexto</a><a href="#decision">Decisiones</a><a href="#twin">Arquitectura</a><a href="#factory">P0 + Casos de uso</a><a href="#economics">Economics</a><a href="#governance">Governance</a><a href="#assurance">Assurance</a><a href="#delivery">Delivery</a><a href="#documents">Docs</a>
     </nav>
-    <div class="actions"><button id="askP0Btn" class="icon-text-btn" type="button">✦ Ask P0</button><button id="commandBtn" class="icon-text-btn" type="button">⌘ K</button><button id="displayBtn" class="icon-text-btn" type="button">Aa</button><button id="shareBtn" class="icon-text-btn public-only" type="button">↗ Compartir</button><button id="briefBtn" class="icon-text-btn public-only" type="button">↓ Brief</button><button id="accessSwitchBtn" class="access-switch-btn" type="button"><i></i><span id="accessSwitchLabel">Elegir acceso</span></button><button id="execStoryBtn" class="chip-btn story-chip">● Story 9 min</button><button id="presentBtn" class="chip-btn">▶ Presentar libre</button><button id="themeBtn" class="icon-btn" aria-label="Cambiar tema">◐</button><button id="menuBtn" class="icon-btn menu" aria-label="Abrir menú">☰</button></div>
+    <div class="actions v62-actions">
+      <button id="commandBtn" class="top-search" type="button" aria-label="Buscar en la propuesta"><span>⌕ Buscar</span><kbd>Ctrl K</kbd></button>
+      <button id="accessSwitchBtn" class="access-switch-btn" type="button"><i></i><span id="accessSwitchLabel">Acceso</span></button>
+      <button id="toolsBtn" class="icon-btn" type="button" aria-expanded="false" aria-controls="toolsPanel" aria-label="Abrir herramientas">⋯</button>
+      <button id="menuBtn" class="icon-btn menu" aria-label="Abrir navegación">☰</button>
+    </div>
   </div>
   <div class="progress"><i id="progress"></i></div>
 </header>
+
+<div id="toolsPanel" class="tools-panel" hidden aria-label="Herramientas">
+  <header><div><span>HERRAMIENTAS</span><b>Acciones rápidas</b></div><button id="toolsClose" type="button" aria-label="Cerrar herramientas">×</button></header>
+  <div class="tools-panel-grid">
+    <button id="askP0Btn" type="button"><b>✦ Preguntar sobre P0</b><small>Buscador gobernado local</small></button>
+    <button id="displayBtn" type="button"><b>Aa Apariencia</b><small>Texto, contraste y movimiento</small></button>
+    <button id="execStoryBtn" class="boardroom-only" type="button"><b>▶ Presentación ejecutiva</b><small>Story guiado</small></button>
+    <button id="presentBtn" class="boardroom-only" type="button"><b>▣ Presentación libre</b><small>Navegar por escenas</small></button>
+    <button id="shareBtn" class="public-only" type="button"><b>↗ Compartir</b><small>URL pública y QR</small></button>
+    <button id="briefBtn" class="public-only" type="button"><b>↓ Resumen ejecutivo</b><small>PDF de una página</small></button>
+    <button id="themeBtn" type="button"><b>◐ Tema</b><small>Claro / oscuro</small></button>
+  </div>
+</div>
 
 <div id="accessRibbon" class="access-ribbon" hidden>
   <div class="shell access-ribbon-row">
@@ -119,14 +110,32 @@
 
 <div class="audience-bar">
   <div class="shell audience-row">
-    <span>Vista</span>
+    <span>Perfil</span>
     <button class="aud active" data-audience="board">Consejo</button>
     <button class="aud" data-audience="tech">Tecnología</button>
     <button class="aud" data-audience="compliance">Compliance</button>
     <button class="aud" data-audience="all">Completa</button>
-    <em>Keedio propone · Soliss decide y valida</em>
+    <em>El contenido se adapta al perfil de revisión</em>
   </div>
 </div>
+
+<aside id="boardroomSidebar" class="boardroom-sidebar boardroom-only" aria-label="Navegación Boardroom">
+  <div class="boardroom-sidebar-inner">
+    <span class="sidebar-eyebrow">BOARDROOM P0</span>
+    <nav id="boardroomSideNav" class="side-nav">
+      <a href="#hero"><i>01</i><span>Resumen</span></a>
+      <a href="#decision"><i>02</i><span>Decisiones</span></a>
+      <a href="#factory"><i>03</i><span>P0 y casos</span></a>
+      <a href="#twin"><i>04</i><span>Arquitectura</span></a>
+      <a href="#economics"><i>05</i><span>Economía / TCO</span></a>
+      <a href="#governance"><i>06</i><span>Gobierno</span></a>
+      <a href="#assurance"><i>07</i><span>Aseguramiento</span></a>
+      <a href="#delivery"><i>08</i><span>Entrega</span></a>
+      <a href="#documents"><i>09</i><span>Documentación</span></a>
+    </nav>
+    <div class="sidebar-help"><b>Ctrl K</b><span>Buscar cualquier concepto</span></div>
+  </div>
+</aside>
 
 <main id="main">
 <section id="hero" class="hero present-step" data-show="board tech compliance">
@@ -134,10 +143,10 @@
   <div class="shell hero-grid">
     <div class="hero-copy reveal">
       <div class="hero-brand"><img src="assets/brand/soliss-logo.png" alt="Soliss"><span>Propuesta tecnológica de Keedio</span></div><div class="overline"><span id="heroScopeLabel">P0 · Infraestructura crítica</span><b id="heroStatus">FINAL CERRADO</b></div>
-      <h1>Keedio propone a Soliss una <em>AI/RPA Factory gobernada</em>, no siete islas tecnológicas.</h1>
-      <p>P0 construye la plataforma on-premise, federada, segura y operable. Soliss mantiene la propiedad de la infraestructura y activa UC1–UC7 posteriormente mediante business case y Go/No-Go.</p>
-      <div class="hero-ctas boardroom-only"><button class="btn primary" type="button" data-open-exec-story>▶ Executive Story · 9 min</button><a class="btn ghost" href="#decision">Abrir Decision Room</a><a class="btn ghost" href="#twin">Simular arquitectura</a></div><div class="hero-ctas public-only"><button class="btn primary" type="button" data-open-exec-story>▶ Story público · 6 min</button><a class="btn ghost" href="#factory">Entender P0</a><a class="btn ghost" href="#assurance">Ver assurance</a></div>
-      <div class="principle"><b>Principio de experiencia propuesto por Keedio</b><span>IA que amplifica la cercanía y el juicio humano de Soliss, no que los sustituye.</span></div>
+      <h1>Una base común para <em>industrializar IA y RPA</em> en Soliss.</h1>
+      <p>Keedio propone P0 como proyecto único: una plataforma gobernada y reutilizable. Los UC1–UC7 se activan después mediante business case y Go/No-Go.</p>
+      <div class="hero-ctas boardroom-only"><button class="btn primary" type="button" data-open-exec-story>▶ Executive Story · 9 min</button><a class="btn ghost" href="#decision">Abrir Decision Room</a><a class="btn ghost" href="#twin">Simular arquitectura</a></div><div class="hero-ctas public-only"><button class="btn primary" type="button" data-open-exec-story>▶ Ver historia</button><a class="btn ghost" href="#factory">Entender P0</a></div>
+      <div class="hero-facts"><span>P0 único</span><span>UC1–UC7 derivados</span><span>24 meses base</span><span>On-premise</span></div>
     </div>
     <aside class="hero-panel reveal boardroom-only">
       <header><span>Responsabilidad</span><strong>Quién hace qué</strong></header>
@@ -160,7 +169,7 @@
 
 <section id="why" class="section present-step" data-show="board compliance">
   <div class="shell">
-    <div class="section-head reveal"><div><span>01 · WHY NOW</span><h2>La oportunidad no es adoptar GenAI. Es industrializarla con control.</h2></div><p>EIOPA confirma que el sector asegurador europeo ya ha entrado en adopción, pero la mayoría de casos sigue atrapada entre PoC y producción.</p></div>
+    <div class="section-head reveal"><div><span>01 · POR QUÉ AHORA</span><h2>La oportunidad no es adoptar GenAI. Es industrializarla con control.</h2></div><p>EIOPA confirma que el sector asegurador europeo ya ha entrado en adopción, pero la mayoría de casos sigue atrapada entre PoC y producción.</p></div>
     <div id="benchmarkGrid" class="benchmark-grid reveal"></div>
     <div class="context-band reveal"><div><span>Soliss</span><b>Toledo · 1933 · 90 oficinas</b><p>La propuesta de Keedio conecta industrialización tecnológica con una experiencia donde el profesional Soliss sigue siendo central.</p></div><div class="trust-signal"><b>59%</b><span>de consumidores europeos muestran reservas ante recomendaciones de agentes IA.</span><small>EIOPA Eurobarometer 2025</small></div></div>
     
@@ -178,16 +187,16 @@
 
 <section id="decision" class="section dark present-step" data-show="board compliance">
   <div class="shell">
-    <div class="section-head light reveal"><div><span>02 · DECISION ROOM</span><h2>Seis decisiones. Un único P0.</h2></div><p>Cada decisión muestra quién la toma, cuándo, qué desbloquea y qué riesgo aparece si se difiere.</p></div>
+    <div class="section-head light reveal"><div><span>02 · DECISIONES</span><h2>Seis decisiones. Un único P0.</h2></div><p>Cada decisión muestra quién la toma, cuándo, qué desbloquea y qué riesgo aparece si se difiere.</p></div>
     <div id="decisionGrid" class="decision-grid reveal"></div>
     
     <div class="v6-readiness reveal">
-      <header><div><span>DECISION READINESS · NO ES COMPLIANCE</span><h3>¿Qué está realmente resuelto para decidir?</h3></div><button id="exportDecisionBoard" type="button">↓ Exportar decisiones</button></header>
+      <header><div><span>PREPARACIÓN PARA DECISIÓN · NO ES COMPLIANCE</span><h3>¿Qué está realmente resuelto para decidir?</h3></div><button id="exportDecisionBoard" type="button">↓ Exportar decisiones</button></header>
       <div id="readinessMetrics" class="readiness-metrics"></div>
       <div class="readiness-note">Los contadores se calculan únicamente a partir de decisiones, owners, checklists G1–G4 y Evidence Registry guardados en este navegador.</div>
     </div>
     <div class="live-decision-board reveal">
-      <header><div><span>LIVE DECISION BOARD</span><h3>Convertir la reunión en próximos pasos concretos.</h3></div><small>Estado local de preparación de comité · no constituye aprobación contractual.</small></header>
+      <header><div><span>TABLERO DE DECISIONES</span><h3>Convertir la reunión en próximos pasos concretos.</h3></div><small>Estado local de preparación de comité · no constituye aprobación contractual.</small></header>
       <div id="liveDecisionGrid" class="live-decision-grid"></div>
     </div>
 <div class="decision-summary reveal"><b>Decisión solicitada</b><p>Aprobar P0 como infraestructura crítica, activar F0, nombrar responsable transversal Soliss y condicionar el avance a G1–G4.</p></div>
@@ -196,7 +205,7 @@
 
 <section id="twin" class="section present-step" data-show="tech compliance board">
   <div class="shell">
-    <div class="section-head reveal"><div><span>03 · DIGITAL TWIN</span><h2>La arquitectura se explica mejor cuando puede fallar.</h2></div><p>Simulación conceptual del patrón objetivo. No representa pruebas ejecutadas: los resultados reales se obtienen en F3/F4 y quedan como evidencia.</p></div>
+    <div class="section-head reveal"><div><span>03 · ARQUITECTURA INTERACTIVA</span><h2>La arquitectura se explica mejor cuando puede fallar.</h2></div><p>Simulación conceptual del patrón objetivo. No representa pruebas ejecutadas: los resultados reales se obtienen en F3/F4 y quedan como evidencia.</p></div>
     <div class="twin-toolbar reveal"><div id="scenarioButtons" class="segmented"></div><div id="lensButtons" class="segmented lenses"><button class="active" data-lens="detail">Arquitectura</button><button data-lens="security">Security</button><button data-lens="data">Data</button><button data-lens="dora">DORA</button><button data-lens="aiAct">AI Act</button></div></div>
     <div class="twin-shell reveal">
       <div class="architecture-map" id="archMap">
@@ -219,6 +228,7 @@
   <div class="shell">
     <div class="section-head reveal"><div><span>04 · P0 + CASOS DE USO</span><h2>Entender primero qué construye P0. Priorizar después qué casos activar.</h2></div><p>Esta sección separa la <b>base común P0</b> de las soluciones de negocio UC1–UC7 y permite cambiar entre lenguaje claro y detalle técnico.</p></div>
 
+    <div class="public-depth-note public-only"><b>Vista pública</b><span>Te mostramos la lógica esencial. El detalle técnico, económico y de gobierno se consulta en Boardroom.</span><button type="button" data-access-choice="boardroom">Acceder al Boardroom →</button></div>
     <div class="explain-toolbar reveal"><div class="segmented" id="explainMode"><button class="active" data-explain="plain">Lenguaje claro</button><button data-explain="technical">Detalle técnico</button></div><span>La terminología contractual se mantiene; los ejemplos se identifican como ilustrativos.</span></div>
 
     <div class="p0-hero-explain reveal">
@@ -318,12 +328,12 @@
 
 
     <section class="v6-uc-contracts reveal">
-      <header><div><span>P0 ARCHITECTURE CONTRACT</span><h3>Qué capacidades solicita cada UC a la Factory.</h3></div><p>REQUIRED / OPTIONAL / DEPENDS describe dependencia arquitectónica propuesta; no amplían el alcance contractual.</p></header>
+      <header><div><span>CONTRATO DE CAPACIDADES P0</span><h3>Qué capacidades solicita cada UC a la Factory.</h3></div><p>REQUIRED / OPTIONAL / DEPENDS describe dependencia arquitectónica propuesta; no amplían el alcance contractual.</p></header>
       <div class="uc-contract-toolbar"><div id="ucContractTabs" class="segmented"></div></div>
       <div id="ucContractCard" class="uc-contract-card"></div>
     </section>
     <section class="v6-value-evidence reveal">
-      <header><div><span>UC → KPI → EVIDENCE</span><h3>Del caso de uso a una medición defendible.</h3></div><p>Baseline y target permanecen N/D hasta disponer de workshop/datos reales.</p></header>
+      <header><div><span>UC → KPI → EVIDENCIA</span><h3>Del caso de uso a una medición defendible.</h3></div><p>Baseline y target permanecen N/D hasta disponer de workshop/datos reales.</p></header>
       <div id="ucEvidenceGrid" class="uc-evidence-grid"></div>
     </section>
 
@@ -337,7 +347,7 @@
 
 <section id="economics" class="section present-step" data-show="board tech">
   <div class="shell">
-    <div class="section-head reveal"><div><span>05 · ECONOMICS LAB</span><h2>Servicios Keedio e infraestructura Soliss, siempre separados.</h2></div><p>El simulador evita confundir el contrato de servicios con el CAPEX que Soliss adquiere directamente.</p></div>
+    <div class="section-head reveal"><div><span>05 · ECONOMÍA Y TCO</span><h2>Servicios Keedio e infraestructura Soliss, siempre separados.</h2></div><p>El simulador evita confundir el contrato de servicios con el CAPEX que Soliss adquiere directamente.</p></div>
     <div class="econ-grid reveal"><div class="econ-card"><span>Keedio · construcción P0</span><b id="econBuildValue">— Boardroom —</b><small>F0–F4, incluyendo activación y ajuste comercial.</small></div><div class="econ-card"><span>Keedio · servicio M3–M24</span><b id="econServiceValue">— Boardroom —</b><small>OPEX co-gestionado.</small></div><div class="econ-card"><span>Soliss · infraestructura</span><b id="infraRange">Sizing G2</b><small>Compra directa · sizing G2.</small></div><div class="econ-card accent"><span>TCO orientativo</span><b id="tcoRange">—</b><small id="tcoMid">—</small></div></div>
     <div class="scenario-lab reveal"><div><h3>Escenario de infraestructura</h3><div id="econScenarios" class="segmented"></div></div><label class="switch-line"><input id="optionalToggle" type="checkbox"><span></span><b>Incluir S2 M25–M36 (opcional · Boardroom)</b></label></div>
     <div class="phase-bars reveal"><header><h3>Construcción P0 · baseline Final Cerrado</h3><p>Baseline detallado disponible tras acceso Boardroom.</p></header><div id="phaseBars"></div></div>
@@ -347,7 +357,7 @@
 
 <section id="governance" class="section dark present-step" data-show="compliance tech board">
   <div class="shell">
-    <div class="section-head light reveal"><div><span>06 · GOVERNANCE COCKPIT</span><h2>De “cumplimos” a “podemos demostrarlo”.</h2></div><p>Estados de propuesta y evidencia. No se muestran porcentajes de cumplimiento ni se presume validación jurídica.</p></div>
+    <div class="section-head light reveal"><div><span>06 · GOBIERNO Y EVIDENCIA</span><h2>De “cumplimos” a “podemos demostrarlo”.</h2></div><p>Estados de propuesta y evidencia. No se muestran porcentajes de cumplimiento ni se presume validación jurídica.</p></div>
     <div class="governance-grid reveal"><div><div class="cockpit-head"><h3>Evidence Registry</h3><span>Los cambios se guardan solo en este navegador</span></div><div id="evidenceGrid" class="evidence-grid"></div></div><aside class="regulatory-lens"><h3>Regulatory Lens</h3><div class="reg-card"><b>DORA 2026</b><p>EIOPA lo mantiene como Focus Area supervisor en 2026. P0 traduce resiliencia en backup, restore, DR, evidencias y gestión de terceros.</p></div><div class="reg-card"><b>AI Act</b><p>La clasificación se realiza por caso. Risk assessment/pricing de personas en vida y salud está expresamente en Annex III 5(c).</p></div><div class="reg-card"><b>Claims ≠ automáticamente high-risk</b><p>Las guías de la Comisión distinguen claims management de risk assessment/pricing en vida/salud. Debe analizarse la finalidad real del sistema.</p></div></aside></div>
     <div class="passport-area reveal"><header><div><span>MODEL PASSPORT</span><h3>Todo modelo autorizado debe tener dueño, versión, licencia, benchmark y fallback.</h3></div><div id="passportTabs" class="segmented"></div></header><div id="passportCard"></div></div>
     <div class="provenance reveal"><header><span>DATA PROVENANCE EXPLORER</span><h3>¿Por qué el modelo sabe esto?</h3></header><div class="trace"><button data-trace="request">Petición</button><i>→</i><button data-trace="identity">Identidad</button><i>→</i><button data-trace="retrieval">Retrieval</button><i>→</i><button data-trace="source">Fuente</button><i>→</i><button data-trace="answer">Respuesta</button><i>→</i><button data-trace="audit">Auditoría</button></div><div id="traceDetail" class="trace-detail">Selecciona una etapa. Es una representación del patrón de trazabilidad previsto, no de datos reales de producción.</div></div>
@@ -359,6 +369,7 @@
   <div class="shell">
     <div class="section-head reveal"><div><span>07 · INSURANCE AI ASSURANCE</span><h2>Gobierno de IA diseñado para un asegurador, no para una demo genérica.</h2></div><p>La capa de assurance combina expectativas sectoriales EIOPA, DORA, AI Act y referencias de gestión/seguridad. Es un mapa de preparación, no una afirmación de certificación ni cumplimiento automático.</p></div>
 
+    <div class="public-depth-note public-only"><b>Confianza antes que automatización ciega</b><span>Esta vista resume los controles esenciales. Evidencias, trazabilidad y registros completos permanecen en Boardroom.</span></div>
     <div class="assurance-hero reveal"><div><span>AHORA · 2 SEP 2026</span><h3>Transparency by design</h3><p>Los asistentes interactivos cubiertos por Art. 50 deben identificar claramente que el usuario está interactuando con IA. Keedio propone que esta transparencia sea una capability del canal, no una corrección posterior.</p></div><div><b>UC1</b><small>AI disclosure</small></div><div><b>ALL</b><small>record keeping</small></div><div><b>HITL</b><small>human oversight</small></div></div>
 
     <div class="timeline-card reveal"><header><span>AI ACT · TIMELINE OPERATIVO</span><h3>Qué debería preparar P0 y cuándo.</h3><small>Calendario público vigente al 2 Sep 2026 · validar con Legal ante futuras modificaciones.</small></header><div id="aiTimeline" class="ai-timeline"></div></div>
@@ -379,12 +390,12 @@
 
 
     <section class="v6-traceability reveal">
-      <header><div><span>CONTROL TRACEABILITY GRAPH</span><h3>Riesgo → Control → Evidencia → Gate → Decisión.</h3></div><p>La trazabilidad evita que un riesgo exista aislado de la acción que lo cierra.</p></header>
+      <header><div><span>TRAZABILIDAD DE CONTROLES</span><h3>Riesgo → Control → Evidencia → Gate → Decisión.</h3></div><p>La trazabilidad evita que un riesgo exista aislado de la acción que lo cierra.</p></header>
       <div id="traceabilityTabs" class="segmented"></div>
       <div id="traceabilityGraph" class="traceability-graph"></div>
     </section>
     <section class="v6-source-registry reveal">
-      <header><div><span>SOURCE FRESHNESS</span><h3>Fuentes externas con fecha de verificación y revisión.</h3></div><button id="toggleProvenance" type="button">◉ Mostrar provenance</button></header>
+      <header><div><span>VIGENCIA DE FUENTES</span><h3>Fuentes externas con fecha de verificación y revisión.</h3></div><button id="toggleProvenance" type="button">◉ Mostrar provenance</button></header>
       <div class="provenance-legend"><span class="prov contractual">CONTRACTUAL</span><span class="prov estimate">ESTIMACIÓN</span><span class="prov hypothesis">HIPÓTESIS</span><span class="prov external">EXTERNO</span></div>
       <div id="sourceRegistry" class="source-registry"></div>
     </section>
@@ -412,7 +423,7 @@
 <section id="documents" class="section document-section present-step" data-show="board tech compliance">
   <div class="shell">
     <div class="section-head reveal">
-      <div><span>09 · DOCUMENT CENTER</span><h2>Una única puerta de entrada a la documentación Keedio → Soliss.</h2></div>
+      <div><span>09 · DOCUMENTACIÓN</span><h2>Una única puerta de entrada a la documentación Keedio → Soliss.</h2></div>
       <p>Descarga los documentos de propuesta, distingue el baseline de los materiales de soporte y conserva la integridad de cada fichero mediante SHA‑256.</p>
     </div>
 
@@ -443,7 +454,7 @@
 
     <div class="meeting-tools reveal">
       <div class="meeting-copy">
-        <span>COMMITTEE TOOLKIT</span>
+        <span>HERRAMIENTAS DE COMITÉ</span>
         <h3>Guarda lo acordado durante la reunión</h3>
         <p>Todo se genera localmente en el navegador. La exportación recoge el escenario TCO, priorización UC, estado de evidencias y checklist G1–G4 en ese momento.</p>
       </div>
@@ -473,7 +484,7 @@
 </section>
 </main>
 
-<footer><div class="shell footer-grid"><div><b>KEEDIO</b><span>Proponente / socio tecnológico</span></div><div><b>SOLISS</b><span>Cliente / propietario de infraestructura y decisión</span></div><p>Decision Room de propuesta. Las simulaciones son conceptuales; los resultados técnicos, regulatorios y operativos deben validarse mediante gates, pruebas, Legal/Compliance y evidencias del proyecto.</p></div></footer>
+<footer><div class="shell footer-grid"><div><b>KEEDIO</b><span>Proponente / socio tecnológico</span></div><div><b>SOLISS</b><span>Cliente / propietario de infraestructura y decisión</span></div><p>Boardroom de propuesta. Las simulaciones son conceptuales; los resultados técnicos, regulatorios y operativos deben validarse mediante gates, pruebas, Legal/Compliance y evidencias del proyecto.</p></div></footer>
 
 
 <div id="execStory" class="exec-story" hidden aria-hidden="true">
@@ -487,9 +498,9 @@
 <button id="execResume" class="exec-resume" type="button" hidden>● Reanudar Executive Story</button>
 
 
-<div id="copilotDrawer" class="v6-drawer" hidden aria-hidden="true">
+<div id="copilotDrawer" class="v6-drawer" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="copilotTitle">
   <div class="v6-drawer-panel">
-    <header><div><span>P0 COPILOT · GOVERNED SOURCES</span><h2>Preguntar sobre P0</h2></div><button data-close-v6="copilotDrawer" aria-label="Cerrar">×</button></header>
+    <header><div><span>P0 COPILOT · FUENTES GOBERNADAS</span><h2 id="copilotTitle">Preguntar sobre P0</h2></div><button data-close-v6="copilotDrawer" aria-label="Cerrar">×</button></header>
     <p class="drawer-intro">Buscador local y determinista sobre contenido estructurado de la propuesta. No llama a un LLM ni envía preguntas fuera del navegador.</p>
     <div class="copilot-search"><input id="copilotInput" type="search" placeholder="Ej.: ¿P0 incluye el motor de fraude?"><button id="copilotAsk" type="button">Preguntar</button></div>
     <div id="copilotQuick" class="copilot-quick"></div>
@@ -497,16 +508,16 @@
   </div>
 </div>
 
-<div id="commandPalette" class="v6-modal" hidden aria-hidden="true">
+<div id="commandPalette" class="v6-modal" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Buscador rápido">
   <div class="command-panel">
-    <header><span>COMMAND PALETTE</span><kbd>ESC</kbd></header>
+    <header><span>BUSCADOR RÁPIDO</span><kbd>ESC</kbd></header>
     <input id="commandInput" type="search" placeholder="Buscar sección, UC, gate, riesgo, documento…">
     <div id="commandResults" class="command-results"></div>
     <footer>↑↓ seleccionar · Enter abrir · Ctrl/⌘ + K</footer>
   </div>
 </div>
 
-<div id="displayPanel" class="v6-popover" hidden>
+<div id="displayPanel" class="v6-popover" hidden role="dialog" aria-label="Visualización y accesibilidad">
   <header><b>Visualización y accesibilidad</b><button data-close-v6="displayPanel">×</button></header>
   <div class="display-group"><span>Densidad</span><div class="segmented"><button data-density="compact">Compacta</button><button data-density="normal" class="active">Normal</button><button data-density="presentation">Presentación</button></div></div>
   <div class="display-group"><span>Escala tipográfica</span><div class="font-controls"><button data-font-step="-1">A−</button><button data-font-reset>A</button><button data-font-step="1">A+</button></div></div>
@@ -515,9 +526,9 @@
   <small>La preferencia se guarda solo en este navegador.</small>
 </div>
 
-<div id="shareModal" class="v6-modal" hidden aria-hidden="true">
+<div id="shareModal" class="v6-modal" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
   <div class="share-panel">
-    <header><div><span>COMPARTIR VISIÓN PÚBLICA</span><h2>URL pública + QR</h2></div><button data-close-v6="shareModal">×</button></header>
+    <header><div><span>COMPARTIR VISIÓN PÚBLICA</span><h2 id="shareTitle">URL pública + QR</h2></div><button data-close-v6="shareModal">×</button></header>
     <div id="publicQr" class="public-qr"><p>El QR solo se solicita cuando pulses “Generar QR” y contiene únicamente la URL pública.</p></div>
     <input id="publicShareUrl" readonly>
     <div class="share-actions"><button id="generateQr" type="button">Generar QR</button><button id="copyPublicUrl" type="button">Copiar enlace</button></div>
@@ -525,9 +536,9 @@
   </div>
 </div>
 
-<div id="briefModal" class="v6-modal" hidden aria-hidden="true">
+<div id="briefModal" class="v6-modal" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="briefTitle">
   <div class="brief-panel">
-    <header><div><span>ONE PAGE EXECUTIVE BRIEF</span><h2>Resumen para reenviar o imprimir</h2></div><button data-close-v6="briefModal">×</button></header>
+    <header><div><span>RESUMEN EJECUTIVO DE UNA PÁGINA</span><h2 id="briefTitle">Resumen para reenviar o imprimir</h2></div><button data-close-v6="briefModal">×</button></header>
     <div id="briefPreview" class="brief-preview"></div>
     <div class="share-actions"><a id="downloadBriefPdf" class="btn primary" href="public/Soliss_AI_RPA_Factory_V6_Executive_Brief.pdf" download>↓ Descargar PDF</a><button id="printBrief" type="button">Imprimir vista</button></div>
   </div>
