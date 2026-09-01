@@ -107,6 +107,30 @@
   $$('.risk-filter').forEach(b=>b.addEventListener('click',()=>{$$('.risk-filter').forEach(x=>x.classList.toggle('active',x===b));renderRisks(b.dataset.risk)}));renderRisks();
 
 
+
+  // V4 research + Soliss corporate modules
+  const R=D.research;
+  $('#solissDnaGrid').innerHTML=R.solissDNA.map(x=>`<article class="dna-card"><strong>${safe(x.value)}</strong><b>${safe(x.label)}</b><p>${safe(x.detail)}</p></article>`).join('');
+  $('#supervisoryRadar').innerHTML=R.supervisoryRadar.map(x=>`<article class="radar-card"><span>${safe(x.tag)}</span><h4>${safe(x.title)}</h4><p>${safe(x.detail)}</p><small>${safe(x.source)}</small></article>`).join('');
+  $('#sovereigntyTable').innerHTML=`<thead><tr><th>Workload</th><th>Default</th><th>Excepción externa</th><th>Control</th></tr></thead><tbody>${R.sovereignty.map(x=>`<tr><td><b>${safe(x.workload)}</b></td><td>${safe(x.default)}</td><td>${safe(x.external)}</td><td>${safe(x.control)}</td></tr>`).join('')}</tbody>`;
+  $('#kpiGrid').innerHTML=R.kpiBlueprint.map(x=>`<article class="kpi-card"><header><span>${x.uc}</span><b>N/D → target en workshop</b></header><h4>${safe(x.name)}</h4><div class="kpi-tags">${x.kpis.map(k=>`<span>${safe(k)}</span>`).join('')}</div><small>Baseline, target, actual, owner y evidencia se completan con Soliss antes del caso productivo.</small></article>`).join('');
+  $('#downloadKpiPlan').addEventListener('click',()=>{const rows=[['UC','Caso','KPI','Baseline','Target','Actual','Owner','Evidence source']];R.kpiBlueprint.forEach(x=>x.kpis.forEach(k=>rows.push([x.uc,x.name,k,'N/D','N/D','N/D','Por asignar','Por definir'])));const csv=rows.map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(';')).join('\n');saveBlob('Soliss_P0_Value_Measurement_Blueprint.csv','\ufeff'+csv,'text/csv;charset=utf-8')});
+  $('#aiTimeline').innerHTML=R.aiTimeline.map(x=>`<article class="timeline-event"><span>${safe(x.date)}</span><b>${safe(x.title)}</b><p>${safe(x.detail)}</p></article>`).join('');
+  $('#assurancePillars').innerHTML=R.assurancePillars.map(x=>`<article class="pillar"><b>${safe(x.title)}</b><p>${safe(x.question)}</p><small>${safe(x.p0)}</small></article>`).join('');
+  $('#doraBoard').innerHTML=R.doraBoard.map((x,i)=>`<article class="dora-item"><span>${i+1}</span><div><b>${safe(x.title)}</b><p>${safe(x.detail)}</p></div></article>`).join('');
+  $('#assuranceStack').innerHTML=R.assuranceStack.map(x=>`<article class="stack-card"><span>${safe(x.status)}</span><h4>${safe(x.name)} · ${safe(x.role)}</h4><p>${safe(x.detail)}</p></article>`).join('');
+  $('#isoPdca').innerHTML=R.isoPDCA.map(x=>`<article class="pdca-step"><span>${safe(x.stage)}</span><b>${safe(x.title)}</b><p>${safe(x.detail)}</p></article>`).join('');
+  const literacyKey='soliss-p0-literacy-v4';let literacyState={};try{literacyState=JSON.parse(localStorage.getItem(literacyKey)||'{}')}catch{}
+  function renderLiteracy(){
+    $('#literacyGrid').innerHTML=R.literacy.map(x=>`<article class="literacy-card"><h4>${safe(x.role)}</h4>${x.topics.map((t,i)=>`<label class="literacy-topic"><input type="checkbox" data-lit="${x.id}-${i}" ${literacyState[`${x.id}-${i}`]?'checked':''}><span>${safe(t)}</span></label>`).join('')}</article>`).join('');
+    $$('#literacyGrid input').forEach(inp=>inp.addEventListener('change',()=>{literacyState[inp.dataset.lit]=inp.checked;localStorage.setItem(literacyKey,JSON.stringify(literacyState))}));
+  }renderLiteracy();
+  $('#agenticRules').innerHTML=R.agenticGate.map(x=>`<article class="agentic-rule"><b>${safe(x.rule)}</b><p>${safe(x.detail)}</p></article>`).join('');
+  $('#gateDeliverables').innerHTML=R.gateDeliverables.map(g=>`<article class="gate-delivery"><span>${g.gate}</span><h4>${safe(g.title)}</h4><ul>${g.items.map(i=>`<li>${safe(i)}</li>`).join('')}</ul></article>`).join('');
+  const resp=R.responsibilities;$('#responsibilityTable').innerHTML=`<thead><tr><th>Actividad</th>${resp.roles.map(r=>`<th>${safe(r)}</th>`).join('')}</tr></thead><tbody>${resp.rows.map(row=>`<tr><td><b>${safe(row[0])}</b></td>${row.slice(1).map(v=>`<td><span class="raci">${safe(v)}</span></td>`).join('')}</tr>`).join('')}</tbody>`;
+  const normFaq=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();let faqQuery='';function renderFaq(){const q=normFaq(faqQuery),list=R.faqs.filter(x=>!q||normFaq(x.q+' '+x.a).includes(q));$('#faqCount').textContent=`${list.length}/${R.faqs.length}`;$('#faqGrid').innerHTML=list.map(x=>`<details class="faq-item"><summary>${safe(x.q)}</summary><div><p>${safe(x.a)}</p><a href="${x.target}">Ir a la evidencia →</a></div></details>`).join('')||'<div class="no-docs">Sin coincidencias.</div>'}$('#faqSearch').addEventListener('input',e=>{faqQuery=e.target.value;renderFaq()});renderFaq();
+  $('#changelogGrid').innerHTML=R.changelog.map(x=>`<article class="change-version"><header><b>${safe(x.version)}</b><span>${safe(x.date)}</span></header><ul>${x.items.map(i=>`<li>${safe(i)}</li>`).join('')}</ul></article>`).join('');
+
   // Document Center
   const DOCS=window.P0_DOCUMENTS;
   let docFilter='all', docQuery='';
@@ -161,7 +185,8 @@
       digitalTwin:{scenario:currentScenario,lens:currentLens,node:currentNode},
       useCaseRanking:ucSnapshot(),
       gates:gateSnapshot(),
-      evidence:evidenceSnapshot()
+      evidence:evidenceSnapshot(),
+      aiLiteracy:{...literacyState}
     };
   }
   function saveBlob(name,content,type){
@@ -213,7 +238,7 @@ Keedio propone, diseña e integra el patrón P0. Soliss decide, valida, adquiere
   $('#printRoom').addEventListener('click',()=>window.print());
   $('#resetSession').addEventListener('click',()=>{
     if(!confirm('¿Reiniciar los datos locales de esta sesión? No se borrará ningún documento.')) return;
-    [ucKey,evidenceKey,gateKey].forEach(k=>localStorage.removeItem(k));
+    [ucKey,evidenceKey,gateKey,literacyKey].forEach(k=>localStorage.removeItem(k));
     location.reload();
   });
 

@@ -83,3 +83,26 @@ Esta build añade:
 Esta es una **Boardroom build**. Si se publica esta carpeta en un hosting público, los documentos incluidos en `/documents` serán también públicos y descargables. `robots.txt` evita indexación cooperativa, pero **no es control de acceso**.
 
 Para una URL pública se recomienda generar una build separada sin documentación confidencial ni importes sensibles.
+
+
+## V4.0 · Soliss Corporate + Insurance AI Assurance
+
+- Identidad visual reforzada con magenta SOLISS `#FF006A` muestreado del wordmark suministrado.
+- Logotipos Soliss y Keedio integrados localmente.
+- Soliss DNA y narrativa de transformación alineada con cercanía y territorio.
+- Supervisory Radar 2026: DORA, claims digitalisation, AI Act transparency y EIOPA AI Opinion.
+- AI Act operational timeline.
+- EIOPA six-pillar Insurance AI Assurance.
+- DORA Board Lens 2026.
+- Claims Assurance Pack concept.
+- ISO/IEC 42001 PDCA alignment (sin afirmar certificación).
+- AI Literacy Passport por rol.
+- Agentic Safety Gate basado en referencias OWASP.
+- Data Sovereignty Matrix.
+- Value Measurement Blueprint + descarga CSV.
+- Gate Deliverable Matrix.
+- Responsibility Explorer RACI.
+- Executive Q&A / objection navigator.
+- Changelog versionado.
+- Working templates descargables en Document Center.
+- Build Boardroom + generador de build Public sanitizada.

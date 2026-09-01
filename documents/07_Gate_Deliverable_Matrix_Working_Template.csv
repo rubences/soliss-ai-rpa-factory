@@ -1,0 +1,25 @@
+﻿Gate;Title;Deliverable
+G1;Alcance controlado;Acta de alcance y exclusiones
+G1;Alcance controlado;Inventario AS-IS
+G1;Alcance controlado;Backlog UC1–UC7
+G1;Alcance controlado;RACI inicial
+G1;Alcance controlado;Registro de riesgos
+G1;Alcance controlado;Calendario de sizing
+G2;Blueprint e inversión;Arquitectura objetivo
+G2;Blueprint e inversión;Sizing CPU/RAM/GPU
+G2;Blueprint e inversión;Red y segmentación
+G2;Blueprint e inversión;Diseño backup/DR
+G2;Blueprint e inversión;Rango CAPEX Soliss
+G2;Blueprint e inversión;Enfoque DORA/AI Act
+G3;Sandbox validado;Keycloak/RBAC
+G3;Sandbox validado;Model Gateway
+G3;Sandbox validado;RAG trazable
+G3;Sandbox validado;Gravitino PoC
+G3;Sandbox validado;Fallback documentado
+G3;Sandbox validado;Observabilidad / benchmark
+G4;Aceptación y transferencia;UAT
+G4;Aceptación y transferencia;Runbooks e IaC
+G4;Aceptación y transferencia;Pruebas HA/restore
+G4;Aceptación y transferencia;Manuales
+G4;Aceptación y transferencia;Formación
+G4;Aceptación y transferencia;Roadmap UC + plan S1

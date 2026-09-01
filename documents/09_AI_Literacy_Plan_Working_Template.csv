@@ -1,0 +1,17 @@
+﻿Role;Topic;Status;Evidence
+Consejo / Sponsor;Responsabilidad y decisiones;Pending;
+Consejo / Sponsor;Riesgo IA y DORA;Pending;
+Consejo / Sponsor;Límites de automatización;Pending;
+Consejo / Sponsor;Escalado e incidentes;Pending;
+Negocio / Key Users;Capacidades y límites;Pending;
+Negocio / Key Users;HITL y escalado;Pending;
+Negocio / Key Users;Uso seguro de prompts;Pending;
+Negocio / Key Users;Comprobación de fuentes;Pending;
+IT / Data / Sec;Gateway y modelos;Pending;
+IT / Data / Sec;Clasificación de datos;Pending;
+IT / Data / Sec;Prompt/RAG security;Pending;
+IT / Data / Sec;Observabilidad y resiliencia;Pending;
+Legal / Compliance;AI Act por caso;Pending;
+Legal / Compliance;DORA / terceros;Pending;
+Legal / Compliance;Record keeping;Pending;
+Legal / Compliance;Fairness / explainability;Pending;

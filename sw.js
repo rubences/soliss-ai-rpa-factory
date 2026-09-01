@@ -1,5 +1,5 @@
-const CACHE='soliss-p0-v3-1-doccenter';
-const CORE=['./','./index.html','./assets/styles.css','./assets/data.js','./assets/documents.js','./assets/app.js','./assets/figures/arquitectura-onpremise.png','./assets/figures/journey-economics.png','./assets/figures/to-be.png','./manifest.webmanifest','./assets/icon-192.png','./assets/icon-512.png'];
+const CACHE='soliss-p0-v4-boardroom';
+const CORE=['./','./index.html','./assets/styles.css','./assets/data.js','./assets/documents.js','./assets/app.js','./assets/brand/soliss-logo.png','./assets/brand/keedio-logo.png','./assets/figures/arquitectura-onpremise.png','./assets/figures/journey-economics.png','./assets/figures/to-be.png','./manifest.webmanifest','./assets/icon-192.png','./assets/icon-512.png'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE))));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))));
 self.addEventListener('fetch',e=>{

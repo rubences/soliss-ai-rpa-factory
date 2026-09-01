@@ -1,11 +1,11 @@
 {
-  "name": "Keedio → Soliss · P0 Decision Room V3.1",
-  "short_name": "Soliss P0 V3.1",
+  "name": "Keedio presenta a SOLISS · P0 Decision Room V4",
+  "short_name": "Soliss P0 V4",
   "description": "Decision Room ejecutiva/técnica de la propuesta Keedio para Soliss AI/RPA Factory.",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#052f3d",
-  "theme_color": "#052f3d",
+  "background_color": "#071F2A",
+  "theme_color": "#FF006A",
   "lang": "es",
   "icons": [
     {

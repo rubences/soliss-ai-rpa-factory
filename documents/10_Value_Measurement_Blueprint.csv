@@ -1,0 +1,29 @@
+﻿UC;Case;KPI;Baseline;Target;Actual;Owner;Evidence source
+UC1;Agentes corporativos;Tiempo hasta respuesta útil;N/D;N/D;N/D;Por asignar;Por definir
+UC1;Agentes corporativos;% respuestas con fuente trazable;N/D;N/D;N/D;Por asignar;Por definir
+UC1;Agentes corporativos;Escalado a humano;N/D;N/D;N/D;Por asignar;Por definir
+UC1;Agentes corporativos;Tiempo ahorrado por consulta;N/D;N/D;N/D;Por asignar;Por definir
+UC2;Document Intelligence;Exactitud de extracción;N/D;N/D;N/D;Por asignar;Por definir
+UC2;Document Intelligence;Tiempo manual/documento;N/D;N/D;N/D;Por asignar;Por definir
+UC2;Document Intelligence;% excepciones;N/D;N/D;N/D;Por asignar;Por definir
+UC2;Document Intelligence;Straight-through processing;N/D;N/D;N/D;Por asignar;Por definir
+UC3;Siniestros y fraude;Cycle time de siniestro;N/D;N/D;N/D;Por asignar;Por definir
+UC3;Siniestros y fraude;False positives de señales;N/D;N/D;N/D;Por asignar;Por definir
+UC3;Siniestros y fraude;% overrides humanos;N/D;N/D;N/D;Por asignar;Por definir
+UC3;Siniestros y fraude;Tiempo de revisión;N/D;N/D;N/D;Por asignar;Por definir
+UC4;Analítica / actuarial;Tiempo preparación de datos;N/D;N/D;N/D;Por asignar;Por definir
+UC4;Analítica / actuarial;Reproducibilidad;N/D;N/D;N/D;Por asignar;Por definir
+UC4;Analítica / actuarial;Tiempo de revisión;N/D;N/D;N/D;Por asignar;Por definir
+UC4;Analítica / actuarial;Cobertura de lineage;N/D;N/D;N/D;Por asignar;Por definir
+UC5;Administración;Tiempo de ciclo;N/D;N/D;N/D;Por asignar;Por definir
+UC5;Administración;Touchless rate;N/D;N/D;N/D;Por asignar;Por definir
+UC5;Administración;% excepciones;N/D;N/D;N/D;Por asignar;Por definir
+UC5;Administración;Reprocesos;N/D;N/D;N/D;Por asignar;Por definir
+UC6;IT / ciber;MTTR;N/D;N/D;N/D;Por asignar;Por definir
+UC6;IT / ciber;% runbooks asistidos;N/D;N/D;N/D;Por asignar;Por definir
+UC6;IT / ciber;Escalados N2;N/D;N/D;N/D;Por asignar;Por definir
+UC6;IT / ciber;Acciones bloqueadas por policy;N/D;N/D;N/D;Por asignar;Por definir
+UC7;Grupo Soliss;Tiempo onboarding entidad;N/D;N/D;N/D;Por asignar;Por definir
+UC7;Grupo Soliss;Reutilización de servicios;N/D;N/D;N/D;Por asignar;Por definir
+UC7;Grupo Soliss;Incidentes de segregación;N/D;N/D;N/D;Por asignar;Por definir
+UC7;Grupo Soliss;Coste incremental por dominio;N/D;N/D;N/D;Por asignar;Por definir

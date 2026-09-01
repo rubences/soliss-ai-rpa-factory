@@ -138,14 +138,67 @@ window.P0_DOCUMENTS = {
           "preview": false
         }
       ]
+    },
+    {
+      "id": "working_templates",
+      "title": "Working templates · P0 Governance Pack",
+      "description": "Matrices generadas por Keedio para workshops y comité. No son baseline contractual hasta su aceptación.",
+      "status": "WORKING TEMPLATES",
+      "tags": [
+        "tecnico",
+        "soporte",
+        "governance"
+      ],
+      "formats": [
+        {
+          "type": "CSV",
+          "path": "documents/07_Gate_Deliverable_Matrix_Working_Template.csv",
+          "sizeBytes": 1064,
+          "size": "1 KB",
+          "sha256": "ad3fe1a2da7799c78f644ee168f221d041894f8b4c2d561c871258a3b452daae",
+          "preview": false
+        },
+        {
+          "type": "CSV",
+          "path": "documents/08_Responsibility_Matrix_Working_Template.csv",
+          "sizeBytes": 454,
+          "size": "0 KB",
+          "sha256": "0e47196eba27e40b4f18b3289cb2e3430cd3defbdcd39fa9442c10cb06f9e5dd",
+          "preview": false
+        },
+        {
+          "type": "CSV",
+          "path": "documents/09_AI_Literacy_Plan_Working_Template.csv",
+          "sizeBytes": 829,
+          "size": "1 KB",
+          "sha256": "4acef89c669c3994356c2a3d7b13d5ba6d543cd34cb70eb88da4633ecdd6eb7e",
+          "preview": false
+        },
+        {
+          "type": "CSV",
+          "path": "documents/10_Value_Measurement_Blueprint.csv",
+          "sizeBytes": 2329,
+          "size": "2 KB",
+          "sha256": "098027d23948f240db2b8acb19fa635601d6eb3dbd980934ba9abf057c55a0b1",
+          "preview": false
+        },
+        {
+          "type": "MD",
+          "path": "documents/11_Research_Radar_2026_Keedio_to_Soliss.md",
+          "sizeBytes": 1895,
+          "size": "2 KB",
+          "sha256": "7b4521e0bf7612012e8d527ddce85b4f6fa80b34aeb46113a8e36ac82adc45cc",
+          "preview": false
+        }
+      ]
     }
   ],
   "pack": {
     "path": "documents/Soliss_P0_Document_Pack_Keedio.zip",
     "size": "22,1 MB",
-    "sizeBytes": 23170637,
-    "sha256": "bcf6023caa67af79c08386bc62df403b2890e3505332f43b29250cfb9ab32044",
-    "fileCount": 8
+    "sizeBytes": 23174669,
+    "sha256": "60a121a33fd2144b41f90144bfda3a34a10a2f3bd9ce25441618f7810b38cfe6",
+    "fileCount": 13
   },
   "manifest": {
     "json": "documents/DOCUMENT_MANIFEST.json",

@@ -1,19 +1,19 @@
 {
-  "product": "Soliss AI/RPA Factory · P0 Decision Room",
+  "product": "Soliss AI/RPA Factory · P0 Decision Room V4",
   "proponent": "Keedio",
   "client": "Soliss",
-  "purpose": "Manifest de integridad de los documentos distribuidos desde la Decision Room.",
-  "baseline_note": "La Decision Room adopta como baseline el Plan Director Final Cerrado y el Presupuesto/Cronograma P0 Final Cerrado.",
+  "purpose": "Manifest de integridad documental.",
+  "baseline_note": "Baseline: Plan Director Final Cerrado + Presupuesto/Cronograma P0 Final Cerrado. Working templates no son baseline contractual hasta aceptación.",
   "files": [
-    {
-      "path": "documents/01_Plan_Director_Consejo_Soliss_AI_RPA_Factory_P0_Final_Cerrado.pdf",
-      "bytes": 893736,
-      "sha256": "ae48b753ec9e73ae04c42803210626bd043bb8aceea15ef8b4edb6a5b28325c4"
-    },
     {
       "path": "documents/01_Plan_Director_Consejo_Soliss_AI_RPA_Factory_P0_Final_Cerrado.docx",
       "bytes": 4246848,
       "sha256": "a41eda1b4298c9cbc924ff1913a1e3a13f00a3e3b4751fc33bfc8df44b4a2c4c"
+    },
+    {
+      "path": "documents/01_Plan_Director_Consejo_Soliss_AI_RPA_Factory_P0_Final_Cerrado.pdf",
+      "bytes": 893736,
+      "sha256": "ae48b753ec9e73ae04c42803210626bd043bb8aceea15ef8b4edb6a5b28325c4"
     },
     {
       "path": "documents/02_Presentacion_Ejecutiva_Soliss_AI_RPA_Factory_P0.pdf",
@@ -44,6 +44,31 @@
       "path": "documents/06_Propuesta_Reestructurada_Soliss_AI_RPA_Factory_PostReunion.docx",
       "bytes": 4250279,
       "sha256": "820989235477dca6dbcf6e7f5c73ecc1d60b41c51c8d66de6cf6096abed6d18b"
+    },
+    {
+      "path": "documents/07_Gate_Deliverable_Matrix_Working_Template.csv",
+      "bytes": 1064,
+      "sha256": "ad3fe1a2da7799c78f644ee168f221d041894f8b4c2d561c871258a3b452daae"
+    },
+    {
+      "path": "documents/08_Responsibility_Matrix_Working_Template.csv",
+      "bytes": 454,
+      "sha256": "0e47196eba27e40b4f18b3289cb2e3430cd3defbdcd39fa9442c10cb06f9e5dd"
+    },
+    {
+      "path": "documents/09_AI_Literacy_Plan_Working_Template.csv",
+      "bytes": 829,
+      "sha256": "4acef89c669c3994356c2a3d7b13d5ba6d543cd34cb70eb88da4633ecdd6eb7e"
+    },
+    {
+      "path": "documents/10_Value_Measurement_Blueprint.csv",
+      "bytes": 2329,
+      "sha256": "098027d23948f240db2b8acb19fa635601d6eb3dbd980934ba9abf057c55a0b1"
+    },
+    {
+      "path": "documents/11_Research_Radar_2026_Keedio_to_Soliss.md",
+      "bytes": 1895,
+      "sha256": "7b4521e0bf7612012e8d527ddce85b4f6fa80b34aeb46113a8e36ac82adc45cc"
     }
   ]
 }

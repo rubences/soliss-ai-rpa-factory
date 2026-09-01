@@ -133,3 +133,143 @@ window.P0 = {
     {title:"Soliss · Historia", note:"Toledo 1933 y red actual de 90 oficinas", url:"https://www.soliss.es/historia/"}
   ]
 };
+
+
+// V4 research layer — public-source enrichment, current at 2026-09-01.
+window.P0.research = {
+  asOf:"1 septiembre 2026",
+  brand:{
+    primary:"#FF006A",
+    note:"Magenta dominante muestreado del logotipo SOLISS incluido en la presentación suministrada."
+  },
+  solissDNA:[
+    {value:"1933",label:"Fundada en Toledo",detail:"Historia y arraigo territorial como parte central de la identidad Soliss."},
+    {value:"90",label:"Oficinas",detail:"Red comunicada actualmente por Soliss en Castilla-La Mancha y localidades próximas."},
+    {value:">95%",label:"Clientes satisfechos",detail:"Indicador comunicado por Soliss en su web corporativa; no es una medición de Keedio."},
+    {value:"100%",label:"Riqueza generada en su región",detail:"Compromiso territorial comunicado públicamente por Soliss."}
+  ],
+  supervisoryRadar:[
+    {tag:"DORA · 2026",title:"El Consejo entra en el radar supervisor",detail:"EIOPA pide foco en implicación del órgano de administración, framework ICT, incidentes, terceros y programa de pruebas de resiliencia.",source:"EIOPA Supervisory Priorities 2026"},
+    {tag:"CLAIMS · 2026",title:"Digitalizar sin degradar el trato al cliente",detail:"Claims management, incluida su digitalización, es Area for Attention 2026. Solo 62% de consumidores UE declara satisfacción con la gestión de siniestros.",source:"EIOPA Focus Areas 2026"},
+    {tag:"AI ACT · AHORA",title:"Transparencia ya aplicable",detail:"Desde agosto de 2026 aplican las obligaciones de transparencia de Art. 50 para ciertos sistemas: un chatbot debe informar de que el usuario interactúa con IA.",source:"Comisión Europea · Art. 50"},
+    {tag:"EIOPA AI",title:"Seis pilares de assurance asegurador",detail:"Data governance, record-keeping, fairness, cyber security, explainability y human oversight estructuran las expectativas supervisoras sectoriales.",source:"EIOPA Opinion · 6 Aug 2025"}
+  ],
+  aiTimeline:[
+    {date:"02 FEB 2025",title:"AI literacy + prohibiciones",detail:"Art. 4 entra en aplicación; Soliss/Keedio deben sostener medidas de alfabetización para quienes usen u operen IA."},
+    {date:"02 AUG 2025",title:"Gobierno + GPAI",detail:"Empiezan a aplicar reglas de gobierno y obligaciones para modelos de propósito general."},
+    {date:"02 AUG 2026",title:"Enforcement + transparencia",detail:"Autoridades empiezan a hacer cumplir el AI Act; Art. 50 exige transparencia en ciertos sistemas interactivos y contenido sintético."},
+    {date:"02 DEC 2027",title:"Annex III high-risk",detail:"Calendario vigente tras simplificación: aplicación de reglas para casos high-risk de Annex III."},
+    {date:"02 AUG 2028",title:"Annex I",detail:"Aplicación extendida para high-risk embebido en productos regulados del Annex I."}
+  ],
+  assurancePillars:[
+    {id:"data",title:"Data governance",question:"¿Qué datos puede usar el sistema y quién es su owner?",p0:"Data Mesh, sensibilidad, RBAC/ABAC, provenance y catálogo."},
+    {id:"records",title:"Record-keeping",question:"¿Podemos reconstruir qué ocurrió?",p0:"Model Gateway, logs, Evidence Registry, versiones y retención."},
+    {id:"fairness",title:"Fairness",question:"¿Puede la automatización generar un resultado injusto?",p0:"HITL, validación por caso, métricas y revisión de consumer outcomes."},
+    {id:"cyber",title:"Cyber security",question:"¿Qué ocurre ante prompt injection, poisoning o excessive agency?",p0:"Gateway, least privilege, sandbox, segregación y pruebas adversariales."},
+    {id:"explain",title:"Explainability",question:"¿Puede el profesional justificar una recomendación?",p0:"RAG trazable, fuentes, Model Passport y evidence trail."},
+    {id:"human",title:"Human oversight",question:"¿Quién conserva la capacidad efectiva de intervenir?",p0:"Profesional Soliss, approvals, escalado y límites de autonomía."}
+  ],
+  doraBoard:[
+    {title:"Board engagement",detail:"Decisiones, risk appetite y supervisión del ICT risk management framework."},
+    {title:"ICT framework",detail:"Adecuación de resiliencia digital a estrategia y criticidad de negocio."},
+    {title:"Major incidents",detail:"Proceso de detección, escalado, reporting y aprendizaje."},
+    {title:"Third parties",detail:"Registro de terceros, dependencias, contratos, salida y concentración."},
+    {title:"Resilience testing",detail:"Programa demostrable de backup/restore, HA, fallo de nodo y DR."}
+  ],
+  assuranceStack:[
+    {name:"DORA",role:"Resiliencia ICT",status:"Regulatorio",detail:"Continuidad, terceros, pruebas, incidentes y gobierno."},
+    {name:"EU AI Act",role:"Riesgo y transparencia",status:"Regulatorio",detail:"Clasificación, transparencia, literacy y obligaciones según uso."},
+    {name:"EIOPA AI Opinion",role:"Sector asegurador",status:"Supervisión",detail:"Data, registros, fairness, cyber, explainability y oversight."},
+    {name:"ISO/IEC 42001",role:"Sistema de gestión",status:"Alineamiento",detail:"PDCA para gobernar riesgos y oportunidades de IA. P0 puede preparar evidencias; no se afirma certificación."},
+    {name:"OWASP GenAI / Agentic",role:"AppSec IA",status:"Referencia técnica",detail:"Prompt injection, información sensible, poisoning, agency, vectores y consumo."},
+    {name:"NIST AI RMF GenAI",role:"Risk engineering",status:"Referencia voluntaria",detail:"Perfil GenAI del AI RMF para diseño, evaluación y gestión del riesgo."}
+  ],
+  isoPDCA:[
+    {stage:"PLAN",title:"Contexto, política y riesgo",detail:"Inventario, ownership, clasificación de casos, objetivos, risk appetite y controles."},
+    {stage:"DO",title:"Construir y operar",detail:"P0, Model Gateway, datos, seguridad, documentación, literacy y change management."},
+    {stage:"CHECK",title:"Medir y auditar",detail:"Gates, pruebas, KPI, evidencias, incidentes, drift, consumer outcomes y auditoría."},
+    {stage:"ACT",title:"Corregir y mejorar",detail:"Fallback, remediación, revisión de modelos, backlog UC y mejora continua S1/S2."}
+  ],
+  literacy:[
+    {id:"board",role:"Consejo / Sponsor",topics:["Responsabilidad y decisiones","Riesgo IA y DORA","Límites de automatización","Escalado e incidentes"]},
+    {id:"business",role:"Negocio / Key Users",topics:["Capacidades y límites","HITL y escalado","Uso seguro de prompts","Comprobación de fuentes"]},
+    {id:"it",role:"IT / Data / Sec",topics:["Gateway y modelos","Clasificación de datos","Prompt/RAG security","Observabilidad y resiliencia"]},
+    {id:"compliance",role:"Legal / Compliance",topics:["AI Act por caso","DORA / terceros","Record keeping","Fairness / explainability"]}
+  ],
+  agenticGate:[
+    {rule:"Least privilege",detail:"El agente solo recibe las herramientas y permisos mínimos del caso."},
+    {rule:"Human approval",detail:"Acciones de impacto financiero, contractual o sensible requieren aprobación explícita salvo autorización formal posterior."},
+    {rule:"Tool allowlist",detail:"Nada de herramientas dinámicas o destinos no registrados en el control plane."},
+    {rule:"Dry-run + rollback",detail:"Cuando sea viable, simular antes de ejecutar y conservar una vía de reversión."},
+    {rule:"Bounded loops",detail:"Límites de iteraciones, tiempo, consumo, coste y llamadas para evitar runaway agents."},
+    {rule:"Evidence trail",detail:"Cada acción debe poder atribuirse a usuario, agente, modelo, herramienta, policy y resultado."}
+  ],
+  sovereignty:[
+    {workload:"LLM inference",default:"On-premise / local-first",external:"Solo fallback/modelo externo aprobado",control:"Model Gateway + policy + logging"},
+    {workload:"Embeddings",default:"Local preferente",external:"Solo si sensibilidad y contrato lo permiten",control:"Data policy + Model Passport"},
+    {workload:"OCR / visión",default:"Local-first según documento",external:"Excepción aprobada",control:"Clasificación + minimización"},
+    {workload:"Datos / RAG",default:"Lago y dominios Soliss",external:"No por defecto",control:"RBAC/ABAC + provenance"},
+    {workload:"Metadatos",default:"Clúster de grupo",external:"No requerido",control:"Catálogo + backup/fallback"},
+    {workload:"APIs externas",default:"Deny by default",external:"Allowlist contractual",control:"Egress + auditoría + terceros"}
+  ],
+  kpiBlueprint:[
+    {uc:"UC1",name:"Agentes corporativos",kpis:["Tiempo hasta respuesta útil","% respuestas con fuente trazable","Escalado a humano","Tiempo ahorrado por consulta"]},
+    {uc:"UC2",name:"Document Intelligence",kpis:["Exactitud de extracción","Tiempo manual/documento","% excepciones","Straight-through processing"]},
+    {uc:"UC3",name:"Siniestros y fraude",kpis:["Cycle time de siniestro","False positives de señales","% overrides humanos","Tiempo de revisión"]},
+    {uc:"UC4",name:"Analítica / actuarial",kpis:["Tiempo preparación de datos","Reproducibilidad","Tiempo de revisión","Cobertura de lineage"]},
+    {uc:"UC5",name:"Administración",kpis:["Tiempo de ciclo","Touchless rate","% excepciones","Reprocesos"]},
+    {uc:"UC6",name:"IT / ciber",kpis:["MTTR","% runbooks asistidos","Escalados N2","Acciones bloqueadas por policy"]},
+    {uc:"UC7",name:"Grupo Soliss",kpis:["Tiempo onboarding entidad","Reutilización de servicios","Incidentes de segregación","Coste incremental por dominio"]}
+  ],
+  gateDeliverables:[
+    {gate:"G1",title:"Alcance controlado",items:["Acta de alcance y exclusiones","Inventario AS-IS","Backlog UC1–UC7","RACI inicial","Registro de riesgos","Calendario de sizing"]},
+    {gate:"G2",title:"Blueprint e inversión",items:["Arquitectura objetivo","Sizing CPU/RAM/GPU","Red y segmentación","Diseño backup/DR","Rango CAPEX Soliss","Enfoque DORA/AI Act"]},
+    {gate:"G3",title:"Sandbox validado",items:["Keycloak/RBAC","Model Gateway","RAG trazable","Gravitino PoC","Fallback documentado","Observabilidad / benchmark"]},
+    {gate:"G4",title:"Aceptación y transferencia",items:["UAT","Runbooks e IaC","Pruebas HA/restore","Manuales","Formación","Roadmap UC + plan S1"]}
+  ],
+  responsibilities:{
+    roles:["Keedio PM/Arquitectura","Keedio Data/AI","Keedio Infra/Sec","Soliss Sponsor","Soliss IT","Soliss Data Owners","Soliss Compliance","Soliss Key Users"],
+    rows:[
+      ["Plan y gobierno","A/R","C","C","A","C","C","C","I"],
+      ["Arquitectura P0","A/R","R","R","C","A","C","C","I"],
+      ["Sizing / compra HW","C","I","R","A","A/R","I","C","I"],
+      ["Data Mesh / ownership","C","R","C","I","C","A/R","C","C"],
+      ["Model Gateway / RAG","A","R","C","I","C","C","C","C"],
+      ["DORA / AI Act","C","C","R","A","C","C","A/R","I"],
+      ["UAT / aceptación","C","C","C","A","C","C","C","R"],
+      ["Operación N1","C","I","C","I","A/R","C","C","I"],
+      ["Soporte N2","A","R","R","I","C","I","I","I"]
+    ]
+  },
+  faqs:[
+    {q:"¿Qué compra Soliss exactamente?",a:"Soliss contrata P0 como capacidad crítica y los servicios Keedio asociados. La infraestructura productiva la adquiere Soliss directamente tras sizing; UC1–UC7 se activan posteriormente.",target:"#decision"},
+    {q:"¿Por qué no desplegar ya los siete casos?",a:"Porque compartir una base de identidad, datos, seguridad, modelos, observabilidad y operación reduce duplicación y permite gates de valor/riesgo antes de cada vertical.",target:"#factory"},
+    {q:"¿Qué ocurre si Gravitino no cumple?",a:"No bloquea P0: se evalúa como PoC en G3 y se activa el fallback de catálogo/metastore desacoplado.",target:"#twin"},
+    {q:"¿Puede salir información de Soliss a modelos externos?",a:"El patrón es local-first. Toda excepción externa requiere modelo/proveedor aprobado, clasificación de datos, policy y logging mediante Model Gateway.",target:"#twin"},
+    {q:"¿Cómo evitamos Shadow AI?",a:"Centralizando acceso a modelos, cuotas, logs y políticas en Model Gateway, combinado con egress control y catálogo de modelos autorizados.",target:"#twin"},
+    {q:"¿Quién responde después de la entrega?",a:"Soliss desarrolla autonomía N1 mediante transferencia y runbooks; Keedio presta soporte N2 especializado y fabricantes/comunidad cubren N3 según contrato.",target:"#delivery"},
+    {q:"¿Cómo demostramos cumplimiento?",a:"Con Evidence Registry, Model Passports, trazabilidad de fuentes, logs, pruebas y artefactos de gate; no mediante un porcentaje arbitrario de compliance.",target:"#governance"},
+    {q:"¿Todo uso de IA en seguros es high-risk?",a:"No. La clasificación depende del uso. Annex III incluye risk assessment/pricing de personas en vida/salud; claims management no entra automáticamente en ese supuesto.",target:"#assurance"},
+    {q:"¿Qué cambia desde agosto de 2026?",a:"El AI Act entra en una fase de enforcement más amplia y Art. 50 aplica obligaciones de transparencia para determinados sistemas interactivos y contenido generado/manipulado.",target:"#assurance"},
+    {q:"¿Cómo mediremos valor y no solo actividad?",a:"Cada UC debe arrancar con baseline, KPI, target, owner y fuente de evidencia. La web incluye un Measurement Blueprint sin inventar resultados.",target:"#factory"}
+  ],
+  changelog:[
+    {version:"V4.0",date:"01 Sep 2026",items:["Identidad visual Soliss","Supervisory Radar 2026","AI Act timeline","EIOPA Assurance","ISO 42001 alignment","AI literacy","Agentic Safety Gate","Sovereignty Matrix","KPI Blueprint","Gate Deliverables","Responsibility Explorer","FAQ/Objection Navigator","Boardroom + Public builds"]},
+    {version:"V3.1",date:"01 Sep 2026",items:["Document Center","SHA-256 manifest","Acta preliminar","Decision snapshot","Offline document cache"]},
+    {version:"V3.0",date:"01 Sep 2026",items:["Audience modes","Decision Room","Digital Twin","Use Case Factory","Economics Lab","Evidence Cockpit","Model Passport"]},
+    {version:"V2",date:"01 Sep 2026",items:["Arquitectura interactiva","Economics por escenarios","Roadmap y operación"]}
+  ]
+};
+
+window.P0.sources.push(
+  {title:"Soliss · web corporativa",note:"1933, compromiso territorial, >95% satisfacción y claims corporativos publicados por Soliss",url:"https://www.soliss.es/"},
+  {title:"EIOPA · Opinion on AI governance and risk management",note:"Data governance, record-keeping, fairness, cyber security, explainability y human oversight",url:"https://www.eiopa.europa.eu/publications/opinion-artificial-intelligence-governance-and-risk-management_en"},
+  {title:"EIOPA · Focus Areas 2026",note:"DORA y claims management/digitalisation; 62% satisfacción UE con claims handling",url:"https://www.eiopa.europa.eu/publications/union-wide-strategic-supervisory-priorities-focus-areas-2026_en"},
+  {title:"European Commission · AI Act enforcement",note:"Enforcement y transparencia desde agosto de 2026; calendario de aplicación actualizado",url:"https://digital-strategy.ec.europa.eu/en/policies/enforcement-ai-act"},
+  {title:"European Commission · AI literacy",note:"Article 4 aplica desde febrero de 2025; medidas de literacy para providers/deployers",url:"https://digital-strategy.ec.europa.eu/en/policies/ai-talent-skills-and-literacy"},
+  {title:"AI Act Service Desk · Essential services",note:"Vida/salud pricing in scope; claims management mostrado como ejemplo fuera de 5(c)",url:"https://ai-act-service-desk.ec.europa.eu/en/essential-services"},
+  {title:"ISO/IEC 42001:2023",note:"AI management system y ciclo de mejora continua",url:"https://www.iso.org/standard/42001"},
+  {title:"OWASP GenAI Security Project · LLM Top 10",note:"Prompt injection, sensitive information, poisoning, agency, vectors y unbounded consumption",url:"https://genai.owasp.org/llm-top-10/"},
+  {title:"OWASP · Top 10 for Agentic Applications",note:"Referencia 2025 para riesgos de aplicaciones agentic",url:"https://genai.owasp.org/2025/12/09/owasp-top-10-for-agentic-applications-the-benchmark-for-agentic-security-in-the-age-of-autonomous-ai/"},
+  {title:"NIST AI RMF · GenAI Profile",note:"Perfil voluntario de gestión de riesgo para IA generativa",url:"https://airc.nist.gov/technical-reports/"}
+);

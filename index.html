@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#062f3d">
+  <meta name="theme-color" content="#FF006A">
   <meta name="description" content="Keedio presenta a Soliss la P0 Decision Room: arquitectura, economics, gates, gobierno y casos de uso de Soliss AI/RPA Factory.">
-  <title>Keedio → Soliss · P0 Decision Room</title>
+  <title>Keedio presenta a SOLISS · P0 Decision Room V4</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="assets/icon-192.png">
   <link rel="stylesheet" href="assets/styles.css">
@@ -13,13 +13,13 @@
   <script defer src="assets/documents.js"></script>
   <script defer src="assets/app.js"></script>
 </head>
-<body data-audience="board">
+<body data-audience="board" data-build="boardroom">
 <a class="skip" href="#main">Ir al contenido</a>
 <header class="topbar">
   <div class="shell navrow">
-    <a class="brand" href="#hero"><span class="keedio-mark">K</span><span><b>KEEDIO</b><small>Propuesta para SOLISS</small></span></a>
+    <a class="brand brand-lockup" href="#hero" aria-label="Keedio presenta a Soliss"><img src="assets/brand/keedio-logo.png" alt="Keedio"><span class="brand-arrow">→</span><img class="soliss-wordmark" src="assets/brand/soliss-logo.png" alt="Soliss Seguros desde 1933"><small>P0 Decision Room</small></a>
     <nav id="nav" aria-label="Principal">
-      <a href="#why">Why now</a><a href="#decision">Decision Room</a><a href="#twin">Digital Twin</a><a href="#factory">UC Factory</a><a href="#economics">Economics</a><a href="#governance">Governance</a><a href="#delivery">Delivery</a><a href="#documents">Documentos</a>
+      <a href="#why">Contexto</a><a href="#decision">Decisiones</a><a href="#twin">Arquitectura</a><a href="#factory">UC Factory</a><a href="#economics">Economics</a><a href="#governance">Governance</a><a href="#assurance">Assurance</a><a href="#delivery">Delivery</a><a href="#documents">Docs</a>
     </nav>
     <div class="actions"><button id="presentBtn" class="chip-btn">▶ Presentar</button><button id="themeBtn" class="icon-btn" aria-label="Cambiar tema">◐</button><button id="menuBtn" class="icon-btn menu" aria-label="Abrir menú">☰</button></div>
   </div>
@@ -42,7 +42,7 @@
   <div class="mesh"></div>
   <div class="shell hero-grid">
     <div class="hero-copy reveal">
-      <div class="overline"><span>P0 · Infraestructura crítica</span><b>FINAL CERRADO</b></div>
+      <div class="hero-brand"><img src="assets/brand/soliss-logo.png" alt="Soliss"><span>Propuesta tecnológica de Keedio</span></div><div class="overline"><span>P0 · Infraestructura crítica</span><b>FINAL CERRADO</b></div>
       <h1>Keedio propone a Soliss una <em>AI/RPA Factory gobernada</em>, no siete islas tecnológicas.</h1>
       <p>P0 construye la plataforma on-premise, federada, segura y operable. Soliss mantiene la propiedad de la infraestructura y activa UC1–UC7 posteriormente mediante business case y Go/No-Go.</p>
       <div class="hero-ctas"><a class="btn primary" href="#decision">Abrir Decision Room</a><a class="btn ghost" href="#twin">Simular arquitectura</a></div>
@@ -62,7 +62,16 @@
     <div class="section-head reveal"><div><span>01 · WHY NOW</span><h2>La oportunidad no es adoptar GenAI. Es industrializarla con control.</h2></div><p>EIOPA confirma que el sector asegurador europeo ya ha entrado en adopción, pero la mayoría de casos sigue atrapada entre PoC y producción.</p></div>
     <div id="benchmarkGrid" class="benchmark-grid reveal"></div>
     <div class="context-band reveal"><div><span>Soliss</span><b>Toledo · 1933 · 90 oficinas</b><p>La propuesta de Keedio conecta industrialización tecnológica con una experiencia donde el profesional Soliss sigue siendo central.</p></div><div class="trust-signal"><b>59%</b><span>de consumidores europeos muestran reservas ante recomendaciones de agentes IA.</span><small>EIOPA Eurobarometer 2025</small></div></div>
-    <details class="sources reveal"><summary>Fuentes públicas de benchmark</summary><div id="publicSources"></div></details>
+    
+<div class="soliss-dna reveal">
+  <header><div><span>SOLISS DNA</span><h3>Modernizar sin diluir lo que hace reconocible a Soliss.</h3></div><p>La propuesta de Keedio usa la tecnología como amplificador de cercanía, solvencia, control y arraigo; no como sustituto indiscriminado de la relación humana.</p></header>
+  <div id="solissDnaGrid" class="dna-grid"></div>
+</div>
+<div class="radar reveal">
+  <header><div><span>SUPERVISORY RADAR · 2026</span><h3>Cuatro señales que P0 debería responder desde el diseño.</h3></div><small>Investigación pública actualizada · 1 Sep 2026</small></header>
+  <div id="supervisoryRadar" class="radar-grid"></div>
+</div>
+<details class="sources reveal"><summary>Fuentes públicas de benchmark</summary><div id="publicSources"></div></details>
   </div>
 </section>
 
@@ -89,6 +98,8 @@
       <aside class="inspector"><div id="scenarioState" class="scenario-state"></div><div id="nodeInspector"></div></aside>
     </div>
     <div class="simulation-strip reveal"><span>Interpretación</span><b id="simOutcome">Operación nominal</b><p id="simMessage"></p><small id="simGate"></small></div>
+<details class="sovereignty reveal"><summary>Data Sovereignty Matrix · local-first, no local-only</summary><div class="table-wrap"><table id="sovereigntyTable"></table></div><p class="detail-note">La matriz es un patrón propuesto por Keedio. Las excepciones externas deben aprobarse por caso, proveedor, clasificación de datos y contrato.</p></details>
+
     <figure class="figure reveal"><button data-lightbox="assets/figures/arquitectura-onpremise.png"><img src="assets/figures/arquitectura-onpremise.png" alt="Arquitectura on-premise federada para Soliss AI/RPA Factory"></button><figcaption>Arquitectura técnica suministrada · ampliar para detalle.</figcaption></figure>
   </div>
 </section>
@@ -98,6 +109,8 @@
     <div class="section-head reveal"><div><span>04 · USE CASE FACTORY</span><h2>Priorizar por valor, datos, riesgo, esfuerzo y time-to-value.</h2></div><p>Los valores iniciales son <b>hipótesis de Keedio</b>, no datos de Soliss. La herramienta está diseñada para sustituirlos durante workshops con negocio, IT y Compliance.</p></div>
     <div class="factory-layout reveal"><div><div id="ucRanking" class="ranking"></div><button id="resetHypotheses" class="btn small">Restaurar hipótesis Keedio</button></div><div id="ucEditor" class="uc-editor"></div></div>
     <div class="human-loop reveal"><span>Principio operativo</span><div><b>IA propone</b><i>→</i><b>Profesional Soliss valida</b><i>→</i><b>Sistema ejecuta</b></div><p>El nivel de automatización se decide por caso, riesgo y control; P0 no impone autonomía ciega.</p></div>
+<details class="kpi-blueprint reveal" open><summary>Value Measurement Blueprint · medir valor sin inventar resultados</summary><div class="blueprint-head"><p>Cada UC debe iniciar con <b>baseline → target → actual → evidencia → owner</b>. Aquí solo se definen KPI candidatos; los valores son N/D hasta el workshop Soliss.</p><button id="downloadKpiPlan" class="btn small">↓ Descargar plan KPI CSV</button></div><div id="kpiGrid" class="kpi-grid"></div></details>
+
   </div>
 </section>
 
@@ -120,11 +133,44 @@
   </div>
 </section>
 
+
+<section id="assurance" class="section assurance present-step" data-show="board tech compliance">
+  <div class="shell">
+    <div class="section-head reveal"><div><span>07 · INSURANCE AI ASSURANCE</span><h2>Gobierno de IA diseñado para un asegurador, no para una demo genérica.</h2></div><p>La capa de assurance combina expectativas sectoriales EIOPA, DORA, AI Act y referencias de gestión/seguridad. Es un mapa de preparación, no una afirmación de certificación ni cumplimiento automático.</p></div>
+
+    <div class="assurance-hero reveal"><div><span>AHORA · 1 SEP 2026</span><h3>Transparency by design</h3><p>Los asistentes interactivos cubiertos por Art. 50 deben identificar claramente que el usuario está interactuando con IA. Keedio propone que esta transparencia sea una capability del canal, no una corrección posterior.</p></div><div><b>UC1</b><small>AI disclosure</small></div><div><b>ALL</b><small>record keeping</small></div><div><b>HITL</b><small>human oversight</small></div></div>
+
+    <div class="timeline-card reveal"><header><span>AI ACT · TIMELINE OPERATIVO</span><h3>Qué debería preparar P0 y cuándo.</h3><small>Calendario público vigente al 1 Sep 2026 · validar con Legal ante futuras modificaciones.</small></header><div id="aiTimeline" class="ai-timeline"></div></div>
+
+    <div class="assurance-columns">
+      <div class="assurance-panel reveal"><header><span>EIOPA AI OPINION</span><h3>6 pilares de assurance</h3></header><div id="assurancePillars" class="pillar-grid"></div></div>
+      <div class="assurance-panel reveal"><header><span>DORA · SUPERVISORY LENS 2026</span><h3>Lo que puede mirar el supervisor</h3></header><div id="doraBoard" class="dora-board"></div></div>
+    </div>
+
+    <div class="claims-focus reveal"><div class="claims-number">62%</div><div><span>CLAIMS & CONSUMER OUTCOMES</span><h3>La eficiencia del siniestro no puede medirse solo en tiempo.</h3><p>EIOPA identifica claims management —incluida la digitalización— como Area for Attention 2026. P0 debería instrumentar cycle time, overrides humanos, quejas/excepciones y fairness junto con productividad.</p></div><div class="claims-rule"><b>Keedio propone</b><p>Un “Claims Assurance Pack” antes de productivizar UC3: HITL, trazabilidad, métricas de errores, explicabilidad y monitorización de consumer outcomes.</p></div></div>
+
+    <div class="assurance-stack reveal"><header><span>ASSURANCE STACK</span><h3>Un control, varias evidencias reutilizables.</h3></header><div id="assuranceStack" class="stack-grid"></div></div>
+
+    <div class="pdca-literacy">
+      <div class="pdca reveal"><header><span>ISO/IEC 42001 ALIGNMENT</span><h3>P0 como precursor de un AI Management System</h3><small>Alineamiento conceptual; no se afirma certificación ISO.</small></header><div id="isoPdca" class="pdca-grid"></div></div>
+      <div class="literacy reveal"><header><span>AI LITERACY PASSPORT</span><h3>Formación por rol, no un curso único para todos.</h3><small>Article 4 aplica desde febrero 2025.</small></header><div id="literacyGrid" class="literacy-grid"></div></div>
+    </div>
+
+    <details class="agentic-gate reveal" open><summary>Agentic Safety Gate · preparado para la siguiente evolución</summary><div class="agentic-copy"><p>Si UC futuros pasan de “asistentes” a agentes que ejecutan acciones, Keedio propone bloquear producción hasta demostrar seis condiciones mínimas.</p><span>OWASP GenAI / Agentic · patrón de referencia</span></div><div id="agenticRules" class="agentic-grid"></div></details>
+  </div>
+</section>
+
 <section id="delivery" class="section present-step" data-show="board tech compliance">
   <div class="shell">
-    <div class="section-head reveal"><div><span>07 · DELIVERY CONTROL</span><h2>Los gates se cierran con evidencia, no con calendario.</h2></div><p>Simulador local para preparar comité. Las casillas no reflejan estado real del proyecto y no se sincronizan con sistemas Soliss.</p></div>
+    <div class="section-head reveal"><div><span>08 · DELIVERY CONTROL</span><h2>Los gates se cierran con evidencia, no con calendario.</h2></div><p>Simulador local para preparar comité. Las casillas no reflejan estado real del proyecto y no se sincronizan con sistemas Soliss.</p></div>
     <div id="gateSimulator" class="gate-grid reveal"></div>
-    <div class="risk-head reveal"><div><span>RISK REGISTER</span><h3>Riesgos base y control de cierre</h3></div><div class="segmented"><button class="risk-filter active" data-risk="all">Todos</button><button class="risk-filter" data-risk="Alto">Altos</button><button class="risk-filter" data-risk="Medio">Medios</button></div></div><div id="riskGrid" class="risk-grid reveal"></div>
+    
+<div class="delivery-expansion reveal">
+  <section class="gate-deliverables"><header><span>WHAT SOLISS RECEIVES</span><h3>Entregables exigibles por Gate</h3></header><div id="gateDeliverables" class="gate-deliverable-grid"></div></section>
+  <section class="responsibility"><header><span>RESPONSIBILITY EXPLORER</span><h3>Keedio ejecuta la ingeniería; Soliss conserva la accountability.</h3><p>R = Responsible · A = Accountable · C = Consulted · I = Informed. Matriz de trabajo para cierre contractual.</p></header><div class="table-wrap"><table id="responsibilityTable"></table></div></section>
+</div>
+<div class="faq reveal"><header><div><span>EXECUTIVE Q&A</span><h3>Preguntas que P0 debe poder responder en menos de 30 segundos.</h3></div><div class="faq-search"><input id="faqSearch" type="search" placeholder="Buscar: Gravitino, datos, high-risk…"><span id="faqCount"></span></div></header><div id="faqGrid" class="faq-grid"></div></div>
+<div class="risk-head reveal"><div><span>RISK REGISTER</span><h3>Riesgos base y control de cierre</h3></div><div class="segmented"><button class="risk-filter active" data-risk="all">Todos</button><button class="risk-filter" data-risk="Alto">Altos</button><button class="risk-filter" data-risk="Medio">Medios</button></div></div><div id="riskGrid" class="risk-grid reveal"></div>
     <figure class="figure reveal"><button data-lightbox="assets/figures/to-be.png"><img src="assets/figures/to-be.png" alt="Transformación TO-BE de capacidades IA/RPA locales a plataforma corporativa gobernada"></button><figcaption>TO-BE suministrado · P0 como base habilitadora y UC1–UC7 derivados.</figcaption></figure>
   </div>
 </section>
@@ -133,7 +179,7 @@
 <section id="documents" class="section document-section present-step" data-show="board tech compliance">
   <div class="shell">
     <div class="section-head reveal">
-      <div><span>08 · DOCUMENT CENTER</span><h2>Una única puerta de entrada a la documentación Keedio → Soliss.</h2></div>
+      <div><span>09 · DOCUMENT CENTER</span><h2>Una única puerta de entrada a la documentación Keedio → Soliss.</h2></div>
       <p>Descarga los documentos de propuesta, distingue el baseline de los materiales de soporte y conserva la integridad de cada fichero mediante SHA‑256.</p>
     </div>
 
@@ -176,7 +222,9 @@
       </div>
     </div>
 
-    <details class="integrity-panel reveal">
+    
+<details class="changelog reveal"><summary>Version history · qué ha cambiado en la propuesta digital</summary><div id="changelogGrid" class="changelog-grid"></div></details>
+<details class="integrity-panel reveal">
       <summary>Integridad, baseline y control de versiones</summary>
       <div class="integrity-grid">
         <div><span>BASELINE DE ESTA WEB</span><b>Plan Director Final Cerrado + Presupuesto/Cronograma P0 Final Cerrado</b><p>Las cifras mostradas por la Decision Room se gobiernan desde estas fuentes para evitar mezclar revisiones anteriores.</p></div>
