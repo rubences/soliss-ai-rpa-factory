@@ -1,232 +1,136 @@
 (() => {
-  const D = window.SOLISS_DATA;
-  const $ = (s, r=document) => r.querySelector(s);
-  const $$ = (s, r=document) => [...r.querySelectorAll(s)];
-  const eur = v => new Intl.NumberFormat("es-ES",{style:"currency",currency:"EUR",minimumFractionDigits:0,maximumFractionDigits:2}).format(v);
-  const eur0 = v => new Intl.NumberFormat("es-ES",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(v);
-  const compactEur = v => `${new Intl.NumberFormat("es-ES",{maximumFractionDigits:1}).format(v/1000)} k€`;
+  const D = window.P0;
+  const $ = (s,r=document)=>r.querySelector(s);
+  const $$ = (s,r=document)=>[...r.querySelectorAll(s)];
+  const fmt = new Intl.NumberFormat('es-ES',{maximumFractionDigits:0});
+  const eur = v => new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(v);
+  const compact = v => `${new Intl.NumberFormat('es-ES',{maximumFractionDigits:1}).format(v/1000)} k€`;
+  const safe = s => String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 
-  function renderUseCases(){
-    $("#useCases").innerHTML = D.useCases.map(u => `
-      <article class="usecase">
-        <b>${u.id}</b><h3>${u.name}</h3><p>${u.enable}</p>
-      </article>`).join("");
+  // Benchmark + public sources
+  $('#benchmarkGrid').innerHTML = D.benchmark.eiopa.map(x=>`<article class="benchmark"><strong>${x.value}${x.suffix}</strong><h3>${safe(x.label)}</h3><p>${safe(x.detail)}</p><small>EIOPA · GenAI Market Survey 2026</small></article>`).join('');
+  $('#publicSources').className='source-list';
+  $('#publicSources').innerHTML=D.sources.map(s=>`<a class="source-link" href="${s.url}" target="_blank" rel="noopener"><b>${safe(s.title)}</b><small>${safe(s.note)}</small></a>`).join('');
+
+  // Decision Room
+  $('#decisionGrid').innerHTML=D.decisions.map(d=>`<article class="decision-card"><div class="decision-top"><b>${d.id}</b><span>${safe(d.when)}</span></div><h3>${safe(d.title)}</h3><p>${safe(d.why)}</p><dl><dt>Decide</dt><dd>${safe(d.owner)}</dd><dt>Si no</dt><dd>${safe(d.risk)}</dd></dl></article>`).join('');
+
+  // Digital twin
+  const nodeById=id=>D.architecture.nodes.find(n=>n.id===id);
+  let currentLens='detail', currentScenario='normal', currentNode='group';
+  $('#scenarioButtons').innerHTML=D.architecture.scenarios.map((s,i)=>`<button class="${i===0?'active':''}" data-scenario="${s.id}">${safe(s.label)}</button>`).join('');
+  function inspectNode(id=currentNode){
+    currentNode=id;
+    const n=nodeById(id); if(!n)return;
+    $$('.node').forEach(b=>b.classList.toggle('selected',b.dataset.node===id));
+    const lensLabel={detail:'Arquitectura',security:'Security lens',data:'Data lens',dora:'DORA lens',aiAct:'AI Act lens'}[currentLens];
+    const lensText=currentLens==='detail'?n.detail:n[currentLens];
+    $('#nodeInspector').innerHTML=`<div class="node-inspect"><span>${safe(n.layer)} · ${lensLabel}</span><h3>${safe(n.label)}</h3><p>${safe(lensText)}</p><dl><div><dt>Responsabilidad</dt><dd>${safe(n.owner)}</dd></div><div><dt>Principio</dt><dd>Keedio diseña el patrón; Soliss valida y opera según el reparto acordado.</dd></div></dl></div>`;
   }
-
-  function renderTobe(view="asis"){
-    const labels = {asis:"Capacidad existente",transition:"Habilitador P0",tobe:"Resultado TO-BE"};
-    $("#tobeExplorer").innerHTML = D.tobe[view].map(([title,text],i)=>`
-      <article class="tobe-item">
-        <span>${String(i+1).padStart(2,"0")} · ${labels[view]}</span>
-        <h3>${title}</h3><p>${text}</p>
-      </article>`).join("");
+  function runScenario(id=currentScenario){
+    currentScenario=id;
+    const s=D.architecture.scenarios.find(x=>x.id===id);
+    $$('#scenarioButtons button').forEach(b=>b.classList.toggle('active',b.dataset.scenario===id));
+    $$('.node').forEach(n=>n.classList.remove('degraded','blocked','attack'));
+    Object.entries(s.status).forEach(([node,status])=>{const el=$(`.node[data-node="${node}"]`);if(el)el.classList.add(status)});
+    $('#scenarioState').innerHTML=`<span>Escenario activo</span><b>${safe(s.label)}</b>`;
+    $('#simOutcome').textContent=s.outcome; $('#simMessage').textContent=s.message; $('#simGate').textContent=s.gate;
   }
+  $$('.node').forEach(b=>b.addEventListener('click',()=>inspectNode(b.dataset.node)));
+  $('#scenarioButtons').addEventListener('click',e=>{const b=e.target.closest('[data-scenario]');if(b)runScenario(b.dataset.scenario)});
+  $('#lensButtons').addEventListener('click',e=>{const b=e.target.closest('[data-lens]');if(!b)return;currentLens=b.dataset.lens;$$('#lensButtons button').forEach(x=>x.classList.toggle('active',x===b));inspectNode()});
+  runScenario(); inspectNode();
 
-  function renderDomains(){
-    $("#domainClusters").innerHTML = D.domains.map(d=>`<div class="domain-card"><b>${d.name}</b><small>${d.sub}</small></div>`).join("");
+  // Use Case Factory
+  const ucKey='soliss-p0-uc-hypotheses-v3';
+  let ucValues={};
+  try{ucValues=JSON.parse(localStorage.getItem(ucKey)||'{}')}catch{}
+  D.useCases.forEach(u=>{if(!ucValues[u.id])ucValues[u.id]={...u.hypothesis}});
+  let selectedUC='UC2';
+  const score = v => Math.round((v.value*.35+v.data*.20+v.ttv*.20+(11-v.risk)*.15+(11-v.effort)*.10)*10);
+  function renderRanking(){
+    const ranked=D.useCases.map(u=>({u,s:score(ucValues[u.id])})).sort((a,b)=>b.s-a.s);
+    $('#ucRanking').innerHTML=ranked.map((r,i)=>`<div class="rank-row ${r.u.id===selectedUC?'active':''}" data-uc="${r.u.id}"><span class="rank-n">${i+1}</span><div><b>${r.u.id} · ${safe(r.u.name)}</b><small>Hipótesis Keedio · pendiente workshop Soliss</small></div><span class="rank-score">${r.s}</span></div>`).join('');
+    $$('.rank-row').forEach(r=>r.addEventListener('click',()=>{selectedUC=r.dataset.uc;renderRanking();renderEditor()}));
   }
-
-  function inspectArchitecture(key){
-    const a=D.architecture[key] || D.architecture.group;
-    $$(".arch-node,.data-lake").forEach(n=>n.classList.toggle("active",n.dataset.arch===key));
-    $("#archInspector").innerHTML=`
-      <span class="inspector-kicker">${a.layer}</span>
-      <h3>${a.title}</h3>
-      <p>${a.detail}</p>
-      <div class="inspector-meta">
-        <div><span>Responsabilidad</span><b>${a.owner}</b></div>
-        <div><span>Decisión de cierre</span><b>${a.decision}</b></div>
-      </div>`;
+  const sliderMeta=[['value','Valor negocio'],['data','Data readiness'],['risk','Riesgo / fricción'],['effort','Esfuerzo'],['ttv','Time-to-value']];
+  function renderEditor(){
+    const u=D.useCases.find(x=>x.id===selectedUC), v=ucValues[u.id];
+    $('#ucEditor').innerHTML=`<header><div><span>${u.id} · HIPÓTESIS EDITABLE</span><h3>${safe(u.name)}</h3></div><small>Score = valor 35% + datos 20% + TTV 20% + riesgo inverso 15% + esfuerzo inverso 10%.</small></header><div class="sliders">${sliderMeta.map(([k,l])=>`<div class="slider-row"><label>${l}</label><input type="range" min="1" max="10" value="${v[k]}" data-field="${k}"><output>${v[k]}</output></div>`).join('')}</div><div class="uc-notes"><div><b>P0 habilita</b><p>${safe(u.enabled)}</p></div><div><b>Vertical posterior</b><p>${safe(u.later)}</p></div><div><b>Regulatory lens</b><p>${safe(u.regulation)}</p></div><div><b>Prioridad actual</b><p>Score de hipótesis: <strong>${score(v)}/100</strong>. Debe validarse con Soliss.</p></div></div>`;
+    $$('#ucEditor input[type=range]').forEach(inp=>inp.addEventListener('input',()=>{v[inp.dataset.field]=+inp.value;inp.nextElementSibling.value=inp.value;localStorage.setItem(ucKey,JSON.stringify(ucValues));renderRanking();const strong=$('#ucEditor .uc-notes div:last-child strong');if(strong)strong.textContent=`${score(v)}/100`}));
   }
+  $('#resetHypotheses').addEventListener('click',()=>{ucValues={};D.useCases.forEach(u=>ucValues[u.id]={...u.hypothesis});localStorage.removeItem(ucKey);renderRanking();renderEditor()});
+  renderRanking();renderEditor();
 
-  function renderTech(){
-    $("#techDecisions").innerHTML=D.techDecisions.map(t=>`
-      <article class="tech-card">
-        <span>${t.tag}</span><h3>${t.title}</h3><p>${t.text}</p>
-      </article>`).join("");
+  // Economics Lab
+  let econScenario='recommended';
+  $('#econScenarios').innerHTML=D.economics.scenarios.map(s=>`<button class="${s.id==='recommended'?'active':''}" data-econ="${s.id}">${s.label}</button>`).join('');
+  function updateEconomics(){
+    const s=D.economics.scenarios.find(x=>x.id===econScenario), optional=$('#optionalToggle').checked?D.economics.optional:0;
+    const low=D.economics.base24+s.low+optional, high=D.economics.base24+s.high+optional, mid=(low+high)/2;
+    $('#infraRange').textContent=`${compact(s.low)} – ${compact(s.high)}`; $('#tcoRange').textContent=`${compact(low)} – ${compact(high)}`; $('#tcoMid').textContent=`Punto central orientativo: ${eur(mid)}`;
+    $$('#econScenarios button').forEach(b=>b.classList.toggle('active',b.dataset.econ===econScenario));
   }
+  $('#econScenarios').addEventListener('click',e=>{const b=e.target.closest('[data-econ]');if(b){econScenario=b.dataset.econ;updateEconomics()}}); $('#optionalToggle').addEventListener('change',updateEconomics); updateEconomics();
+  const maxCost=Math.max(...D.economics.phases.map(p=>p.cost));
+  $('#phaseBars').innerHTML=D.economics.phases.map(p=>`<div class="phase-row"><b>${p.id}</b><div class="bar-track"><div class="bar-fill" style="width:${Math.max(7,p.cost/maxCost*100)}%">${p.hours} h</div></div><span>${eur(p.cost)}</span><small>${p.period}</small></div>`).join('');
+  $('#infraTable').innerHTML=`<thead><tr><th>Bloque</th><th>Mínimo</th><th>Base</th><th>Escalable</th></tr></thead><tbody>${D.economics.infraBlocks.map(r=>`<tr><td><b>${safe(r[0])}</b><small>${safe(r[1])}</small></td><td>${eur(r[2])}</td><td>${eur(r[3])}</td><td>${eur(r[4])}</td></tr>`).join('')}</tbody>`;
 
-  function renderJourney(){
-    $("#journeySteps").innerHTML=D.journey.map(j=>`
-      <article class="journey-card">
-        <span class="n">${j.n}</span><h3>${j.title}</h3><span class="period">${j.period}</span>
-        <strong class="amount">${j.amount}</strong><span class="type">${j.type}</span><p>${j.text}</p>
-      </article>`).join("");
-  }
+  // Evidence Cockpit
+  const evidenceKey='soliss-p0-evidence-v3';
+  let evidenceState={};try{evidenceState=JSON.parse(localStorage.getItem(evidenceKey)||'{}')}catch{}
+  const statusLabels={proposal:'Diseñado en propuesta',evidence:'Pendiente evidencia',soliss:'Pendiente Soliss / Legal',validated:'Validado'};
+  function renderEvidence(){
+    $('#evidenceGrid').innerHTML=D.evidence.map(e=>{const value=evidenceState[e.id]||e.default;return `<div class="evidence-row"><span>${safe(e.area)}</span><div><b>${safe(e.control)}</b><small>${safe(e.owner)}</small></div><small>${safe(e.evidence)}</small><select data-eid="${e.id}">${Object.entries(statusLabels).map(([k,l])=>`<option value="${k}" ${k===value?'selected':''}>${l}</option>`).join('')}</select></div>`}).join('');
+    $$('#evidenceGrid select').forEach(s=>s.addEventListener('change',()=>{evidenceState[s.dataset.eid]=s.value;localStorage.setItem(evidenceKey,JSON.stringify(evidenceState))}));
+  }renderEvidence();
 
-  function renderScenarios(){
-    $("#scenarioButtons").innerHTML=D.scenarios.map(s=>`<button data-scenario="${s.id}" class="${s.id==="recommended"?"active":""}">${s.label}</button>`).join("");
-    updateTco("recommended");
-  }
+  // Model Passport
+  let passport='llm';
+  $('#passportTabs').innerHTML=D.passports.map(p=>`<button data-passport="${p.id}" class="${p.id==='llm'?'active':''}">${safe(p.title.replace('Modelo ','').replace(' principal',''))}</button>`).join('');
+  function renderPassport(){const p=D.passports.find(x=>x.id===passport);$('#passportCard').className='passport-card';$('#passportCard').innerHTML=`<div class="passport-summary"><span>ESTADO</span><h4>${safe(p.title)}</h4><p>${safe(p.purpose)}</p><b>${safe(p.status)}</b></div><div class="passport-fields">${Object.entries(p.fields).map(([k,v])=>`<div class="passport-field"><small>${safe(k)}</small><b>${safe(v)}</b></div>`).join('')}</div>`;$$('#passportTabs button').forEach(b=>b.classList.toggle('active',b.dataset.passport===passport))}
+  $('#passportTabs').addEventListener('click',e=>{const b=e.target.closest('[data-passport]');if(b){passport=b.dataset.passport;renderPassport()}});renderPassport();
 
-  let scenarioId="recommended";
-  function updateTco(id=scenarioId){
-    scenarioId=id;
-    const s=D.scenarios.find(x=>x.id===id);
-    const optional=$("#s2Toggle")?.checked ? D.baseline.optionalS2 : 0;
-    const low=D.baseline.keedio24+s.low+optional;
-    const high=D.baseline.keedio24+s.high+optional;
-    const mid=D.baseline.keedio24+(s.low+s.high)/2+optional;
-    $("#scenarioLabel").textContent=`${s.label} · ${s.description}`;
-    $("#tcoRange").textContent=`${compactEur(low)} – ${compactEur(high)}`;
-    $("#tcoMid").textContent=`Punto central orientativo: ${eur0(mid)}`;
-    $$("#scenarioButtons button").forEach(b=>b.classList.toggle("active",b.dataset.scenario===id));
-  }
+  // Provenance explorer
+  const trace={request:'Petición: usuario, canal, caso y contexto declarado.',identity:'Identidad: rol, empresa/dominio y permisos resueltos antes del retrieval.',retrieval:'Retrieval: consulta solo índices y fuentes autorizadas por policy.',source:'Fuente: documento, versión, dominio, clasificación, owner y timestamp.',answer:'Respuesta: modelo/versión, grounding, referencias y política HITL.',audit:'Auditoría: usuario, modelo, fuente, latencia, coste, decisión y evidencia retenida según política.'};
+  $$('.trace button').forEach(b=>b.addEventListener('click',()=>{$$('.trace button').forEach(x=>x.classList.toggle('active',x===b));$('#traceDetail').textContent=trace[b.dataset.trace]}));
 
-  function renderInfraTable(){
-    $("#infraTable").innerHTML=`
-      <thead><tr><th>Bloque</th><th>Mínimo</th><th>Base</th><th>Escalable</th></tr></thead>
-      <tbody>${D.infraBlocks.map(r=>`
-        <tr><td><b>${r.name}</b><small>${r.detail}</small></td><td>${eur0(r.min)}</td><td>${eur0(r.base)}</td><td>${eur0(r.max)}</td></tr>`).join("")}</tbody>`;
-  }
-
+  // Gate simulator
+  const gateKey='soliss-p0-gates-v3'; let gateState={};try{gateState=JSON.parse(localStorage.getItem(gateKey)||'{}')}catch{}
   function renderGates(){
-    $("#gateRail").innerHTML=D.gates.map(g=>`
-      <article class="gate-card">
-        <span>${g.id} · ${g.when}</span><h3>${g.title}</h3><p>${g.criteria}</p>
-        <div class="gate-meta"><b>${g.phase}</b><span>Go / No-Go</span></div>
-      </article>`).join("");
-  }
+    $('#gateSimulator').innerHTML=D.gates.map(g=>{const done=g.checks.filter((_,i)=>gateState[`${g.id}-${i}`]).length,ready=done===g.checks.length;return `<article class="gate"><header><b>${g.id}</b><span>${g.when} · ${g.phase}</span></header><h3>${safe(g.title)}</h3><div class="gate-status ${ready?'ready':''}">${ready?'READY FOR DECISION':`${g.checks.length-done} evidencias pendientes`}</div><div class="gate-checks">${g.checks.map((c,i)=>`<label><input type="checkbox" data-gate="${g.id}-${i}" ${gateState[`${g.id}-${i}`]?'checked':''}><span>${safe(c)}</span></label>`).join('')}</div></article>`}).join('');
+    $$('#gateSimulator input').forEach(c=>c.addEventListener('change',()=>{gateState[c.dataset.gate]=c.checked;localStorage.setItem(gateKey,JSON.stringify(gateState));renderGates()}));
+  }renderGates();
 
-  function renderRoadmap(filter="all"){
-    const rows=D.roadmap.filter(r=>filter==="all"||r.type===filter);
-    $("#roadmapRows").innerHTML=rows.map(r=>{
-      const left=((r.start-1)/36)*100;
-      const width=((r.end-r.start+1)/36)*100;
-      return `<div class="roadmap-row" data-type="${r.type}">
-        <div class="roadmap-label"><b>${r.name}</b><small>${r.owner}</small></div>
-        <div class="month-track"><span class="month-bar" style="left:${left}%;width:${width}%"></span></div>
-        <div class="roadmap-dates">M${r.start}–M${r.end}</div>
-      </div>`;
-    }).join("");
-  }
+  // Risks
+  function renderRisks(filter='all'){$('#riskGrid').innerHTML=D.risks.filter(r=>filter==='all'||r.severity===filter).map(r=>`<article class="risk" data-severity="${r.severity}"><header><b>${r.id}</b><span>${r.severity}</span></header><h3>${safe(r.risk)}</h3><p>${safe(r.control)}</p><small>${safe(r.owner)}</small></article>`).join('')}
+  $$('.risk-filter').forEach(b=>b.addEventListener('click',()=>{$$('.risk-filter').forEach(x=>x.classList.toggle('active',x===b));renderRisks(b.dataset.risk)}));renderRisks();
 
-  function supportPanel(){
-    return `<div class="support-grid">${D.support.map(s=>`
-      <article class="support-card"><span class="support-level">${s.level}</span><h3>${s.title}</h3>
-      <small>${s.owner}</small><p>${s.scope}</p><b>${s.result}</b></article>`).join("")}</div>`;
-  }
-  function changePanel(){
-    return `<div class="change-grid">${D.change.map(c=>`
-      <article class="change-card"><small>${c.dedication}</small><h3>${c.profile}</h3><p>${c.responsibility}</p></article>`).join("")}</div>`;
-  }
-  function raciPanel(){
-    const headers=["Actividad","Soliss líder","Keedio PM/Arq","Negocio","IT Soliss","Seguridad"];
-    return `<div class="table-scroll"><table class="raci-table"><thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>
-      ${D.raci.map(r=>`<tr>${r.map((v,i)=>`<td>${i===0?v:`<span class="raci-badge">${v}</span>`}</td>`).join("")}</tr>`).join("")}
-      </tbody></table></div>`;
-  }
-  function testingPanel(){
-    return `<div class="test-grid">${D.tests.map(t=>`<article class="test-card"><small>${t.evidence}</small><h3>${t.type}</h3><p>${t.coverage}</p></article>`).join("")}</div>`;
-  }
-  function deliverablesPanel(){
-    return `<div class="deliverable-grid">${D.deliverables.map(d=>`<article class="deliverable-card"><small>${d.type}</small><h3>${d.name}</h3><p>${d.content}</p></article>`).join("")}</div>`;
-  }
-  const opPanels={support:supportPanel,change:changePanel,raci:raciPanel,testing:testingPanel,deliverables:deliverablesPanel};
-  function renderOperation(key="support"){
-    $("#operationPanel").innerHTML=opPanels[key]();
-    $$(".op-tab").forEach(b=>b.classList.toggle("active",b.dataset.op===key));
-  }
+  // Audience modes
+  function setAudience(a){document.body.dataset.audience=a;$$('.aud').forEach(b=>b.classList.toggle('active',b.dataset.audience===a));$$('#nav a').forEach(link=>{const target=$(link.getAttribute('href'));link.style.display=(a==='all'||!target?.dataset.show||target.dataset.show.split(' ').includes(a))?'':'none'});setTimeout(navSpyUpdate,30)}
+  $$('.aud').forEach(b=>b.addEventListener('click',()=>setAudience(b.dataset.audience)));
 
-  function renderRisks(filter="all"){
-    const list=D.risks.filter(r=>filter==="all"||r.severity===filter);
-    $("#riskGrid").innerHTML=list.map(r=>`
-      <article class="risk-card" data-severity="${r.severity}">
-        <div class="risk-top"><b>${r.id}</b><span class="severity">${r.severity}</span></div>
-        <h3>${r.risk}</h3><p>${r.control}</p><div class="risk-owner">${r.owner}</div>
-      </article>`).join("");
-    $("#riskCount").textContent=`${list.length} riesgos mostrados`;
-  }
+  // Theme, menu, progress, reveal, nav spy
+  const savedTheme=localStorage.getItem('soliss-p0-theme');if(savedTheme)document.documentElement.dataset.theme=savedTheme;
+  $('#themeBtn').addEventListener('click',()=>{const t=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=t;localStorage.setItem('soliss-p0-theme',t)});
+  $('#menuBtn').addEventListener('click',()=>$('#nav').classList.toggle('open'));$$('#nav a').forEach(a=>a.addEventListener('click',()=>$('#nav').classList.remove('open')));
+  addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-innerHeight;$('#progress').style.width=`${h?scrollY/h*100:0}%`},{passive:true});
+  const rio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');rio.unobserve(e.target)}}),{threshold:.08});$$('.reveal').forEach(el=>rio.observe(el));
+  let spyObserver;
+  function navSpyUpdate(){if(spyObserver)spyObserver.disconnect();const links=$$('#nav a').filter(a=>a.style.display!=='none');const sections=links.map(a=>$(a.getAttribute('href'))).filter(s=>s&&getComputedStyle(s).display!=='none');spyObserver=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')===`#${e.target.id}`))}),{rootMargin:'-28% 0px -62% 0px'});sections.forEach(s=>spyObserver.observe(s))}navSpyUpdate();
 
-  function charts(){
-    if(!window.Chart) return;
-    Chart.defaults.font.family='Inter,system-ui,-apple-system,"Segoe UI",sans-serif';
-    Chart.defaults.color=getComputedStyle(document.documentElement).getPropertyValue("--muted").trim() || "#647483";
-    Chart.defaults.borderColor=getComputedStyle(document.documentElement).getPropertyValue("--line").trim() || "#dce6eb";
+  // Lightbox
+  const dialog=$('#lightbox'),lightImg=$('#lightboxImg');$$('[data-lightbox]').forEach(b=>b.addEventListener('click',()=>{lightImg.src=b.dataset.lightbox;dialog.showModal()}));$('#closeLightbox').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
 
-    const phaseRows=[...D.phases,{id:"Ajuste",name:"Ajuste comercial de consolidación",period:"—",hours:0,rate:0,cost:D.adjustment}];
-    new Chart($("#phaseChart"),{
-      type:"bar",
-      data:{
-        labels:phaseRows.map(p=>p.id),
-        datasets:[
-          {label:"Horas",data:phaseRows.map(p=>p.hours),backgroundColor:"#145bcc",yAxisID:"y"},
-          {label:"Importe (€)",data:phaseRows.map(p=>p.cost),backgroundColor:phaseRows.map(p=>p.cost<0?"#d80b60":"#0ca596"),yAxisID:"y1"}
-        ]
-      },
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom",labels:{usePointStyle:true,boxWidth:9,font:{size:10}}},tooltip:{callbacks:{afterLabel:c=>{const p=phaseRows[c.dataIndex];return p.id==="Ajuste"?`${p.name}: ${eur(p.cost)}`:`${p.name}\n${p.period} · ${eur(p.rate)}/h`;}}}},scales:{y:{position:"left",title:{display:true,text:"Horas"}},y1:{position:"right",grid:{drawOnChartArea:false},ticks:{callback:v=>`${v/1000}k€`},title:{display:true,text:"Importe"}}}}
-    });
+  // Presentation mode
+  let presentIndex=0,steps=[];
+  function refreshSteps(){steps=$$('.present-step').filter(s=>getComputedStyle(s).display!=='none')}
+  function goStep(i){refreshSteps();if(!steps.length)return;presentIndex=Math.max(0,Math.min(i,steps.length-1));steps[presentIndex].scrollIntoView({behavior:'smooth',block:'start'});$('#stepCounter').textContent=`${presentIndex+1}/${steps.length}`}
+  async function enterPresent(){document.body.classList.add('presentation-mode');$('#presentationHUD').hidden=false;refreshSteps();presentIndex=0;goStep(0);try{await document.documentElement.requestFullscreen?.()}catch{}}
+  function exitPresent(){document.body.classList.remove('presentation-mode');$('#presentationHUD').hidden=true;if(document.fullscreenElement)document.exitFullscreen?.()}
+  $('#presentBtn').addEventListener('click',enterPresent);$('#exitPresent').addEventListener('click',exitPresent);$('#prevStep').addEventListener('click',()=>goStep(presentIndex-1));$('#nextStep').addEventListener('click',()=>goStep(presentIndex+1));addEventListener('keydown',e=>{if(!document.body.classList.contains('presentation-mode'))return;if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();goStep(presentIndex+1)}if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();goStep(presentIndex-1)}if(e.key==='Escape')exitPresent()});
 
-    new Chart($("#infraChart"),{
-      type:"bar",
-      data:{
-        labels:D.scenarios.map(s=>s.label),
-        datasets:[
-          {label:"Desde",data:D.scenarios.map(s=>s.low),backgroundColor:"#1197b8"},
-          {label:"Hasta",data:D.scenarios.map(s=>s.high),backgroundColor:"#6034a5"}
-        ]
-      },
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"bottom",labels:{usePointStyle:true,boxWidth:9,font:{size:10}}}},scales:{y:{ticks:{callback:v=>`${v/1000}k€`}}}}
-    });
-  }
-
-  function counters(){
-    const io=new IntersectionObserver(entries=>entries.forEach(e=>{
-      if(!e.isIntersecting)return;
-      const el=e.target; const target=Number(el.dataset.counter); let start=null;
-      const step=t=>{if(!start)start=t;const p=Math.min((t-start)/900,1);const value=target*(1-Math.pow(1-p,3));el.textContent=el.dataset.format==="eur"?eur(value):Math.round(value).toLocaleString("es-ES");if(p<1)requestAnimationFrame(step)};
-      requestAnimationFrame(step);io.unobserve(el);
-    }),{threshold:.4});
-    $$("[data-counter]").forEach(el=>io.observe(el));
-  }
-
-  function reveal(){
-    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");io.unobserve(e.target)}}),{threshold:.08});
-    $$(".reveal").forEach(el=>io.observe(el));
-  }
-
-  function navSpy(){
-    const links=$$("#primaryNav a");
-    const sections=links.map(a=>$(a.getAttribute("href"))).filter(Boolean);
-    const io=new IntersectionObserver(es=>es.forEach(e=>{
-      if(e.isIntersecting){
-        links.forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#"+e.target.id));
-      }
-    }),{rootMargin:"-25% 0px -65% 0px",threshold:0});
-    sections.forEach(s=>io.observe(s));
-  }
-
-  function theme(){
-    const saved=localStorage.getItem("soliss-theme");
-    if(saved)document.documentElement.dataset.theme=saved;
-    $("#themeToggle").addEventListener("click",()=>{
-      const next=document.documentElement.dataset.theme==="dark"?"light":"dark";
-      document.documentElement.dataset.theme=next;localStorage.setItem("soliss-theme",next);
-    });
-  }
-
-  function lightbox(){
-    const dialog=$("#lightbox"), img=$("#lightboxImage");
-    $$("[data-lightbox]").forEach(b=>b.addEventListener("click",()=>{img.src=b.dataset.lightbox;dialog.showModal()}));
-    $("#lightboxClose").addEventListener("click",()=>dialog.close());
-    dialog.addEventListener("click",e=>{if(e.target===dialog)dialog.close()});
-  }
-
-  function interactions(){
-    $$(".tab-button").forEach(b=>b.addEventListener("click",()=>{$$(".tab-button").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderTobe(b.dataset.view)}));
-    $$(".arch-node,.data-lake").forEach(b=>b.addEventListener("click",()=>inspectArchitecture(b.dataset.arch)));
-    $("#scenarioButtons").addEventListener("click",e=>{const b=e.target.closest("[data-scenario]");if(b)updateTco(b.dataset.scenario)});
-    $("#s2Toggle").addEventListener("change",()=>updateTco());
-    $$(".roadmap-filter").forEach(b=>b.addEventListener("click",()=>{$$(".roadmap-filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderRoadmap(b.dataset.roadmap)}));
-    $$(".op-tab").forEach(b=>b.addEventListener("click",()=>renderOperation(b.dataset.op)));
-    $$(".risk-filter").forEach(b=>b.addEventListener("click",()=>{$$(".risk-filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderRisks(b.dataset.risk)}));
-    $("#menuToggle").addEventListener("click",()=>{const nav=$("#primaryNav");const open=nav.classList.toggle("open");$("#menuToggle").setAttribute("aria-expanded",String(open))});
-    $$("#primaryNav a").forEach(a=>a.addEventListener("click",()=>$("#primaryNav").classList.remove("open")));
-    addEventListener("scroll",()=>{
-      const p=(scrollY/(document.documentElement.scrollHeight-innerHeight))*100;$("#scrollProgress").style.width=`${Math.max(0,Math.min(100,p))}%`;
-    },{passive:true});
-  }
-
-  renderUseCases();renderTobe();renderDomains();inspectArchitecture("group");renderTech();renderJourney();renderScenarios();renderInfraTable();renderGates();renderRoadmap();renderOperation();renderRisks();
-  charts();counters();reveal();navSpy();theme();lightbox();interactions();
+  // Service worker. No external runtime dependencies.
+  if('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js').catch(()=>{});
+  setAudience('board');
 })();

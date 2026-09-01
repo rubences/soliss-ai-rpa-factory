@@ -1,169 +1,135 @@
-window.SOLISS_DATA = {
-  baseline: {
-    horizonBase: 24,
-    horizonOptional: 12,
-    keedioBuild: 105786.20,
-    keedioService: 77000,
-    keedio24: 182786.20,
-    optionalS2: 42000
+window.P0 = {
+  meta: {
+    title: "Soliss AI/RPA Factory · P0 Decision Room",
+    proponent: "Keedio",
+    client: "Soliss / Grupo Soliss",
+    horizon: "24 meses base + 12 meses opcionales",
+    baseline: "Final Cerrado",
+    statement: "Keedio propone, diseña e integra P0; Soliss decide, adquiere la infraestructura, valida los gates y opera con transferencia progresiva."
   },
-  phases: [
-    {id:"F0", name:"Activación P0 y cierre de alcance", period:"M1", hours:160, rate:125, cost:20000, type:"CAPEX", result:"Discovery, gobierno inicial, alcance, backlog UC y plan director definitivo."},
-    {id:"F1", name:"Blueprint on-premise y sizing de infraestructura", period:"M1–M2", hours:220, rate:110, cost:24200, type:"CAPEX", result:"Rancher/RKE2, clústeres, red, almacenamiento, backup, seguridad y adquisición Soliss."},
-    {id:"F2", name:"Gobierno, DORA, Data Mesh e identidad", period:"M2", hours:180, rate:105, cost:18900, type:"CAPEX", result:"Dominios, Keycloak, RBAC/ABAC, metadatos, evidencias y controles."},
-    {id:"F3", name:"Sandbox, Model Gateway, RAG y Gravitino PoC", period:"M2–M3", hours:310, rate:110, cost:34100, type:"CAPEX", result:"Validación técnica no bloqueante, local-first, trazabilidad, fuentes y seguridad de acceso."},
-    {id:"F4", name:"Pruebas, UAT, documentación, transferencia y cierre", period:"M3", hours:85, rate:105, cost:8925, type:"CAPEX", result:"Plan de pruebas, manuales, runbooks, formación y aceptación ejecutiva."}
-  ],
-  adjustment: -338.80,
-  scenarios: [
-    {id:"minimum", label:"Mínimo", low:125000, high:175000, description:"Infraestructura básica ajustada a requisitos iniciales."},
-    {id:"recommended", label:"Recomendado", low:180000, high:280000, description:"Configuración robusta e industrializada para crecimiento."},
-    {id:"ha", label:"Alta disponibilidad", low:300000, high:450000, description:"Redundancia y alta capacidad para madurez y criticidad superior."}
-  ],
-  infraBlocks: [
-    {name:"Clúster gestión Rancher/RKE2", detail:"3 nodos control plane, quórum etcd, HA, TLS/CA interna", min:18000, base:30000, max:45000},
-    {name:"Clúster de grupo", detail:"Keycloak, Gravitino PoC, PostgreSQL/CloudNativePG y gobierno", min:25000, base:45000, max:70000},
-    {name:"Clúster empresa piloto", detail:"Plano de datos, conectores, pipelines y aislamiento por dominio", min:30000, base:55000, max:90000},
-    {name:"GPU / IA local", detail:"LLM local-first, embeddings, OCR/visión y Model Gateway", min:20000, base:50000, max:110000},
-    {name:"Almacenamiento / backup", detail:"MinIO/Ceph, snapshots, restore y retención", min:15000, base:35000, max:70000},
-    {name:"Red / seguridad / observabilidad", detail:"VPN, segmentación, logging, monitorización y hardening", min:12000, base:30000, max:60000},
-    {name:"Soporte / licencias opcionales", detail:"Rancher Prime, fabricante, garantía extendida", min:0, base:25000, max:70000}
-  ],
-  useCases: [
-    {id:"UC1", name:"Agentes conversacionales corporativos", enable:"Backlog, arquitectura, permisos y patrón RAG gobernado.", later:"Agentes finales por área y despliegue masivo."},
-    {id:"UC2", name:"Document Intelligence e imagen", enable:"Patrón de ingesta, OCR/visión, metadatos y validación.", later:"Automatización productiva por tipología documental."},
-    {id:"UC3", name:"Producción, siniestros y fraude", enable:"Seguridad, datos, explicabilidad y scoring asistido.", later:"Scoring/motor productivo y reglas finales por ramo."},
-    {id:"UC4", name:"Analítica, actuarial y gestión", enable:"Data Mesh, catálogo, acceso y base analítica.", later:"Modelos actuariales, tarificación y cuadros finales."},
-    {id:"UC5", name:"Administración, contabilidad e inversiones", enable:"Integración y gobierno documental/contable.", later:"Flujos completos ERP, compras, facturas e inversiones."},
-    {id:"UC6", name:"IT, ciberseguridad y soporte técnico", enable:"Observabilidad, logs, soporte y patrón de agente IT.", later:"SOC/agente definitivo y automatizaciones productivas."},
-    {id:"UC7", name:"Extensión Grupo Soliss", enable:"Multitenancy, identidad y separación por empresa.", later:"Despliegue funcional por entidad bajo Go/No-Go."}
-  ],
-  tobe: {
-    asis: [
-      ["n8n / RPA","Flujos y automatizaciones existentes."],
-      ["Open WebUI / Ollama","Capacidades locales ya operativas."],
-      ["Automatizaciones departamentales","Soluciones aisladas por área."],
-      ["Conocimiento disperso","Integraciones y datos no gobernados de forma común."],
-      ["Gobierno limitado","Escalabilidad, trazabilidad y control heterogéneos."]
+  economics: {
+    build: 105786.20,
+    service: 77000,
+    base24: 182786.20,
+    optional: 42000,
+    adjustment: -338.80,
+    phases: [
+      {id:"F0", name:"Activación P0 y cierre de alcance", period:"M1", hours:160, rate:125, cost:20000, owner:"Keedio + Soliss", outcome:"Discovery, gobierno inicial, alcance, backlog UC y plan director definitivo."},
+      {id:"F1", name:"Blueprint on-premise y sizing", period:"M1–M2", hours:220, rate:110, cost:24200, owner:"Keedio diseña · Soliss valida", outcome:"Rancher/RKE2, clústeres, red, almacenamiento, backup, seguridad y sizing."},
+      {id:"F2", name:"Gobierno, DORA, Data Mesh e identidad", period:"M2", hours:180, rate:105, cost:18900, owner:"Keedio + Soliss", outcome:"Dominios, Keycloak, RBAC/ABAC, metadatos, evidencias y controles."},
+      {id:"F3", name:"Sandbox, Model Gateway, RAG y Gravitino PoC", period:"M2–M3", hours:310, rate:110, cost:34100, owner:"Keedio", outcome:"Validación no bloqueante, local-first, trazabilidad, fuentes y control de acceso."},
+      {id:"F4", name:"Pruebas, UAT, documentación y transferencia", period:"M3", hours:85, rate:105, cost:8925, owner:"Keedio entrega · Soliss acepta", outcome:"Pruebas, manuales, runbooks, formación y aceptación ejecutiva."}
     ],
-    transition: [
-      ["P0 como base","Plataforma crítica on-premise gobernada."],
-      ["Rancher / RKE2","Gestión de flota y clústeres por dominio/empresa."],
-      ["Keycloak / RBAC / ABAC","Identidad, permisos y segregación."],
-      ["Model Gateway","Uso de modelos bajo control corporativo."],
-      ["Data Mesh + lago","Gobierno, ownership, sensibilidad y acceso."],
-      ["Gravitino PoC","Catalogación/federación no bloqueante."],
-      ["HA / Backup / DR","Resiliencia, hardening y recuperación."]
+    scenarios: [
+      {id:"minimum", label:"Mínimo", low:125000, high:175000, note:"Infraestructura básica ajustada a requisitos iniciales."},
+      {id:"recommended", label:"Recomendado", low:180000, high:280000, note:"Configuración robusta e industrializada para crecimiento."},
+      {id:"ha", label:"Alta disponibilidad", low:300000, high:450000, note:"Redundancia y capacidad superior para criticidad/madurez."}
     ],
-    tobe: [
-      ["Plataforma federada","Escala horizontal sin mezclar dominios."],
-      ["Servicios IA/RPA gobernados","RAG, Document Intelligence, n8n y APIs."],
-      ["Observabilidad end-to-end","Métricas, logs, coste, SLA y auditoría."],
-      ["UC1–UC7 derivados","Activación por business case y valor de negocio."],
-      ["Autonomía progresiva","Runbooks, N1 interno y soporte N2/N3 co-gestionado."]
+    infraBlocks: [
+      ["Clúster gestión Rancher/RKE2","3 nodos control plane, quórum etcd, HA, TLS/CA interna",18000,30000,45000],
+      ["Clúster de grupo","Keycloak, Gravitino PoC, PostgreSQL/CloudNativePG y gobierno",25000,45000,70000],
+      ["Clúster empresa piloto","Plano de datos, conectores, pipelines y aislamiento por dominio",30000,55000,90000],
+      ["GPU / IA local","LLM local-first, embeddings, OCR/visión y Model Gateway",20000,50000,110000],
+      ["Almacenamiento / backup","MinIO/Ceph, snapshots, restore y retención",15000,35000,70000],
+      ["Red / seguridad / observabilidad","VPN, segmentación, logging, monitorización y hardening",12000,30000,60000],
+      ["Soporte / licencias opcionales","Rancher Prime, fabricante, garantía extendida",0,25000,70000]
     ]
   },
-  architecture: {
-    channels:{title:"Usuarios y canales", layer:"Acceso", owner:"Soliss", decision:"Perfiles, canales y casos autorizados definidos antes de UAT.", detail:"Empleados, agentes, IT, Dirección y RRHH consumen servicios según rol y dominio."},
-    identity:{title:"Identidad corporativa", layer:"Gobierno", owner:"Soliss + Keedio", decision:"SSO/RBAC/ABAC, segregación y política de acceso validados en G3.", detail:"Keycloak, OIDC y potencial integración LDAP/AD para evitar identidades paralelas."},
-    gateway:{title:"Model Gateway", layer:"IA", owner:"Keedio diseña / Soliss opera", decision:"Componente obligatorio para reducir Shadow AI.", detail:"Control de modelos, cuotas, coste, latencia, logs, caché, fallback y aprobación de uso."},
-    governance:{title:"Gobierno y cumplimiento", layer:"GRC", owner:"Soliss Compliance + Keedio", decision:"Controles y evidencias se validan en G2–G4.", detail:"DORA, AI Act, auditoría, trazabilidad, human-in-the-loop y clasificación de casos sensibles."},
-    management:{title:"Clúster de gestión", layer:"Kubernetes", owner:"Soliss infra / Keedio integración", decision:"Sizing desde F0 y blueprint cerrado en G2.", detail:"RKE2 dedicado + Rancher para gestión de flota, ciclo de vida, políticas y operación central."},
-    group:{title:"Clúster de grupo", layer:"Servicios transversales", owner:"Soliss infra / Keedio arquitectura", decision:"Definir HA, backup, restore y fallback.", detail:"Keycloak, CloudNativePG/PostgreSQL, Gravitino PoC, catálogo, metadatos y servicios comunes."},
-    solissInfra:{title:"Infraestructura Soliss", layer:"CPD", owner:"Soliss", decision:"Compra directa tras sizing G2 y cotización.", detail:"Servidores, red, GPU, almacenamiento, backup, soporte y potenciales licencias."},
-    aiServices:{title:"Servicios IA/RPA", layer:"Aplicación", owner:"Keedio + Soliss", decision:"Patrones habilitadores dentro de P0; verticales productivas fuera de P0.", detail:"RAG gobernado, Document Intelligence, n8n, APIs, conectores y orquestación."},
-    observability:{title:"Observabilidad", layer:"Operación", owner:"Keedio + Soliss", decision:"S1 debe incluir transferencia y SLA contractual.", detail:"Métricas, logs, coste, auditoría, paneles, alertas y evidencias."},
-    dataMesh:{title:"Data Mesh federado + lago gobernado", layer:"Datos", owner:"Data Owners + IT", decision:"Separación por empresa, ownership y sensibilidad definidos por dominio.", detail:"Catálogo horizontal, trazabilidad, calidad, clasificación y acceso controlado al lago."}
+  benchmark: {
+    eiopa: [
+      {value:65, suffix:"%", label:"Aseguradoras que ya usan GenAI", detail:"Adopción activa declarada."},
+      {value:64, suffix:"%", label:"Casos aún en PoC/experimentación", detail:"La industrialización sigue siendo el cuello de botella."},
+      {value:32, suffix:"%", label:"Casos que han llegado a producción", detail:"El salto PoC → producción es la oportunidad de P0."},
+      {value:64, suffix:"%", label:"Casos orientados a back-office", detail:"Encaje directo con Document Intelligence, administración, IT y soporte."},
+      {value:49, suffix:"%", label:"Entidades con política específica de IA", detail:"Gobierno y riesgo ya forman parte de la agenda aseguradora."},
+      {value:30, suffix:"%", label:"Consumidores que confiarían en recomendaciones de agentes IA", detail:"59% expresan reservas: la supervisión humana sigue siendo clave."}
+    ],
+    soliss: [
+      {value:"1933", label:"Origen en Toledo", detail:"Mutua con una trayectoria histórica profundamente vinculada al territorio."},
+      {value:"90", label:"Oficinas", detail:"Implantación territorial comunicada públicamente por Soliss."},
+      {value:"HITL", label:"Principio de experiencia", detail:"Propuesta Keedio: IA que amplifica la cercanía y el juicio humano, no que los sustituye."}
+    ]
   },
-  domains:[
-    {name:"RKE2 Empresa A",sub:"dominio de datos propio"},
-    {name:"RKE2 Empresa B",sub:"dominio de datos propio"},
-    {name:"RKE2 Empresa C",sub:"dominio de datos propio"},
-    {name:"RKE2 futuras empresas",sub:"alta progresiva"}
+  decisions: [
+    {id:"D1", title:"Aprobar P0", owner:"Consejo / Sponsor Soliss", when:"Inicio", why:"Pasar de iniciativas aisladas a plataforma gobernada.", risk:"Crecimiento por islas, Shadow AI y costes dispersos."},
+    {id:"D2", title:"Nombrar responsable transversal", owner:"Soliss", when:"G1", why:"Coordinar negocio, IT, datos, seguridad y adopción.", risk:"Bloqueos de decisión y baja adopción."},
+    {id:"D3", title:"Autorizar F0", owner:"Soliss", when:"Inicio", why:"Cerrar alcance, AS-IS, sizing y backlog con datos reales.", risk:"Ambigüedad técnica/económica."},
+    {id:"D4", title:"Aprobar sizing e inversión", owner:"Soliss", when:"G2", why:"Activar compra de infraestructura con blueprint validado.", risk:"Infra insuficiente o compra prematura."},
+    {id:"D5", title:"Go/No-Go Gravitino", owner:"Soliss + Keedio", when:"G3", why:"Mantener la PoC no bloqueante y activar fallback si procede.", risk:"Dependencia de un componente inmaduro."},
+    {id:"D6", title:"Aceptar P0 y transferencia", owner:"Soliss", when:"G4", why:"Pasar a operación co-gestionada con evidencias y runbooks.", risk:"Dependencia operativa y falta de autonomía."}
   ],
-  techDecisions:[
-    {title:"Gravitino = PoC no bloqueante",tag:"G3",text:"No se convierte en dependencia productiva obligatoria hasta superar benchmark, estabilidad y operabilidad.",tone:"purple"},
-    {title:"Fallback desacoplado",tag:"Resiliencia",text:"Catálogo/metastore estándar con APIs documentadas y acoplamiento reducido para evitar SPOF tecnológico.",tone:"blue"},
-    {title:"Local-first",tag:"Datos",text:"Procesamiento local, control de acceso, sensibilidad y auditabilidad para información corporativa y regulada.",tone:"green"},
-    {title:"Model Gateway único",tag:"FinOps IA",text:"Cuotas, logging, caché, coste, latencia, políticas y fallback para reducir Shadow AI.",tone:"amber"},
-    {title:"HA + Backup + DR",tag:"Continuidad",text:"Pruebas de restore, fallo de nodo y recuperación antes de considerar producción crítica.",tone:"red"},
-    {title:"Repositorios e IaC",tag:"Transferencia",text:"Código, manifiestos, scripts, versiones y documentación como entregables para reducir dependencia.",tone:"cyan"}
+  useCases: [
+    {id:"UC1", name:"Agentes conversacionales corporativos", enabled:"Arquitectura, permisos, RAG gobernado y criterios de arranque.", later:"Agentes finales por área y despliegue masivo.", regulation:"Evaluar por rol, datos y uso; mantener supervisión humana en contextos sensibles.", hypothesis:{value:8,data:7,risk:5,effort:6,ttv:8}},
+    {id:"UC2", name:"Document Intelligence e imagen", enabled:"Patrón de ingesta, OCR/visión, metadatos y validación.", later:"Automatización productiva por tipología documental.", regulation:"Privacidad, minimización, provenance y permisos sobre documentos.", hypothesis:{value:9,data:8,risk:4,effort:5,ttv:9}},
+    {id:"UC3", name:"Producción, siniestros y fraude", enabled:"Seguridad, datos, explicabilidad y scoring asistido.", later:"Motor/scoring productivo y reglas finales por ramo.", regulation:"Claims/fraud requieren análisis del uso concreto; HITL y trazabilidad son controles clave.", hypothesis:{value:9,data:6,risk:8,effort:8,ttv:6}},
+    {id:"UC4", name:"Analítica, actuarial y gestión", enabled:"Data Mesh, catálogo, acceso y base analítica.", later:"Modelos actuariales productivos, tarificación y cuadros finales.", regulation:"Si evalúa riesgo/precio de personas en vida/salud puede entrar en Annex III 5(c) del AI Act.", hypothesis:{value:8,data:7,risk:8,effort:8,ttv:6}},
+    {id:"UC5", name:"Administración, contabilidad e inversiones", enabled:"Integración y gobierno documental/contable.", later:"Flujos ERP, compras, facturas e inversiones completos.", regulation:"Control de excepciones, autorizaciones y auditabilidad de automatizaciones.", hypothesis:{value:8,data:8,risk:5,effort:6,ttv:8}},
+    {id:"UC6", name:"IT, ciberseguridad y soporte técnico", enabled:"Observabilidad, logs, soporte y patrón de agente IT.", later:"Agente/SOC definitivo y automatizaciones productivas.", regulation:"Principio de mínimo privilegio, approvals y límites de agencia.", hypothesis:{value:7,data:8,risk:5,effort:5,ttv:8}},
+    {id:"UC7", name:"Extensión Grupo Soliss", enabled:"Multitenancy, identidad y separación por empresa.", later:"Despliegue funcional por entidad bajo Go/No-Go.", regulation:"Segregación de datos, responsabilidades y onboarding por entidad.", hypothesis:{value:6,data:5,risk:5,effort:8,ttv:5}}
   ],
-  journey:[
-    {n:"1",title:"Construcción P0",period:"M1–M3",amount:"105.786,20 €",type:"CAPEX potencial",text:"Activación, blueprint, gobierno, sandbox, pruebas y transferencia."},
-    {n:"2",title:"Servicio co-gestionado",period:"M3–M24",amount:"77.000 €",type:"OPEX",text:"Soporte, gobierno, observabilidad, control económico y evolución."},
-    {n:"3",title:"Año opcional",period:"M25–M36",amount:"42.000 €",type:"OPEX opcional",text:"Continuidad, madurez y evolución si Soliss decide activarlo."}
+  architecture: {
+    nodes: [
+      {id:"users", label:"Usuarios / canales", layer:"Acceso", owner:"Soliss", detail:"Empleados, agentes, IT, Dirección y RRHH acceden según rol y dominio.", security:"Prompt injection, identidad del usuario y autorización de acciones.", data:"El contexto debe limitarse a los datos autorizados para rol/empresa.", dora:"Trazabilidad de uso y continuidad del canal.", aiAct:"Transparencia y supervisión humana según el caso de uso."},
+      {id:"identity", label:"Identidad", layer:"Gobierno", owner:"Soliss + Keedio", detail:"Keycloak, OIDC y potencial integración LDAP/AD con RBAC/ABAC.", security:"Autenticación, segregación, mínimo privilegio y control de acceso.", data:"Permisos basados en dominio, sensibilidad y ownership.", dora:"Control de acceso y evidencias de cambios.", aiAct:"Responsabilidad y atribución de cada interacción."},
+      {id:"gateway", label:"Model Gateway", layer:"IA", owner:"Keedio diseña · Soliss opera", detail:"Modelos, cuotas, coste, latencia, logs, caché, fallback y políticas.", security:"Control frente a Shadow AI, consumo no acotado y herramientas no autorizadas.", data:"Decide qué modelos pueden tratar qué clases de datos.", dora:"Logging, observabilidad, resiliencia y proveedores/modelos autorizados.", aiAct:"Registro de uso, modelo, prompt/respuesta y supervisión."},
+      {id:"governance", label:"Gobierno", layer:"GRC", owner:"Soliss Compliance + Keedio", detail:"DORA, AI Act, auditoría, evidencias, clasificación de casos y HITL.", security:"Políticas, risk acceptance y evidencia de controles.", data:"Sensibilidad, ownership, retención y calidad.", dora:"ICT risk, terceros, resiliencia, pruebas y exit plan.", aiAct:"Clasificación previa de usos sensibles y controles aplicables."},
+      {id:"management", label:"Clúster gestión", layer:"Kubernetes", owner:"Soliss infra · Keedio integración", detail:"RKE2 dedicado + Rancher para ciclo de vida y gestión de flota.", security:"Hardening, RBAC, secretos, políticas y plano de control aislado.", data:"No debe mezclar planos de datos de los dominios.", dora:"HA, cambios controlados y recuperación del control plane.", aiAct:"Infraestructura habilitadora, no determina por sí sola clasificación."},
+      {id:"group", label:"Clúster de grupo", layer:"Servicios transversales", owner:"Soliss infra · Keedio arquitectura", detail:"Keycloak, CloudNativePG, Gravitino PoC, catálogo, metadatos y servicios comunes.", security:"Segregación, secrets y resistencia a fallo transversal.", data:"Catálogo, metadata, lineage y reglas de acceso.", dora:"HA, backup, restore y monitorización obligatorios para producción.", aiAct:"Soporta trazabilidad y gobernanza de evidencias."},
+      {id:"ai", label:"Servicios IA/RPA", layer:"Aplicación", owner:"Keedio + Soliss", detail:"RAG, Document Intelligence, n8n, APIs, conectores y orquestación.", security:"Output handling, tool permissions, prompt injection y approvals.", data:"Grounding con fuentes autorizadas y trazables.", dora:"Continuidad y observabilidad del servicio.", aiAct:"Control del grado de autonomía y human-in-the-loop."},
+      {id:"observability", label:"Observabilidad", layer:"Operación", owner:"Keedio + Soliss", detail:"Métricas, logs, coste, auditoría, paneles y evidencias.", security:"Detección, forense y alertas sobre comportamiento anómalo.", data:"Audita accesos, fuentes, respuestas y costes.", dora:"Evidencia para resiliencia, incidentes y testing.", aiAct:"Outcomes monitoring y trazabilidad de inferencia."},
+      {id:"domainA", label:"RKE2 Empresa A", layer:"Dominio", owner:"Soliss", detail:"Datos, conectores y pipelines del dominio/empresa A.", security:"Aislamiento y política de red/identidad del dominio.", data:"Ownership y calidad propios.", dora:"Continuidad y recovery del dominio.", aiAct:"Clasificación depende del caso que se despliegue."},
+      {id:"domainB", label:"RKE2 Empresa B", layer:"Dominio", owner:"Soliss", detail:"Datos, conectores y pipelines del dominio/empresa B.", security:"Aislamiento y política de red/identidad del dominio.", data:"Ownership y calidad propios.", dora:"Continuidad y recovery del dominio.", aiAct:"Clasificación depende del caso que se despliegue."},
+      {id:"domainC", label:"RKE2 Empresa C", layer:"Dominio", owner:"Soliss", detail:"Datos, conectores y pipelines del dominio/empresa C.", security:"Aislamiento y política de red/identidad del dominio.", data:"Ownership y calidad propios.", dora:"Continuidad y recovery del dominio.", aiAct:"Clasificación depende del caso que se despliegue."},
+      {id:"data", label:"Data Mesh + lago", layer:"Datos", owner:"Soliss Data Owners + IT", detail:"Separación por empresa, ownership, sensibilidad, trazabilidad y acceso controlado.", security:"Exfiltración, poisoning y exposición entre dominios.", data:"Source of truth, provenance, catálogo y retención.", dora:"Backup, recuperación y criticidad de datos.", aiAct:"Calidad, trazabilidad y documentación de fuentes."},
+      {id:"infra", label:"Infraestructura Soliss", layer:"CPD", owner:"Soliss", detail:"Servidores, red, GPU, almacenamiento, backup y soporte adquiridos directamente por Soliss.", security:"Segmentación, hardening, cifrado, red y supply chain.", data:"Ubicación y resiliencia de datos/modelos.", dora:"HA, backup, DR, capacidad y soporte.", aiAct:"Base técnica; requisitos AI Act recaen en sistemas/casos concretos."}
+    ],
+    scenarios: [
+      {id:"normal", label:"Operación normal", status:{}, message:"Flujo nominal. Todos los componentes operan dentro del patrón objetivo.", outcome:"Operación nominal", gate:"G4 valida con UAT, resiliencia y transferencia."},
+      {id:"gravitino", label:"Gravitino no supera PoC", status:{group:"degraded",data:"degraded"}, message:"Gravitino queda fuera de la ruta crítica. Se activa el fallback de catálogo/metastore desacoplado.", outcome:"P0 continúa con fallback", gate:"Go/No-Go documentado en G3."},
+      {id:"gpu", label:"Retraso de GPU", status:{infra:"degraded",ai:"degraded"}, message:"El hardware definitivo se retrasa. El sandbox de G3 puede continuar en entorno provisional; producción queda bloqueada hasta aceptación de infraestructura/HA/backup/DR.", outcome:"G3 puede seguir · producción no", gate:"Sizing y compras se activan en F0/F1; validación en G2."},
+      {id:"node", label:"Fallo de nodo", status:{management:"degraded",group:"degraded"}, message:"La arquitectura debe degradar sin perder control ni evidencias. El comportamiento real se demuestra en pruebas de resiliencia, no se presume.", outcome:"Resultado pendiente de prueba", gate:"Evidencia de HA/restore en G4."},
+      {id:"shadow", label:"Intento de Shadow AI", status:{users:"attack",gateway:"blocked"}, message:"Un usuario intenta saltar el Model Gateway hacia un modelo no autorizado. El patrón objetivo lo bloquea y registra el intento.", outcome:"BLOCK conceptual", gate:"Políticas y logging se validan en G3/G4."},
+      {id:"cross", label:"Acceso entre dominios", status:{domainA:"attack",domainB:"blocked",identity:"blocked",data:"blocked"}, message:"Una identidad del dominio A intenta acceder a información del dominio B. RBAC/ABAC, segregación y Data Mesh deben denegar y auditar.", outcome:"DENY conceptual", gate:"Pruebas de seguridad e integración en F4."}
+    ]
+  },
+  gates: [
+    {id:"G1", when:"Semana 2", phase:"F0", title:"Alcance y responsables", checks:["Inventario AS-IS validado","Alcance y exclusiones aceptados","Backlog UC1–UC7 priorizado","Sponsor y responsable transversal nombrados","Calendario de sizing/aprovisionamiento acordado"]},
+    {id:"G2", when:"Semana 6", phase:"F1–F2", title:"Blueprint e inversión", checks:["Blueprint on-premise aprobado","Sizing CPU/RAM/GPU validado","Red/segmentación definidas","Backup/DR diseñados","Rango de inversión Soliss aprobado","Enfoque DORA/AI Act revisado"]},
+    {id:"G3", when:"Semana 9", phase:"F3", title:"Sandbox técnico", checks:["Keycloak/RBAC validados","Model Gateway validado","RAG y fuentes trazables","Gravitino PoC evaluado","Fallback documentado","Observabilidad y logging activos"]},
+    {id:"G4", when:"Semana 12", phase:"F4", title:"UAT y transferencia", checks:["UAT firmado","Runbooks entregados","Backup/restore probado","HA/fallo de nodo probado","Formación y transferencia realizadas","Roadmap UC1–UC7 y plan S1 aceptados"]}
   ],
-  gates:[
-    {id:"G1",when:"Semana 2",phase:"F0",title:"Alcance y responsables",criteria:"Inventario AS-IS, alcance, exclusiones, backlog UC1–UC7 y responsables aceptados."},
-    {id:"G2",when:"Semana 6",phase:"F1–F2",title:"Blueprint + inversión",criteria:"Sizing, arquitectura, inversión Soliss, Data Mesh y enfoque DORA/AI Act aprobados."},
-    {id:"G3",when:"Semana 9",phase:"F3",title:"Sandbox técnico",criteria:"Keycloak, Model Gateway, RAG, Gravitino PoC, observabilidad y acceso validados."},
-    {id:"G4",when:"Semana 12",phase:"F4",title:"UAT y transferencia",criteria:"Runbooks, manuales, formación, cierre P0 y roadmap UC1–UC7 aceptados."}
+  evidence: [
+    {id:"E1", area:"DORA", control:"Contrato TIC y responsabilidades", owner:"Soliss + Keedio + Jurídico", default:"proposal", evidence:"Anexo contractual / matriz de responsabilidades"},
+    {id:"E2", area:"DORA", control:"Derecho de auditoría", owner:"Soliss + Keedio", default:"soliss", evidence:"Cláusula + acceso a logs/configuración/cambios"},
+    {id:"E3", area:"DORA", control:"Exit plan", owner:"Keedio entrega · Soliss valida", default:"proposal", evidence:"Plan de transición, repositorios, credenciales y continuidad"},
+    {id:"E4", area:"DORA", control:"Backup / restore / DR", owner:"Soliss IT + Keedio", default:"evidence", evidence:"Runbooks + pruebas de recuperación + RTO/RPO contractual"},
+    {id:"E5", area:"DORA", control:"Pruebas de resiliencia", owner:"Soliss + Keedio", default:"evidence", evidence:"Resultados de fallo de nodo, restore y escenarios"},
+    {id:"E6", area:"AI Act", control:"Clasificación del caso de uso", owner:"Soliss Compliance + Keedio", default:"soliss", evidence:"Ficha de clasificación antes de producción"},
+    {id:"E7", area:"AI Act", control:"Supervisión humana", owner:"Soliss negocio + Compliance", default:"proposal", evidence:"Workflow HITL, roles y criterio de aprobación"},
+    {id:"E8", area:"AI/GRC", control:"Model Gateway logging", owner:"Keedio diseña · Soliss opera", default:"proposal", evidence:"Usuario, modelo, prompt/respuesta, coste, latencia y retención"},
+    {id:"E9", area:"Datos", control:"Segregación / sensibilidad / ownership", owner:"Soliss Data Owners", default:"soliss", evidence:"Catálogo de dominios, clasificación y permisos"},
+    {id:"E10", area:"Terceros", control:"Registro de proveedores/subcontratas", owner:"Soliss + Jurídico", default:"soliss", evidence:"Registro de terceros TIC y dependencias"}
   ],
-  roadmap:[
-    {name:"F0 Activación P0",start:1,end:1,type:"build",owner:"Keedio + Soliss"},
-    {name:"F1–F4 Construcción P0",start:1,end:3,type:"build",owner:"Keedio + Soliss"},
-    {name:"Infraestructura Soliss",start:1,end:6,type:"build",owner:"Soliss IT / Compras"},
-    {name:"Servicio co-gestionado",start:3,end:24,type:"run",owner:"Keedio + Soliss"},
-    {name:"Onboarding UC1–UC7",start:4,end:24,type:"run",owner:"Business cases"},
-    {name:"Gobierno / DORA / AI Act",start:1,end:24,type:"governance",owner:"Comité"},
-    {name:"Año opcional S2",start:25,end:36,type:"run",owner:"Opcional"}
+  passports: [
+    {id:"llm", title:"LLM local principal", purpose:"Generación / razonamiento general", status:"A seleccionar y validar en F3", fields:{Proveedor:"Por seleccionar",Versión:"Por seleccionar",Licencia:"Por validar",Hosting:"On-premise / local-first",Datos:"Según clasificación y policy",Owner:"Soliss opera · Keedio diseña",Benchmark:"Pendiente G3",Seguridad:"Prompt injection / leakage / tools",Fallback:"Modelo alternativo aprobado"}},
+    {id:"emb", title:"Modelo de embeddings", purpose:"Indexación y recuperación RAG", status:"A seleccionar y validar en F3", fields:{Proveedor:"Por seleccionar",Versión:"Por seleccionar",Licencia:"Por validar",Hosting:"Preferente local",Datos:"Documentos autorizados",Owner:"Soliss + Keedio",Benchmark:"Recall / latencia / coste",Seguridad:"Vector poisoning / access control",Fallback:"Índice compatible alternativo"}},
+    {id:"ocr", title:"OCR / visión", purpose:"Document Intelligence", status:"A seleccionar por UC2", fields:{Proveedor:"Por seleccionar",Versión:"Por seleccionar",Licencia:"Por validar",Hosting:"Local-first según sensibilidad",Datos:"Imágenes/documentos autorizados",Owner:"Soliss + Keedio",Benchmark:"Exactitud por tipología",Seguridad:"PII / malware / ingestión",Fallback:"Pipeline OCR alternativo"}}
   ],
-  support:[
-    {level:"N0",title:"Usuario / key user",owner:"Soliss",scope:"Uso funcional, dudas básicas, feedback y validación UAT.",result:"Adopción controlada."},
-    {level:"N1",title:"Operación interna",owner:"Soliss con transferencia Keedio",scope:"Incidencias simples, paneles y ejecución de runbooks.",result:"Autonomía progresiva."},
-    {level:"N2",title:"Soporte especializado",owner:"Keedio",scope:"Kubernetes, Model Gateway, RAG, metadatos, seguridad y debugging.",result:"Continuidad y reducción de riesgo."},
-    {level:"N3",title:"Fabricantes / comunidad",owner:"Soliss/Keedio según contrato",scope:"Rancher/SUSE, hardware, red, almacenamiento y backup.",result:"SLA externo si se contrata."}
+  risks: [
+    {id:"R1", severity:"Alto", risk:"Infraestructura insuficiente o compra no alineada", control:"Sizing formal, escenarios, validación IT y G2 antes de compra.", owner:"Soliss + Keedio"},
+    {id:"R2", severity:"Medio", risk:"Gravitino inmaduro para producción regulada", control:"PoC sandbox, Go/No-Go y fallback desacoplado.", owner:"Keedio"},
+    {id:"R3", severity:"Alto", risk:"Exposición de datos personales o sensibles", control:"Local-first, RBAC/ABAC, sensibilidad, auditoría y HITL.", owner:"Soliss + Keedio"},
+    {id:"R4", severity:"Alto", risk:"Shadow AI y costes no controlados", control:"Model Gateway único, cuotas, logging, caché, fallback y FinOps IA.", owner:"Keedio"},
+    {id:"R5", severity:"Medio", risk:"Baja adopción por usuarios o áreas", control:"Gestión del cambio, champions, UAT, formación y N1/N2.", owner:"Soliss"},
+    {id:"R6", severity:"Medio", risk:"Operación difícil tras la entrega", control:"Runbooks, IaC, transferencia, servicio co-gestionado y RACI.", owner:"Keedio + Soliss"},
+    {id:"R7", severity:"Alto", risk:"No conformidad DORA / AI Act", control:"Compliance-by-design, clasificación, controles, logs, pruebas y evidencias.", owner:"Soliss + Keedio"},
+    {id:"R8", severity:"Medio", risk:"Dependencia excesiva de proveedor", control:"On-premise, open source, repositorios, documentación y soporte separado.", owner:"Soliss"}
   ],
-  change:[
-    {profile:"Sponsor ejecutivo Soliss",responsibility:"Priorizar, desbloquear decisiones, aceptar gates y comunicar valor.",dedication:"2–4 h/mes"},
-    {profile:"Responsable interno AI/RPA Factory",responsibility:"Liderar negocio-tecnología, coordinación y adopción.",dedication:"30–50% M1–M3; 15–25% M4–M24"},
-    {profile:"Responsable infraestructura Soliss",responsibility:"CPD, red, servidores, almacenamiento, backup y soporte base.",dedication:"20–40% M1–M3; 10–20% posterior"},
-    {profile:"Responsable datos/gobierno",responsibility:"Ownership, sensibilidad, calidad y acceso por dominio.",dedication:"15–30% M1–M3"},
-    {profile:"Key users negocio",responsibility:"Necesidades, UAT, manuales y casos derivados.",dedication:"Sesiones por sprint"},
-    {profile:"Keedio PM / Arquitecto",responsibility:"Dirección, arquitectura, riesgos, coordinación y entregables.",dedication:"Incluido"},
-    {profile:"Keedio Data/AI Engineer",responsibility:"Gateway, RAG, metadatos, pipelines y pruebas.",dedication:"Incluido"},
-    {profile:"Keedio Infra/Sec Engineer",responsibility:"RKE2, seguridad, IaC, observabilidad y runbooks.",dedication:"Incluido"}
-  ],
-  raci:[
-    ["Alcance y priorización","A/R","C","C","R","I"],
-    ["Sizing infraestructura","A","R","C","R","C"],
-    ["Arquitectura Rancher/RKE2","C","A/R","C","R","I"],
-    ["Gobierno datos/seguridad","A/R","R","R","C","C"],
-    ["RAG / Model Gateway","C","A/R","C","R","C"],
-    ["UAT y adopción","A/R","C","R","C","R"],
-    ["Operación N1/N2","A/R","R","C","R","I"]
-  ],
-  tests:[
-    {type:"Funcional",coverage:"Roles, empresas, canales, límites de P0 y casos derivados.",evidence:"Casos UAT firmados"},
-    {type:"Integración",coverage:"APIs, conectores, n8n, Open WebUI/Ollama, lago, Keycloak y Gateway.",evidence:"Logs, resultados y actas"},
-    {type:"Seguridad",coverage:"RBAC/ABAC, segregación, trazabilidad, hardening, TLS, secretos y backup.",evidence:"Checklists y evidencias"},
-    {type:"Rendimiento",coverage:"Latencia, concurrencia, GPU, RAG, embeddings, observabilidad y coste/petición.",evidence:"Métricas y umbrales"},
-    {type:"Resiliencia",coverage:"Backup/restore, HA, fallo de nodo, recuperación y DR.",evidence:"Pruebas de recuperación"},
-    {type:"Aceptación",coverage:"Criterios G1–G4, manuales, runbooks y transferencia.",evidence:"Acta de cierre G4"}
-  ],
-  deliverables:[
-    {type:"General",name:"Plan de proyecto",content:"Cronograma, recursos, riesgos, hitos, metodología, RACI y gates."},
-    {type:"General",name:"Informes de avance",content:"Estado, desviaciones, decisiones, dependencias y acciones correctivas."},
-    {type:"General",name:"Journey + Economics",content:"CAPEX/OPEX, inversiones, fases, gates y continuidad."},
-    {type:"General",name:"Gestión del cambio",content:"Adopción, formación, perfiles, comunicación y soporte usuario."},
-    {type:"General",name:"Informe de cierre",content:"Aceptación, lecciones aprendidas y roadmap UC1–UC7."},
-    {type:"Técnico",name:"Especificaciones funcionales",content:"Qué debe hacer P0 por perfiles, empresas y dominios."},
-    {type:"Técnico",name:"Especificaciones técnicas",content:"Arquitectura, APIs, identidad, datos, modelos, red, seguridad y operación."},
-    {type:"Técnico",name:"Diseños de solución",content:"Diagramas, flujos, Kubernetes, Data Mesh y servicios verticales."},
-    {type:"Calidad",name:"Plan de pruebas",content:"Casos, cobertura, UAT, regresión, continuidad y evidencias."},
-    {type:"Técnico",name:"Código / IaC",content:"Repositorios, manifiestos, scripts, versiones y trazabilidad."},
-    {type:"Operación",name:"Manual técnico / runbooks",content:"Instalación, configuración, backup, restore, monitorización y N1/N2."},
-    {type:"Usuario",name:"Manual de usuario",content:"Roles, acceso, buenas prácticas, soporte y límites de IA."}
-  ],
-  risks:[
-    {id:"R1",severity:"Alto",risk:"Infraestructura insuficiente o compra no alineada",control:"Sizing formal, opciones por escenario, validación IT y G2 antes de compra.",owner:"Soliss + Keedio"},
-    {id:"R2",severity:"Medio",risk:"Gravitino inmaduro para producción regulada",control:"PoC sandbox no bloqueante, Go/No-Go y no dependencia crítica inicial.",owner:"Keedio"},
-    {id:"R3",severity:"Alto",risk:"Exposición de datos personales o sensibles",control:"Local-first, RBAC/ABAC, Keycloak, sensibilidad, auditoría y HITL.",owner:"Soliss + Keedio"},
-    {id:"R4",severity:"Alto",risk:"Shadow AI y costes no controlados",control:"Model Gateway único, cuotas, logging, caché, fallback y FinOps IA.",owner:"Keedio"},
-    {id:"R5",severity:"Medio",risk:"Baja adopción por usuarios o negocio",control:"Gestión del cambio, champions, formación, UAT, manuales y N1/N2.",owner:"Soliss"},
-    {id:"R6",severity:"Medio",risk:"Operación difícil tras la entrega",control:"Runbooks, IaC, transferencia, soporte co-gestionado y RACI.",owner:"Keedio + Soliss"},
-    {id:"R7",severity:"Alto",risk:"No conformidad DORA / AI Act",control:"Compliance-by-design, registro, controles, logs, pruebas y evidencias.",owner:"Soliss + Keedio"},
-    {id:"R8",severity:"Medio",risk:"Dependencia excesiva de proveedor",control:"On-premise, open source, repositorios, documentación y soporte separado.",owner:"Soliss"}
+  sources: [
+    {title:"EIOPA · Generative AI Market Survey", note:"347 entidades · 25 países · publicado 2 feb 2026", url:"https://www.eiopa.europa.eu/publications/generative-ai-market-survey-outlook-use-cases-and-risk-management_en"},
+    {title:"EIOPA · Supervisory priorities 2026", note:"DORA como Focus Area 2026", url:"https://www.eiopa.europa.eu/publications/union-wide-strategic-supervisory-priorities-focus-areas-2026_en"},
+    {title:"EU AI Act Service Desk · Annex III", note:"Vida/salud: risk assessment & pricing de personas en 5(c)", url:"https://ai-act-service-desk.ec.europa.eu/en/ai-act/annex-3"},
+    {title:"EUR-Lex · DORA 2022/2554", note:"Resiliencia digital, backup/restoration y terceros TIC", url:"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.L_.2022.333.01.0001.01.ENG"},
+    {title:"Soliss · Historia", note:"Toledo 1933 y red actual de 90 oficinas", url:"https://www.soliss.es/historia/"}
   ]
 };

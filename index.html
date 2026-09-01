@@ -2,349 +2,140 @@
 <html lang="es" data-theme="light">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Soliss AI/RPA Factory · P0 Infraestructura Crítica</title>
-  <meta name="description" content="Plan Director técnico y ejecutivo de Soliss AI/RPA Factory: P0 on-premise federado, gobierno, economics, roadmap, riesgos, soporte y casos de uso derivados.">
-  <meta name="theme-color" content="#042f3e">
-  <meta property="og:title" content="Soliss AI/RPA Factory · P0">
-  <meta property="og:description" content="Infraestructura crítica on-premise, federada y gobernada para industrializar IA/RPA.">
-  <meta property="og:type" content="website">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#062f3d">
+  <meta name="description" content="Keedio presenta a Soliss la P0 Decision Room: arquitectura, economics, gates, gobierno y casos de uso de Soliss AI/RPA Factory.">
+  <title>Keedio → Soliss · P0 Decision Room</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon-192.png">
   <link rel="stylesheet" href="assets/styles.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
   <script defer src="assets/data.js"></script>
   <script defer src="assets/app.js"></script>
 </head>
-<body>
-  <a class="skip-link" href="#main">Ir al contenido</a>
+<body data-audience="board">
+<a class="skip" href="#main">Ir al contenido</a>
+<header class="topbar">
+  <div class="shell navrow">
+    <a class="brand" href="#hero"><span class="keedio-mark">K</span><span><b>KEEDIO</b><small>Propuesta para SOLISS</small></span></a>
+    <nav id="nav" aria-label="Principal">
+      <a href="#why">Why now</a><a href="#decision">Decision Room</a><a href="#twin">Digital Twin</a><a href="#factory">UC Factory</a><a href="#economics">Economics</a><a href="#governance">Governance</a><a href="#delivery">Delivery</a>
+    </nav>
+    <div class="actions"><button id="presentBtn" class="chip-btn">▶ Presentar</button><button id="themeBtn" class="icon-btn" aria-label="Cambiar tema">◐</button><button id="menuBtn" class="icon-btn menu" aria-label="Abrir menú">☰</button></div>
+  </div>
+  <div class="progress"><i id="progress"></i></div>
+</header>
 
-  <header class="topbar">
-    <div class="shell nav-shell">
-      <a href="#inicio" class="brand" aria-label="Inicio">
-        <span class="brand-orbit"><i></i><i></i><i></i><b>P0</b></span>
-        <span class="brand-copy">
-          <strong>SOLISS <em>AI/RPA FACTORY</em></strong>
-          <small>Plan Director · Keedio × Soliss</small>
-        </span>
-      </a>
+<div class="audience-bar">
+  <div class="shell audience-row">
+    <span>Vista</span>
+    <button class="aud active" data-audience="board">Consejo</button>
+    <button class="aud" data-audience="tech">Tecnología</button>
+    <button class="aud" data-audience="compliance">Compliance</button>
+    <button class="aud" data-audience="all">Completa</button>
+    <em>Keedio propone · Soliss decide y valida</em>
+  </div>
+</div>
 
-      <nav id="primaryNav" class="nav-links" aria-label="Navegación">
-        <a href="#decision">Decisión</a>
-        <a href="#tobe">TO-BE</a>
-        <a href="#arquitectura">Arquitectura</a>
-        <a href="#economics">Economics</a>
-        <a href="#roadmap">Roadmap</a>
-        <a href="#operacion">Operación</a>
-        <a href="#riesgos">Riesgos</a>
-      </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-button" aria-label="Cambiar tema" title="Cambiar tema">◐</button>
-        <button id="menuToggle" class="icon-button menu-button" aria-label="Abrir menú" aria-expanded="false">☰</button>
-      </div>
+<main id="main">
+<section id="hero" class="hero present-step" data-show="board tech compliance">
+  <div class="mesh"></div>
+  <div class="shell hero-grid">
+    <div class="hero-copy reveal">
+      <div class="overline"><span>P0 · Infraestructura crítica</span><b>FINAL CERRADO</b></div>
+      <h1>Keedio propone a Soliss una <em>AI/RPA Factory gobernada</em>, no siete islas tecnológicas.</h1>
+      <p>P0 construye la plataforma on-premise, federada, segura y operable. Soliss mantiene la propiedad de la infraestructura y activa UC1–UC7 posteriormente mediante business case y Go/No-Go.</p>
+      <div class="hero-ctas"><a class="btn primary" href="#decision">Abrir Decision Room</a><a class="btn ghost" href="#twin">Simular arquitectura</a></div>
+      <div class="principle"><b>Principio de experiencia propuesto por Keedio</b><span>IA que amplifica la cercanía y el juicio humano de Soliss, no que los sustituye.</span></div>
     </div>
-    <div class="progress-track"><span id="scrollProgress"></span></div>
-  </header>
+    <aside class="hero-panel reveal">
+      <header><span>Responsabilidad</span><strong>Quién hace qué</strong></header>
+      <div class="role-grid"><article class="keedio"><b>KEEDIO</b><p>Arquitectura, integración, gobierno, sandbox, IaC, soporte especializado y transferencia.</p></article><article class="soliss"><b>SOLISS</b><p>Decisión, infraestructura, ownership de datos, validación, operación interna y aprobación de gates.</p></article></div>
+      <div class="kpis"><div><small>Construcción P0</small><b>105.786,20 €</b></div><div><small>Servicio M3–M24</small><b>77.000 €</b></div><div><small>Total Keedio 24M</small><b>182.786,20 €</b></div><div><small>Infra Soliss recomendada</small><b>180–280 k€*</b></div></div>
+      <small class="fine">*Rango orientativo sujeto a sizing G2 y cotizaciones de Soliss.</small>
+    </aside>
+  </div>
+</section>
 
-  <main id="main">
-    <section id="inicio" class="hero section">
-      <div class="hero-glow glow-one"></div>
-      <div class="hero-glow glow-two"></div>
-      <div class="shell hero-grid">
-        <div class="hero-copy reveal">
-          <div class="eyebrow-row">
-            <span class="eyebrow">P0 · Infraestructura crítica</span>
-            <span class="status-chip"><i></i>Baseline Final Cerrado</span>
-          </div>
-          <h1>De capacidades IA/RPA locales a una <span>plataforma corporativa gobernada</span>.</h1>
-          <p class="lead">P0 es el único proyecto contratado. Construye la base on-premise, federada, segura y operable; UC1–UC7 se activan después como casos de uso derivados mediante business case y Go/No-Go.</p>
-          <div class="hero-actions">
-            <a class="button primary" href="#arquitectura">Explorar arquitectura</a>
-            <a class="button secondary" href="#decision">Lectura para Consejo</a>
-          </div>
-          <div class="trust-row">
-            <span>Rancher / RKE2</span><span>Keycloak</span><span>Model Gateway</span><span>Data Mesh</span><span>Gravitino PoC</span><span>DORA / AI Act</span>
-          </div>
-        </div>
+<section id="why" class="section present-step" data-show="board compliance">
+  <div class="shell">
+    <div class="section-head reveal"><div><span>01 · WHY NOW</span><h2>La oportunidad no es adoptar GenAI. Es industrializarla con control.</h2></div><p>EIOPA confirma que el sector asegurador europeo ya ha entrado en adopción, pero la mayoría de casos sigue atrapada entre PoC y producción.</p></div>
+    <div id="benchmarkGrid" class="benchmark-grid reveal"></div>
+    <div class="context-band reveal"><div><span>Soliss</span><b>Toledo · 1933 · 90 oficinas</b><p>La propuesta de Keedio conecta industrialización tecnológica con una experiencia donde el profesional Soliss sigue siendo central.</p></div><div class="trust-signal"><b>59%</b><span>de consumidores europeos muestran reservas ante recomendaciones de agentes IA.</span><small>EIOPA Eurobarometer 2025</small></div></div>
+    <details class="sources reveal"><summary>Fuentes públicas de benchmark</summary><div id="publicSources"></div></details>
+  </div>
+</section>
 
-        <aside class="hero-dashboard reveal" aria-label="Resumen ejecutivo">
-          <div class="dash-top">
-            <span>Programa base</span>
-            <strong>24M <small>+ 12M opcionales</small></strong>
-          </div>
-          <div class="dash-grid">
-            <article><span>Construcción P0</span><strong data-counter="105786.2" data-format="eur">0</strong><small>CAPEX potencial Keedio</small></article>
-            <article><span>Servicio M3–M24</span><strong data-counter="77000" data-format="eur">0</strong><small>OPEX co-gestionado</small></article>
-            <article><span>Total Keedio 24M</span><strong data-counter="182786.2" data-format="eur">0</strong><small>Sin infraestructura Soliss</small></article>
-            <article><span>Año opcional</span><strong data-counter="42000" data-format="eur">0</strong><small>M25–M36</small></article>
-          </div>
-          <div class="dash-footer">
-            <div><span class="mini-label">Infra Soliss recomendada</span><strong>180–280 k€</strong></div>
-            <div><span class="mini-label">TCO central orientativo*</span><strong>≈ 412,8 k€</strong></div>
-          </div>
-          <p class="micro">*Referencia central usando 230 k€ dentro del rango recomendado; no sustituye sizing G2 ni cotización de proveedores.</p>
-        </aside>
+<section id="decision" class="section dark present-step" data-show="board compliance">
+  <div class="shell">
+    <div class="section-head light reveal"><div><span>02 · DECISION ROOM</span><h2>Seis decisiones. Un único P0.</h2></div><p>Cada decisión muestra quién la toma, cuándo, qué desbloquea y qué riesgo aparece si se difiere.</p></div>
+    <div id="decisionGrid" class="decision-grid reveal"></div>
+    <div class="decision-summary reveal"><b>Decisión solicitada</b><p>Aprobar P0 como infraestructura crítica, activar F0, nombrar responsable transversal Soliss y condicionar el avance a G1–G4.</p></div>
+  </div>
+</section>
+
+<section id="twin" class="section present-step" data-show="tech compliance board">
+  <div class="shell">
+    <div class="section-head reveal"><div><span>03 · DIGITAL TWIN</span><h2>La arquitectura se explica mejor cuando puede fallar.</h2></div><p>Simulación conceptual del patrón objetivo. No representa pruebas ejecutadas: los resultados reales se obtienen en F3/F4 y quedan como evidencia.</p></div>
+    <div class="twin-toolbar reveal"><div id="scenarioButtons" class="segmented"></div><div id="lensButtons" class="segmented lenses"><button class="active" data-lens="detail">Arquitectura</button><button data-lens="security">Security</button><button data-lens="data">Data</button><button data-lens="dora">DORA</button><button data-lens="aiAct">AI Act</button></div></div>
+    <div class="twin-shell reveal">
+      <div class="architecture-map" id="archMap">
+        <button class="node" data-node="users">Usuarios / canales</button><button class="node" data-node="identity">Identidad</button><button class="node" data-node="gateway">Model Gateway</button><button class="node" data-node="governance">Gobierno</button>
+        <button class="node big" data-node="management">Clúster gestión<br><small>Rancher + RKE2</small></button><div class="arrow">→</div><button class="node big focus" data-node="group">Clúster de grupo<br><small>Keycloak · CNPG · Gravitino PoC</small></button><div class="arrow">→</div><button class="node big" data-node="infra">Infraestructura Soliss</button>
+        <button class="node service" data-node="ai">Servicios IA/RPA</button><button class="node service" data-node="observability">Observabilidad</button>
+        <button class="node domain" data-node="domainA">RKE2 Empresa A</button><button class="node domain" data-node="domainB">RKE2 Empresa B</button><button class="node domain" data-node="domainC">RKE2 Empresa C</button>
+        <button class="node lake" data-node="data">Data Mesh federado + lago gobernado</button>
       </div>
-    </section>
-
-    <section id="decision" class="section decision-section">
-      <div class="shell">
-        <div class="section-head reveal">
-          <div><span class="section-kicker">01 · Decisión ejecutiva</span><h2>Qué se aprueba ahora y qué queda para después</h2></div>
-          <p>La web diferencia explícitamente <b>capacidad habilitadora</b> de <b>aplicaciones finales</b> para evitar expectativas incorrectas de alcance.</p>
-        </div>
-
-        <div class="decision-grid">
-          <article class="decision-card approve reveal">
-            <span class="card-tag">SE APRUEBA</span>
-            <h3>P0 como infraestructura crítica</h3>
-            <p>Arquitectura on-premise, gobierno, seguridad, identidad, data mesh, sandbox, Model Gateway/RAG, observabilidad, runbooks, pruebas y transferencia.</p>
-            <div class="decision-foot">Proyecto único contratado</div>
-          </article>
-          <article class="decision-arrow reveal" aria-hidden="true">→</article>
-          <article class="decision-card later reveal">
-            <span class="card-tag">SE ACTIVA DESPUÉS</span>
-            <h3>UC1–UC7 como casos derivados</h3>
-            <p>Se priorizan por valor, datos, seguridad, adopción e inversión. Cada vertical productiva requiere business case, alcance y gate específico.</p>
-            <div class="decision-foot">No son siete proyectos incluidos en P0</div>
-          </article>
-        </div>
-
-        <div id="useCases" class="usecase-grid reveal"></div>
-
-        <div class="scope-alert reveal">
-          <span>Fuera de P0</span>
-          <p>No se entrega un agente departamental completo, motor de fraude productivo, solución actuarial final ni cuadros de mando finales. P0 entrega la base técnica, operativa y de gobierno para construirlos sin rehacer la plataforma.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="tobe" class="section soft-section">
-      <div class="shell">
-        <div class="section-head reveal">
-          <div><span class="section-kicker">02 · AS-IS → TO-BE</span><h2>Industrializar lo existente sin sustituirlo por decreto</h2></div>
-          <p>El objetivo es reducir islas técnicas y convertir Kubernetes en el plano central de operación, manteniendo integraciones y capacidades actuales donde aporten valor.</p>
-        </div>
-
-        <div class="toggle-tabs reveal" role="tablist" aria-label="Vista AS-IS TO-BE">
-          <button class="tab-button active" data-view="asis" role="tab">AS-IS</button>
-          <button class="tab-button" data-view="transition" role="tab">Transición P0</button>
-          <button class="tab-button" data-view="tobe" role="tab">TO-BE</button>
-        </div>
-        <div id="tobeExplorer" class="tobe-explorer reveal"></div>
-
-        <figure class="source-figure reveal">
-          <button class="figure-open" data-lightbox="assets/figures/to-be.png" aria-label="Ampliar figura TO-BE">
-            <img src="assets/figures/to-be.png" alt="Transformación TO-BE desde automatizaciones y agentes existentes hacia P0 y casos de uso derivados">
-          </button>
-          <figcaption><strong>Figura de referencia:</strong> transformación desde capacidades locales hacia plataforma corporativa gobernada.</figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section id="arquitectura" class="section architecture-section">
-      <div class="shell">
-        <div class="section-head light reveal">
-          <div><span class="section-kicker">03 · Arquitectura técnica</span><h2>Federación horizontal por dominio + servicios corporativos verticales</h2></div>
-          <p>Rancher gestiona la flota RKE2; el clúster de grupo concentra servicios transversales; cada empresa/dominio mantiene su plano de datos y operación.</p>
-        </div>
-
-        <div class="architecture-console reveal">
-          <div class="arch-stage">
-            <div class="arch-topline">
-              <button class="arch-node" data-arch="channels"><span>01</span><b>Usuarios y canales</b><small>Empleados · agentes · IT · RRHH</small></button>
-              <button class="arch-node" data-arch="identity"><span>02</span><b>Identidad</b><small>Keycloak · OIDC · RBAC/ABAC</small></button>
-              <button class="arch-node" data-arch="gateway"><span>03</span><b>Model Gateway</b><small>Cuotas · logs · coste · fallback</small></button>
-              <button class="arch-node" data-arch="governance"><span>04</span><b>Gobierno</b><small>DORA · AI Act · HITL</small></button>
-            </div>
-
-            <div class="arch-flow">
-              <button class="arch-node big" data-arch="management"><span>A</span><b>Clúster de gestión</b><small>RKE2 dedicado + Rancher</small></button>
-              <div class="flow-arrow">→</div>
-              <button class="arch-node big focus" data-arch="group"><span>B</span><b>Clúster de grupo</b><small>Keycloak · Gravitino PoC · CloudNativePG</small></button>
-              <div class="flow-arrow">→</div>
-              <button class="arch-node big" data-arch="solissInfra"><span>C</span><b>Infraestructura Soliss</b><small>CPD · servidores · red · backup</small></button>
-            </div>
-
-            <div class="arch-service-row">
-              <button class="arch-node service" data-arch="aiServices"><b>Servicios IA/RPA</b><small>RAG · Document Intelligence · n8n</small></button>
-              <button class="arch-node service" data-arch="observability"><b>Observabilidad</b><small>Métricas · logs · coste · auditoría</small></button>
-            </div>
-
-            <div id="domainClusters" class="domain-grid"></div>
-
-            <button class="data-lake" data-arch="dataMesh">
-              <span class="lake-icon">≋</span>
-              <span><b>Data Mesh federado + lago de datos gobernado</b><small>Una empresa = un dominio · ownership · sensibilidad · acceso controlado · catálogo horizontal</small></span>
-            </button>
-          </div>
-
-          <aside id="archInspector" class="arch-inspector" aria-live="polite"></aside>
-        </div>
-
-        <figure class="source-figure dark-figure reveal">
-          <button class="figure-open" data-lightbox="assets/figures/arquitectura-onpremise.png" aria-label="Ampliar arquitectura on-premise">
-            <img src="assets/figures/arquitectura-onpremise.png" alt="Arquitectura on-premise federada para Soliss AI/RPA Factory">
-          </button>
-          <figcaption><strong>Figura de referencia:</strong> arquitectura on-premise federada, clúster de grupo, empresas y Data Mesh.</figcaption>
-        </figure>
-
-        <div class="tech-grid reveal" id="techDecisions"></div>
-      </div>
-    </section>
-
-    <section id="economics" class="section economics-section">
-      <div class="shell">
-        <div class="section-head reveal">
-          <div><span class="section-kicker">04 · Journey + Economics</span><h2>Separación CAPEX/OPEX y TCO configurable por escenario</h2></div>
-          <p>El coste de infraestructura productiva es responsabilidad directa de Soliss y no forma parte de los 182.786,20 € de servicios Keedio M1–M24.</p>
-        </div>
-
-        <div class="economics-layout">
-          <div class="journey-steps reveal" id="journeySteps"></div>
-          <aside class="tco-calculator reveal">
-            <div class="calc-head"><span>Simulador de escenario</span><b>TCO orientativo</b></div>
-            <div id="scenarioButtons" class="scenario-buttons"></div>
-            <label class="switch-row">
-              <input id="s2Toggle" type="checkbox">
-              <span class="switch"><i></i></span>
-              <span>Incluir año opcional M25–M36 (+42.000 €)</span>
-            </label>
-            <div class="tco-result">
-              <small id="scenarioLabel">Escenario recomendado</small>
-              <strong id="tcoRange">—</strong>
-              <span id="tcoMid">—</span>
-            </div>
-            <p class="micro">La banda de TCO = servicios Keedio + rango CAPEX del escenario Soliss. El punto central es solo una referencia de planificación.</p>
-          </aside>
-        </div>
-
-        <div class="chart-grid">
-          <article class="chart-card reveal">
-            <div class="chart-title"><div><span>Construcción P0</span><h3>Horas e importe por fase</h3></div><small>Baseline Final Cerrado</small></div>
-            <div class="chart-area"><canvas id="phaseChart"></canvas></div>
-            <p class="micro">F0–F4 suman 955 h. El ajuste comercial de −338,80 € lleva el total de construcción desde 106.125,00 € hasta 105.786,20 €.</p>
-          </article>
-          <article class="chart-card reveal">
-            <div class="chart-title"><div><span>Infraestructura</span><h3>Rangos por escenario</h3></div><small>CAPEX Soliss</small></div>
-            <div class="chart-area"><canvas id="infraChart"></canvas></div>
-          </article>
-        </div>
-
-        <div class="infra-table-wrap reveal">
-          <div class="table-heading"><h3>Bloques de inversión Soliss</h3><p>Los importes por bloque son orientativos; la compra debe cerrarse tras sizing G2 y cotizaciones.</p></div>
-          <div class="table-scroll"><table id="infraTable"></table></div>
-        </div>
-
-        <figure class="source-figure reveal">
-          <button class="figure-open" data-lightbox="assets/figures/journey-economics.png" aria-label="Ampliar Journey + Economics">
-            <img src="assets/figures/journey-economics.png" alt="Journey y economics de P0 con construcción, servicio co-gestionado y año opcional">
-          </button>
-          <figcaption><strong>Figura de referencia:</strong> journey ejecutivo. La web aplica el baseline financiero del documento/Excel Final Cerrado para evitar doble contabilización de la activación.</figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section id="roadmap" class="section roadmap-section">
-      <div class="shell">
-        <div class="section-head light reveal">
-          <div><span class="section-kicker">05 · Roadmap y gates</span><h2>G1–G4 protegen alcance, inversión, PoC y aceptación</h2></div>
-          <p>El aprovisionamiento se inicia desde F0/F1, pero el sandbox no depende de que toda la infraestructura definitiva esté disponible antes de G3.</p>
-        </div>
-
-        <div id="gateRail" class="gate-rail reveal"></div>
-
-        <div class="roadmap-card reveal">
-          <div class="roadmap-toolbar">
-            <span>Roadmap M1–M36</span>
-            <div><button class="roadmap-filter active" data-roadmap="all">Todo</button><button class="roadmap-filter" data-roadmap="build">Construcción</button><button class="roadmap-filter" data-roadmap="run">Operación</button><button class="roadmap-filter" data-roadmap="governance">Gobierno</button></div>
-          </div>
-          <div id="roadmapRows" class="roadmap-rows"></div>
-        </div>
-
-        <div class="supply-alert reveal">
-          <span>Riesgo de suministro controlado</span>
-          <p>Requisitos y ofertas se activan desde M1. Si el hardware definitivo se retrasa, G3 puede validar sandbox provisional; producción exige hardware, HA, backup y DR aceptados por Soliss.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="operacion" class="section operation-section">
-      <div class="shell">
-        <div class="section-head reveal">
-          <div><span class="section-kicker">06 · Operación y adopción</span><h2>Transferencia progresiva, no dependencia perpetua</h2></div>
-          <p>La arquitectura se cierra con responsables, RACI, pruebas, runbooks, formación y un servicio escalonado N0–N3.</p>
-        </div>
-
-        <div class="operation-tabs reveal">
-          <button class="op-tab active" data-op="support">Soporte N0–N3</button>
-          <button class="op-tab" data-op="change">Gestión del cambio</button>
-          <button class="op-tab" data-op="raci">RACI</button>
-          <button class="op-tab" data-op="testing">Pruebas</button>
-          <button class="op-tab" data-op="deliverables">Entregables</button>
-        </div>
-        <div id="operationPanel" class="operation-panel reveal"></div>
-      </div>
-    </section>
-
-    <section id="riesgos" class="section risk-section">
-      <div class="shell">
-        <div class="section-head reveal">
-          <div><span class="section-kicker">07 · Riesgos, DORA y AI Act</span><h2>El riesgo no se elimina: se asigna, mitiga y valida por gate</h2></div>
-          <p>Los controles se conectan directamente a componentes de arquitectura, responsables y criterios de aceptación.</p>
-        </div>
-
-        <div class="risk-toolbar reveal">
-          <div class="risk-filters">
-            <button class="risk-filter active" data-risk="all">Todos</button>
-            <button class="risk-filter" data-risk="Alto">Altos</button>
-            <button class="risk-filter" data-risk="Medio">Medios</button>
-          </div>
-          <span id="riskCount"></span>
-        </div>
-        <div id="riskGrid" class="risk-grid reveal"></div>
-
-        <div class="compliance-grid reveal">
-          <article><span>DORA</span><h3>Contrato TIC y resiliencia</h3><p>Proveedores/subcontratas, derecho de auditoría, evidencias, continuidad, backup/DR y estrategia de salida.</p></article>
-          <article><span>AI ACT</span><h3>Gobierno de casos sensibles</h3><p>Clasificación previa, supervisión humana, trazabilidad y FRIA/DPIA cuando resulte aplicable.</p></article>
-          <article><span>MODEL GATEWAY</span><h3>Control frente a Shadow AI</h3><p>Usuario, modelo, uso, coste, latencia, logs, cuotas, caché y fallback aprobado.</p></article>
-          <article><span>DATA</span><h3>Protección y segregación</h3><p>Minimización, RBAC/ABAC, sensibilidad, ownership, acceso controlado y separación por dominio/empresa.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section source-control-section">
-      <div class="shell">
-        <details class="source-control reveal">
-          <summary>Control de versión, coherencia y fuentes utilizadas</summary>
-          <div class="source-control-grid">
-            <div>
-              <h3>Baseline financiero adoptado</h3>
-              <p><b>Plan Director Final Cerrado</b> + <b>Presupuesto/Cronograma P0 Final Cerrado</b>: 105.786,20 € construcción, 77.000 € servicio M3–M24 y 42.000 € opción M25–M36.</p>
-            </div>
-            <div>
-              <h3>Enriquecimiento técnico</h3>
-              <p>Programa Reestructurado Post-Reunión, cronograma actualizado, arquitectura, gestión del cambio, soporte, pruebas, riesgos y figuras técnicas suministradas.</p>
-            </div>
-            <div>
-              <h3>Inconsistencia corregida</h3>
-              <p>Una figura de Journey muestra 125.786,20 € como CAPEX al sumar 20.000 € a 105.786,20 €. El baseline Final Cerrado define 105.786,20 € como construcción P0 <b>incluyendo activación</b>; por ello la web no suma la activación dos veces.</p>
-            </div>
-          </div>
-        </details>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="shell footer-grid">
-      <div><strong>Soliss AI/RPA Factory · P0</strong><p>Infraestructura crítica on-premise, federada y gobernada.</p></div>
-      <div><p>Visualización ejecutiva/técnica generada a partir de la documentación suministrada. Rangos de infraestructura no vinculantes y sujetos a sizing G2, proveedores y aprobación Soliss.</p></div>
+      <aside class="inspector"><div id="scenarioState" class="scenario-state"></div><div id="nodeInspector"></div></aside>
     </div>
-  </footer>
+    <div class="simulation-strip reveal"><span>Interpretación</span><b id="simOutcome">Operación nominal</b><p id="simMessage"></p><small id="simGate"></small></div>
+    <figure class="figure reveal"><button data-lightbox="assets/figures/arquitectura-onpremise.png"><img src="assets/figures/arquitectura-onpremise.png" alt="Arquitectura on-premise federada para Soliss AI/RPA Factory"></button><figcaption>Arquitectura técnica suministrada · ampliar para detalle.</figcaption></figure>
+  </div>
+</section>
 
-  <dialog id="lightbox" class="lightbox">
-    <button id="lightboxClose" aria-label="Cerrar">×</button>
-    <img id="lightboxImage" alt="">
-  </dialog>
+<section id="factory" class="section soft present-step" data-show="board tech">
+  <div class="shell">
+    <div class="section-head reveal"><div><span>04 · USE CASE FACTORY</span><h2>Priorizar por valor, datos, riesgo, esfuerzo y time-to-value.</h2></div><p>Los valores iniciales son <b>hipótesis de Keedio</b>, no datos de Soliss. La herramienta está diseñada para sustituirlos durante workshops con negocio, IT y Compliance.</p></div>
+    <div class="factory-layout reveal"><div><div id="ucRanking" class="ranking"></div><button id="resetHypotheses" class="btn small">Restaurar hipótesis Keedio</button></div><div id="ucEditor" class="uc-editor"></div></div>
+    <div class="human-loop reveal"><span>Principio operativo</span><div><b>IA propone</b><i>→</i><b>Profesional Soliss valida</b><i>→</i><b>Sistema ejecuta</b></div><p>El nivel de automatización se decide por caso, riesgo y control; P0 no impone autonomía ciega.</p></div>
+  </div>
+</section>
+
+<section id="economics" class="section present-step" data-show="board tech">
+  <div class="shell">
+    <div class="section-head reveal"><div><span>05 · ECONOMICS LAB</span><h2>Servicios Keedio e infraestructura Soliss, siempre separados.</h2></div><p>El simulador evita confundir el contrato de servicios con el CAPEX que Soliss adquiere directamente.</p></div>
+    <div class="econ-grid reveal"><div class="econ-card"><span>Keedio · construcción P0</span><b>105.786,20 €</b><small>F0–F4, incluyendo activación y ajuste comercial.</small></div><div class="econ-card"><span>Keedio · servicio M3–M24</span><b>77.000 €</b><small>OPEX co-gestionado.</small></div><div class="econ-card"><span>Soliss · infraestructura</span><b id="infraRange">180–280 k€</b><small>Compra directa · sizing G2.</small></div><div class="econ-card accent"><span>TCO orientativo</span><b id="tcoRange">—</b><small id="tcoMid">—</small></div></div>
+    <div class="scenario-lab reveal"><div><h3>Escenario de infraestructura</h3><div id="econScenarios" class="segmented"></div></div><label class="switch-line"><input id="optionalToggle" type="checkbox"><span></span><b>Incluir S2 M25–M36 (+42.000 €)</b></label></div>
+    <div class="phase-bars reveal"><header><h3>Construcción P0 · baseline Final Cerrado</h3><p>955 h + ajuste comercial −338,80 €.</p></header><div id="phaseBars"></div></div>
+    <details class="infra-details reveal"><summary>Ver bloques de inversión Soliss</summary><div class="table-wrap"><table id="infraTable"></table></div></details>
+  </div>
+</section>
+
+<section id="governance" class="section dark present-step" data-show="compliance tech board">
+  <div class="shell">
+    <div class="section-head light reveal"><div><span>06 · GOVERNANCE COCKPIT</span><h2>De “cumplimos” a “podemos demostrarlo”.</h2></div><p>Estados de propuesta y evidencia. No se muestran porcentajes de cumplimiento ni se presume validación jurídica.</p></div>
+    <div class="governance-grid reveal"><div><div class="cockpit-head"><h3>Evidence Registry</h3><span>Los cambios se guardan solo en este navegador</span></div><div id="evidenceGrid" class="evidence-grid"></div></div><aside class="regulatory-lens"><h3>Regulatory Lens</h3><div class="reg-card"><b>DORA 2026</b><p>EIOPA lo mantiene como Focus Area supervisor en 2026. P0 traduce resiliencia en backup, restore, DR, evidencias y gestión de terceros.</p></div><div class="reg-card"><b>AI Act</b><p>La clasificación se realiza por caso. Risk assessment/pricing de personas en vida y salud está expresamente en Annex III 5(c).</p></div><div class="reg-card"><b>Claims ≠ automáticamente high-risk</b><p>Las guías de la Comisión distinguen claims management de risk assessment/pricing en vida/salud. Debe analizarse la finalidad real del sistema.</p></div></aside></div>
+    <div class="passport-area reveal"><header><div><span>MODEL PASSPORT</span><h3>Todo modelo autorizado debe tener dueño, versión, licencia, benchmark y fallback.</h3></div><div id="passportTabs" class="segmented"></div></header><div id="passportCard"></div></div>
+    <div class="provenance reveal"><header><span>DATA PROVENANCE EXPLORER</span><h3>¿Por qué el modelo sabe esto?</h3></header><div class="trace"><button data-trace="request">Petición</button><i>→</i><button data-trace="identity">Identidad</button><i>→</i><button data-trace="retrieval">Retrieval</button><i>→</i><button data-trace="source">Fuente</button><i>→</i><button data-trace="answer">Respuesta</button><i>→</i><button data-trace="audit">Auditoría</button></div><div id="traceDetail" class="trace-detail">Selecciona una etapa. Es una representación del patrón de trazabilidad previsto, no de datos reales de producción.</div></div>
+  </div>
+</section>
+
+<section id="delivery" class="section present-step" data-show="board tech compliance">
+  <div class="shell">
+    <div class="section-head reveal"><div><span>07 · DELIVERY CONTROL</span><h2>Los gates se cierran con evidencia, no con calendario.</h2></div><p>Simulador local para preparar comité. Las casillas no reflejan estado real del proyecto y no se sincronizan con sistemas Soliss.</p></div>
+    <div id="gateSimulator" class="gate-grid reveal"></div>
+    <div class="risk-head reveal"><div><span>RISK REGISTER</span><h3>Riesgos base y control de cierre</h3></div><div class="segmented"><button class="risk-filter active" data-risk="all">Todos</button><button class="risk-filter" data-risk="Alto">Altos</button><button class="risk-filter" data-risk="Medio">Medios</button></div></div><div id="riskGrid" class="risk-grid reveal"></div>
+    <figure class="figure reveal"><button data-lightbox="assets/figures/to-be.png"><img src="assets/figures/to-be.png" alt="Transformación TO-BE de capacidades IA/RPA locales a plataforma corporativa gobernada"></button><figcaption>TO-BE suministrado · P0 como base habilitadora y UC1–UC7 derivados.</figcaption></figure>
+  </div>
+</section>
+
+<section class="section closing present-step" data-show="board tech compliance">
+  <div class="shell closing-grid reveal"><div><span>PROPUESTA DE KEEDIO PARA SOLISS</span><h2>P0 construye la capacidad. Soliss conserva el control. Los casos de uso capturan el valor.</h2><p>La siguiente decisión no es comprar siete soluciones. Es aprobar la base que permite desplegarlas con gobierno, seguridad, trazabilidad y un modelo operativo transferible.</p></div><a href="#decision" class="btn primary">Volver a decisiones</a></div>
+</section>
+</main>
+
+<footer><div class="shell footer-grid"><div><b>KEEDIO</b><span>Proponente / socio tecnológico</span></div><div><b>SOLISS</b><span>Cliente / propietario de infraestructura y decisión</span></div><p>Decision Room de propuesta. Las simulaciones son conceptuales; los resultados técnicos, regulatorios y operativos deben validarse mediante gates, pruebas, Legal/Compliance y evidencias del proyecto.</p></div></footer>
+
+<dialog id="lightbox" class="lightbox"><button id="closeLightbox" aria-label="Cerrar">×</button><img id="lightboxImg" alt=""></dialog>
+<div id="presentationHUD" class="presentation-hud" hidden><button id="prevStep">←</button><span id="stepCounter">1/1</span><button id="nextStep">→</button><button id="exitPresent">Salir</button></div>
 </body>
 </html>
