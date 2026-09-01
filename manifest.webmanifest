@@ -1,11 +1,22 @@
 {
-  "name":"Keedio para Soliss · P0 Decision Room",
-  "short_name":"Soliss P0",
-  "description":"Decision Room ejecutiva/técnica de la propuesta Keedio para Soliss AI/RPA Factory.",
-  "start_url":"./",
-  "display":"standalone",
-  "background_color":"#052f3d",
-  "theme_color":"#052f3d",
-  "lang":"es",
-  "icons":[{"src":"assets/icon-192.png","sizes":"192x192","type":"image/png"},{"src":"assets/icon-512.png","sizes":"512x512","type":"image/png"}]
+  "name": "Keedio → Soliss · P0 Decision Room V3.1",
+  "short_name": "Soliss P0 V3.1",
+  "description": "Decision Room ejecutiva/técnica de la propuesta Keedio para Soliss AI/RPA Factory.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#052f3d",
+  "theme_color": "#052f3d",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }

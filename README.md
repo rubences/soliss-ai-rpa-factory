@@ -62,3 +62,24 @@ Abrir `http://localhost:8000`.
 El sitio no requiere compilación. Técnicamente puede publicarse desde `main` → `/ (root)`.
 
 **Importante:** esta versión contiene importes, arquitectura, riesgos y responsabilidades y debe considerarse **boardroom/confidencial** hasta autorización de Keedio y Soliss. El `robots.txt` incluido bloquea indexación de crawlers, pero eso **no convierte un hosting público en privado**.
+
+
+## V3.1 — Document Center y Committee Toolkit
+
+Esta build añade:
+
+- Centro Documental **Keedio → Soliss** con 6 familias documentales y 8 archivos.
+- Descarga individual por formato y pack completo.
+- Etiquetas para distinguir baseline, Consejo, técnico y económico.
+- Manifest SHA‑256 en JSON/TXT.
+- Exportación local de **acta preliminar** Markdown.
+- Exportación local de **snapshot de decisión** JSON con economics, UC ranking, gates y Evidence Registry.
+- Impresión/guardado a PDF desde el navegador.
+- Reset explícito de los datos locales de la sesión.
+- Service Worker mejorado: los documentos descargados se cachean bajo demanda.
+
+### Confidencialidad
+
+Esta es una **Boardroom build**. Si se publica esta carpeta en un hosting público, los documentos incluidos en `/documents` serán también públicos y descargables. `robots.txt` evita indexación cooperativa, pero **no es control de acceso**.
+
+Para una URL pública se recomienda generar una build separada sin documentación confidencial ni importes sensibles.

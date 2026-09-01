@@ -106,6 +106,117 @@
   function renderRisks(filter='all'){$('#riskGrid').innerHTML=D.risks.filter(r=>filter==='all'||r.severity===filter).map(r=>`<article class="risk" data-severity="${r.severity}"><header><b>${r.id}</b><span>${r.severity}</span></header><h3>${safe(r.risk)}</h3><p>${safe(r.control)}</p><small>${safe(r.owner)}</small></article>`).join('')}
   $$('.risk-filter').forEach(b=>b.addEventListener('click',()=>{$$('.risk-filter').forEach(x=>x.classList.toggle('active',x===b));renderRisks(b.dataset.risk)}));renderRisks();
 
+
+  // Document Center
+  const DOCS=window.P0_DOCUMENTS;
+  let docFilter='all', docQuery='';
+  const normalize=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  function renderDocuments(){
+    const q=normalize(docQuery);
+    const groups=DOCS.groups.filter(g=>{
+      const filterOk=docFilter==='all'||g.tags.includes(docFilter);
+      const hay=normalize([g.title,g.description,g.status,...g.tags,...g.formats.map(f=>f.type)].join(' '));
+      return filterOk && (!q||hay.includes(q));
+    });
+    $('#documentGrid').innerHTML=groups.length?groups.map(g=>`
+      <article class="document-card">
+        <header><span class="doc-status ${g.tags.includes('baseline')?'baseline':''}">${safe(g.status)}</span><small>${g.formats.length} formato${g.formats.length>1?'s':''}</small></header>
+        <h3>${safe(g.title)}</h3><p>${safe(g.description)}</p>
+        <div class="doc-tags">${g.tags.map(t=>`<span>${safe(t)}</span>`).join('')}</div>
+        <div class="doc-formats">${g.formats.map(f=>`
+          <div class="doc-format">
+            <span class="doc-type">${f.type}</span>
+            <div><b>${safe(f.size)}</b><small>SHA‑256</small><code title="${f.sha256}">${f.sha256.slice(0,12)}…</code></div>
+            <div class="doc-actions">${f.preview?`<a href="${f.path}" target="_blank" rel="noopener" title="Abrir">↗</a>`:''}<a href="${f.path}" download title="Descargar">↓</a></div>
+          </div>`).join('')}</div>
+      </article>`).join(''):`<div class="no-docs">No hay documentos que coincidan con este filtro.</div>`;
+  }
+  $('#downloadPack').href=DOCS.pack.path;
+  $('#packMeta').textContent=`${DOCS.pack.fileCount} archivos · ${DOCS.pack.size} · SHA ${DOCS.pack.sha256.slice(0,12)}…`;
+  $('#manifestJsonLink').href=DOCS.manifest.json; $('#manifestTxtLink').href=DOCS.manifest.txt;
+  $$('.doc-filter').forEach(b=>b.addEventListener('click',()=>{docFilter=b.dataset.docFilter;$$('.doc-filter').forEach(x=>x.classList.toggle('active',x===b));renderDocuments()}));
+  $('#documentSearch').addEventListener('input',e=>{docQuery=e.target.value;renderDocuments()});
+  renderDocuments();
+
+  // Committee toolkit: local-only export of the current working session
+  const isoStamp=()=>new Date().toISOString();
+  function currentEconomics(){
+    const s=D.economics.scenarios.find(x=>x.id===econScenario), optional=$('#optionalToggle').checked?D.economics.optional:0;
+    const low=D.economics.base24+s.low+optional, high=D.economics.base24+s.high+optional;
+    return {scenario:s.label,infra:{low:s.low,high:s.high},includeS2:Boolean($('#optionalToggle').checked),keedio24:D.economics.base24,tco:{low,high,mid:(low+high)/2}};
+  }
+  function ucSnapshot(){
+    return D.useCases.map(u=>({id:u.id,name:u.name,score:score(ucValues[u.id]),values:{...ucValues[u.id]}})).sort((a,b)=>b.score-a.score);
+  }
+  function gateSnapshot(){
+    return D.gates.map(g=>{const done=g.checks.filter((_,i)=>gateState[`${g.id}-${i}`]).length;return {id:g.id,title:g.title,when:g.when,done,total:g.checks.length,ready:done===g.checks.length,checks:g.checks.map((c,i)=>({label:c,done:Boolean(gateState[`${g.id}-${i}`])}))}});
+  }
+  function evidenceSnapshot(){
+    return D.evidence.map(e=>({id:e.id,area:e.area,control:e.control,owner:e.owner,status:evidenceState[e.id]||e.default,statusLabel:statusLabels[evidenceState[e.id]||e.default]}));
+  }
+  function sessionSnapshot(){
+    return {
+      meta:{generatedAt:isoStamp(),product:'Soliss AI/RPA Factory · P0 Decision Room',proponent:'Keedio',client:'Soliss',audience:document.body.dataset.audience,notice:'Snapshot local de trabajo. No constituye aprobación, acta firmada ni evidencia de ejecución.'},
+      economics:currentEconomics(),
+      digitalTwin:{scenario:currentScenario,lens:currentLens,node:currentNode},
+      useCaseRanking:ucSnapshot(),
+      gates:gateSnapshot(),
+      evidence:evidenceSnapshot()
+    };
+  }
+  function saveBlob(name,content,type){
+    const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  }
+  function meetingMinutes(){
+    const s=sessionSnapshot(), e=s.economics;
+    const gateLines=s.gates.map(g=>`- ${g.id} · ${g.title}: ${g.done}/${g.total} · ${g.ready?'READY FOR DECISION':'pendiente'}`).join('\n');
+    const evidenceLines=s.evidence.map(x=>`- ${x.area} · ${x.control}: ${x.statusLabel} · ${x.owner}`).join('\n');
+    const ucLines=s.useCaseRanking.map((u,i)=>`${i+1}. ${u.id} · ${u.name}: ${u.score}/100`).join('\n');
+    return `# Acta preliminar de sesión · Soliss AI/RPA Factory P0
+
+**Proponente:** Keedio  
+**Cliente:** Soliss  
+**Generada:** ${new Date().toLocaleString('es-ES')}  
+**Vista utilizada:** ${s.meta.audience}
+
+> Documento generado automáticamente en el navegador para preparación de comité. No sustituye un acta firmada, una aceptación contractual ni evidencia de ejecución.
+
+## Escenario económico
+- Escenario de infraestructura: ${e.scenario}
+- Infraestructura Soliss: ${eur(e.infra.low)} – ${eur(e.infra.high)}
+- Servicios Keedio M1–M24: ${eur(e.keedio24)}
+- S2 M25–M36: ${e.includeS2?'Incluido':'No incluido'}
+- TCO orientativo: ${eur(e.tco.low)} – ${eur(e.tco.high)}
+- Punto central: ${eur(e.tco.mid)}
+
+## Digital Twin
+- Escenario: ${D.architecture.scenarios.find(x=>x.id===s.digitalTwin.scenario)?.label||s.digitalTwin.scenario}
+- Lens: ${s.digitalTwin.lens}
+- Nodo seleccionado: ${nodeById(s.digitalTwin.node)?.label||s.digitalTwin.node}
+
+## Gates
+${gateLines}
+
+## Evidence Registry
+${evidenceLines}
+
+## Priorización UC
+${ucLines}
+
+## Nota de gobierno
+Keedio propone, diseña e integra el patrón P0. Soliss decide, valida, adquiere la infraestructura bajo su responsabilidad y asume la operación según el reparto acordado.
+`;
+  }
+  $('#downloadSnapshot').addEventListener('click',()=>saveBlob(`Soliss_P0_Decision_Snapshot_${new Date().toISOString().slice(0,10)}.json`,JSON.stringify(sessionSnapshot(),null,2),'application/json;charset=utf-8'));
+  $('#downloadMinutes').addEventListener('click',()=>saveBlob(`Soliss_P0_Acta_Preliminar_${new Date().toISOString().slice(0,10)}.md`,meetingMinutes(),'text/markdown;charset=utf-8'));
+  $('#printRoom').addEventListener('click',()=>window.print());
+  $('#resetSession').addEventListener('click',()=>{
+    if(!confirm('¿Reiniciar los datos locales de esta sesión? No se borrará ningún documento.')) return;
+    [ucKey,evidenceKey,gateKey].forEach(k=>localStorage.removeItem(k));
+    location.reload();
+  });
+
   // Audience modes
   function setAudience(a){document.body.dataset.audience=a;$$('.aud').forEach(b=>b.classList.toggle('active',b.dataset.audience===a));$$('#nav a').forEach(link=>{const target=$(link.getAttribute('href'));link.style.display=(a==='all'||!target?.dataset.show||target.dataset.show.split(' ').includes(a))?'':'none'});setTimeout(navSpyUpdate,30)}
   $$('.aud').forEach(b=>b.addEventListener('click',()=>setAudience(b.dataset.audience)));

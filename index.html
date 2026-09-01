@@ -10,6 +10,7 @@
   <link rel="icon" href="assets/icon-192.png">
   <link rel="stylesheet" href="assets/styles.css">
   <script defer src="assets/data.js"></script>
+  <script defer src="assets/documents.js"></script>
   <script defer src="assets/app.js"></script>
 </head>
 <body data-audience="board">
@@ -18,7 +19,7 @@
   <div class="shell navrow">
     <a class="brand" href="#hero"><span class="keedio-mark">K</span><span><b>KEEDIO</b><small>Propuesta para SOLISS</small></span></a>
     <nav id="nav" aria-label="Principal">
-      <a href="#why">Why now</a><a href="#decision">Decision Room</a><a href="#twin">Digital Twin</a><a href="#factory">UC Factory</a><a href="#economics">Economics</a><a href="#governance">Governance</a><a href="#delivery">Delivery</a>
+      <a href="#why">Why now</a><a href="#decision">Decision Room</a><a href="#twin">Digital Twin</a><a href="#factory">UC Factory</a><a href="#economics">Economics</a><a href="#governance">Governance</a><a href="#delivery">Delivery</a><a href="#documents">Documentos</a>
     </nav>
     <div class="actions"><button id="presentBtn" class="chip-btn">▶ Presentar</button><button id="themeBtn" class="icon-btn" aria-label="Cambiar tema">◐</button><button id="menuBtn" class="icon-btn menu" aria-label="Abrir menú">☰</button></div>
   </div>
@@ -125,6 +126,64 @@
     <div id="gateSimulator" class="gate-grid reveal"></div>
     <div class="risk-head reveal"><div><span>RISK REGISTER</span><h3>Riesgos base y control de cierre</h3></div><div class="segmented"><button class="risk-filter active" data-risk="all">Todos</button><button class="risk-filter" data-risk="Alto">Altos</button><button class="risk-filter" data-risk="Medio">Medios</button></div></div><div id="riskGrid" class="risk-grid reveal"></div>
     <figure class="figure reveal"><button data-lightbox="assets/figures/to-be.png"><img src="assets/figures/to-be.png" alt="Transformación TO-BE de capacidades IA/RPA locales a plataforma corporativa gobernada"></button><figcaption>TO-BE suministrado · P0 como base habilitadora y UC1–UC7 derivados.</figcaption></figure>
+  </div>
+</section>
+
+
+<section id="documents" class="section document-section present-step" data-show="board tech compliance">
+  <div class="shell">
+    <div class="section-head reveal">
+      <div><span>08 · DOCUMENT CENTER</span><h2>Una única puerta de entrada a la documentación Keedio → Soliss.</h2></div>
+      <p>Descarga los documentos de propuesta, distingue el baseline de los materiales de soporte y conserva la integridad de cada fichero mediante SHA‑256.</p>
+    </div>
+
+    <div class="document-pack reveal">
+      <div>
+        <span>PAQUETE DOCUMENTAL COMPLETO</span>
+        <h3>Soliss P0 · Document Pack</h3>
+        <p>Incluye Plan Director, presentación, presupuestos, cronograma, propuesta reestructurada y manifest de integridad.</p>
+      </div>
+      <div class="pack-actions">
+        <div><small id="packMeta">—</small><b>Keedio → Soliss</b></div>
+        <a id="downloadPack" class="btn primary" href="#" download>↓ Descargar pack completo</a>
+      </div>
+    </div>
+
+    <div class="document-toolbar reveal">
+      <div class="document-search"><span>⌕</span><input id="documentSearch" type="search" placeholder="Buscar documento, formato o contenido…" aria-label="Buscar documentos"></div>
+      <div class="segmented document-filters">
+        <button class="doc-filter active" data-doc-filter="all">Todos</button>
+        <button class="doc-filter" data-doc-filter="baseline">Baseline</button>
+        <button class="doc-filter" data-doc-filter="consejo">Consejo</button>
+        <button class="doc-filter" data-doc-filter="tecnico">Técnico</button>
+        <button class="doc-filter" data-doc-filter="economico">Económico</button>
+      </div>
+    </div>
+
+    <div id="documentGrid" class="document-grid reveal"></div>
+
+    <div class="meeting-tools reveal">
+      <div class="meeting-copy">
+        <span>COMMITTEE TOOLKIT</span>
+        <h3>Guarda lo acordado durante la reunión</h3>
+        <p>Todo se genera localmente en el navegador. La exportación recoge el escenario TCO, priorización UC, estado de evidencias y checklist G1–G4 en ese momento.</p>
+      </div>
+      <div class="meeting-actions">
+        <button id="downloadMinutes" class="tool-action"><b>↓ Acta preliminar</b><small>Markdown legible</small></button>
+        <button id="downloadSnapshot" class="tool-action"><b>↓ Snapshot de decisión</b><small>JSON estructurado</small></button>
+        <button id="printRoom" class="tool-action"><b>⎙ Guardar / imprimir</b><small>PDF desde el navegador</small></button>
+        <button id="resetSession" class="tool-action danger"><b>↺ Reiniciar sesión</b><small>Borra solo datos locales</small></button>
+      </div>
+    </div>
+
+    <details class="integrity-panel reveal">
+      <summary>Integridad, baseline y control de versiones</summary>
+      <div class="integrity-grid">
+        <div><span>BASELINE DE ESTA WEB</span><b>Plan Director Final Cerrado + Presupuesto/Cronograma P0 Final Cerrado</b><p>Las cifras mostradas por la Decision Room se gobiernan desde estas fuentes para evitar mezclar revisiones anteriores.</p></div>
+        <div><span>MANIFEST</span><b>SHA‑256 por fichero</b><p>Permite verificar que el documento descargado es exactamente el distribuido con esta versión de la web.</p><p><a id="manifestJsonLink" href="#" download>Descargar JSON</a> · <a id="manifestTxtLink" href="#" download>Descargar TXT</a></p></div>
+        <div><span>CONFIDENCIALIDAD</span><b>Boardroom build</b><p>Publicar esta carpeta en Internet haría descargables también los documentos. Para GitHub Pages público debe generarse una build sanitizada independiente.</p></div>
+      </div>
+    </details>
   </div>
 </section>
 
