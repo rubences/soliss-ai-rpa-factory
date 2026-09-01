@@ -331,6 +331,206 @@ Keedio propone, diseña e integra el patrón P0. Soliss decide, valida, adquiere
     location.reload();
   });
 
+
+  // V4.4 · Executive Story Mode
+  const EX=window.P0.executiveStory;
+  let exIndex=0,exElapsed=0,exSceneElapsed=0,exTimer=null,exAuto=false,exQa=false,exNotesOpen=true;
+  const exScenes=()=>document.body.dataset.access==='public'?(EX.publicScenes||EX.scenes):EX.scenes;
+  const exTotal=()=>exScenes().reduce((a,x)=>a+x.duration,0);
+  const exScene=()=>exScenes()[exIndex];
+  const mmss=s=>`${String(Math.floor(s/60)).padStart(2,'0')}:${String(Math.max(0,Math.floor(s%60))).padStart(2,'0')}`;
+  const execStoryVisible=()=>!$('#execStory').hidden;
+
+  function exVisual(scene){
+    const econ=D.economics;
+    if(scene.visual==='opening')return `<div class="exec-visual exec-flow"><div class="exec-flow-card"><span>01 · P0</span><b>Capacidad común</b><p>Infraestructura, identidad, datos, Gateway, seguridad y operación.</p></div><div class="exec-flow-arrow">→</div><div class="exec-flow-card"><span>02 · UC</span><b>Vertical derivado</b><p>Proceso, reglas, datos concretos, UX, UAT y KPI.</p></div><div class="exec-flow-arrow">→</div><div class="exec-flow-card"><span>03 · VALOR</span><b>Resultado de negocio</b><p>Activado por Soliss mediante business case y Go/No-Go.</p></div></div>`;
+    if(scene.visual==='market')return `<div class="exec-visual exec-stat-grid"><div class="exec-stat"><b>65%</b><span>aseguradoras ya usan GenAI</span><small>EIOPA · benchmark de la Decision Room</small></div><div class="exec-stat"><b>64%</b><span>casos aún en PoC / experimentación</span><small>El reto es industrializar.</small></div><div class="exec-stat"><b>32%</b><span>casos alcanzan producción</span><small>P0 aborda el salto PoC → operación.</small></div></div>`;
+    if(scene.visual==='p0')return `<div class="exec-visual exec-cap-grid">${[['Plataforma','Rancher / RKE2'],['Identidad','Keycloak · RBAC/ABAC'],['Datos','Data Mesh · catálogo'],['IA','Model Gateway · RAG'],['Servicios','OCR · n8n · APIs'],['Seguridad','HA · backup · DR'],['Evidencia','logs · provenance'],['Operación','IaC · runbooks · N0–N3']].map(x=>`<div class="exec-cap"><b>${x[0]}</b><small>${x[1]}</small></div>`).join('')}</div>`;
+    if(scene.visual==='stories')return `<div class="exec-visual exec-story-cards"><div class="exec-story-card"><span>UC2 + UC3</span><b>Un siniestro entra</b><p>Documentos → contexto → señales → profesional Soliss → evidencia.</p><div class="reuse"><i>Identidad</i><i>Datos</i><i>Gateway</i><i>HITL</i></div></div><div class="exec-story-card"><span>UC1</span><b>Empleado consulta</b><p>Identidad → RAG → modelo autorizado → respuesta → escalado.</p><div class="reuse"><i>RAG</i><i>Gateway</i><i>Logging</i><i>Fuentes</i></div></div><div class="exec-story-card"><span>UC2 + UC5</span><b>Llega una factura</b><p>Extracción → reglas → excepción → aprobación → auditoría.</p><div class="reuse"><i>OCR</i><i>Policies</i><i>Integración</i><i>Audit</i></div></div></div>`;
+    if(scene.visual==='effect')return `<div class="exec-visual exec-compare"><div class="left"><span class="exec-scene-label">VERTICAL AISLADO</span><h3>Reconstruye la base</h3><ul><li>Identidad / permisos</li><li>Integraciones y fuentes</li><li>Acceso a modelos</li><li>Logging y observabilidad</li><li>Controles y soporte</li></ul></div><div class="mid">→</div><div class="right"><span class="exec-scene-label">CON P0</span><h3>Se concentra en el diferencial</h3><ul><li>Business case</li><li>Datos concretos</li><li>Reglas / modelo / workflow</li><li>UX y canales</li><li>UAT + KPI de negocio</li></ul></div></div>`;
+    if(scene.visual==='architecture')return `<div class="exec-visual"><div class="exec-arch"><div><span>GESTIÓN</span><b>Rancher / RKE2</b><small>Flota y ciclo de vida.</small></div><div><span>GRUPO</span><b>Servicios transversales</b><small>Identidad, catálogo, PostgreSQL.</small></div><div><span>DOMINIOS</span><b>RKE2 por empresa</b><small>Aislamiento y ownership.</small></div><div><span>IA</span><b>Model Gateway</b><small>Modelos, cuotas, logs y fallback.</small></div></div><div class="exec-fallback">↺ Gravitino = PoC no bloqueante · retraso GPU = sandbox provisional · producción exige HA/backup/DR</div></div>`;
+    if(scene.visual==='economics'){const available=econ.base24>0;return `<div class="exec-visual exec-econ-grid"><div class="exec-econ"><span>CONSTRUCCIÓN P0</span><b>${available?eur(econ.build):'Boardroom'}</b><small>Baseline Final Cerrado.</small></div><div class="exec-econ"><span>SERVICIO M3–M24</span><b>${available?eur(econ.service):'Boardroom'}</b><small>Operación co-gestionada.</small></div><div class="exec-econ"><span>INFRA SOLISS</span><b>${available?'180–280 k€':'Sizing G2'}</b><small>Compra directa · sujeto a sizing/cotización.</small></div></div>`}
+    if(scene.visual==='governance')return `<div class="exec-visual exec-gate-grid">${D.gates.map(g=>`<div class="exec-gate"><span>${g.id} · ${g.when}</span><b>${safe(g.title)}</b><p>${safe(g.criteria||g.checks?.[0]||'Validación por evidencia.')}</p></div>`).join('')}</div>`;
+    if(scene.visual==='publicTrust')return `<div class="exec-visual exec-story-cards"><div class="exec-story-card"><span>DATA</span><b>Fuentes autorizadas</b><p>Ownership, clasificación y provenance antes de utilizar información corporativa.</p><div class="reuse"><i>Data governance</i><i>RAG</i></div></div><div class="exec-story-card"><span>AI</span><b>Modelos controlados</b><p>Gateway, allowlist, logging y fallback como patrón corporativo.</p><div class="reuse"><i>Gateway</i><i>Logging</i></div></div><div class="exec-story-card"><span>HUMAN</span><b>Supervisión efectiva</b><p>La automatización mantiene escalado, revisión y accountability de Soliss.</p><div class="reuse"><i>HITL</i><i>Evidence</i></div></div></div>`;
+    if(scene.visual==='decision')return `<div class="exec-visual exec-decision-grid"><div class="exec-decision-card"><span>AHORA</span><b>Aprobar P0 + F0</b></div><div class="exec-decision-card"><span>G2 / G3 / G4</span><b>Validar inversión, PoC/fallback y transferencia</b></div><div class="exec-decision-card"><span>DESPUÉS</span><b>Activar UC por business case</b></div></div>`;
+    return '';
+  }
+
+  function exRenderSegments(){
+    $('#execSegments').innerHTML=exScenes().map((s,i)=>`<button class="exec-segment ${i<exIndex?'done':''} ${i===exIndex?'active':''}" data-ex-scene="${i}" title="${safe(s.title)}"><i></i></button>`).join('');
+    $$('#execSegments [data-ex-scene]').forEach(b=>b.addEventListener('click',()=>exGo(+b.dataset.exScene)));
+  }
+  function exRender(){
+    const s=exScene(),remaining=Math.max(0,s.duration-exSceneElapsed);
+    $('#execSceneCounter').textContent=`${exIndex+1} / ${exScenes().length}`;
+    $('#execElapsed').textContent=mmss(exElapsed);$('#execTotal').textContent=mmss(exTotal());
+    $('#execSceneTime').textContent=`${Math.round(s.duration/60*10)/10} min`;$('#execCountdown').textContent=mmss(remaining);
+    $('#execProgress').style.width=`${Math.min(100,exElapsed/exTotal()*100)}%`;
+    $('#execPrev').disabled=exIndex===0;$('#execNext').disabled=exIndex===exScenes().length-1;
+    $('#execPlay').textContent=exAuto?'❚❚ Pausar':'▶ Auto';$('#execQa').textContent=exQa?'▶ Continuar':'❓ Pausa Q&A';
+    $('#execStage').innerHTML=`${exQa?'<div class="exec-qa-badge"><i></i> PAUSA Q&A · cronómetro detenido</div>':''}<span class="exec-scene-kicker">${safe(s.kicker)}</span><h1>${safe(s.title)}</h1><p class="exec-message">${safe(s.message)}</p><div class="exec-cue"><span>${safe(s.cue)}</span><b>${safe(s.cueText)}</b></div>${exVisual(s)}`;
+    $('#execNotesBody').innerHTML=`<ul>${s.notes.map(n=>`<li>${safe(n)}</li>`).join('')}</ul><div class="exec-if-asked"><span>Si surge una pregunta</span><p>Pulsa <b>Profundizar</b> y después “Reanudar Executive Story”.</p></div>`;
+    exRenderSegments();
+  }
+  function exGo(i){exIndex=Math.max(0,Math.min(i,exScenes().length-1));exElapsed=exScenes().slice(0,exIndex).reduce((a,x)=>a+x.duration,0);exSceneElapsed=0;exQa=false;exRender()}
+  function exTick(){if(!exAuto||exQa)return;exElapsed++;exSceneElapsed++;if(exSceneElapsed>=exScene().duration){if(exIndex<exScenes().length-1){exIndex++;exSceneElapsed=0}else{exAuto=false;clearInterval(exTimer);exTimer=null}}exRender()}
+  function exToggleAuto(){exAuto=!exAuto;exQa=false;if(exAuto&&!exTimer)exTimer=setInterval(exTick,1000);exRender()}
+  function exOpen(){$('#execStory').hidden=false;$('#execStory').setAttribute('aria-hidden','false');document.body.style.overflow='hidden';$('#execResume').hidden=true;exRender();try{document.documentElement.requestFullscreen?.()}catch{}}
+  function exClose(full=true){$('#execStory').hidden=true;$('#execStory').setAttribute('aria-hidden','true');document.body.style.overflow='';exAuto=false;if(exTimer){clearInterval(exTimer);exTimer=null}if(full)$('#execResume').hidden=true;if(full&&document.fullscreenElement)document.exitFullscreen?.()}
+  function exRestart(){exIndex=0;exElapsed=0;exSceneElapsed=0;exQa=false;exAuto=false;if(exTimer){clearInterval(exTimer);exTimer=null}exRender()}
+  function exToggleNotes(){exNotesOpen=!exNotesOpen;$('#execNotes').classList.toggle('collapsed',!exNotesOpen);$('.exec-story-main').classList.toggle('notes-off',!exNotesOpen)}
+  function exDeep(){const link=exScene().deepLink;exAuto=false;if(exTimer){clearInterval(exTimer);exTimer=null}exClose(false);$('#execResume').hidden=false;$(link)?.scrollIntoView({behavior:'smooth',block:'start'})}
+
+  $('#execStoryBtn')?.addEventListener('click',exOpen);$$('[data-open-exec-story]').forEach(b=>b.addEventListener('click',exOpen));
+  $('#execExit')?.addEventListener('click',()=>exClose(true));$('#execPrev')?.addEventListener('click',()=>exGo(exIndex-1));$('#execNext')?.addEventListener('click',()=>exGo(exIndex+1));$('#execPlay')?.addEventListener('click',exToggleAuto);$('#execRestart')?.addEventListener('click',exRestart);$('#execNotesToggle')?.addEventListener('click',exToggleNotes);$('#execQa')?.addEventListener('click',()=>{exQa=!exQa;if(exQa)exAuto=false;exRender()});$('#execDeepDive')?.addEventListener('click',exDeep);$('#execResume')?.addEventListener('click',exOpen);
+  addEventListener('keydown',e=>{if(!execStoryVisible())return;if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();exGo(exIndex+1)}if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();exGo(exIndex-1)}if(e.key===' '){e.preventDefault();exToggleAuto()}if(e.key.toLowerCase()==='n')exToggleNotes();if(e.key.toLowerCase()==='q'){exQa=!exQa;if(exQa)exAuto=false;exRender()}if(e.key==='Escape')exClose(true)});
+
+
+
+  // V5 · Unified Access Hub
+  const ACCESS_NAV={
+    public:[
+      ['Contexto','#why'],
+      ['P0 + Casos de uso','#factory'],
+      ['Assurance','#assurance']
+    ],
+    boardroom:[
+      ['Contexto','#why'],
+      ['Decisiones','#decision'],
+      ['Arquitectura','#twin'],
+      ['P0 + Casos de uso','#factory'],
+      ['Economics','#economics'],
+      ['Governance','#governance'],
+      ['Assurance','#assurance'],
+      ['Delivery','#delivery'],
+      ['Docs','#documents']
+    ]
+  };
+  const ACCESS_COPY={
+    public:{
+      badge:'PUBLIC',
+      ribbon:'Visión pública · estrategia, P0, casos de uso y assurance. Sin economics ni documentación interna.',
+      brand:'AI/RPA Factory · Visión pública',
+      switchLabel:'Public',
+      title:'Soliss AI/RPA Factory · Visión pública | Keedio',
+      scope:'P0 · AI/RPA Factory',
+      status:'VISIÓN PÚBLICA',
+      closeTitle:'Una base común para convertir casos de IA/RPA en capacidades gobernadas.',
+      closeText:'La visión pública explica el porqué, el modelo P0 y los casos de uso sin exponer economics, herramientas de comité ni documentación interna.',
+      closeHref:'#factory',
+      closeCta:'Volver a P0'
+    },
+    boardroom:{
+      badge:'BOARDROOM',
+      ribbon:'Boardroom Keedio → Soliss · economics, arquitectura, gobierno, delivery, evidencias y documentación de propuesta.',
+      brand:'P0 Decision Room · Boardroom',
+      switchLabel:'Boardroom',
+      title:'Keedio → Soliss · P0 Boardroom V5',
+      scope:'P0 · Infraestructura crítica',
+      status:'FINAL CERRADO',
+      closeTitle:'P0 construye la capacidad. Soliss conserva el control. Los casos de uso capturan el valor.',
+      closeText:'La siguiente decisión no es comprar siete soluciones. Es aprobar la base que permite desplegarlas con gobierno, seguridad, trazabilidad y un modelo operativo transferible.',
+      closeHref:'#decision',
+      closeCta:'Volver a decisiones'
+    }
+  };
+
+  function buildAccessNav(mode){
+    $('#nav').innerHTML=ACCESS_NAV[mode].map(([label,href])=>`<a href="${href}">${label}</a>`).join('');
+    $$('#nav a').forEach(a=>a.addEventListener('click',()=>$('#nav').classList.remove('open')));
+  }
+
+  function updateExecutiveStoryForAccess(mode){
+    exIndex=0;exElapsed=0;exSceneElapsed=0;exAuto=false;exQa=false;
+    if(exTimer){clearInterval(exTimer);exTimer=null}
+    const mins=Math.ceil(exTotal()/60);
+    $('#execStoryBtn').textContent=`● Story ${mins} min`;
+    $$('[data-open-exec-story]').forEach(b=>b.textContent=mode==='public'?`▶ Story público · ${mins} min`:`▶ Executive Story · ${mins} min`);
+    $('#execTotal').textContent=mmss(exTotal());
+  }
+
+  function applyAccessMode(mode,{updateUrl=true,remember=true}={}){
+    if(!ACCESS_COPY[mode])return;
+    const c=ACCESS_COPY[mode];
+    document.body.dataset.access=mode;
+    $('#accessPortal').hidden=true;
+    $('#accessRibbon').hidden=false;
+    $('#accessBadge').textContent=c.badge;
+    $('#accessBadge').className=`access-badge ${mode}`;
+    $('#accessRibbonText').textContent=c.ribbon;
+    $('#brandModeText').textContent=c.brand;
+    $('#accessSwitchLabel').textContent=c.switchLabel;
+    $('#accessSwitchBtn').className=`access-switch-btn ${mode}`;
+    document.title=c.title;
+    $('#heroScopeLabel').textContent=c.scope;
+    $('#heroStatus').textContent=c.status;
+    $('#closingTitle').textContent=c.closeTitle;
+    $('#closingText').textContent=c.closeText;
+    $('#closingCta').href=c.closeHref;
+    $('#closingCta').textContent=c.closeCta;
+    buildAccessNav(mode);
+
+    if(mode==='boardroom'){
+      const a=['board','tech','compliance'].includes(document.body.dataset.audience)?document.body.dataset.audience:'board';
+      setAudience(a);
+    }else{
+      document.body.dataset.audience='all';
+    }
+    updateExecutiveStoryForAccess(mode);
+    if(remember)sessionStorage.setItem('soliss-p0-access',mode);
+    if(updateUrl){
+      const u=new URL(location.href);
+      u.searchParams.set('view',mode);
+      u.hash='';
+      history.replaceState(null,'',u);
+    }
+    scrollTo({top:0,behavior:'auto'});
+    setTimeout(()=>{navSpyUpdate();$$('.reveal').forEach(el=>{if(getComputedStyle(el).display!=='none')el.classList.add('visible')})},40);
+  }
+
+  function showAccessPortal(preselect=null){
+    document.body.dataset.access='portal';
+    $('#accessPortal').hidden=false;
+    $('#accessRibbon').hidden=true;
+    $('#nav').classList.remove('open');
+    $('#boardroomConsent').hidden=true;
+    $('#boardroomAck').checked=false;
+    $('#boardroomEnter').disabled=true;
+    if(preselect==='boardroom'){
+      $('#boardroomConsent').hidden=false;
+      setTimeout(()=>$('#boardroomConsent').scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+    }
+  }
+
+  function initAccessPortal(){
+    const params=new URLSearchParams(location.search);
+    const requested=params.get('view');
+    const remembered=sessionStorage.getItem('soliss-p0-access');
+    if(requested==='public') return applyAccessMode('public',{updateUrl:false});
+    if(requested==='boardroom'){
+      if(remembered==='boardroom')return applyAccessMode('boardroom',{updateUrl:false});
+      return showAccessPortal('boardroom');
+    }
+    if(remembered==='public'||remembered==='boardroom')return applyAccessMode(remembered,{updateUrl:true,remember:false});
+    showAccessPortal();
+  }
+
+  $$('[data-access-choice]').forEach(b=>b.addEventListener('click',()=>{
+    const mode=b.dataset.accessChoice;
+    if(mode==='public')applyAccessMode('public');
+    else{
+      $('#boardroomConsent').hidden=false;
+      setTimeout(()=>$('#boardroomConsent').scrollIntoView({behavior:'smooth',block:'nearest'}),40);
+    }
+  }));
+  $('#boardroomAck').addEventListener('change',e=>$('#boardroomEnter').disabled=!e.target.checked);
+  $('#boardroomEnter').addEventListener('click',()=>applyAccessMode('boardroom'));
+  $('#boardroomCancel').addEventListener('click',()=>{$('#boardroomConsent').hidden=true;$('#boardroomAck').checked=false;$('#boardroomEnter').disabled=true});
+  $('#accessSwitchBtn').addEventListener('click',()=>showAccessPortal());
+  $('#accessRibbonSwitch').addEventListener('click',()=>showAccessPortal());
+  $('#copyAccessLink').addEventListener('click',async()=>{const u=new URL(location.href);u.searchParams.set('view',document.body.dataset.access);u.hash='';try{await navigator.clipboard.writeText(u.toString());$('#copyAccessLink').textContent='Enlace copiado ✓';setTimeout(()=>$('#copyAccessLink').textContent='Copiar enlace',1400)}catch{$('#copyAccessLink').textContent='No disponible'}});
+
+
   // Audience modes
   function setAudience(a){document.body.dataset.audience=a;$$('.aud').forEach(b=>b.classList.toggle('active',b.dataset.audience===a));$$('#nav a').forEach(link=>{const target=$(link.getAttribute('href'));link.style.display=(a==='all'||!target?.dataset.show||target.dataset.show.split(' ').includes(a))?'':'none'});setTimeout(navSpyUpdate,30)}
   $$('.aud').forEach(b=>b.addEventListener('click',()=>setAudience(b.dataset.audience)));
@@ -358,4 +558,5 @@ Keedio propone, diseña e integra el patrón P0. Soliss decide, valida, adquiere
   // Service worker. No external runtime dependencies.
   if('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js').catch(()=>{});
   setAudience('board');
+  initAccessPortal();
 })();

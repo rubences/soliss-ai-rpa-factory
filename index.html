@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#FF006A">
-  <meta name="description" content="Keedio presenta a Soliss la P0 Decision Room: arquitectura, economics, gates, gobierno y casos de uso de Soliss AI/RPA Factory.">
-  <title>Keedio presenta a SOLISS · P0 Decision Room V4</title>
+  <meta name="description" content="Soliss AI/RPA Factory · una única web Keedio → Soliss con acceso a Visión pública o Boardroom P0.">
+  <title>Soliss AI/RPA Factory · Keedio → Soliss · V5</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="assets/icon-192.png">
   <link rel="stylesheet" href="assets/styles.css">
@@ -13,18 +13,93 @@
   <script defer src="assets/documents.js"></script>
   <script defer src="assets/app.js"></script>
 </head>
-<body data-audience="board" data-build="boardroom">
+<body data-audience="board" data-build="unified" data-access="portal">
 <a class="skip" href="#main">Ir al contenido</a>
+
+<div id="accessPortal" class="access-portal" aria-labelledby="accessPortalTitle">
+  <div class="access-portal-shell">
+    <header class="access-portal-head">
+      <div class="access-logos">
+        <img src="assets/brand/keedio-logo.png" alt="Keedio">
+        <span>→</span>
+        <img src="assets/brand/soliss-logo.png" alt="Soliss">
+      </div>
+      <span class="access-version">SOLISS AI/RPA FACTORY · V5</span>
+      <h1 id="accessPortalTitle">¿Qué experiencia quieres consultar?</h1>
+      <p>Una única web, dos niveles de lectura. El contenido compartido se mantiene una sola vez; economics, herramientas de comité y documentación se reservan a la vista Boardroom.</p>
+    </header>
+
+    <div class="access-options">
+      <button class="access-card public" type="button" data-access-choice="public">
+        <span class="access-icon">◎</span>
+        <small>ACCESO ABIERTO</small>
+        <h2>Visión pública</h2>
+        <p>Para explicar la estrategia AI/RPA Factory de forma clara, pedagógica y compartible.</p>
+        <ul>
+          <li>Why now + benchmark sectorial</li>
+          <li>P0 explicado en lenguaje claro</li>
+          <li>UC1–UC7 e historias de usuario</li>
+          <li>Factory Effect y futuros UC</li>
+          <li>Insurance AI Assurance</li>
+        </ul>
+        <b>Entrar a la visión pública →</b>
+        <em>Sin economics, documentos internos ni simuladores de comité.</em>
+      </button>
+
+      <button class="access-card boardroom" type="button" data-access-choice="boardroom">
+        <span class="access-icon">◆</span>
+        <small>KEEDIO → SOLISS · USO RESTRINGIDO</small>
+        <h2>Boardroom P0</h2>
+        <p>Para Consejo, IT, Data, Security y Compliance durante revisión y toma de decisiones.</p>
+        <ul>
+          <li>Decision Room + Digital Twin</li>
+          <li>Economics y escenarios TCO</li>
+          <li>Governance + Evidence Registry</li>
+          <li>Delivery, Gates, RACI y riesgos</li>
+          <li>Document Center + Committee Toolkit</li>
+        </ul>
+        <b>Continuar al Boardroom →</b>
+        <em>Contiene información interna de propuesta.</em>
+      </button>
+    </div>
+
+    <div id="boardroomConsent" class="boardroom-consent" hidden>
+      <div>
+        <span>BOARDROOM · CONFIDENCIALIDAD</span>
+        <h3>Esta vista contiene información que no forma parte de la experiencia pública.</h3>
+        <p>Incluye economics, arquitectura detallada, matrices de responsabilidad, riesgos y documentos descargables. El selector de la web es una separación de experiencia, <b>no un mecanismo de autenticación</b>.</p>
+      </div>
+      <label><input id="boardroomAck" type="checkbox"> Entiendo que, si esta web se publica externamente, el Boardroom debe protegerse también en el hosting.</label>
+      <div class="consent-actions">
+        <button id="boardroomCancel" type="button">← Volver</button>
+        <button id="boardroomEnter" class="primary" type="button" disabled>Entrar al Boardroom →</button>
+      </div>
+    </div>
+
+    <footer class="access-portal-foot">
+      <span>Keedio propone y ejecuta la ingeniería · Soliss decide, valida, posee la infraestructura y conserva la accountability.</span>
+      <small>La vista elegida se recuerda durante esta sesión. Siempre podrás cambiarla desde la cabecera.</small>
+    </footer>
+  </div>
+</div>
+
 <header class="topbar">
   <div class="shell navrow">
-    <a class="brand brand-lockup" href="#hero" aria-label="Keedio presenta a Soliss"><img src="assets/brand/keedio-logo.png" alt="Keedio"><span class="brand-arrow">→</span><img class="soliss-wordmark" src="assets/brand/soliss-logo.png" alt="Soliss Seguros desde 1933"><small>P0 Decision Room</small></a>
+    <a class="brand brand-lockup" href="#hero" aria-label="Keedio presenta a Soliss"><img src="assets/brand/keedio-logo.png" alt="Keedio"><span class="brand-arrow">→</span><img class="soliss-wordmark" src="assets/brand/soliss-logo.png" alt="Soliss Seguros desde 1933"><small id="brandModeText">AI/RPA Factory · V5</small></a>
     <nav id="nav" aria-label="Principal">
       <a href="#why">Contexto</a><a href="#decision">Decisiones</a><a href="#twin">Arquitectura</a><a href="#factory">P0 + Casos de uso</a><a href="#economics">Economics</a><a href="#governance">Governance</a><a href="#assurance">Assurance</a><a href="#delivery">Delivery</a><a href="#documents">Docs</a>
     </nav>
-    <div class="actions"><button id="presentBtn" class="chip-btn">▶ Presentar</button><button id="themeBtn" class="icon-btn" aria-label="Cambiar tema">◐</button><button id="menuBtn" class="icon-btn menu" aria-label="Abrir menú">☰</button></div>
+    <div class="actions"><button id="accessSwitchBtn" class="access-switch-btn" type="button"><i></i><span id="accessSwitchLabel">Elegir acceso</span></button><button id="execStoryBtn" class="chip-btn story-chip">● Story 9 min</button><button id="presentBtn" class="chip-btn">▶ Presentar libre</button><button id="themeBtn" class="icon-btn" aria-label="Cambiar tema">◐</button><button id="menuBtn" class="icon-btn menu" aria-label="Abrir menú">☰</button></div>
   </div>
   <div class="progress"><i id="progress"></i></div>
 </header>
+
+<div id="accessRibbon" class="access-ribbon" hidden>
+  <div class="shell access-ribbon-row">
+    <div><span id="accessBadge" class="access-badge">—</span><p id="accessRibbonText"></p></div>
+    <div class="access-ribbon-actions"><button id="copyAccessLink" type="button">Copiar enlace</button><button id="accessRibbonSwitch" type="button">Cambiar acceso</button></div>
+  </div>
+</div>
 
 <div class="audience-bar">
   <div class="shell audience-row">
@@ -42,17 +117,27 @@
   <div class="mesh"></div>
   <div class="shell hero-grid">
     <div class="hero-copy reveal">
-      <div class="hero-brand"><img src="assets/brand/soliss-logo.png" alt="Soliss"><span>Propuesta tecnológica de Keedio</span></div><div class="overline"><span>P0 · Infraestructura crítica</span><b>FINAL CERRADO</b></div>
+      <div class="hero-brand"><img src="assets/brand/soliss-logo.png" alt="Soliss"><span>Propuesta tecnológica de Keedio</span></div><div class="overline"><span id="heroScopeLabel">P0 · Infraestructura crítica</span><b id="heroStatus">FINAL CERRADO</b></div>
       <h1>Keedio propone a Soliss una <em>AI/RPA Factory gobernada</em>, no siete islas tecnológicas.</h1>
       <p>P0 construye la plataforma on-premise, federada, segura y operable. Soliss mantiene la propiedad de la infraestructura y activa UC1–UC7 posteriormente mediante business case y Go/No-Go.</p>
-      <div class="hero-ctas"><a class="btn primary" href="#decision">Abrir Decision Room</a><a class="btn ghost" href="#twin">Simular arquitectura</a></div>
+      <div class="hero-ctas boardroom-only"><button class="btn primary" type="button" data-open-exec-story>▶ Executive Story · 9 min</button><a class="btn ghost" href="#decision">Abrir Decision Room</a><a class="btn ghost" href="#twin">Simular arquitectura</a></div><div class="hero-ctas public-only"><button class="btn primary" type="button" data-open-exec-story>▶ Story público · 6 min</button><a class="btn ghost" href="#factory">Entender P0</a><a class="btn ghost" href="#assurance">Ver assurance</a></div>
       <div class="principle"><b>Principio de experiencia propuesto por Keedio</b><span>IA que amplifica la cercanía y el juicio humano de Soliss, no que los sustituye.</span></div>
     </div>
-    <aside class="hero-panel reveal">
+    <aside class="hero-panel reveal boardroom-only">
       <header><span>Responsabilidad</span><strong>Quién hace qué</strong></header>
       <div class="role-grid"><article class="keedio"><b>KEEDIO</b><p>Arquitectura, integración, gobierno, sandbox, IaC, soporte especializado y transferencia.</p></article><article class="soliss"><b>SOLISS</b><p>Decisión, infraestructura, ownership de datos, validación, operación interna y aprobación de gates.</p></article></div>
       <div class="kpis"><div><small>Construcción P0</small><b>105.786,20 €</b></div><div><small>Servicio M3–M24</small><b>77.000 €</b></div><div><small>Total Keedio 24M</small><b>182.786,20 €</b></div><div><small>Infra Soliss recomendada</small><b>180–280 k€*</b></div></div>
       <small class="fine">*Rango orientativo sujeto a sizing G2 y cotizaciones de Soliss.</small>
+    </aside>
+
+    <aside class="public-hero-panel reveal public-only">
+      <header><span>VISIÓN PÚBLICA</span><strong>Qué queremos que se entienda</strong></header>
+      <div class="public-pillars">
+        <article><b>01 · P0 común</b><p>Una base corporativa para no reconstruir identidad, datos, modelos, seguridad y operación en cada vertical.</p></article>
+        <article><b>02 · UC derivados</b><p>Agentes, documentos, siniestros, analítica, administración, IT y Grupo convierten esa base en valor.</p></article>
+        <article><b>03 · Control humano</b><p>La IA asiste y automatiza dentro de límites; Soliss mantiene ownership, validación y decisión.</p></article>
+      </div>
+      <small>Los detalles contractuales, economics y documentación se consultan en Boardroom.</small>
     </aside>
   </div>
 </section>
@@ -328,18 +413,29 @@
       <div class="integrity-grid">
         <div><span>BASELINE DE ESTA WEB</span><b>Plan Director Final Cerrado + Presupuesto/Cronograma P0 Final Cerrado</b><p>Las cifras mostradas por la Decision Room se gobiernan desde estas fuentes para evitar mezclar revisiones anteriores.</p></div>
         <div><span>MANIFEST</span><b>SHA‑256 por fichero</b><p>Permite verificar que el documento descargado es exactamente el distribuido con esta versión de la web.</p><p><a id="manifestJsonLink" href="#" download>Descargar JSON</a> · <a id="manifestTxtLink" href="#" download>Descargar TXT</a></p></div>
-        <div><span>CONFIDENCIALIDAD</span><b>Boardroom build</b><p>Publicar esta carpeta en Internet haría descargables también los documentos. Para GitHub Pages público debe generarse una build sanitizada independiente.</p></div>
+        <div><span>MODELO V5 UNIFICADO</span><b>Una web · dos experiencias</b><p>La vista pública oculta economics y documentación interna. El Boardroom debe protegerse en el hosting si la URL se expone externamente: el selector visual no sustituye autenticación.</p></div>
       </div>
     </details>
   </div>
 </section>
 
 <section class="section closing present-step" data-show="board tech compliance">
-  <div class="shell closing-grid reveal"><div><span>PROPUESTA DE KEEDIO PARA SOLISS</span><h2>P0 construye la capacidad. Soliss conserva el control. Los casos de uso capturan el valor.</h2><p>La siguiente decisión no es comprar siete soluciones. Es aprobar la base que permite desplegarlas con gobierno, seguridad, trazabilidad y un modelo operativo transferible.</p></div><a href="#decision" class="btn primary">Volver a decisiones</a></div>
+  <div class="shell closing-grid reveal"><div><span>PROPUESTA DE KEEDIO PARA SOLISS</span><h2 id="closingTitle">P0 construye la capacidad. Soliss conserva el control. Los casos de uso capturan el valor.</h2><p id="closingText">La siguiente decisión no es comprar siete soluciones. Es aprobar la base que permite desplegarlas con gobierno, seguridad, trazabilidad y un modelo operativo transferible.</p></div><a id="closingCta" href="#decision" class="btn primary">Volver a decisiones</a></div>
 </section>
 </main>
 
 <footer><div class="shell footer-grid"><div><b>KEEDIO</b><span>Proponente / socio tecnológico</span></div><div><b>SOLISS</b><span>Cliente / propietario de infraestructura y decisión</span></div><p>Decision Room de propuesta. Las simulaciones son conceptuales; los resultados técnicos, regulatorios y operativos deben validarse mediante gates, pruebas, Legal/Compliance y evidencias del proyecto.</p></div></footer>
+
+
+<div id="execStory" class="exec-story" hidden aria-hidden="true">
+  <div class="exec-story-shell">
+    <header class="exec-story-top"><div class="exec-brand"><img src="assets/brand/keedio-logo.png" alt="Keedio"><span>→</span><img src="assets/brand/soliss-logo.png" alt="Soliss"><div><b>Executive Story</b><small>Keedio presenta · Soliss decide</small></div></div><div class="exec-status"><span id="execSceneCounter">1 / 9</span><span id="execElapsed">00:00</span><span id="execTotal">09:00</span><button id="execNotesToggle" type="button">Notas</button><button id="execExit" type="button">Salir ×</button></div></header>
+    <div class="exec-progress"><i id="execProgress"></i></div><div id="execSegments" class="exec-segments"></div>
+    <main class="exec-story-main"><section id="execStage" class="exec-stage" aria-live="polite"></section><aside id="execNotes" class="exec-notes"><div class="exec-notes-head"><span>NOTAS DEL PRESENTADOR</span><b id="execSceneTime">—</b></div><div id="execNotesBody"></div><div class="exec-shortcuts"><span>→ siguiente</span><span>← anterior</span><span>Espacio play/pause</span><span>N notas</span><span>Q Q&A</span><span>Esc salir</span></div></aside></main>
+    <footer class="exec-controls"><div><button id="execPrev" type="button">← Anterior</button><button id="execPlay" class="exec-primary" type="button">▶ Auto</button><button id="execNext" type="button">Siguiente →</button></div><div class="exec-control-center"><button id="execQa" type="button">❓ Pausa Q&A</button><span id="execCountdown">00:40</span></div><div><button id="execDeepDive" type="button">Profundizar ↗</button><button id="execRestart" type="button">↺ Reiniciar</button></div></footer>
+  </div>
+</div>
+<button id="execResume" class="exec-resume" type="button" hidden>● Reanudar Executive Story</button>
 
 <dialog id="lightbox" class="lightbox"><button id="closeLightbox" aria-label="Cerrar">×</button><img id="lightboxImg" alt=""></dialog>
 <div id="presentationHUD" class="presentation-hud" hidden><button id="prevStep">←</button><span id="stepCounter">1/1</span><button id="nextStep">→</button><button id="exitPresent">Salir</button></div>

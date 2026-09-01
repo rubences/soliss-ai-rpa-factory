@@ -137,3 +137,29 @@ Tres historias interactivas: siniestro (UC2+UC3), empleado (UC1) y factura (UC2+
 - Materiales explicativos incorporados al Document Pack.
 
 La comparación no describe de forma categórica el AS-IS de Soliss: representa el patrón típico de construir verticales sin una base común.
+
+
+## V4.4 — Executive Story Mode
+Recorrido guiado de ~9 minutos con 9 escenas, autoplay, cronómetros, notas, pausa Q&A, deep dive y reanudación. Incluye guion y Run of Show en Document Center.
+
+
+## V5.0 — Unified Public + Boardroom
+
+V5 reemplaza las dos builds independientes por **una única aplicación**.
+
+Al acceder, el usuario elige:
+
+- **Visión pública**: contenido explicativo, casos de uso, historias, Factory Effect y assurance.
+- **Boardroom**: Decision Room completa con economics, arquitectura detallada, governance, delivery y documentos.
+
+### Ventajas
+- una única base de código;
+- no hay divergencia funcional entre dos webs;
+- navegación mucho más limpia;
+- Story Mode adaptativo: ~6 min Public / ~9 min Boardroom;
+- URLs compartibles por vista;
+- cambio de acceso desde la cabecera;
+- selección recordada durante la sesión.
+
+### Importante
+La selección Public/Boardroom es una separación de UX, no autenticación. Consulte `SECURITY_DEPLOYMENT.md` antes de publicar externamente.

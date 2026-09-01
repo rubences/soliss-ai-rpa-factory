@@ -213,6 +213,30 @@ window.P0_DOCUMENTS = {
           "size": "1 KB",
           "sha256": "6093f29bad55806507117766116837d1b0fa45ddec356071218125eb600893a0",
           "preview": false
+        },
+        {
+          "type": "MD",
+          "path": "documents/15_Executive_Story_Mode_Guion_Consejo_Keedio_to_Soliss.md",
+          "sizeBytes": 929,
+          "size": "1 KB",
+          "sha256": "e6c358b796b127a7ce249f3ee2bf73c1b68d60845c27d2e6ba14b021ba94750a",
+          "preview": false
+        },
+        {
+          "type": "CSV",
+          "path": "documents/16_Executive_Story_Mode_Run_of_Show.csv",
+          "sizeBytes": 660,
+          "size": "1 KB",
+          "sha256": "b2291cb0d65a149437efb4d727891f86f4cff535b65ec81b93c399fec500e464",
+          "preview": false
+        },
+        {
+          "type": "MD",
+          "path": "documents/17_V5_Modelo_Acceso_Public_Boardroom_Keedio_to_Soliss.md",
+          "sizeBytes": 1044,
+          "size": "1 KB",
+          "sha256": "3012ccfb430345355ce9304c4c6880b1dd9f16ed3f53aab328dd7364b2f5d7b5",
+          "preview": false
         }
       ]
     }
@@ -220,9 +244,9 @@ window.P0_DOCUMENTS = {
   "pack": {
     "path": "documents/Soliss_P0_Document_Pack_Keedio.zip",
     "size": "22,1 MB",
-    "sizeBytes": 23177362,
-    "sha256": "591086b14d98a4f1037bd68b4af82a0d9af50d74fbd61cbf56a210fd9eefd67e",
-    "fileCount": 16
+    "sizeBytes": 23179923,
+    "sha256": "cfdeeba570bc28950bd2c7dae12e8b34931ba9c7a0082b210da731bb710ae380",
+    "fileCount": 19
   },
   "manifest": {
     "json": "documents/DOCUMENT_MANIFEST.json",

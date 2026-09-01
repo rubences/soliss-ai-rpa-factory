@@ -1,7 +1,7 @@
 {
-  "name": "Keedio → Soliss · P0 Decision Room V4.3",
-  "short_name": "Soliss P0 V4.3",
-  "description": "Decision Room ejecutiva/técnica de la propuesta Keedio para Soliss AI/RPA Factory.",
+  "name": "Keedio → Soliss · AI/RPA Factory V5",
+  "short_name": "Soliss Factory V5",
+  "description": "Una única experiencia con acceso Public o Boardroom para Soliss AI/RPA Factory.",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#071F2A",

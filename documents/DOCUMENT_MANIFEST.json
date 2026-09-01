@@ -1,7 +1,8 @@
 {
-  "product": "Soliss AI/RPA Factory · P0 Decision Room V4.3",
+  "product": "Soliss AI/RPA Factory · V5 Unified",
   "proponent": "Keedio",
   "client": "Soliss",
+  "experience_model": "Public + Boardroom in one application",
   "baseline_note": "Plan Director Final Cerrado + Presupuesto/Cronograma P0 Final Cerrado.",
   "files": [
     {
@@ -83,6 +84,21 @@
       "path": "documents/14_UC_Onboarding_Canvas_Keedio_to_Soliss.csv",
       "bytes": 1259,
       "sha256": "6093f29bad55806507117766116837d1b0fa45ddec356071218125eb600893a0"
+    },
+    {
+      "path": "documents/15_Executive_Story_Mode_Guion_Consejo_Keedio_to_Soliss.md",
+      "bytes": 929,
+      "sha256": "e6c358b796b127a7ce249f3ee2bf73c1b68d60845c27d2e6ba14b021ba94750a"
+    },
+    {
+      "path": "documents/16_Executive_Story_Mode_Run_of_Show.csv",
+      "bytes": 660,
+      "sha256": "b2291cb0d65a149437efb4d727891f86f4cff535b65ec81b93c399fec500e464"
+    },
+    {
+      "path": "documents/17_V5_Modelo_Acceso_Public_Boardroom_Keedio_to_Soliss.md",
+      "bytes": 1044,
+      "sha256": "3012ccfb430345355ce9304c4c6880b1dd9f16ed3f53aab328dd7364b2f5d7b5"
     }
   ]
 }

@@ -254,6 +254,11 @@ window.P0.research = {
     {q:"¿Cómo mediremos valor y no solo actividad?",a:"Cada UC debe arrancar con baseline, KPI, target, owner y fuente de evidencia. La web incluye un Measurement Blueprint sin inventar resultados.",target:"#factory"}
   ],
   changelog:[
+    {version:"V5.0",date:"02 Sep 2026",items:["Access Hub único","Visión pública + Boardroom en una sola web","Navegación y copy por modo","Story público 6 min + Boardroom 9 min","Consentimiento Boardroom","URLs compartibles por vista","Cambio de acceso persistente por sesión","Modelo de despliegue seguro documentado"]},
+    {version:"V4.4",date:"01 Sep 2026",items:["Executive Story Mode","9 escenas Consejo","Autoplay y cronómetros","Notas del presentador","Pausa Q&A","Deep dive + reanudación"]},
+    {version:"V4.3",date:"01 Sep 2026",items:["Factory Effect","Antes/Después de P0","Onboarding futuros UC8/UC9","Canvas descargable"]},
+    {version:"V4.2",date:"01 Sep 2026",items:["Historias visuales","Siniestro","Empleado","Factura","Matriz de reutilización P0"]},
+    {version:"V4.1",date:"01 Sep 2026",items:["P0 en 60 segundos","Lenguaje claro / técnico","Explorador UC1–UC7","Glosario"]},
     {version:"V4.0",date:"01 Sep 2026",items:["Identidad visual Soliss","Supervisory Radar 2026","AI Act timeline","EIOPA Assurance","ISO 42001 alignment","AI literacy","Agentic Safety Gate","Sovereignty Matrix","KPI Blueprint","Gate Deliverables","Responsibility Explorer","FAQ/Objection Navigator","Boardroom + Public builds"]},
     {version:"V3.1",date:"01 Sep 2026",items:["Document Center","SHA-256 manifest","Acta preliminar","Decision snapshot","Offline document cache"]},
     {version:"V3.0",date:"01 Sep 2026",items:["Audience modes","Decision Room","Digital Twin","Use Case Factory","Economics Lab","Evidence Cockpit","Model Passport"]},
@@ -484,3 +489,44 @@ window.P0.explainer.ucOnboarding = {
   reusable:["Clústeres/infraestructura","Identidad y acceso","Data governance","Model Gateway","Servicios IA/RPA","Seguridad y evidencia","Observabilidad/operación"],
   vertical:["Business case","Datos/fuentes concretas","Reglas/modelo del proceso","Integraciones específicas","UX/canales","UAT y KPI de negocio","Aprobación productiva"]
 };
+
+
+// V4.4 — Executive Story Mode · guided Board narrative for Keedio → Soliss.
+window.P0.executiveStory = {
+  title:"P0 Executive Story · Consejo Soliss", totalSeconds:540, audience:"Consejo / Sponsor",
+  statement:"Recorrido guiado de aproximadamente 9 minutos. Keedio presenta la lógica de P0; Soliss mantiene la decisión, validación y accountability.",
+  scenes:[
+    {id:"opening",duration:40,deepLink:"#hero",visual:"opening",kicker:"ESCENA 1 · TESIS",title:"No proponemos siete islas tecnológicas.",message:"Keedio propone construir una única base corporativa —P0— desde la que Soliss pueda desplegar IA y RPA con identidad, datos, modelos, seguridad, evidencia y operación bajo un mismo gobierno.",cue:"Frase a recordar",cueText:"P0 construye la capacidad. Los UC capturan el valor.",notes:["Abrir con el problema de arquitectura, no con Kubernetes.","Recalcar que Soliss conserva propiedad de infraestructura, decisiones y operación.","P0 es el único proyecto base; UC1–UC7 son desarrollos derivados."]},
+    {id:"why",duration:55,deepLink:"#why",visual:"market",kicker:"ESCENA 2 · POR QUÉ AHORA",title:"El reto del sector ya no es probar GenAI. Es llevarla a producción con control.",message:"La adopción aseguradora ya es material, pero una gran parte de los casos continúa en experimentación. P0 responde precisamente al salto entre PoC y operación gobernada.",cue:"Lectura ejecutiva",cueText:"Industrializar con control es distinto de acumular pilotos.",notes:["Usar los datos EIOPA ya incluidos en la Decision Room.","No vender FOMO: presentar madurez, gobierno y control.","Conectar el principio Soliss con IA que amplifica la cercanía y el juicio humano."]},
+    {id:"p0",duration:60,deepLink:"#factory",visual:"p0",kicker:"ESCENA 3 · QUÉ ES P0",title:"P0 es la base común que evita reconstruir la misma infraestructura en cada caso.",message:"Antes de hablar de agentes, fraude o facturas, P0 resuelve una vez las capacidades transversales: plataforma, identidad, datos gobernados, Model Gateway, servicios IA/RPA, seguridad, observabilidad y transferencia.",cue:"Analogía",cueText:"P0 es la cimentación y las instalaciones comunes; los UC son las estancias de negocio.",notes:["Explicarlo en lenguaje claro antes de entrar en componentes técnicos.","P0 no es un chatbot, ni un motor de fraude, ni un dashboard final.","El valor de P0 es la reutilización gobernada."]},
+    {id:"stories",duration:80,deepLink:"#factory",visual:"stories",kicker:"ESCENA 4 · P0 EN ACCIÓN",title:"Tres situaciones distintas reutilizan la misma base.",message:"Un siniestro, una consulta de empleado y una factura necesitan lógica funcional diferente, pero comparten identidad, datos/fuentes, Gateway, seguridad, observabilidad y evidencia.",cue:"Demostración",cueText:"Lo repetido en las tres historias es exactamente lo que debe vivir en P0.",notes:["Usar 20–25 segundos por historia.","Siniestro: IA asiste; profesional Soliss decide.","Empleado: RAG con fuentes autorizadas y escalado.","Factura: automatización con excepciones y segregación de funciones."]},
+    {id:"factory",duration:60,deepLink:"#factory",visual:"effect",kicker:"ESCENA 5 · FACTORY EFFECT",title:"Con P0, el siguiente UC se concentra en lo diferencial.",message:"La Factory no elimina el trabajo del vertical. Evita que el caso tenga que volver a diseñar identidad, gobierno, acceso a modelos, seguridad, observabilidad y operación.",cue:"Idea económica/técnica",cueText:"El esfuerzo se desplaza hacia proceso, datos, reglas, integraciones, UX y UAT.",notes:["No usar porcentajes de ahorro no medidos.","Hablar de capacidades reutilizadas y decisiones evitadas.","Introducir el futuro UC8/UC9 para demostrar que P0 no se diseña solo para la lista actual."]},
+    {id:"architecture",duration:70,deepLink:"#twin",visual:"architecture",kicker:"ESCENA 6 · ARQUITECTURA Y RESILIENCIA",title:"Federación horizontal, servicios comunes verticales y fallback explícito.",message:"Rancher/RKE2 gestiona la flota; el clúster de grupo concentra servicios transversales; cada empresa/dominio conserva aislamiento. Gravitino permanece como PoC no bloqueante y el Model Gateway controla el acceso a IA.",cue:"Prueba de robustez",cueText:"La arquitectura debe seguir teniendo una respuesta cuando falla un componente.",notes:["Mostrar un fallo conceptual: Gravitino → fallback; retraso GPU → sandbox provisional.","Destacar local-first, no local-only.","Soliss compra/posee la infraestructura; Keedio diseña, integra y transfiere."]},
+    {id:"economics",duration:55,deepLink:"#economics",visual:"economics",kicker:"ESCENA 7 · ECONOMICS",title:"Separar servicios Keedio de infraestructura Soliss evita confundir el TCO.",message:"La construcción y el servicio co-gestionado tienen un baseline contractual; la infraestructura productiva es una inversión directa de Soliss que se cierra tras sizing y cotización.",cue:"Mensaje financiero",cueText:"P0 se aprueba como programa de capacidad, no como una suma de siete presupuestos independientes.",notes:["Boardroom: mostrar cifras exactas del baseline Final Cerrado.","Recordar que los rangos de hardware siguen sujetos a G2 y proveedor.","No presentar el punto central de TCO como oferta cerrada."]},
+    {id:"governance",duration:70,deepLink:"#governance",visual:"governance",kicker:"ESCENA 8 · GOBIERNO",title:"Una demo que funciona no equivale a un sistema listo para producción.",message:"Cada UC debe pasar por ownership, clasificación, datos, sandbox, UAT, assurance y operación. G1–G4 protegen alcance, inversión, validación técnica y transferencia.",cue:"Control",cueText:"Ready for production = valor + datos autorizados + seguridad + UAT + evidencia + operación.",notes:["Conectar DORA, AI Act, Evidence Registry y Model Passport.","Evitar afirmaciones de compliance porcentual.","Mostrar que la accountability permanece en Soliss."]},
+    {id:"decision",duration:50,deepLink:"#decision",visual:"decision",kicker:"ESCENA 9 · DECISIÓN",title:"La decisión de hoy es aprobar la base y el modelo de gobierno.",message:"Keedio propone iniciar P0, cerrar F0, nombrar responsables, aprobar el sizing en G2, validar la PoC/fallback en G3 y aceptar transferencia en G4. Los UC se activan después mediante business case.",cue:"Cierre",cueText:"P0 construye la capacidad. Soliss conserva el control. Los casos de uso capturan el valor.",notes:["Cerrar con decisiones concretas, no con tecnología.","Preguntar qué condición necesita Soliss para autorizar F0.","Si surge una pregunta, usar 'Profundizar' y volver después al Story Mode."]}
+  ]
+};
+
+
+// V5 · Public Executive Story. No economics or internal committee content.
+window.P0.executiveStory.publicScenes = [
+  window.P0.executiveStory.scenes[0],
+  window.P0.executiveStory.scenes[1],
+  window.P0.executiveStory.scenes[2],
+  window.P0.executiveStory.scenes[3],
+  window.P0.executiveStory.scenes[4],
+  {
+    id:"public-trust", duration:55, deepLink:"#assurance", visual:"publicTrust",
+    kicker:"ESCENA 6 · CONFIANZA",
+    title:"Industrializar IA también significa poder explicar, limitar y auditar su uso.",
+    message:"La visión pública cierra con el principio de gobierno: datos autorizados, modelos controlados, trazabilidad, human oversight y una evolución por gates antes de producción.",
+    cue:"Cierre público",
+    cueText:"P0 crea una base reutilizable para innovar sin perder control.",
+    notes:[
+      "No entrar en economics ni documentación interna.",
+      "Explicar que Boardroom contiene el detalle de decisión y evidencias.",
+      "Cerrar ofreciendo profundizar en P0, casos de uso o assurance."
+    ]
+  }
+];
