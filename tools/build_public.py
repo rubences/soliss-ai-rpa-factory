@@ -1,7 +1,7 @@
 from pathlib import Path
 import shutil,re,json
 SRC=Path(__file__).resolve().parents[1]
-OUT=SRC.parent/'soliss-p0-decision-room-v4-public'
+OUT=SRC.parent/'soliss-p0-decision-room-v4.1-public'
 if OUT.exists(): shutil.rmtree(OUT)
 shutil.copytree(SRC,OUT,ignore=shutil.ignore_patterns('documents','tools','RESEARCH_SOURCES.md'))
 # Empty public document metadata to keep runtime code stable; Document Center is hidden.
@@ -28,5 +28,5 @@ rt=rt.replace('- Construcción P0 F0–F4: **105.786,20 €**.','- Construcción
 r.write_text(rt,encoding='utf-8')
 (OUT/'robots.txt').write_text('User-agent: *\nAllow: /\n',encoding='utf-8')
 # Disable service worker pre-existing cache name collision.
-sw=OUT/'sw.js';st=sw.read_text(encoding='utf-8').replace("soliss-p0-v4-boardroom","soliss-p0-v4-public");sw.write_text(st,encoding='utf-8')
+sw=OUT/'sw.js';st=sw.read_text(encoding='utf-8').replace("soliss-p0-v4-boardroom","soliss-p0-v4-1-public");sw.write_text(st,encoding='utf-8')
 print(OUT)

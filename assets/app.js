@@ -41,6 +41,41 @@
   $('#lensButtons').addEventListener('click',e=>{const b=e.target.closest('[data-lens]');if(!b)return;currentLens=b.dataset.lens;$$('#lensButtons button').forEach(x=>x.classList.toggle('active',x===b));inspectNode()});
   runScenario(); inspectNode();
 
+
+  // P0 explained + simple UC explorer
+  const E=D.explainer;
+  let explainMode='plain';
+  let simpleUC='UC1';
+  const explainText=(obj)=>obj[explainMode]||obj.plain||'';
+  function renderP0Explainer(){
+    $('#p0Headline').textContent=E.p0.headline;
+    $('#p0Definition').textContent=explainMode==='plain'?E.p0.plain:E.p0.technical;
+    $('#p0Analogy').textContent=E.p0.analogy;
+    $('#p0Objective').textContent=E.p0.objective;
+    $('#p0Blocks').innerHTML=E.blocks.map(b=>`<article class="p0-block"><h3>${safe(b.title)}</h3><p>${safe(explainText(b))}</p><small>${explainMode==='plain'?'Qué significa':'Qué incluye'}</small></article>`).join('');
+    $('#p0Flow').innerHTML=E.commonFlow.map(x=>`<article class="p0-step"><span>${x.n}</span><b>${safe(x.title)}</b><p>${safe(explainText(x))}</p></article>`).join('');
+    $('#p0NotIncluded').innerHTML=E.p0.notIncluded.map(x=>`<li>${safe(x)}</li>`).join('');
+    $('#glossaryGrid').innerHTML=E.glossary.map(x=>`<article class="glossary-item"><b>${safe(x.term)}</b><p>${safe(explainText(x))}</p></article>`).join('');
+  }
+  function renderSimpleTabs(){
+    $('#ucSimpleTabs').innerHTML=D.useCases.map(u=>`<button class="uc-simple-tab ${u.id===simpleUC?'active':''}" data-simple-uc="${u.id}"><b>${u.id}</b><span>${safe(u.name)}</span></button>`).join('');
+    $$('#ucSimpleTabs [data-simple-uc]').forEach(b=>b.addEventListener('click',()=>{simpleUC=b.dataset.simpleUc;renderSimpleTabs();renderSimpleUC()}));
+  }
+  function renderSimpleUC(){
+    const base=D.useCases.find(x=>x.id===simpleUC),u=E.useCases[simpleUC];
+    $('#ucSimpleDetail').innerHTML=`<header><div><span>${base.id} · CASO DERIVADO</span><h3>${safe(base.name)}</h3><p class="one-line">${safe(u.plain)}</p></div><span class="badge">P0 → UC</span></header>
+      <div class="uc-detail-grid">
+        <div class="uc-detail-box"><b>Pregunta que responde</b><p>${safe(u.question)}</p></div>
+        <div class="uc-detail-box"><b>Qué deja preparado P0</b><p>${safe(u.p0)}</p></div>
+        <div class="uc-detail-box"><b>Qué se construye después</b><p>${safe(u.later)}</p></div>
+        <div class="uc-detail-box"><b>Quién lo utilizaría</b><p>${safe(u.users)}</p></div>
+        <div class="uc-detail-box example"><b>Ejemplo ilustrativo</b><p>${safe(u.example)}</p></div>
+        <div class="uc-detail-box boundary"><b>Qué NO está incluido en P0</b><p>${safe(u.out)}</p></div>
+      </div><div class="uc-role-line"><b>Papel humano</b><p>${safe(u.human)}</p></div>`;
+  }
+  $('#explainMode').addEventListener('click',e=>{const b=e.target.closest('[data-explain]');if(!b)return;explainMode=b.dataset.explain;$$('#explainMode button').forEach(x=>x.classList.toggle('active',x===b));renderP0Explainer()});
+  renderP0Explainer();renderSimpleTabs();renderSimpleUC();
+
   // Use Case Factory
   const ucKey='soliss-p0-uc-hypotheses-v3';
   let ucValues={};

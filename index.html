@@ -19,7 +19,7 @@
   <div class="shell navrow">
     <a class="brand brand-lockup" href="#hero" aria-label="Keedio presenta a Soliss"><img src="assets/brand/keedio-logo.png" alt="Keedio"><span class="brand-arrow">→</span><img class="soliss-wordmark" src="assets/brand/soliss-logo.png" alt="Soliss Seguros desde 1933"><small>P0 Decision Room</small></a>
     <nav id="nav" aria-label="Principal">
-      <a href="#why">Contexto</a><a href="#decision">Decisiones</a><a href="#twin">Arquitectura</a><a href="#factory">UC Factory</a><a href="#economics">Economics</a><a href="#governance">Governance</a><a href="#assurance">Assurance</a><a href="#delivery">Delivery</a><a href="#documents">Docs</a>
+      <a href="#why">Contexto</a><a href="#decision">Decisiones</a><a href="#twin">Arquitectura</a><a href="#factory">P0 + Casos de uso</a><a href="#economics">Economics</a><a href="#governance">Governance</a><a href="#assurance">Assurance</a><a href="#delivery">Delivery</a><a href="#documents">Docs</a>
     </nav>
     <div class="actions"><button id="presentBtn" class="chip-btn">▶ Presentar</button><button id="themeBtn" class="icon-btn" aria-label="Cambiar tema">◐</button><button id="menuBtn" class="icon-btn menu" aria-label="Abrir menú">☰</button></div>
   </div>
@@ -104,10 +104,33 @@
   </div>
 </section>
 
-<section id="factory" class="section soft present-step" data-show="board tech">
+<section id="factory" class="section soft present-step" data-show="board tech compliance">
   <div class="shell">
-    <div class="section-head reveal"><div><span>04 · USE CASE FACTORY</span><h2>Priorizar por valor, datos, riesgo, esfuerzo y time-to-value.</h2></div><p>Los valores iniciales son <b>hipótesis de Keedio</b>, no datos de Soliss. La herramienta está diseñada para sustituirlos durante workshops con negocio, IT y Compliance.</p></div>
-    <div class="factory-layout reveal"><div><div id="ucRanking" class="ranking"></div><button id="resetHypotheses" class="btn small">Restaurar hipótesis Keedio</button></div><div id="ucEditor" class="uc-editor"></div></div>
+    <div class="section-head reveal"><div><span>04 · P0 + CASOS DE USO</span><h2>Entender primero qué construye P0. Priorizar después qué casos activar.</h2></div><p>Esta sección separa la <b>base común P0</b> de las soluciones de negocio UC1–UC7 y permite cambiar entre lenguaje claro y detalle técnico.</p></div>
+
+    <div class="explain-toolbar reveal"><div class="segmented" id="explainMode"><button class="active" data-explain="plain">Lenguaje claro</button><button data-explain="technical">Detalle técnico</button></div><span>La terminología contractual se mantiene; los ejemplos se identifican como ilustrativos.</span></div>
+
+    <div class="p0-hero-explain reveal">
+      <div><span>P0 EN 60 SEGUNDOS</span><h3 id="p0Headline"></h3><p id="p0Definition"></p><blockquote id="p0Analogy"></blockquote></div>
+      <aside><b>Objetivo</b><p id="p0Objective"></p><small>Keedio construye e integra la capacidad. Soliss decide, valida, adquiere su infraestructura y opera según el reparto acordado.</small></aside>
+    </div>
+
+    <div id="p0Blocks" class="p0-block-grid reveal"></div>
+
+    <div class="p0-flow-card reveal"><header><span>CÓMO USA UN CASO DE NEGOCIO LA BASE P0</span><h3>De una petición a una respuesta/acción gobernada</h3><p>El mismo patrón común puede reutilizarse en distintos UC, cambiando fuentes, reglas y lógica funcional.</p></header><div id="p0Flow" class="p0-flow"></div></div>
+
+    <div class="p0-boundaries reveal"><div><span>QUÉ NO ES P0</span><h3>La frontera evita vender siete aplicaciones dentro de un único proyecto fundacional.</h3></div><ul id="p0NotIncluded"></ul></div>
+
+    <details class="p0-glossary reveal"><summary>Glosario sin jerga · entender RKE2, RAG, Gateway, Data Mesh, Gravitino y HITL</summary><div id="glossaryGrid" class="glossary-grid"></div></details>
+
+    <div class="uc-explorer reveal">
+      <header><div><span>UC1–UC7 · UNO A UNO</span><h3>¿Qué significa realmente cada caso de uso?</h3></div><p>P0 deja preparado el patrón; el caso derivado concreta proceso, datos, integración, usuarios y criterios productivos.</p></header>
+      <div id="ucSimpleTabs" class="uc-simple-tabs"></div>
+      <article id="ucSimpleDetail" class="uc-simple-detail"></article>
+    </div>
+
+    <details class="advanced-priority reveal"><summary>Priorización avanzada · hipótesis Keedio para workshop con Soliss</summary><div class="advanced-intro">Los valores iniciales son hipótesis de trabajo, no datos de Soliss. Se sustituyen durante workshops con negocio, IT y Compliance.</div>
+    <div class="factory-layout"><div><div id="ucRanking" class="ranking"></div><button id="resetHypotheses" class="btn small">Restaurar hipótesis Keedio</button></div><div id="ucEditor" class="uc-editor"></div></div></details>
     <div class="human-loop reveal"><span>Principio operativo</span><div><b>IA propone</b><i>→</i><b>Profesional Soliss valida</b><i>→</i><b>Sistema ejecuta</b></div><p>El nivel de automatización se decide por caso, riesgo y control; P0 no impone autonomía ciega.</p></div>
 <details class="kpi-blueprint reveal" open><summary>Value Measurement Blueprint · medir valor sin inventar resultados</summary><div class="blueprint-head"><p>Cada UC debe iniciar con <b>baseline → target → actual → evidencia → owner</b>. Aquí solo se definen KPI candidatos; los valores son N/D hasta el workshop Soliss.</p><button id="downloadKpiPlan" class="btn small">↓ Descargar plan KPI CSV</button></div><div id="kpiGrid" class="kpi-grid"></div></details>
 

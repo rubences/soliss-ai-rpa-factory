@@ -106,3 +106,17 @@ Para una URL pública se recomienda generar una build separada sin documentació
 - Changelog versionado.
 - Working templates descargables en Document Center.
 - Build Boardroom + generador de build Public sanitizada.
+
+
+## V4.1 — P0 explicado para audiencias no técnicas
+
+Se añade una capa pedagógica basada en el alcance del Plan Director Final Cerrado:
+
+- P0 en 60 segundos: definición, objetivo, analogía y límites.
+- 8 bloques de P0 explicados en lenguaje claro y detalle técnico.
+- Flujo común de 7 pasos: identidad → datos → Gateway → servicio → HITL → evidencia.
+- Glosario sin jerga para RKE2, Model Gateway, RAG, Data Mesh, Gravitino PoC, HITL y observabilidad.
+- Explorador UC1–UC7 con: pregunta de negocio, qué deja P0, qué se desarrolla después, usuarios, ejemplo ilustrativo, papel humano y exclusiones.
+- La priorización cuantitativa queda como vista avanzada para workshop.
+
+Los ejemplos se presentan expresamente como ilustrativos y no amplían el alcance contractual.
