@@ -1,0 +1,443 @@
+{
+  "version": "V6.0",
+  "classification": "BOARDROOM",
+  "economics": {
+    "build": 105786.2,
+    "service": 77000,
+    "base24": 182786.2,
+    "optional": 42000,
+    "adjustment": -338.8,
+    "phases": [
+      {
+        "id": "F0",
+        "name": "Activación P0 y cierre de alcance",
+        "period": "M1",
+        "hours": 160,
+        "rate": 125,
+        "cost": 20000,
+        "owner": "Keedio + Soliss",
+        "outcome": "Discovery, gobierno inicial, alcance, backlog UC y plan director definitivo."
+      },
+      {
+        "id": "F1",
+        "name": "Blueprint on-premise y sizing",
+        "period": "M1–M2",
+        "hours": 220,
+        "rate": 110,
+        "cost": 24200,
+        "owner": "Keedio diseña · Soliss valida",
+        "outcome": "Rancher/RKE2, clústeres, red, almacenamiento, backup, seguridad y sizing."
+      },
+      {
+        "id": "F2",
+        "name": "Gobierno, DORA, Data Mesh e identidad",
+        "period": "M2",
+        "hours": 180,
+        "rate": 105,
+        "cost": 18900,
+        "owner": "Keedio + Soliss",
+        "outcome": "Dominios, Keycloak, RBAC/ABAC, metadatos, evidencias y controles."
+      },
+      {
+        "id": "F3",
+        "name": "Sandbox, Model Gateway, RAG y Gravitino PoC",
+        "period": "M2–M3",
+        "hours": 310,
+        "rate": 110,
+        "cost": 34100,
+        "owner": "Keedio",
+        "outcome": "Validación no bloqueante, local-first, trazabilidad, fuentes y control de acceso."
+      },
+      {
+        "id": "F4",
+        "name": "Pruebas, UAT, documentación y transferencia",
+        "period": "M3",
+        "hours": 85,
+        "rate": 105,
+        "cost": 8925,
+        "owner": "Keedio entrega · Soliss acepta",
+        "outcome": "Pruebas, manuales, runbooks, formación y aceptación ejecutiva."
+      }
+    ],
+    "scenarios": [
+      {
+        "id": "minimum",
+        "label": "Mínimo",
+        "low": 125000,
+        "high": 175000,
+        "note": "Infraestructura básica ajustada a requisitos iniciales."
+      },
+      {
+        "id": "recommended",
+        "label": "Recomendado",
+        "low": 180000,
+        "high": 280000,
+        "note": "Configuración robusta e industrializada para crecimiento."
+      },
+      {
+        "id": "ha",
+        "label": "Alta disponibilidad",
+        "low": 300000,
+        "high": 450000,
+        "note": "Redundancia y capacidad superior para criticidad/madurez."
+      }
+    ],
+    "infraBlocks": [
+      [
+        "Clúster gestión Rancher/RKE2",
+        "3 nodos control plane, quórum etcd, HA, TLS/CA interna",
+        18000,
+        30000,
+        45000
+      ],
+      [
+        "Clúster de grupo",
+        "Keycloak, Gravitino PoC, PostgreSQL/CloudNativePG y gobierno",
+        25000,
+        45000,
+        70000
+      ],
+      [
+        "Clúster empresa piloto",
+        "Plano de datos, conectores, pipelines y aislamiento por dominio",
+        30000,
+        55000,
+        90000
+      ],
+      [
+        "GPU / IA local",
+        "LLM local-first, embeddings, OCR/visión y Model Gateway",
+        20000,
+        50000,
+        110000
+      ],
+      [
+        "Almacenamiento / backup",
+        "MinIO/Ceph, snapshots, restore y retención",
+        15000,
+        35000,
+        70000
+      ],
+      [
+        "Red / seguridad / observabilidad",
+        "VPN, segmentación, logging, monitorización y hardening",
+        12000,
+        30000,
+        60000
+      ],
+      [
+        "Soporte / licencias opcionales",
+        "Rancher Prime, fabricante, garantía extendida",
+        0,
+        25000,
+        70000
+      ]
+    ]
+  },
+  "loaded_from": "private/boardroom-data.json",
+  "decisions": [
+    {
+      "id": "D1",
+      "title": "Aprobar P0",
+      "owner": "Consejo / Sponsor Soliss",
+      "when": "Inicio",
+      "why": "Pasar de iniciativas aisladas a plataforma gobernada.",
+      "risk": "Crecimiento por islas, Shadow AI y costes dispersos."
+    },
+    {
+      "id": "D2",
+      "title": "Nombrar responsable transversal",
+      "owner": "Soliss",
+      "when": "G1",
+      "why": "Coordinar negocio, IT, datos, seguridad y adopción.",
+      "risk": "Bloqueos de decisión y baja adopción."
+    },
+    {
+      "id": "D3",
+      "title": "Autorizar F0",
+      "owner": "Soliss",
+      "when": "Inicio",
+      "why": "Cerrar alcance, AS-IS, sizing y backlog con datos reales.",
+      "risk": "Ambigüedad técnica/económica."
+    },
+    {
+      "id": "D4",
+      "title": "Aprobar sizing e inversión",
+      "owner": "Soliss",
+      "when": "G2",
+      "why": "Activar compra de infraestructura con blueprint validado.",
+      "risk": "Infra insuficiente o compra prematura."
+    },
+    {
+      "id": "D5",
+      "title": "Go/No-Go Gravitino",
+      "owner": "Soliss + Keedio",
+      "when": "G3",
+      "why": "Mantener la PoC no bloqueante y activar fallback si procede.",
+      "risk": "Dependencia de un componente inmaduro."
+    },
+    {
+      "id": "D6",
+      "title": "Aceptar P0 y transferencia",
+      "owner": "Soliss",
+      "when": "G4",
+      "why": "Pasar a operación co-gestionada con evidencias y runbooks.",
+      "risk": "Dependencia operativa y falta de autonomía."
+    }
+  ],
+  "gates": [
+    {
+      "id": "G1",
+      "when": "Semana 2",
+      "phase": "F0",
+      "title": "Alcance y responsables",
+      "checks": [
+        "Inventario AS-IS validado",
+        "Alcance y exclusiones aceptados",
+        "Backlog UC1–UC7 priorizado",
+        "Sponsor y responsable transversal nombrados",
+        "Calendario de sizing/aprovisionamiento acordado"
+      ]
+    },
+    {
+      "id": "G2",
+      "when": "Semana 6",
+      "phase": "F1–F2",
+      "title": "Blueprint e inversión",
+      "checks": [
+        "Blueprint on-premise aprobado",
+        "Sizing CPU/RAM/GPU validado",
+        "Red/segmentación definidas",
+        "Backup/DR diseñados",
+        "Rango de inversión Soliss aprobado",
+        "Enfoque DORA/AI Act revisado"
+      ]
+    },
+    {
+      "id": "G3",
+      "when": "Semana 9",
+      "phase": "F3",
+      "title": "Sandbox técnico",
+      "checks": [
+        "Keycloak/RBAC validados",
+        "Model Gateway validado",
+        "RAG y fuentes trazables",
+        "Gravitino PoC evaluado",
+        "Fallback documentado",
+        "Observabilidad y logging activos"
+      ]
+    },
+    {
+      "id": "G4",
+      "when": "Semana 12",
+      "phase": "F4",
+      "title": "UAT y transferencia",
+      "checks": [
+        "UAT firmado",
+        "Runbooks entregados",
+        "Backup/restore probado",
+        "HA/fallo de nodo probado",
+        "Formación y transferencia realizadas",
+        "Roadmap UC1–UC7 y plan S1 aceptados"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E1",
+      "area": "DORA",
+      "control": "Contrato TIC y responsabilidades",
+      "owner": "Soliss + Keedio + Jurídico",
+      "default": "proposal",
+      "evidence": "Anexo contractual / matriz de responsabilidades"
+    },
+    {
+      "id": "E2",
+      "area": "DORA",
+      "control": "Derecho de auditoría",
+      "owner": "Soliss + Keedio",
+      "default": "soliss",
+      "evidence": "Cláusula + acceso a logs/configuración/cambios"
+    },
+    {
+      "id": "E3",
+      "area": "DORA",
+      "control": "Exit plan",
+      "owner": "Keedio entrega · Soliss valida",
+      "default": "proposal",
+      "evidence": "Plan de transición, repositorios, credenciales y continuidad"
+    },
+    {
+      "id": "E4",
+      "area": "DORA",
+      "control": "Backup / restore / DR",
+      "owner": "Soliss IT + Keedio",
+      "default": "evidence",
+      "evidence": "Runbooks + pruebas de recuperación + RTO/RPO contractual"
+    },
+    {
+      "id": "E5",
+      "area": "DORA",
+      "control": "Pruebas de resiliencia",
+      "owner": "Soliss + Keedio",
+      "default": "evidence",
+      "evidence": "Resultados de fallo de nodo, restore y escenarios"
+    },
+    {
+      "id": "E6",
+      "area": "AI Act",
+      "control": "Clasificación del caso de uso",
+      "owner": "Soliss Compliance + Keedio",
+      "default": "soliss",
+      "evidence": "Ficha de clasificación antes de producción"
+    },
+    {
+      "id": "E7",
+      "area": "AI Act",
+      "control": "Supervisión humana",
+      "owner": "Soliss negocio + Compliance",
+      "default": "proposal",
+      "evidence": "Workflow HITL, roles y criterio de aprobación"
+    },
+    {
+      "id": "E8",
+      "area": "AI/GRC",
+      "control": "Model Gateway logging",
+      "owner": "Keedio diseña · Soliss opera",
+      "default": "proposal",
+      "evidence": "Usuario, modelo, prompt/respuesta, coste, latencia y retención"
+    },
+    {
+      "id": "E9",
+      "area": "Datos",
+      "control": "Segregación / sensibilidad / ownership",
+      "owner": "Soliss Data Owners",
+      "default": "soliss",
+      "evidence": "Catálogo de dominios, clasificación y permisos"
+    },
+    {
+      "id": "E10",
+      "area": "Terceros",
+      "control": "Registro de proveedores/subcontratas",
+      "owner": "Soliss + Jurídico",
+      "default": "soliss",
+      "evidence": "Registro de terceros TIC y dependencias"
+    }
+  ],
+  "risks": [
+    {
+      "id": "R1",
+      "severity": "Alto",
+      "risk": "Infraestructura insuficiente o compra no alineada",
+      "control": "Sizing formal, escenarios, validación IT y G2 antes de compra.",
+      "owner": "Soliss + Keedio"
+    },
+    {
+      "id": "R2",
+      "severity": "Medio",
+      "risk": "Gravitino inmaduro para producción regulada",
+      "control": "PoC sandbox, Go/No-Go y fallback desacoplado.",
+      "owner": "Keedio"
+    },
+    {
+      "id": "R3",
+      "severity": "Alto",
+      "risk": "Exposición de datos personales o sensibles",
+      "control": "Local-first, RBAC/ABAC, sensibilidad, auditoría y HITL.",
+      "owner": "Soliss + Keedio"
+    },
+    {
+      "id": "R4",
+      "severity": "Alto",
+      "risk": "Shadow AI y costes no controlados",
+      "control": "Model Gateway único, cuotas, logging, caché, fallback y FinOps IA.",
+      "owner": "Keedio"
+    },
+    {
+      "id": "R5",
+      "severity": "Medio",
+      "risk": "Baja adopción por usuarios o áreas",
+      "control": "Gestión del cambio, champions, UAT, formación y N1/N2.",
+      "owner": "Soliss"
+    },
+    {
+      "id": "R6",
+      "severity": "Medio",
+      "risk": "Operación difícil tras la entrega",
+      "control": "Runbooks, IaC, transferencia, servicio co-gestionado y RACI.",
+      "owner": "Keedio + Soliss"
+    },
+    {
+      "id": "R7",
+      "severity": "Alto",
+      "risk": "No conformidad DORA / AI Act",
+      "control": "Compliance-by-design, clasificación, controles, logs, pruebas y evidencias.",
+      "owner": "Soliss + Keedio"
+    },
+    {
+      "id": "R8",
+      "severity": "Medio",
+      "risk": "Dependencia excesiva de proveedor",
+      "control": "On-premise, open source, repositorios, documentación y soporte separado.",
+      "owner": "Soliss"
+    }
+  ],
+  "traces": {
+    "R1": {
+      "risk": "Infraestructura insuficiente o compra no alineada",
+      "control": "Sizing formal + blueprint + validación IT",
+      "evidence": "Sizing CPU/RAM/GPU, red, storage y cotización",
+      "gate": "G2",
+      "decision": "D4 · Aprobar sizing e inversión"
+    },
+    "R2": {
+      "risk": "Gravitino inmaduro",
+      "control": "PoC no bloqueante + fallback desacoplado",
+      "evidence": "Benchmark PoC + prueba de fallback",
+      "gate": "G3",
+      "decision": "D5 · Go/No-Go Gravitino"
+    },
+    "R3": {
+      "risk": "Exposición de datos sensibles",
+      "control": "Local-first + RBAC/ABAC + clasificación",
+      "evidence": "Policies, pruebas de acceso y provenance",
+      "gate": "G3/G4",
+      "decision": "Soliss Data/Compliance valida"
+    },
+    "R4": {
+      "risk": "Shadow AI / coste no controlado",
+      "control": "Model Gateway + allowlist + cuotas",
+      "evidence": "Logs de modelo, consumo, policy y denegaciones",
+      "gate": "G3",
+      "decision": "Model policy aprobada"
+    },
+    "R5": {
+      "risk": "Baja adopción",
+      "control": "UAT + champions + literacy + soporte",
+      "evidence": "UAT, formación, feedback y KPI de uso",
+      "gate": "G4",
+      "decision": "D6 · Aceptación/transferencia"
+    },
+    "R6": {
+      "risk": "Operación difícil tras entrega",
+      "control": "IaC + runbooks + N0–N3 + transferencia",
+      "evidence": "Runbooks, restore, handover y RACI",
+      "gate": "G4",
+      "decision": "D6 · Aceptar P0"
+    },
+    "R7": {
+      "risk": "No conformidad regulatoria",
+      "control": "Clasificación + evidence + HITL + pruebas",
+      "evidence": "Evidence Registry, fichas UC y logs",
+      "gate": "G1–G4",
+      "decision": "Soliss Compliance / Legal"
+    },
+    "R8": {
+      "risk": "Dependencia de proveedor",
+      "control": "On-premise + OSS + repos + exit plan",
+      "evidence": "Repositorios, IaC, documentación y exit plan",
+      "gate": "G4",
+      "decision": "Aceptación de transferencia"
+    }
+  }
+}

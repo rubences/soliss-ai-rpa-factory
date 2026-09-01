@@ -1,0 +1,129 @@
+{
+  "product": "Soliss AI/RPA Factory · V6",
+  "proponent": "Keedio",
+  "client": "Soliss",
+  "classification": "BOARDROOM",
+  "verified": "2026-09-02",
+  "files": [
+    {
+      "path": "private/documents/01_Plan_Director_Consejo_Soliss_AI_RPA_Factory_P0_Final_Cerrado.docx",
+      "bytes": 4246848,
+      "sha256": "a41eda1b4298c9cbc924ff1913a1e3a13f00a3e3b4751fc33bfc8df44b4a2c4c"
+    },
+    {
+      "path": "private/documents/01_Plan_Director_Consejo_Soliss_AI_RPA_Factory_P0_Final_Cerrado.pdf",
+      "bytes": 893736,
+      "sha256": "ae48b753ec9e73ae04c42803210626bd043bb8aceea15ef8b4edb6a5b28325c4"
+    },
+    {
+      "path": "private/documents/02_Presentacion_Ejecutiva_Soliss_AI_RPA_Factory_P0.pdf",
+      "bytes": 2140528,
+      "sha256": "bef70537b25a243bd8c4a43bdbf281df7228c20c55ae4e46ef0fee457e4c9cde"
+    },
+    {
+      "path": "private/documents/02_Presentacion_Ejecutiva_Soliss_AI_RPA_Factory_P0.pptx",
+      "bytes": 11903286,
+      "sha256": "0b817150bcdfbac4d6b41772b49fc6f14f048de423295d7498a7cec3bc79c386"
+    },
+    {
+      "path": "private/documents/03_Presupuesto_Cronograma_P0_Soliss_AI_RPA_Factory_Final_Cerrado.xlsx",
+      "bytes": 101816,
+      "sha256": "65f4dd423a5d5450237853bc2ca5c3aa880df362f5c0bf1f158ecf1845927726"
+    },
+    {
+      "path": "private/documents/04_Presupuesto_Marco_Programa_Soliss_AI_RPA_Factory_PostReunion.xlsx",
+      "bytes": 17761,
+      "sha256": "2396e929fa4dc6cdbfa3cc884c4d6118e0f7b632a4e1ab564e986077adf6382f"
+    },
+    {
+      "path": "private/documents/05_Cronograma_Programa_Soliss_AI_RPA_Factory_PostReunion.xlsx",
+      "bytes": 10963,
+      "sha256": "adcb89e9bf66aa75b7e6c6345c86155bc9692ca181e37b6539d89b89e77b7306"
+    },
+    {
+      "path": "private/documents/06_Propuesta_Reestructurada_Soliss_AI_RPA_Factory_PostReunion.docx",
+      "bytes": 4250279,
+      "sha256": "820989235477dca6dbcf6e7f5c73ecc1d60b41c51c8d66de6cf6096abed6d18b"
+    },
+    {
+      "path": "private/documents/07_Gate_Deliverable_Matrix_Working_Template.csv",
+      "bytes": 1064,
+      "sha256": "ad3fe1a2da7799c78f644ee168f221d041894f8b4c2d561c871258a3b452daae"
+    },
+    {
+      "path": "private/documents/08_Responsibility_Matrix_Working_Template.csv",
+      "bytes": 454,
+      "sha256": "0e47196eba27e40b4f18b3289cb2e3430cd3defbdcd39fa9442c10cb06f9e5dd"
+    },
+    {
+      "path": "private/documents/09_AI_Literacy_Plan_Working_Template.csv",
+      "bytes": 829,
+      "sha256": "4acef89c669c3994356c2a3d7b13d5ba6d543cd34cb70eb88da4633ecdd6eb7e"
+    },
+    {
+      "path": "private/documents/10_Value_Measurement_Blueprint.csv",
+      "bytes": 2329,
+      "sha256": "098027d23948f240db2b8acb19fa635601d6eb3dbd980934ba9abf057c55a0b1"
+    },
+    {
+      "path": "private/documents/11_Research_Radar_2026_Keedio_to_Soliss.md",
+      "bytes": 1895,
+      "sha256": "7b4521e0bf7612012e8d527ddce85b4f6fa80b34aeb46113a8e36ac82adc45cc"
+    },
+    {
+      "path": "private/documents/12_Historias_Usuario_P0_y_Casos_Uso_Keedio_to_Soliss.md",
+      "bytes": 1066,
+      "sha256": "276a14945cdd95b7f6d73615004d315e57821e51ae2c7c3d610001312b8a4ba7"
+    },
+    {
+      "path": "private/documents/13_Antes_y_Despues_de_P0_Factory_Effect_Keedio_to_Soliss.md",
+      "bytes": 760,
+      "sha256": "005bd89a84dd3985915f99e041a07d5fa0580afc6a8fcca3c708dac864dfab50"
+    },
+    {
+      "path": "private/documents/14_UC_Onboarding_Canvas_Keedio_to_Soliss.csv",
+      "bytes": 1259,
+      "sha256": "6093f29bad55806507117766116837d1b0fa45ddec356071218125eb600893a0"
+    },
+    {
+      "path": "private/documents/15_Executive_Story_Mode_Guion_Consejo_Keedio_to_Soliss.md",
+      "bytes": 929,
+      "sha256": "e6c358b796b127a7ce249f3ee2bf73c1b68d60845c27d2e6ba14b021ba94750a"
+    },
+    {
+      "path": "private/documents/16_Executive_Story_Mode_Run_of_Show.csv",
+      "bytes": 660,
+      "sha256": "b2291cb0d65a149437efb4d727891f86f4cff535b65ec81b93c399fec500e464"
+    },
+    {
+      "path": "private/documents/17_V5_Modelo_Acceso_Public_Boardroom_Keedio_to_Soliss.md",
+      "bytes": 1044,
+      "sha256": "3012ccfb430345355ce9304c4c6880b1dd9f16ed3f53aab328dd7364b2f5d7b5"
+    },
+    {
+      "path": "private/documents/18_V6_Operational_Features_and_Security_Model.md",
+      "bytes": 694,
+      "sha256": "f93b611e7dbc43ff80ed7f922975361311a3b9507cef8335762910520676f04b"
+    },
+    {
+      "path": "private/documents/19_V6_Source_Freshness_Registry.csv",
+      "bytes": 1873,
+      "sha256": "211de616b33c4ed518368de669c1f0810c764c9e532ba2c16f85984c02c71f4a"
+    },
+    {
+      "path": "private/documents/20_V6_P0_Capability_Contract_Matrix.csv",
+      "bytes": 780,
+      "sha256": "6ab914c2c302045974578b5f1a09b30ea6db8878e839c01fd3eacba85228493b"
+    },
+    {
+      "path": "private/documents/21_V6_Control_Traceability.csv",
+      "bytes": 1223,
+      "sha256": "cae93dc020432035d380bd192948ce00b3cec15a8d4a2ee90a599c475192b57e"
+    },
+    {
+      "path": "private/documents/22_V6_Live_Decision_Board_Template.csv",
+      "bytes": 298,
+      "sha256": "70e1e42920a8f116eff386a7eda50844610bc3bf39aa44c2c385d4ebbe52329e"
+    }
+  ]
+}

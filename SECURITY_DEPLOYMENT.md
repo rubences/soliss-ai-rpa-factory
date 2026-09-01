@@ -1,47 +1,72 @@
-# V5 · Modelo de acceso y despliegue seguro
+# V6 · Public + Boardroom security model
 
-## Qué hace V5
+## Implemented in V6
 
-V5 unifica la experiencia **Public** y **Boardroom** en una sola aplicación y permite al usuario elegir la vista al entrar.
+V6 no longer stores the Boardroom economics or document catalogue in the public application bundle.
 
-El selector de la interfaz:
-- reduce ruido;
-- evita mostrar economics/documentación al usuario público;
-- crea URLs por vista (`?view=public` y `?view=boardroom`);
-- mantiene una única base de código y contenido compartido.
-
-## Qué NO hace
-
-El selector **no es autenticación**.
-
-Si esta carpeta completa se publica en un hosting estático abierto, una persona técnicamente capaz podría inspeccionar los assets o intentar acceder directamente a recursos Boardroom aunque la interfaz los oculte.
-
-`robots.txt` ayuda a evitar indexación cooperativa, pero tampoco es un control de seguridad.
-
-## Recomendación para producción
-
-Para una publicación externa real:
-
-1. Mantener la experiencia Public accesible sin autenticación.
-2. Proteger el Boardroom en el hosting mediante SSO / Identity-Aware Proxy / reverse proxy.
-3. Proteger específicamente `/documents/` y cualquier futuro bundle `/private/`.
-4. No confiar en contraseñas JavaScript, hashes embebidos o simples `display:none`.
-5. Registrar accesos al Boardroom si Soliss/Keedio lo requieren.
-6. Mantener HTTPS y headers de seguridad.
-
-### Arquitectura recomendada a futuro
+Public assets contain the public experience. Boardroom data is under `/private/`:
 
 ```text
-soliss-ai-rpa.example
-│
-├── Public experience
-│      └── acceso abierto
-│
-└── Boardroom
-       ├── autenticación edge / SSO
-       ├── economics
-       ├── decision tools
-       └── documents/
+/private/
+  boardroom-data.json
+  documents.json
+  documents/...
 ```
 
-La V5 entregada implementa la **separación de experiencia**. El control de acceso fuerte debe configurarse en la capa de hosting.
+The browser implements OIDC **Authorization Code + PKCE** for a public SPA client. `config/runtime-config.js` contains the deployment-specific issuer and client ID.
+
+## Critical boundary
+
+Front-end authentication does **not** by itself protect a static file path.
+
+In production `/private/` MUST also be protected at the hosting/reverse-proxy layer. V6 sends the OIDC Bearer token when requesting the private JSON bundle. A compatible reverse proxy/resource server must validate it.
+
+## Local review
+
+For local review only:
+
+```bash
+python -m http.server 8000
+```
+
+Open `http://localhost:8000/`.
+
+With `auth.enabled=false` and `allowLocalDemo=true`, V6 allows a clearly labelled **Demo local** Boardroom. This mode is intentionally not accepted on ordinary external hostnames.
+
+## Keycloak SPA client
+
+Recommended client characteristics:
+
+- OpenID Connect.
+- Client authentication OFF (public client).
+- Standard Flow ON.
+- PKCE method S256.
+- Exact production redirect URI(s).
+- Exact Web Origins.
+- HTTPS in production.
+- Short access-token lifetime appropriate to the environment.
+
+## Reverse proxy
+
+A practical pattern is Keycloak + oauth2-proxy/reverse proxy. The proxy should protect `/private/` and validate the Bearer JWT sent by V6. oauth2-proxy exposes `skip_jwt_bearer_tokens` for accepting verified JWT bearer tokens whose audience matches the configured client.
+
+See `deployment/`.
+
+## Do not use
+
+- password hard-coded in JavaScript;
+- `display:none` as access control;
+- secrets embedded in the SPA;
+- public URLs to `/private/documents`;
+- robots.txt as security.
+
+## Optional hardening
+
+- CSP and security headers;
+- HSTS;
+- restrictive CORS;
+- short token lifetime;
+- Keycloak groups/roles for Boardroom;
+- audit logging at the proxy;
+- rate limiting;
+- DPoP/client policies if the target architecture requires it and the complete chain supports it.

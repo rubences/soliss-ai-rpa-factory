@@ -29,13 +29,13 @@ La web evita el lenguaje ambiguo de “Keedio × Soliss” como si ambas partes 
 
 Se adopta el baseline **Final Cerrado**:
 
-- Construcción P0 F0–F4: **105.786,20 €**.
-- Servicio co-gestionado M3–M24: **77.000 €**.
-- Total Keedio M1–M24: **182.786,20 €**.
-- Año opcional M25–M36: **42.000 €**.
+- Construcción P0 F0–F4: **detalle protegido en Boardroom**.
+- Servicio co-gestionado M3–M24: **detalle protegido en Boardroom**.
+- Total Keedio M1–M24: **detalle protegido en Boardroom**.
+- Año opcional M25–M36: **detalle protegido en Boardroom**.
 - Infraestructura Soliss: escenarios orientativos, compra directa y cierre tras sizing G2.
 
-La web no suma de nuevo 20.000 € de activación sobre 105.786,20 €, porque F0 ya forma parte del total de construcción Final Cerrado.
+La reconciliación exacta del baseline económico se mantiene exclusivamente en el bundle privado Boardroom.
 
 ## Fuentes públicas incorporadas
 
@@ -163,3 +163,36 @@ Al acceder, el usuario elige:
 
 ### Importante
 La selección Public/Boardroom es una separación de UX, no autenticación. Consulte `SECURITY_DEPLOYMENT.md` antes de publicar externamente.
+
+
+## V6.0 — Operational Product Layer
+
+V6 convierte la propuesta digital en un portal operativo:
+
+- bundle público y bundle Boardroom físicamente separados;
+- OIDC Authorization Code + PKCE preparado para Keycloak;
+- `/private` diseñado para protección adicional en reverse proxy/hosting;
+- P0 Copilot local sin LLM externo;
+- Command Palette `Ctrl/Cmd + K`;
+- Live Decision Board y Decision Readiness (no compliance);
+- provenance universal: CONTRACTUAL / ESTIMACIÓN / HIPÓTESIS / EXTERNO;
+- Source Freshness con fecha de verificación;
+- Control Traceability Graph;
+- contratos de capacidades P0 por UC;
+- UC → KPI → Evidence;
+- modo Presentación, escala tipográfica, alto contraste y reduced motion;
+- QR público bajo demanda;
+- One Page Executive Brief PDF/HTML;
+- comparador de versiones.
+
+### Prueba local Boardroom
+
+Para que `fetch()` pueda leer el bundle privado, sirva la carpeta por HTTP:
+
+```bash
+python -m http.server 8000
+```
+
+y abra `http://localhost:8000/`.
+
+En localhost, `allowLocalDemo=true` permite revisar Boardroom sin fingir un SSO productivo. Fuera de localhost, si `auth.enabled=false`, V6 bloquea el acceso Boardroom.

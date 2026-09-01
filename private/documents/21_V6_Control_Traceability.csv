@@ -1,0 +1,9 @@
+﻿Riesgo ID,Riesgo,Control,Evidencia,Gate,Decisión
+R1,Infraestructura insuficiente o compra no alineada,Sizing formal + blueprint + validación IT,"Sizing CPU/RAM/GPU, red, storage y cotización",G2,D4 · Aprobar sizing e inversión
+R2,Gravitino inmaduro,PoC no bloqueante + fallback desacoplado,Benchmark PoC + prueba de fallback,G3,D5 · Go/No-Go Gravitino
+R3,Exposición de datos sensibles,Local-first + RBAC/ABAC + clasificación,"Policies, pruebas de acceso y provenance",G3/G4,Soliss Data/Compliance valida
+R4,Shadow AI / coste no controlado,Model Gateway + allowlist + cuotas,"Logs de modelo, consumo, policy y denegaciones",G3,Model policy aprobada
+R5,Baja adopción,UAT + champions + literacy + soporte,"UAT, formación, feedback y KPI de uso",G4,D6 · Aceptación/transferencia
+R6,Operación difícil tras entrega,IaC + runbooks + N0–N3 + transferencia,"Runbooks, restore, handover y RACI",G4,D6 · Aceptar P0
+R7,No conformidad regulatoria,Clasificación + evidence + HITL + pruebas,"Evidence Registry, fichas UC y logs",G1–G4,Soliss Compliance / Legal
+R8,Dependencia de proveedor,On-premise + OSS + repos + exit plan,"Repositorios, IaC, documentación y exit plan",G4,Aceptación de transferencia

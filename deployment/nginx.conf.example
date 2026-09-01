@@ -1,0 +1,32 @@
+# Reference pattern only
+server {
+    listen 443 ssl http2;
+    server_name soliss-ai-rpa.example;
+
+    root /srv/soliss-ai-rpa-factory-v6;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    # Private Boardroom resources: delegate JWT/session validation.
+    location /private/ {
+        auth_request /oauth2/auth;
+        error_page 401 = /oauth2/start;
+        try_files $uri =404;
+        add_header Cache-Control "no-store";
+    }
+
+    location /oauth2/ {
+        proxy_pass http://127.0.0.1:4180;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Auth-Request-Redirect $scheme://$host$request_uri;
+        proxy_set_header Authorization $http_authorization;
+    }
+
+    add_header X-Content-Type-Options nosniff always;
+    add_header Referrer-Policy strict-origin-when-cross-origin always;
+    add_header X-Frame-Options SAMEORIGIN always;
+}

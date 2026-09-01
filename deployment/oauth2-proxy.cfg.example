@@ -1,0 +1,14 @@
+# Example only - replace placeholders and validate against deployed oauth2-proxy version
+provider = "keycloak-oidc"
+oidc_issuer_url = "https://KEYCLOAK_HOST/realms/SOLISS_REALM"
+client_id = "soliss-p0-boardroom"
+client_secret = "STORE_OUTSIDE_REPOSITORY"
+cookie_secret = "STORE_OUTSIDE_REPOSITORY"
+email_domains = [ "*" ]
+reverse_proxy = true
+
+# V6 fetches /private with the Keycloak Bearer token.
+skip_jwt_bearer_tokens = true
+bearer_token_login_fallback = false
+
+http_address = "127.0.0.1:4180"

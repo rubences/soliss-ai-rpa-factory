@@ -1,0 +1,9 @@
+﻿ID,Fuente,URL,Verificada,Revisión días,Soporta
+EIOPA-GENAI,EIOPA · Generative AI Market Survey,https://www.eiopa.europa.eu/publications/generative-ai-market-survey-outlook-use-cases-and-risk-management_en,2026-09-02,90,347 aseguradoras / 25 países; adopción GenAI y madurez PoC→producción.
+EIOPA-2026,EIOPA · Supervisory priorities 2026,https://www.eiopa.europa.eu/publications/union-wide-strategic-supervisory-priorities-focus-areas-2026_en,2026-09-02,90,DORA como Focus Area y claims management/digitalisation como Area for Attention.
+EU-ACT50,Comisión Europea · AI Act Article 50 transparency guidelines,https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems,2026-09-02,60,Obligaciones de transparencia aplicables desde 2 agosto 2026.
+ISO-42001,ISO · ISO/IEC 42001:2023,https://www.iso.org/es/norma/42001,2026-09-02,180,AIMS y ciclo de mejora continua para gestión responsable de IA.
+OWASP-PI,OWASP GenAI · LLM01 Prompt Injection,https://genai.owasp.org/llmrisk/llm01-prompt-injection/,2026-09-02,90,"Prompt injection, least privilege, HITL y testing adversarial."
+OWASP-EA,OWASP GenAI · LLM06 Excessive Agency,https://genai.owasp.org/llmrisk/llm062025-excessive-agency/,2026-09-02,90,Riesgo de agencia excesiva en sistemas con herramientas/acciones.
+EIOPA-CONSUMER-2025,EIOPA · Eurobarometer 2025 consumer trends,https://www.eiopa.europa.eu/tools-and-data/eurobarometer-2025-consumer-trends-insurance-and-pension-services_en,2026-09-02,120,62% satisfacción con claims handling y 30% confianza en recomendaciones de agentes IA.
+EU-AIACT-TIMELINE,Comisión Europea · AI Act implementation timeline,https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai,2026-09-02,60,Aplicación general 2 Aug 2026; Annex III 2 Dec 2027; Annex I 2 Aug 2028 tras AI Omnibus.

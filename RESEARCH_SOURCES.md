@@ -23,3 +23,20 @@ Actualizado: 1 septiembre 2026. Material de contexto para propuesta; no sustituy
 - https://www.iso.org/standard/42001
 - https://genai.owasp.org/llm-top-10/
 - https://airc.nist.gov/technical-reports/
+
+
+## V6 verification refresh · 2 Sep 2026
+
+Official sources re-checked for V6 Source Freshness:
+
+- EIOPA — Generative AI Market Survey (65% adoption; 64% use cases in PoC/experimentation; 32% in production; 49% dedicated AI policy).
+- EIOPA — Union-wide Supervisory Priorities 2026 (DORA Focus Area; claims management including digitalisation Area for Attention).
+- EIOPA — Eurobarometer 2025 consumer trends (62% claims-handling satisfaction; 30% trust AI-agent recommendations for insurance/pensions).
+- European Commission — Article 50 transparency guidelines (apply from 2 Aug 2026).
+- European Commission — AI Act implementation timeline after AI Omnibus (Annex III 2 Dec 2027; Annex I 2 Aug 2028).
+- ISO — ISO/IEC 42001:2023 AIMS.
+- OWASP GenAI — LLM01 Prompt Injection and LLM06 Excessive Agency.
+- Keycloak — public SPA clients, Standard Flow and PKCE S256.
+- oauth2-proxy — verified JWT bearer-token support via `skip_jwt_bearer_tokens`.
+
+The web records the verification date but does not treat external sources as contractual Soliss evidence.

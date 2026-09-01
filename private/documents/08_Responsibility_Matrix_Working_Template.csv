@@ -1,0 +1,10 @@
+﻿Actividad;Keedio PM/Arq;Keedio Data/AI;Keedio Infra/Sec;Soliss Sponsor;Soliss IT;Soliss Data Owners;Soliss Compliance;Soliss Key Users
+Plan y gobierno;A/R;C;C;A;C;C;C;I
+Arquitectura P0;A/R;R;R;C;A;C;C;I
+Sizing / compra HW;C;I;R;A;A/R;I;C;I
+Data Mesh / ownership;C;R;C;I;C;A/R;C;C
+Model Gateway / RAG;A;R;C;I;C;C;C;C
+DORA / AI Act;C;C;R;A;C;C;A/R;I
+UAT / aceptación;C;C;C;A;C;C;C;R
+Operación N1;C;I;C;I;A/R;C;C;I
+Soporte N2;A;R;R;I;C;I;I;I
