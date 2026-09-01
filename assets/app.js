@@ -524,7 +524,28 @@ Keedio propone, diseña e integra el patrón P0. Soliss decide, valida, adquiere
     }
   }));
   $('#boardroomAck').addEventListener('change',e=>$('#boardroomEnter').disabled=!e.target.checked);
-  $('#boardroomEnter').addEventListener('click',async()=>{try{const ok=window.V6Auth?await V6Auth.ensureBoardroom():false;if(!ok){if(!V6_CONFIG?.auth?.enabled){$('#authReadiness').textContent=V6Auth.readinessText();$('#authReadiness').classList.add('blocked')}return}applyAccessMode('boardroom')}catch(e){console.error(e);$('#authReadiness').textContent=e.message;$('#authReadiness').classList.add('blocked')}});
+  $('#boardroomEnter').addEventListener('click',async()=>{
+    const err=$('#boardroomLoginError');
+    if(err)err.hidden=true;
+    const username=$('#boardroomUser')?.value?.trim()||'';
+    const password=$('#boardroomPassword')?.value||'';
+    if(!$('#boardroomAck')?.checked){
+      if(err){err.textContent='Confirme el acceso Keedio → Soliss antes de continuar.';err.hidden=false}
+      return;
+    }
+    try{
+      const ok=window.V6Auth?await V6Auth.ensureBoardroom({username,password}):false;
+      if(!ok){
+        if(err){err.textContent='Usuario o contraseña incorrectos.';err.hidden=false}
+        return;
+      }
+      applyAccessMode('boardroom');
+      if($('#boardroomPassword'))$('#boardroomPassword').value='';
+    }catch(e){
+      console.error(e);
+      if(err){err.textContent=e.message;err.hidden=false}
+    }
+  });
   $('#boardroomCancel').addEventListener('click',()=>{$('#boardroomConsent').hidden=true;$('#boardroomAck').checked=false;$('#boardroomEnter').disabled=true});
   $('#accessSwitchBtn').addEventListener('click',()=>showAccessPortal());
   $('#accessRibbonSwitch').addEventListener('click',()=>showAccessPortal());

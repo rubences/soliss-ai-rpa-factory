@@ -18,9 +18,9 @@
     if(chip){
       chip.hidden=document.body.dataset.access!=='boardroom';
       chip.textContent=st.label;
-      chip.className=`auth-status-chip ${st.mode==='oidc'?'sso':st.mode==='local-demo'?'demo':''}`;
+      chip.className=`auth-status-chip ${st.mode==='oidc'?'sso':st.mode==='simple'?'demo':st.mode==='local-demo'?'demo':''}`;
     }
-    if(logout)logout.hidden=document.body.dataset.access!=='boardroom'||st.mode!=='oidc';
+    if(logout)logout.hidden=document.body.dataset.access!=='boardroom'||!st.authenticated;
   }
   function rebuildEconomics(){
     const e=D.economics;if(!e?.base24)return;

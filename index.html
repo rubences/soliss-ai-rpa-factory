@@ -28,7 +28,7 @@
         <span>→</span>
         <img src="assets/brand/soliss-logo.png" alt="Soliss">
       </div>
-      <span class="access-version">SOLISS AI/RPA FACTORY · V6</span>
+      <span class="access-version">SOLISS AI/RPA FACTORY · V6.1</span>
       <h1 id="accessPortalTitle">¿Qué experiencia quieres consultar?</h1>
       <p>Una única web, dos niveles de lectura. El contenido compartido se mantiene una sola vez; economics, herramientas de comité y documentación se reservan a la vista Boardroom.</p>
     </header>
@@ -73,7 +73,19 @@
         <h3>Esta vista contiene información que no forma parte de la experiencia pública.</h3>
         <p>Incluye economics, arquitectura detallada, matrices de responsabilidad, riesgos y documentos descargables. V6 incorpora integración OIDC/PKCE para Keycloak. Los recursos privados deben permanecer además protegidos por el reverse proxy/hosting.</p>
       </div>
-      <div id="authReadiness" class="auth-readiness">Comprobando configuración de acceso…</div><label><input id="boardroomAck" type="checkbox"> Confirmo que este acceso es para revisión Keedio → Soliss.</label>
+      <div id="authReadiness" class="auth-readiness">Acceso Boardroom mediante credenciales Keedio → Soliss.</div>
+      <div class="simple-login-grid">
+        <label>
+          <span>Usuario</span>
+          <input id="boardroomUser" type="text" autocomplete="username" placeholder="Usuario" value="">
+        </label>
+        <label>
+          <span>Contraseña</span>
+          <input id="boardroomPassword" type="password" autocomplete="current-password" placeholder="Contraseña" value="">
+        </label>
+      </div>
+      <div id="boardroomLoginError" class="boardroom-login-error" hidden>Usuario o contraseña incorrectos.</div>
+      <label class="boardroom-access-note"><input id="boardroomAck" type="checkbox"> Confirmo que este acceso es para revisión Keedio → Soliss.</label>
       <div class="consent-actions">
         <button id="boardroomCancel" type="button">← Volver</button>
         <button id="boardroomEnter" class="primary" type="button" disabled>Entrar al Boardroom →</button>
@@ -89,7 +101,7 @@
 
 <header class="topbar">
   <div class="shell navrow">
-    <a class="brand brand-lockup" href="#hero" aria-label="Keedio presenta a Soliss"><img src="assets/brand/keedio-logo.png" alt="Keedio"><span class="brand-arrow">→</span><img class="soliss-wordmark" src="assets/brand/soliss-logo.png" alt="Soliss Seguros desde 1933"><small id="brandModeText">AI/RPA Factory · V6</small></a>
+    <a class="brand brand-lockup" href="#hero" aria-label="Keedio presenta a Soliss"><img src="assets/brand/keedio-logo.png" alt="Keedio"><span class="brand-arrow">→</span><img class="soliss-wordmark" src="assets/brand/soliss-logo.png" alt="Soliss Seguros desde 1933"><small id="brandModeText">AI/RPA Factory · V6.1</small></a>
     <nav id="nav" aria-label="Principal">
       <a href="#why">Contexto</a><a href="#decision">Decisiones</a><a href="#twin">Arquitectura</a><a href="#factory">P0 + Casos de uso</a><a href="#economics">Economics</a><a href="#governance">Governance</a><a href="#assurance">Assurance</a><a href="#delivery">Delivery</a><a href="#documents">Docs</a>
     </nav>

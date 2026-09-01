@@ -10,10 +10,17 @@
   let privateLoaded=false,discovery=null;
 
   function status(){
-    const c=cfg(), exp=Number(store.getItem(keys.exp)||0);
-    if(c.enabled && store.getItem(keys.token) && exp>now()+15)return {authenticated:true,mode:'oidc',label:'SSO activo'};
-    if(!c.enabled && c.allowLocalDemo && isLocal())return {authenticated:true,mode:'local-demo',label:'Demo local'};
-    if(!c.enabled)return {authenticated:false,mode:'not-configured',label:'SSO pendiente'};
+    const c=cfg(), simple=c.simpleLogin||{}, exp=Number(store.getItem(keys.exp)||0);
+    if(simple.enabled && store.getItem(simple.sessionKey||'soliss-v61-boardroom')==='1')
+      return {authenticated:true,mode:'simple',label:'Acceso Soliss'};
+    if(c.enabled && store.getItem(keys.token) && exp>now()+15)
+      return {authenticated:true,mode:'oidc',label:'SSO activo'};
+    if(!c.enabled && c.allowLocalDemo && isLocal())
+      return {authenticated:false,mode:'simple',label:'Login requerido'};
+    if(simple.enabled)
+      return {authenticated:false,mode:'simple',label:'Login requerido'};
+    if(!c.enabled)
+      return {authenticated:false,mode:'not-configured',label:'SSO pendiente'};
     return {authenticated:false,mode:'oidc',label:'Login requerido'};
   }
   async function sha256(text){return crypto.subtle.digest('SHA-256',enc(text))}
@@ -61,6 +68,16 @@
     const st=status();if(st.mode==='oidc')headers.set('Authorization',`Bearer ${store.getItem(keys.token)}`);
     return fetch(url,{...opts,headers,cache:'no-store'});
   }
+  function simpleLogin(username,password){
+    const c=cfg(),s=c.simpleLogin||{};
+    const ok=!!s.enabled && username===String(s.username||'') && password===String(s.password||'');
+    if(ok)store.setItem(s.sessionKey||'soliss-v61-boardroom','1');
+    return ok;
+  }
+  function clearSimpleLogin(){
+    const s=cfg().simpleLogin||{};
+    store.removeItem(s.sessionKey||'soliss-v61-boardroom');
+  }
   async function loadPrivateBundle(){
     if(privateLoaded)return true;
     const st=status();if(!st.authenticated)return false;
@@ -75,10 +92,16 @@
     document.dispatchEvent(new CustomEvent('v6:private-ready',{detail:{mode:st.mode}}));
     return true;
   }
-  async function ensureBoardroom(){
+  async function ensureBoardroom(credentials={}){
     let st=status();
     if(st.authenticated){await loadPrivateBundle();return true}
-    if(cfg().enabled){await login();return false}
+    const c=cfg(),s=c.simpleLogin||{};
+    if(s.enabled){
+      if(!simpleLogin(credentials.username||'',credentials.password||''))return false;
+      await loadPrivateBundle();
+      return true;
+    }
+    if(c.enabled){await login();return false}
     return false;
   }
   async function downloadPrivate(path,filename){
@@ -86,7 +109,7 @@
     const blob=await r.blob(),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename||path.split('/').pop();document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
   }
   async function logout(){
-    const c=cfg();store.removeItem(keys.token);store.removeItem(keys.exp);privateLoaded=false;
+    const c=cfg();store.removeItem(keys.token);store.removeItem(keys.exp);clearSimpleLogin();privateLoaded=false;
     if(c.enabled){
       try{
         const d=await getDiscovery();
@@ -96,13 +119,15 @@
     location.assign(`${location.pathname}?view=public`);
   }
   function readinessText(){
-    const c=cfg(),st=status();
-    if(st.mode==='local-demo')return 'Modo DEMO LOCAL: el Boardroom puede abrirse desde localhost para revisión. En producción configure Keycloak/OIDC.';
-    if(!c.enabled)return 'SSO no configurado: establezca issuer y clientId en config/runtime-config.js. En un hosting externo V6 bloqueará el Boardroom.';
-    if(st.authenticated)return 'Sesión OIDC válida. El bundle privado se solicitará con Bearer token.';
+    const c=cfg(),st=status(),s=c.simpleLogin||{};
+    if(st.mode==='simple' && st.authenticated)return 'Acceso Boardroom activo para esta sesión.';
+    if(s.enabled)return 'Introduzca las credenciales Boardroom para continuar.';
+    if(st.mode==='local-demo')return 'Modo DEMO LOCAL.';
+    if(!c.enabled)return 'SSO no configurado.';
+    if(st.authenticated)return 'Sesión OIDC válida.';
     return 'Keycloak/OIDC configurado. Al continuar se iniciará Authorization Code + PKCE.';
   }
 
-  window.V6Auth={status,login,handleCallback,ensureBoardroom,loadPrivateBundle,fetchPrivate,downloadPrivate,logout,readinessText,isPrivateLoaded:()=>privateLoaded};
+  window.V6Auth={status,login,handleCallback,ensureBoardroom,loadPrivateBundle,fetchPrivate,downloadPrivate,logout,readinessText,simpleLogin,isPrivateLoaded:()=>privateLoaded};
   handleCallback().catch(e=>{console.error(e);sessionStorage.setItem('v6_auth_error',e.message)});
 })();

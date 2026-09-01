@@ -1,4 +1,4 @@
-# Soliss AI/RPA Factory · V6 Release Notes
+# Soliss AI/RPA Factory · V6.1 Release Notes
 
 **Proponente:** Keedio  
 **Cliente:** Soliss  
@@ -54,3 +54,11 @@ V6 deja de ser únicamente una Decision Room interactiva y pasa a comportarse co
 - `private/boardroom-data.json` — bundle de datos Boardroom.
 - `private/documents/` — documentación Boardroom.
 - `public/` — materiales públicos.
+
+
+## V6.1 · Direct Boardroom Login
+
+- Boardroom accesible con usuario `soliss`.
+- Contraseña `soliss`.
+- Ya no es obligatorio configurar Keycloak para la demo.
+- Keycloak/OIDC permanece preparado para despliegue productivo.

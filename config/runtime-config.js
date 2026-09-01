@@ -1,13 +1,20 @@
 window.V6_CONFIG={
-  version:"6.0",
+  version:"6.1",
   auth:{
+    mode:"simple",
     enabled:false,
     issuer:"https://KEYCLOAK_HOST/realms/SOLISS_REALM",
     clientId:"soliss-p0-boardroom",
     redirectUri:null,
     scope:"openid profile email",
     privateBaseUrl:"private",
-    allowLocalDemo:true
+    allowLocalDemo:true,
+    simpleLogin:{
+      enabled:true,
+      username:"soliss",
+      password:"soliss",
+      sessionKey:"soliss-v61-boardroom"
+    }
   },
   sourceFreshnessDays:90
 };

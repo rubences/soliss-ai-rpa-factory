@@ -289,3 +289,15 @@ body.v6-reduced-motion *,body.v6-reduced-motion *:before,body.v6-reduced-motion 
 @media print{#askP0Btn,#commandBtn,#displayBtn,#shareBtn,#briefBtn,.v6-drawer,.v6-modal,.v6-popover{display:none!important}}
 
 body[data-access="public"] .v6-traceability{display:none!important}
+
+
+/* V6.1 · Direct Boardroom login */
+.simple-login-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.simple-login-grid label{display:block}
+.simple-login-grid label span{display:block;font-size:.5rem;color:#9eb4bd;font-weight:850;margin-bottom:5px;text-transform:uppercase;letter-spacing:.06em}
+.simple-login-grid input{width:100%;border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:10px 11px;background:rgba(0,0,0,.14);color:#fff;font-size:.65rem;outline:none}
+.simple-login-grid input:focus{border-color:#ff71ad;box-shadow:0 0 0 3px rgba(255,0,106,.12)}
+.boardroom-login-error{margin-top:8px;padding:8px 10px;border-radius:9px;background:rgba(255,54,111,.12);border:1px solid rgba(255,82,139,.28);color:#ffd5e5;font-size:.54rem;font-weight:750}
+.boardroom-login-error[hidden]{display:none!important}
+.boardroom-access-note{margin-top:10px!important}
+@media(max-width:700px){.simple-login-grid{grid-template-columns:1fr}}

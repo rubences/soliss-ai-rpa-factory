@@ -196,3 +196,15 @@ python -m http.server 8000
 y abra `http://localhost:8000/`.
 
 En localhost, `allowLocalDemo=true` permite revisar Boardroom sin fingir un SSO productivo. Fuera de localhost, si `auth.enabled=false`, V6 bloquea el acceso Boardroom.
+
+
+## V6.1 — Acceso directo Boardroom
+
+Para simplificar la demo/reunión se ha activado un login directo:
+
+- Usuario: `soliss`
+- Contraseña: `soliss`
+
+La sesión se guarda únicamente en `sessionStorage`.
+
+Este mecanismo es una barrera de acceso de interfaz, no autenticación fuerte. Para producción real sigue disponible la integración Keycloak/OIDC preparada en V6.
