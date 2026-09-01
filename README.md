@@ -195,7 +195,7 @@ python -m http.server 8000
 
 y abra `http://localhost:8000/`.
 
-En localhost, `allowLocalDemo=true` permite revisar Boardroom sin fingir un SSO productivo. Fuera de localhost, si `auth.enabled=false`, V6 bloquea el acceso Boardroom.
+En localhost, `allowLocalDemo=true` permite revisar Boardroom sin fingir un SSO productivo. Fuera de localhost, el acceso Boardroom usa el login directo (`simpleLogin`, ver V6.1) salvo que se desactive explícitamente; si además `auth.enabled=false` y `simpleLogin.enabled=false`, V6 bloquea el acceso Boardroom hasta configurar SSO.
 
 
 ## V6.1 — Acceso directo Boardroom
