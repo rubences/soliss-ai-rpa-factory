@@ -1,7 +1,8 @@
 {
-  "product": "Soliss AI/RPA Factory · P0 Decision Room V4.2",
+  "product": "Soliss AI/RPA Factory · P0 Decision Room V4.3",
   "proponent": "Keedio",
   "client": "Soliss",
+  "baseline_note": "Plan Director Final Cerrado + Presupuesto/Cronograma P0 Final Cerrado.",
   "files": [
     {
       "path": "documents/01_Plan_Director_Consejo_Soliss_AI_RPA_Factory_P0_Final_Cerrado.docx",
@@ -72,6 +73,16 @@
       "path": "documents/12_Historias_Usuario_P0_y_Casos_Uso_Keedio_to_Soliss.md",
       "bytes": 1066,
       "sha256": "276a14945cdd95b7f6d73615004d315e57821e51ae2c7c3d610001312b8a4ba7"
+    },
+    {
+      "path": "documents/13_Antes_y_Despues_de_P0_Factory_Effect_Keedio_to_Soliss.md",
+      "bytes": 760,
+      "sha256": "005bd89a84dd3985915f99e041a07d5fa0580afc6a8fcca3c708dac864dfab50"
+    },
+    {
+      "path": "documents/14_UC_Onboarding_Canvas_Keedio_to_Soliss.csv",
+      "bytes": 1259,
+      "sha256": "6093f29bad55806507117766116837d1b0fa45ddec356071218125eb600893a0"
     }
   ]
 }

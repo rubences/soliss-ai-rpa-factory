@@ -124,3 +124,16 @@ Los ejemplos se presentan expresamente como ilustrativos y no amplían el alcanc
 
 ## V4.2 — Historias visuales P0 / UC
 Tres historias interactivas: siniestro (UC2+UC3), empleado (UC1) y factura (UC2+UC5). Cada paso separa P0 común, UC derivado, papel humano Soliss y evidencia. Incluye reproducción automática y matriz de reutilización.
+
+
+## V4.3 — Factory Effect y onboarding de futuros UC
+
+- Comparador cualitativo **vertical aislado vs. P0 operativo**.
+- Selector para agente interno, siniestros, administración y futuro UC8/UC9.
+- Seis dimensiones: ownership, identidad, datos, modelos, assurance y operación.
+- Recuento explícito de capacidades P0 reutilizadas, sin convertirlo en una métrica ficticia de ahorro.
+- Onboarding de 7 pasos para futuros casos: business case → clasificación → datos → patrón P0 → sandbox → UAT/assurance → go-live.
+- Descarga del `UC Onboarding Canvas` en CSV.
+- Materiales explicativos incorporados al Document Pack.
+
+La comparación no describe de forma categórica el AS-IS de Soliss: representa el patrón típico de construir verticales sin una base común.

@@ -147,6 +147,64 @@
       <details class="story-comparison" open><summary>Por qué P0 antes que tres soluciones aisladas · matriz de reutilización</summary><div class="story-comparison-intro"><p>La parte <b>común</b> debe resolverse una vez en P0. La lógica del proceso, datos concretos, reglas y experiencia de usuario se desarrollan en cada UC posterior.</p><span>P0 = reutilización + gobierno · UC = valor funcional específico</span></div><div class="table-wrap"><table id="storyReuseTable"></table></div></details>
     </section>
 
+
+    <section class="factory-effect reveal" aria-labelledby="factoryEffectTitle">
+      <header class="factory-effect-head">
+        <div>
+          <span>ANTES DE P0 / DESPUÉS DE P0</span>
+          <h3 id="factoryEffectTitle">¿Qué cambia cuando llega el siguiente caso de uso?</h3>
+          <p>No comparamos “Soliss actual” contra una situación ideal. Comparamos dos <b>formas de abordar un nuevo vertical</b>: resolverlo como isla o incorporarlo a una Factory con capacidades comunes.</p>
+        </div>
+        <div class="factory-effect-legend"><i></i><b>Comparación cualitativa</b><small>Sin métricas de ahorro inventadas</small></div>
+      </header>
+
+      <div id="effectCaseTabs" class="effect-case-tabs" role="tablist" aria-label="Seleccionar tipo de nuevo caso"></div>
+
+      <div class="effect-case-summary">
+        <div><span id="effectCaseUc"></span><h4 id="effectCaseLabel"></h4><p id="effectCaseGoal"></p></div>
+        <div class="effect-reuse-score"><span>CAPACIDADES P0 REUTILIZADAS</span><b id="effectReuseCount">—</b><small>No es un porcentaje de ahorro; es un recuento de capacidades comunes.</small></div>
+      </div>
+
+      <div class="before-after-labels">
+        <div class="before"><span>ENFOQUE POR VERTICAL AISLADO</span><b>Cada proyecto resuelve de nuevo la base</b></div>
+        <div class="after"><span>CON P0 OPERATIVO</span><b>El UC se concentra en lo diferencial</b></div>
+      </div>
+
+      <div id="effectStages" class="effect-stages"></div>
+
+      <div class="effect-bottom-grid">
+        <article class="effect-box reused"><span>SE REUTILIZA DE P0</span><div id="effectReuseChips"></div></article>
+        <article class="effect-box still"><span>SE SIGUE CONSTRUYENDO EN EL UC</span><div id="effectStillChips"></div></article>
+      </div>
+
+      <div class="factory-effect-message">
+        <b>El “efecto Factory” no elimina el trabajo del caso de uso.</b>
+        <p>Evita que el vertical tenga que reinventar identidad, gobierno, acceso a modelos, seguridad, observabilidad y operación. El esfuerzo se desplaza hacia el proceso, los datos, las reglas, la experiencia de usuario y la validación que realmente crean valor de negocio.</p>
+      </div>
+    </section>
+
+    <section class="onboarding-lab reveal" aria-labelledby="onboardingTitle">
+      <header class="onboarding-head">
+        <div><span>ONBOARDING DE UN FUTURO UC8 / UC9</span><h3 id="onboardingTitle">Cómo entra un nuevo caso de uso en la Soliss AI/RPA Factory</h3><p id="onboardingStatement"></p></div>
+        <button id="downloadOnboardingCanvas" class="btn small" type="button">↓ Descargar onboarding canvas</button>
+      </header>
+
+      <div id="onboardingRail" class="onboarding-rail"></div>
+      <div class="onboarding-workspace">
+        <aside id="onboardingInspector" class="onboarding-inspector"></aside>
+        <div class="onboarding-separation">
+          <article><span>P0 YA DISPONIBLE</span><div id="onboardingReusable"></div></article>
+          <div class="onboarding-plus">+</div>
+          <article><span>DECISIONES DEL NUEVO UC</span><div id="onboardingVertical"></div></article>
+        </div>
+      </div>
+
+      <div class="onboarding-rule">
+        <span>REGLA DE ENTRADA A PRODUCCIÓN</span>
+        <p>Un nuevo UC no se considera “listo” por funcionar en una demo. Debe demostrar valor, autorización de datos, control de modelos/herramientas, seguridad, UAT, evidencia y capacidad operativa.</p>
+      </div>
+    </section>
+
     <details class="advanced-priority reveal"><summary>Priorización avanzada · hipótesis Keedio para workshop con Soliss</summary><div class="advanced-intro">Los valores iniciales son hipótesis de trabajo, no datos de Soliss. Se sustituyen durante workshops con negocio, IT y Compliance.</div>
     <div class="factory-layout"><div><div id="ucRanking" class="ranking"></div><button id="resetHypotheses" class="btn small">Restaurar hipótesis Keedio</button></div><div id="ucEditor" class="uc-editor"></div></div></details>
     <div class="human-loop reveal"><span>Principio operativo</span><div><b>IA propone</b><i>→</i><b>Profesional Soliss valida</b><i>→</i><b>Sistema ejecuta</b></div><p>El nivel de automatización se decide por caso, riesgo y control; P0 no impone autonomía ciega.</p></div>

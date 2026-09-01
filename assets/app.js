@@ -73,7 +73,7 @@
         <div class="uc-detail-box boundary"><b>Qué NO está incluido en P0</b><p>${safe(u.out)}</p></div>
       </div><div class="uc-role-line"><b>Papel humano</b><p>${safe(u.human)}</p></div>`;
   }
-  $('#explainMode').addEventListener('click',e=>{const b=e.target.closest('[data-explain]');if(!b)return;explainMode=b.dataset.explain;$$('#explainMode button').forEach(x=>x.classList.toggle('active',x===b));renderP0Explainer();if(typeof renderStory==='function'&&STORIES.length)renderStory()});
+  $('#explainMode').addEventListener('click',e=>{const b=e.target.closest('[data-explain]');if(!b)return;explainMode=b.dataset.explain;$$('#explainMode button').forEach(x=>x.classList.toggle('active',x===b));renderP0Explainer();if(typeof renderStory==='function'&&STORIES.length)renderStory();if(typeof renderFactoryEffect==='function'&&FX)renderFactoryEffect()});
   renderP0Explainer();renderSimpleTabs();renderSimpleUC();
 
 
@@ -90,6 +90,45 @@
   $('#storyPlay')?.addEventListener('click',()=>{if(storyTimer){stopStoryPlayback();return}$('#storyPlay').textContent='■ Detener';storyTimer=setInterval(()=>{const s=storyById(storyId);if(storyStep>=s.steps.length-1){stopStoryPlayback();return}storyStep++;renderStory();if(storyTimer)$('#storyPlay').textContent='■ Detener'},1800)});
   function renderStoryReuse(){const rows=E.storyReuse||[];$('#storyReuseTable').innerHTML=`<thead><tr><th>Capacidad</th><th>Siniestro</th><th>Empleado</th><th>Factura</th><th>Lectura</th></tr></thead><tbody>${rows.map(r=>`<tr><td><b>${safe(r.capability)}</b></td><td>${r.claim?'<span class="reuse-yes">✓</span>':'<span class="reuse-vertical">UC</span>'}</td><td>${r.employee?'<span class="reuse-yes">✓</span>':'<span class="reuse-vertical">UC</span>'}</td><td>${r.invoice?'<span class="reuse-yes">✓</span>':'<span class="reuse-vertical">UC</span>'}</td><td class="reuse-why">${safe(r.why)}</td></tr>`).join('')}</tbody>`}
   if(STORIES.length){renderStory();renderStoryReuse()}
+
+
+
+  // V4.3 · Factory Effect + future UC onboarding
+  const FX=E.factoryEffect, ONB=E.ucOnboarding;
+  let effectCaseId=FX?.cases?.[0]?.id||'agent', onboardingStep=0;
+  const effectCase=()=>FX.cases.find(x=>x.id===effectCaseId)||FX.cases[0];
+  function renderEffectTabs(){
+    $('#effectCaseTabs').innerHTML=FX.cases.map(c=>`<button class="effect-case-tab ${c.id===effectCaseId?'active':''}" data-effect-case="${c.id}"><b>${safe(c.label)}</b><small>${safe(c.uc)}</small></button>`).join('');
+    $$('#effectCaseTabs [data-effect-case]').forEach(b=>b.addEventListener('click',()=>{effectCaseId=b.dataset.effectCase;renderFactoryEffect()}));
+  }
+  function renderFactoryEffect(){
+    const c=effectCase();renderEffectTabs();
+    $('#effectCaseUc').textContent=c.uc;$('#effectCaseLabel').textContent=c.label;$('#effectCaseGoal').textContent=c.goal;
+    $('#effectReuseCount').textContent=`${c.reuse.length} capacidades`;
+    $('#effectStages').innerHTML=FX.stages.map(s=>`<article class="effect-stage">
+      <div class="effect-stage-title">${safe(s.title)}</div>
+      <div class="effect-side before"><b>${safe(s.isolated.headline)}</b><p>${safe(explainMode==='plain'?s.isolated.plain:s.isolated.technical)}</p><small>Riesgo típico · ${safe(s.isolated.risk)}</small></div>
+      <div class="effect-arrow">→</div>
+      <div class="effect-side after"><b>${safe(s.p0.headline)}</b><p>${safe(explainMode==='plain'?s.p0.plain:s.p0.technical)}</p><small>Efecto P0 · ${safe(s.p0.benefit)}</small></div>
+    </article>`).join('');
+    $('#effectReuseChips').innerHTML=c.reuse.map(x=>`<span class="effect-chip">${safe(x)}</span>`).join('');
+    $('#effectStillChips').innerHTML=c.stillBuild.map(x=>`<span class="effect-chip">${safe(x)}</span>`).join('');
+  }
+  function renderOnboarding(){
+    $('#onboardingStatement').textContent=ONB.statement;
+    $('#onboardingRail').innerHTML=ONB.steps.map((s,i)=>`<button class="onboarding-step ${i===onboardingStep?'active':''}" data-onboarding="${i}"><i>${s.n}</i><b>${safe(s.title)}</b><small>${safe(s.owner)}</small></button>`).join('');
+    $$('#onboardingRail [data-onboarding]').forEach(b=>b.addEventListener('click',()=>{onboardingStep=+b.dataset.onboarding;renderOnboarding()}));
+    const s=ONB.steps[onboardingStep];
+    $('#onboardingInspector').innerHTML=`<span>PASO ${s.n}</span><h4>${safe(s.title)}</h4><p>${safe(s.question)}</p><dl><div><dt>Responsable principal</dt><dd>${safe(s.owner)}</dd></div><div><dt>Salida esperada</dt><dd>${safe(s.output)}</dd></div></dl>`;
+    $('#onboardingReusable').innerHTML=ONB.reusable.map(x=>`<div class="onboarding-capability">${safe(x)}</div>`).join('');
+    $('#onboardingVertical').innerHTML=ONB.vertical.map(x=>`<div class="onboarding-capability">${safe(x)}</div>`).join('');
+  }
+  function onboardingCsv(){
+    const rows=[['Paso','Nombre','Responsable','Pregunta de cierre','Salida esperada'],...ONB.steps.map(s=>[s.n,s.title,s.owner,s.question,s.output])];
+    return rows.map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(',')).join('\n');
+  }
+  $('#downloadOnboardingCanvas')?.addEventListener('click',()=>saveBlob(`Soliss_P0_UC_Onboarding_Canvas_${new Date().toISOString().slice(0,10)}.csv`,onboardingCsv(),'text/csv;charset=utf-8'));
+  if(FX&&ONB){renderFactoryEffect();renderOnboarding()}
 
   // Use Case Factory
   const ucKey='soliss-p0-uc-hypotheses-v3';

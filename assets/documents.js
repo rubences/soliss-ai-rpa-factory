@@ -197,6 +197,22 @@ window.P0_DOCUMENTS = {
           "size": "1 KB",
           "sha256": "276a14945cdd95b7f6d73615004d315e57821e51ae2c7c3d610001312b8a4ba7",
           "preview": false
+        },
+        {
+          "type": "MD",
+          "path": "documents/13_Antes_y_Despues_de_P0_Factory_Effect_Keedio_to_Soliss.md",
+          "sizeBytes": 760,
+          "size": "1 KB",
+          "sha256": "005bd89a84dd3985915f99e041a07d5fa0580afc6a8fcca3c708dac864dfab50",
+          "preview": false
+        },
+        {
+          "type": "CSV",
+          "path": "documents/14_UC_Onboarding_Canvas_Keedio_to_Soliss.csv",
+          "sizeBytes": 1259,
+          "size": "1 KB",
+          "sha256": "6093f29bad55806507117766116837d1b0fa45ddec356071218125eb600893a0",
+          "preview": false
         }
       ]
     }
@@ -204,9 +220,9 @@ window.P0_DOCUMENTS = {
   "pack": {
     "path": "documents/Soliss_P0_Document_Pack_Keedio.zip",
     "size": "22,1 MB",
-    "sizeBytes": 23175461,
-    "sha256": "17452b9860ee17f3daa09cb10a531e82bdfe6ac04fc790d3b9bff30ba7a8eaa9",
-    "fileCount": 14
+    "sizeBytes": 23177362,
+    "sha256": "591086b14d98a4f1037bd68b4af82a0d9af50d74fbd61cbf56a210fd9eefd67e",
+    "fileCount": 16
   },
   "manifest": {
     "json": "documents/DOCUMENT_MANIFEST.json",

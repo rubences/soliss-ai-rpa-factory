@@ -1,0 +1,8 @@
+﻿Paso,Nombre,Responsable,Pregunta de cierre,Salida esperada
+01,Idea + business case,Soliss negocio · Keedio acompaña,¿Qué problema resuelve y cómo mediremos valor?,"Owner, objetivo, usuarios, KPI candidatos, alcance inicial."
+02,Clasificación y riesgo,Soliss + Keedio + Compliance,"¿Qué datos, autonomía, impacto y regulación aplican?","Clasificación de datos, AI Act/DORA/privacy, HITL y risk tier."
+03,Datos y ownership,Data Owners Soliss,¿Qué fuentes puede utilizar y quién responde por ellas?,"Fuentes, owner, permisos, calidad, sensibilidad y provenance."
+04,Patrón P0 reutilizable,Keedio arquitectura,¿Qué capacidades existentes puede consumir?,"Identidad, Gateway, RAG/OCR/RPA, conectores, observabilidad, seguridad."
+05,Sandbox del UC,Keedio + equipo Soliss,¿Funciona técnicamente con datos/control representativos?,"Prototipo, métricas técnicas, costes, fallos, límites y backlog."
+06,UAT + Assurance,Key users + IT + Compliance,"¿Es útil, seguro, explicable y operable?","UAT, security tests, evidence pack, model passport, runbooks."
+07,Go-Live + monitorización,Soliss opera · Keedio N2,¿Podemos operar y medir outcomes de forma continua?,"Release aprobado, KPI, alertas, support model y revisión periódica."

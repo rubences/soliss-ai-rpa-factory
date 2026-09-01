@@ -404,3 +404,83 @@ window.P0.explainer.storyReuse = [
   {capability:"Human-in-the-loop",claim:true,employee:true,invoice:true,why:"El nivel de intervención cambia, pero el patrón es reutilizable."},
   {capability:"Lógica funcional del vertical",claim:false,employee:false,invoice:false,why:"Esto pertenece al UC derivado, no a P0."}
 ];
+
+
+// V4.3 — Factory Effect: isolated vertical vs. P0-enabled onboarding.
+// This comparison is qualitative. It does not claim measured current-state deficiencies or quantified savings.
+window.P0.explainer.factoryEffect = {
+  disclaimer:"Comparación conceptual: 'aislado' representa el patrón típico de resolver un nuevo vertical sin una base corporativa común. No afirma que todos estos problemas existan hoy en Soliss ni cuantifica ahorros.",
+  cases:[
+    {
+      id:"agent", label:"Nuevo agente interno", uc:"UC1",
+      goal:"Desplegar un asistente para un área corporativa usando conocimiento autorizado.",
+      stillBuild:["Propósito y conversación del agente","Fuentes concretas del área","Reglas de escalado y límites","UAT, KPI y adopción"],
+      reuse:["Identidad","RAG / fuentes","Model Gateway","Logging","Seguridad","Observabilidad"]
+    },
+    {
+      id:"claim", label:"Nuevo flujo de siniestros", uc:"UC2 + UC3",
+      goal:"Añadir inteligencia documental y asistencia al tramitador en un proceso concreto.",
+      stillBuild:["Tipologías documentales","Modelo/reglas/señales del caso","Integración con proceso/core","UAT, assurance y KPI"],
+      reuse:["Identidad","Data Mesh","Document pattern","Model Gateway","HITL","Evidence trail"]
+    },
+    {
+      id:"admin", label:"Nueva automatización administrativa", uc:"UC2 + UC5",
+      goal:"Automatizar un flujo documental/administrativo manteniendo autorizaciones y excepciones.",
+      stillBuild:["Reglas reales del proceso","Integraciones ERP/sistemas","Matriz de excepciones/aprobaciones","UAT y KPI operativo"],
+      reuse:["Identidad","OCR/patrón documental","Integraciones comunes","Policies","Logging","Observabilidad"]
+    },
+    {
+      id:"future", label:"Futuro UC8 / UC9", uc:"NUEVO",
+      goal:"Incorporar un caso no previsto hoy sin volver a diseñar la plataforma corporativa.",
+      stillBuild:["Business case","Datos y proceso específicos","Lógica/modelo/automatización","UAT, riesgo y KPI"],
+      reuse:["Clústeres","Identidad","Gobierno de datos","Gateway","Seguridad","Operación"]
+    }
+  ],
+  stages:[
+    {
+      id:"ownership", title:"1 · Alcance y ownership",
+      isolated:{headline:"Se vuelve a definir el marco del proyecto",plain:"Cada vertical necesita cerrar de nuevo responsables, criterios de aceptación y dependencias.",technical:"Scope, owners, RACI, controles y acceptance criteria pueden terminar definidos ad hoc por proyecto.",risk:"Mayor heterogeneidad entre verticales."},
+      p0:{headline:"El UC entra por un patrón de gobierno común",plain:"El caso sigue necesitando owner y business case, pero parte de reglas y responsabilidades ya conocidas.",technical:"Plantillas de onboarding, RACI, gates, catálogo de controles y ownership P0 reducen decisiones repetidas.",benefit:"Gobierno consistente desde el inicio."}
+    },
+    {
+      id:"identity", title:"2 · Identidad y permisos",
+      isolated:{headline:"Permisos diseñados para el vertical",plain:"El proyecto debe resolver cómo autentica usuarios/servicios y qué puede ver cada uno.",technical:"Riesgo de cuentas, roles o políticas específicas por solución si no existe un plano corporativo común.",risk:"Duplicación y políticas heterogéneas."},
+      p0:{headline:"Se reutiliza identidad corporativa P0",plain:"El UC declara qué roles necesita sobre un mecanismo común.",technical:"Keycloak/OIDC + RBAC/ABAC + segregación por dominio se reutilizan; el UC añade permisos funcionales.",benefit:"Una misma lógica de acceso para múltiples casos."}
+    },
+    {
+      id:"data", title:"3 · Datos y fuentes",
+      isolated:{headline:"Integraciones y copias por proyecto",plain:"Cada solución puede acabar construyendo sus propias conexiones y lógica para localizar datos.",technical:"Point-to-point integrations, copias y provenance específico elevan acoplamiento y coste operativo.",risk:"Más silos de datos e integraciones."},
+      p0:{headline:"Se conectan fuentes gobernadas",plain:"El caso pide acceso a dominios/fuentes ya catalogados y con owner.",technical:"Data Mesh, clasificación, catálogo/provenance y patrones de conectores forman el plano común.",benefit:"Reutilización sin perder ownership ni trazabilidad."}
+    },
+    {
+      id:"ai", title:"4 · Modelos y automatización",
+      isolated:{headline:"Cada solución integra su IA o herramienta",plain:"El proyecto debe decidir proveedor/modelo, logging, límites, coste y fallback.",technical:"Integraciones directas a modelos/tools pueden crear Shadow AI y políticas diferentes.",risk:"Control de modelos disperso."},
+      p0:{headline:"El UC consume servicios a través de P0",plain:"Los modelos y automatizaciones pasan por una puerta corporativa con reglas.",technical:"Model Gateway, allowlist, cuotas, logging, caché, fallback, RAG y servicios IA/RPA comunes.",benefit:"Control central con libertad funcional en el vertical."}
+    },
+    {
+      id:"assurance", title:"5 · Seguridad, riesgo y compliance",
+      isolated:{headline:"Los controles se vuelven a interpretar por proyecto",plain:"Cada equipo debe decidir qué pruebas y evidencias necesita.",technical:"Threat model, privacy, AI governance, HITL, auditability y third-party checks pueden variar si no hay baseline.",risk:"Evidencia difícil de comparar."},
+      p0:{headline:"Se parte de controles y evidencias predefinidos",plain:"El caso hereda una base y añade lo específico según sus riesgos.",technical:"Security lenses, Evidence Registry, DORA/AI Act assessment, model passport y HITL patterns.",benefit:"Assurance-by-design en vez de añadirlo al final."}
+    },
+    {
+      id:"operations", title:"6 · Operación y soporte",
+      isolated:{headline:"Runbooks y monitorización propios",plain:"Cada solución necesita diseñar cómo se observa, mantiene y escala una incidencia.",technical:"Dashboards, logs, backup, support model y operational ownership pueden fragmentarse.",risk:"Mayor esfuerzo de operación multi-solución."},
+      p0:{headline:"El vertical entra en un modelo operativo común",plain:"El UC añade sus métricas funcionales sobre una operación ya definida.",technical:"Observabilidad, evidence trail, N0–N3, IaC, runbooks, backup/restore y transfer patterns reutilizados.",benefit:"Operabilidad comparable entre casos."}
+    }
+  ]
+};
+
+window.P0.explainer.ucOnboarding = {
+  statement:"Un nuevo caso de uso no entra directamente en producción. Entra en la Factory, reutiliza capacidades P0 y completa las decisiones/evidencias que son específicas de su finalidad.",
+  steps:[
+    {n:"01",title:"Idea + business case",owner:"Soliss negocio · Keedio acompaña",question:"¿Qué problema resuelve y cómo mediremos valor?",output:"Owner, objetivo, usuarios, KPI candidatos, alcance inicial."},
+    {n:"02",title:"Clasificación y riesgo",owner:"Soliss + Keedio + Compliance",question:"¿Qué datos, autonomía, impacto y regulación aplican?",output:"Clasificación de datos, AI Act/DORA/privacy, HITL y risk tier."},
+    {n:"03",title:"Datos y ownership",owner:"Data Owners Soliss",question:"¿Qué fuentes puede utilizar y quién responde por ellas?",output:"Fuentes, owner, permisos, calidad, sensibilidad y provenance."},
+    {n:"04",title:"Patrón P0 reutilizable",owner:"Keedio arquitectura",question:"¿Qué capacidades existentes puede consumir?",output:"Identidad, Gateway, RAG/OCR/RPA, conectores, observabilidad, seguridad."},
+    {n:"05",title:"Sandbox del UC",owner:"Keedio + equipo Soliss",question:"¿Funciona técnicamente con datos/control representativos?",output:"Prototipo, métricas técnicas, costes, fallos, límites y backlog."},
+    {n:"06",title:"UAT + Assurance",owner:"Key users + IT + Compliance",question:"¿Es útil, seguro, explicable y operable?",output:"UAT, security tests, evidence pack, model passport, runbooks."},
+    {n:"07",title:"Go-Live + monitorización",owner:"Soliss opera · Keedio N2",question:"¿Podemos operar y medir outcomes de forma continua?",output:"Release aprobado, KPI, alertas, support model y revisión periódica."}
+  ],
+  reusable:["Clústeres/infraestructura","Identidad y acceso","Data governance","Model Gateway","Servicios IA/RPA","Seguridad y evidencia","Observabilidad/operación"],
+  vertical:["Business case","Datos/fuentes concretas","Reglas/modelo del proceso","Integraciones específicas","UX/canales","UAT y KPI de negocio","Aprobación productiva"]
+};
