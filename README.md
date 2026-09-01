@@ -120,3 +120,7 @@ Se añade una capa pedagógica basada en el alcance del Plan Director Final Cerr
 - La priorización cuantitativa queda como vista avanzada para workshop.
 
 Los ejemplos se presentan expresamente como ilustrativos y no amplían el alcance contractual.
+
+
+## V4.2 — Historias visuales P0 / UC
+Tres historias interactivas: siniestro (UC2+UC3), empleado (UC1) y factura (UC2+UC5). Cada paso separa P0 común, UC derivado, papel humano Soliss y evidencia. Incluye reproducción automática y matriz de reutilización.

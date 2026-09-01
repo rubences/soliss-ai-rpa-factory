@@ -189,6 +189,14 @@ window.P0_DOCUMENTS = {
           "size": "2 KB",
           "sha256": "7b4521e0bf7612012e8d527ddce85b4f6fa80b34aeb46113a8e36ac82adc45cc",
           "preview": false
+        },
+        {
+          "type": "MD",
+          "path": "documents/12_Historias_Usuario_P0_y_Casos_Uso_Keedio_to_Soliss.md",
+          "sizeBytes": 1066,
+          "size": "1 KB",
+          "sha256": "276a14945cdd95b7f6d73615004d315e57821e51ae2c7c3d610001312b8a4ba7",
+          "preview": false
         }
       ]
     }
@@ -196,9 +204,9 @@ window.P0_DOCUMENTS = {
   "pack": {
     "path": "documents/Soliss_P0_Document_Pack_Keedio.zip",
     "size": "22,1 MB",
-    "sizeBytes": 23174669,
-    "sha256": "60a121a33fd2144b41f90144bfda3a34a10a2f3bd9ce25441618f7810b38cfe6",
-    "fileCount": 13
+    "sizeBytes": 23175461,
+    "sha256": "17452b9860ee17f3daa09cb10a531e82bdfe6ac04fc790d3b9bff30ba7a8eaa9",
+    "fileCount": 14
   },
   "manifest": {
     "json": "documents/DOCUMENT_MANIFEST.json",

@@ -1,9 +1,7 @@
 {
-  "product": "Soliss AI/RPA Factory · P0 Decision Room V4",
+  "product": "Soliss AI/RPA Factory · P0 Decision Room V4.2",
   "proponent": "Keedio",
   "client": "Soliss",
-  "purpose": "Manifest de integridad documental.",
-  "baseline_note": "Baseline: Plan Director Final Cerrado + Presupuesto/Cronograma P0 Final Cerrado. Working templates no son baseline contractual hasta aceptación.",
   "files": [
     {
       "path": "documents/01_Plan_Director_Consejo_Soliss_AI_RPA_Factory_P0_Final_Cerrado.docx",
@@ -69,6 +67,11 @@
       "path": "documents/11_Research_Radar_2026_Keedio_to_Soliss.md",
       "bytes": 1895,
       "sha256": "7b4521e0bf7612012e8d527ddce85b4f6fa80b34aeb46113a8e36ac82adc45cc"
+    },
+    {
+      "path": "documents/12_Historias_Usuario_P0_y_Casos_Uso_Keedio_to_Soliss.md",
+      "bytes": 1066,
+      "sha256": "276a14945cdd95b7f6d73615004d315e57821e51ae2c7c3d610001312b8a4ba7"
     }
   ]
 }

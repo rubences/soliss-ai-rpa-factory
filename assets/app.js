@@ -73,8 +73,23 @@
         <div class="uc-detail-box boundary"><b>Qué NO está incluido en P0</b><p>${safe(u.out)}</p></div>
       </div><div class="uc-role-line"><b>Papel humano</b><p>${safe(u.human)}</p></div>`;
   }
-  $('#explainMode').addEventListener('click',e=>{const b=e.target.closest('[data-explain]');if(!b)return;explainMode=b.dataset.explain;$$('#explainMode button').forEach(x=>x.classList.toggle('active',x===b));renderP0Explainer()});
+  $('#explainMode').addEventListener('click',e=>{const b=e.target.closest('[data-explain]');if(!b)return;explainMode=b.dataset.explain;$$('#explainMode button').forEach(x=>x.classList.toggle('active',x===b));renderP0Explainer();if(typeof renderStory==='function'&&STORIES.length)renderStory()});
   renderP0Explainer();renderSimpleTabs();renderSimpleUC();
+
+
+
+  // V4.2 · Visual User Story Lab
+  const STORIES=E.userStories||[];
+  let storyId=STORIES[0]?.id||'claim',storyStep=0,storyTimer=null;
+  const storyById=id=>STORIES.find(s=>s.id===id)||STORIES[0];
+  const storyKindLabel={business:'Negocio',p0:'P0 común',uc:'Caso derivado',human:'Profesional Soliss',evidence:'Evidencia / control'};
+  function stopStoryPlayback(){if(storyTimer){clearInterval(storyTimer);storyTimer=null}const b=$('#storyPlay');if(b)b.textContent='▶ Reproducir historia'}
+  function renderStoryTabs(){$('#storyTabs').innerHTML=STORIES.map(s=>`<button class="story-tab ${s.id===storyId?'active':''}" data-story="${s.id}"><b>${safe(s.title.replace(/^Historia \d+ · /,''))}</b><small>${safe(s.ucs.join(' + '))}</small></button>`).join('');$$('#storyTabs [data-story]').forEach(b=>b.addEventListener('click',()=>{stopStoryPlayback();storyId=b.dataset.story;storyStep=0;renderStory()}))}
+  function renderStory(){const s=storyById(storyId),st=s.steps[storyStep];renderStoryTabs();$('#storyUcs').textContent=s.ucs.join(' + ');$('#storyTitle').textContent=s.title;$('#storySubtitle').textContent=s.subtitle;$('#storyOutcome').textContent=s.outcome;$('#storyActors').innerHTML=s.actors.map(a=>`<span class="story-actor">${safe(a)}</span>`).join('');$('#storyProgress').innerHTML=`<i style="width:${((storyStep+1)/s.steps.length)*100}%"></i>`;$('#storySteps').innerHTML=s.steps.map((x,i)=>`<button class="story-step ${i===storyStep?'active':''}" data-story-step="${i}" data-kind="${x.kind}"><span class="step-num">${x.n}</span><b>${safe(x.title)}</b><small>${safe(x.who)}</small></button>`).join('');$$('#storySteps [data-story-step]').forEach(b=>b.addEventListener('click',()=>{stopStoryPlayback();storyStep=+b.dataset.storyStep;renderStory()}));$('#storyPosition').textContent=`Paso ${storyStep+1} de ${s.steps.length}`;$('#storyPrev').disabled=storyStep===0;$('#storyNext').disabled=storyStep===s.steps.length-1;$('#storyInspector').innerHTML=`<span class="kind">${storyKindLabel[st.kind]}</span><h4>${safe(st.title)}</h4><div class="who">${safe(st.who)}</div><p class="desc">${safe(explainMode==='plain'?st.plain:st.technical)}</p><div class="story-inspector-grid"><div><span>Qué hace P0 aquí</span><p>${safe(st.p0)}</p></div><div><span>Qué aporta el UC</span><p>${safe(st.uc)}</p></div><div><span>Papel de Soliss / persona</span><p>${safe(st.human)}</p></div><div><span>Evidencia que debería quedar</span><p>${safe(st.evidence)}</p></div></div>`;$('#storyReuseChips').innerHTML=s.p0Reuse.map(x=>`<span class="story-reuse-chip">${safe(x)}</span>`).join('');$('#storyP0Boundary').textContent=s.p0Boundary;$('#storyUcBoundary').textContent=s.derivedBoundary;$('#storyHuman').textContent=`Interviene: ${s.person}. ${s.outcome}`}
+  $('#storyPrev')?.addEventListener('click',()=>{stopStoryPlayback();if(storyStep>0){storyStep--;renderStory()}});$('#storyNext')?.addEventListener('click',()=>{stopStoryPlayback();const s=storyById(storyId);if(storyStep<s.steps.length-1){storyStep++;renderStory()}});
+  $('#storyPlay')?.addEventListener('click',()=>{if(storyTimer){stopStoryPlayback();return}$('#storyPlay').textContent='■ Detener';storyTimer=setInterval(()=>{const s=storyById(storyId);if(storyStep>=s.steps.length-1){stopStoryPlayback();return}storyStep++;renderStory();if(storyTimer)$('#storyPlay').textContent='■ Detener'},1800)});
+  function renderStoryReuse(){const rows=E.storyReuse||[];$('#storyReuseTable').innerHTML=`<thead><tr><th>Capacidad</th><th>Siniestro</th><th>Empleado</th><th>Factura</th><th>Lectura</th></tr></thead><tbody>${rows.map(r=>`<tr><td><b>${safe(r.capability)}</b></td><td>${r.claim?'<span class="reuse-yes">✓</span>':'<span class="reuse-vertical">UC</span>'}</td><td>${r.employee?'<span class="reuse-yes">✓</span>':'<span class="reuse-vertical">UC</span>'}</td><td>${r.invoice?'<span class="reuse-yes">✓</span>':'<span class="reuse-vertical">UC</span>'}</td><td class="reuse-why">${safe(r.why)}</td></tr>`).join('')}</tbody>`}
+  if(STORIES.length){renderStory();renderStoryReuse()}
 
   // Use Case Factory
   const ucKey='soliss-p0-uc-hypotheses-v3';

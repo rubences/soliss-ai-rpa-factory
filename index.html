@@ -129,6 +129,24 @@
       <article id="ucSimpleDetail" class="uc-simple-detail"></article>
     </div>
 
+
+    <section class="story-lab reveal" aria-labelledby="storyLabTitle">
+      <header class="story-lab-head">
+        <div><span>3 HISTORIAS PARA VER P0 EN ACCIÓN</span><h3 id="storyLabTitle">La misma base P0, tres situaciones de negocio distintas.</h3><p>Los recorridos son <b>ilustrativos</b>: explican cómo se reutiliza la plataforma y dónde empieza el desarrollo del caso derivado. No amplían el alcance contractual.</p></div>
+        <button id="storyPlay" class="btn small" type="button">▶ Reproducir historia</button>
+      </header>
+      <div id="storyTabs" class="story-tabs" role="tablist" aria-label="Historias de usuario"></div>
+      <article id="storyCanvas" class="story-canvas">
+        <div class="story-overview"><div><span id="storyUcs" class="story-uc-badge"></span><h3 id="storyTitle"></h3><p id="storySubtitle"></p></div><div class="story-outcome"><span>RESULTADO QUE QUEREMOS EXPLICAR</span><p id="storyOutcome"></p></div></div>
+        <div class="story-actors" id="storyActors"></div>
+        <div class="story-progress-wrap"><div id="storyProgress" class="story-progress"></div></div>
+        <div class="story-workspace"><div><div id="storySteps" class="story-steps"></div><div class="story-nav"><button id="storyPrev" type="button">← Paso anterior</button><span id="storyPosition">—</span><button id="storyNext" type="button">Paso siguiente →</button></div></div><aside id="storyInspector" class="story-inspector" aria-live="polite"></aside></div>
+        <div class="story-foundation"><header><span>LO QUE SE REUTILIZA DE P0 EN ESTA HISTORIA</span><p>Estas capacidades no deberían reconstruirse dentro de cada vertical.</p></header><div id="storyReuseChips" class="story-reuse-chips"></div></div>
+        <div class="story-boundary-grid"><article class="story-boundary p0"><span>P0 · BASE COMÚN</span><p id="storyP0Boundary"></p></article><div class="story-boundary-arrow">→</div><article class="story-boundary uc"><span>UC · DESARROLLO DERIVADO</span><p id="storyUcBoundary"></p></article><div class="story-boundary-arrow">→</div><article class="story-boundary human"><span>SOLISS · DECISIÓN / OPERACIÓN</span><p id="storyHuman"></p></article></div>
+      </article>
+      <details class="story-comparison" open><summary>Por qué P0 antes que tres soluciones aisladas · matriz de reutilización</summary><div class="story-comparison-intro"><p>La parte <b>común</b> debe resolverse una vez en P0. La lógica del proceso, datos concretos, reglas y experiencia de usuario se desarrollan en cada UC posterior.</p><span>P0 = reutilización + gobierno · UC = valor funcional específico</span></div><div class="table-wrap"><table id="storyReuseTable"></table></div></details>
+    </section>
+
     <details class="advanced-priority reveal"><summary>Priorización avanzada · hipótesis Keedio para workshop con Soliss</summary><div class="advanced-intro">Los valores iniciales son hipótesis de trabajo, no datos de Soliss. Se sustituyen durante workshops con negocio, IT y Compliance.</div>
     <div class="factory-layout"><div><div id="ucRanking" class="ranking"></div><button id="resetHypotheses" class="btn small">Restaurar hipótesis Keedio</button></div><div id="ucEditor" class="uc-editor"></div></div></details>
     <div class="human-loop reveal"><span>Principio operativo</span><div><b>IA propone</b><i>→</i><b>Profesional Soliss valida</b><i>→</i><b>Sistema ejecuta</b></div><p>El nivel de automatización se decide por caso, riesgo y control; P0 no impone autonomía ciega.</p></div>
