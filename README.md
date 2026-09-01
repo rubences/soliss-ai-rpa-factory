@@ -1,17 +1,33 @@
-# Keedio × Soliss — AI/RPA Factory · Plan Director P0
+# Soliss AI/RPA Factory · P0 — Web técnica ejecutiva v2
 
-Sitio estático consolidado a partir de tres infografías HTML de la propuesta. La información repetida se ha unificado y las cifras contractuales se separan de las proyecciones.
+Web estática consolidada y actualizada a partir del **Plan Director Final Cerrado**, los Excel de presupuesto/cronograma, la propuesta post-reunión y las figuras técnicas suministradas.
 
-## Contenido
+## Qué cambia frente a la primera versión
 
-- Resumen ejecutivo y KPIs.
-- TCO base, fases, horas, escenarios de hardware y tramos de pago.
-- Roadmap M1–M36 y Gates G1–G4.
-- Arquitectura Rancher/RKE2, gobierno, Model Gateway/RAG, Gravitino y sizing GPU.
-- Catálogo UC1–UC7 con riesgos de adopción.
-- DORA, EU AI Act, gobierno y matriz de riesgos.
-- Proyección de ROI, ahorro y madurez.
-- Seis condiciones para aprobación ejecutiva.
+- Baseline económico corregido y centralizado en `assets/data.js`.
+- P0 claramente separado de UC1–UC7.
+- Fases F0–F4 del **Presupuesto/Cronograma Final Cerrado**.
+- Arquitectura interactiva: Rancher/RKE2, clúster de grupo, dominios, identidad, Model Gateway, Data Mesh y observabilidad.
+- Simulador de TCO por escenarios y opción S2.
+- Gates G1–G4 y roadmap M1–M36.
+- Soporte N0–N3, gestión del cambio, RACI, pruebas y entregables.
+- Matriz de riesgos filtrable.
+- Lightbox para las figuras técnicas.
+- Tema claro/oscuro, animaciones discretas, contador de KPIs, navegación activa y responsive.
+- Sin framework ni proceso de build.
+
+## Baseline de cifras
+
+La web usa como referencia principal:
+- Construcción P0: **105.786,20 €**.
+- Servicio co-gestionado M3–M24: **77.000 €**.
+- Total Keedio 24M: **182.786,20 €**.
+- Opción M25–M36: **42.000 €**.
+- Infraestructura Soliss recomendada: **180.000–280.000 €**, sujeta a sizing G2 y proveedores.
+
+### Nota de consistencia
+
+Una figura `Journey + Economics` suministrada muestra **125.786,20 €** como CAPEX Keedio al sumar `20.000 € activación + 105.786,20 € construcción`. El **Plan Director Final Cerrado** y el **Excel Final Cerrado** definen `105.786,20 €` como el total de construcción P0 incluyendo F0/activación. La web evita por tanto la doble contabilización de F0.
 
 ## Estructura
 
@@ -21,38 +37,31 @@ Sitio estático consolidado a partir de tres infografías HTML de la propuesta. 
 ├── 404.html
 ├── .nojekyll
 ├── robots.txt
-└── assets
+├── README.md
+└── assets/
+    ├── data.js
+    ├── app.js
     ├── styles.css
-    └── app.js
+    └── figures/
+        ├── arquitectura-onpremise.png
+        ├── journey-economics.png
+        └── to-be.png
 ```
 
-No existe paso de compilación: es HTML/CSS/JS estático.
-
-## Ejecutar en local
-
-Puedes abrir `index.html` directamente o lanzar un servidor:
+## Ejecutar localmente
 
 ```bash
 python -m http.server 8000
 ```
 
-y visitar `http://localhost:8000`.
+Abrir `http://localhost:8000`.
 
-## Publicar gratis con GitHub Pages
+## GitHub Pages
 
-1. Crea un repositorio (por ejemplo `soliss-ai-rpa-factory`).
-2. Sube estos archivos a la rama `main`.
-3. En GitHub: **Settings → Pages**.
-4. En **Build and deployment**, selecciona **Deploy from a branch**.
-5. Selecciona `main` y `/ (root)`.
-6. Guarda. GitHub mostrará la URL pública, normalmente:
-   `https://<usuario>.github.io/soliss-ai-rpa-factory/`
+No requiere compilación. Subir el contenido a la raíz de `main` y activar:
 
-> Importante: un repositorio público y GitHub Pages harán públicas las cifras económicas, arquitectura, riesgos y condiciones de la propuesta. Si el contenido es confidencial, no lo publiques sin autorización.
+**Settings → Pages → Deploy from a branch → main → /(root)**
 
-## Notas
+## Nota de publicación
 
-- Chart.js se carga desde jsDelivr; no hay framework ni backend.
-- Los bloques de ROI, ahorro y madurez son proyecciones del material de propuesta.
-- La sección legal consolida lo indicado en los materiales originales y no sustituye revisión de Legal/Compliance.
-- No se ha añadido una licencia open-source: el contenido de negocio debe tratarse según los derechos y acuerdos de las partes.
+El sitio contiene información económica, técnica y de riesgos del proyecto. Validar su autorización de difusión antes de publicar un repositorio/Pages público.
