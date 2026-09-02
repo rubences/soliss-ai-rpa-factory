@@ -520,6 +520,7 @@ Keedio propone, diseña e integra el patrón P0. Soliss decide, valida, adquiere
   $('#boardroomUser').addEventListener('input',updateBoardroomSubmitState);
   $('#boardroomPassword').addEventListener('input',updateBoardroomSubmitState);
   $('#boardroomAck').addEventListener('change',updateBoardroomSubmitState);
+  updateBoardroomSubmitState();
   $('#boardroomEnter').addEventListener('click',async()=>{
     const err=$('#boardroomLoginError');
     if(err)err.hidden=true;
