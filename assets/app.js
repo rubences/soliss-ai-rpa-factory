@@ -562,8 +562,10 @@ Keedio propone, diseña e integra el patrón P0. Soliss decide, valida, adquiere
   function exitPresent(){document.body.classList.remove('presentation-mode');$('#presentationHUD').hidden=true;if(document.fullscreenElement)document.exitFullscreen?.()}
   $('#presentBtn').addEventListener('click',enterPresent);$('#exitPresent').addEventListener('click',exitPresent);$('#prevStep').addEventListener('click',()=>goStep(presentIndex-1));$('#nextStep').addEventListener('click',()=>goStep(presentIndex+1));addEventListener('keydown',e=>{if(!document.body.classList.contains('presentation-mode'))return;if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();goStep(presentIndex+1)}if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();goStep(presentIndex-1)}if(e.key==='Escape')exitPresent()});
 
-  // Service worker. No external runtime dependencies.
-  if('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js').catch(()=>{});
+  // Service worker disabled for this demo to avoid stale cached JS blocking the fixed Boardroom login flow.
+  if('serviceWorker' in navigator && location.protocol.startsWith('http')){
+    navigator.serviceWorker.getRegistrations().then(regs=>regs.forEach(r=>r.unregister())).catch(()=>{});
+  }
   setAudience('board');
   initAccessPortal();
 })();
