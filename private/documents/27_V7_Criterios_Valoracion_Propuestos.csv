@@ -1,0 +1,11 @@
+﻿ID,Bloque,Criterio,Puntuación máxima,Carácter
+T1,Técnica,"Arquitectura, escalabilidad y soberanía on-premise",15,Working draft · pendiente Soliss
+T2,Técnica,"Seguridad, DORA, AI Act, continuidad y evidencias",12,Working draft · pendiente Soliss
+T3,Técnica,"Gobierno del dato, RAG y Model Gateway",10,Working draft · pendiente Soliss
+T4,Técnica,"Migración, integración con core y reversibilidad",10,Working draft · pendiente Soliss
+T5,Técnica,"Pruebas, UAT, calidad y criterios de aceptación",8,Working draft · pendiente Soliss
+T6,Técnica,"Operación, cambio, documentación y transferencia",8,Working draft · pendiente Soliss
+T7,Técnica,"Equipo, roles y capacidad de ejecución",7,Working draft · pendiente Soliss
+E1,Económica,Oferta económica de servicios P0 + S1,20,Working draft · pendiente Soliss
+E2,Económica,Transparencia TCO / infraestructura / costes variables,5,Working draft · pendiente Soliss
+E3,Económica,"Opcionales, escalabilidad económica y condiciones comerciales",5,Working draft · pendiente Soliss

@@ -1,4 +1,4 @@
-# V6 · Public + Boardroom security model
+# V7 · Public + Boardroom + Licitación security model
 
 ## Implemented in V6
 
@@ -70,3 +70,8 @@ See `deployment/`.
 - audit logging at the proxy;
 - rate limiting;
 - DPoP/client policies if the target architecture requires it and the complete chain supports it.
+
+
+## V7 · Tender workspace
+
+El nuevo acceso `?view=tender` utiliza la misma sesión reservada que Boardroom. Sus datos económicos, prescripciones, criterios de valoración y documento fuente se mantienen bajo `/private/`. En producción, proteger `/private/` sigue siendo obligatorio.

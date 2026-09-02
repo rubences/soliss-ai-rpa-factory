@@ -1,0 +1,14 @@
+﻿Elemento,Estado,Observación
+Objeto y alcance P0,ready,"Objeto, incluido/excluido y UC derivados están definidos."
+Prescripciones técnicas,ready,18 PPT con respuesta y entregable verificable.
+Gates y aceptación,ready,G1–G4 y criterios Go/No-Go definidos.
+Entregables,ready,Paquete mínimo y criterios de aceptación descritos.
+Modelo de responsabilidades,ready,Keedio/Soliss y dedicaciones principales descritas.
+Baseline económico por fases,warning,Existe discrepancia entre el borrador de licitación (1.172 h F0–F4) y el baseline Boardroom Final Cerrado (955 h).
+S1 en horas,warning,El borrador fija 880 h; el baseline Boardroom anterior no consolidaba horas S1.
+Forma de pago e hitos de facturación,missing,No está especificada en el documento aportado.
+Validez de oferta / revisión de precios,missing,No está especificada.
+"Garantías, penalizaciones y SLAs contractuales",missing,Necesitan clausulado contractual.
+Propiedad intelectual y derechos de uso,warning,"Se entregan repositorios/código, pero falta clausulado detallado de titularidad/licencias."
+Procedimiento/CPV/solvencia administrativa,missing,Requiere definición por Compras/Legal; no se infiere en V7.
+Cláusulas protección de datos/subencargados,warning,"Hay controles técnicos, pero el clausulado jurídico debe cerrarse con Soliss."

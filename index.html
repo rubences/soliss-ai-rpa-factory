@@ -4,19 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#FF006A">
-  <meta name="description" content="Soliss AI/RPA Factory · una única web Keedio → Soliss con acceso a Visión pública o Boardroom P0.">
-  <title>Soliss AI/RPA Factory · Keedio → Soliss · V6.2</title>
+  <meta name="description" content="Soliss AI/RPA Factory · una única web Keedio → Soliss con acceso a Visión pública, Boardroom y espacio de Licitación/Pliego P0.">
+  <title>Soliss AI/RPA Factory · Keedio → Soliss · V7.0</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="assets/icon-192.png">
   <link rel="stylesheet" href="assets/styles.css">
-  <script defer src="config/runtime-config.js?v=2026-09-02-1"></script>
-  <script defer src="assets/data.js?v=2026-09-02-1"></script>
-  <script defer src="assets/documents.js?v=2026-09-02-1"></script>
-  <script defer src="assets/v6-data.js?v=2026-09-02-1"></script>
-  <script defer src="assets/v6-auth.js?v=2026-09-02-1"></script>
-  <script defer src="assets/app.js?v=2026-09-02-1"></script>
-  <script defer src="assets/v6-features.js?v=2026-09-02-1"></script>
-  <script defer src="assets/v62-ui.js?v=2026-09-02-1"></script>
+  <script defer src="config/runtime-config.js"></script>
+  <script defer src="assets/data.js"></script>
+  <script defer src="assets/documents.js"></script>
+  <script defer src="assets/v6-data.js"></script>
+  <script defer src="assets/v6-auth.js"></script>
+  <script defer src="assets/app.js"></script>
+  <script defer src="assets/v6-features.js"></script>
+  <script defer src="assets/v62-ui.js"></script>
+  <script defer src="assets/v7-tender.js"></script>
 </head>
 <body data-audience="board" data-build="unified" data-access="portal">
 <a class="skip" href="#main">Ir al contenido</a>
@@ -25,7 +26,7 @@
   <div class="access-portal-shell">
     <header class="access-portal-head">
       <div class="access-logos"><img src="assets/brand/keedio-logo.png" alt="Keedio"><span>→</span><img src="assets/brand/soliss-logo.png" alt="Soliss"></div>
-      <span class="access-version">SOLISS AI/RPA FACTORY · V6.2</span>
+      <span class="access-version">SOLISS AI/RPA FACTORY · V7.0</span>
       <h1 id="accessPortalTitle">Elige tu experiencia</h1>
       <p>La misma propuesta, con el nivel de detalle adecuado para cada momento.</p>
     </header>
@@ -46,13 +47,21 @@
         <div class="access-meta"><span>Consejo / IT / Compliance</span><span>Área reservada</span></div>
         <b>Acceder →</b>
       </button>
+      <button class="access-card tender" type="button" data-access-choice="tender">
+        <span class="access-icon">§</span><small>LICITACIÓN / PLIEGO P0</small>
+        <h2>Dimensionar la contratación</h2>
+        <p>Objeto, prescripciones técnicas, condiciones económicas, cumplimiento, valoración y readiness del pliego.</p>
+        <div class="access-meta"><span>Compras / IT / Legal</span><span>Área reservada</span></div>
+        <b>Abrir espacio de licitación →</b>
+      </button>
+
     </div>
 
     <div id="boardroomConsent" class="boardroom-consent" hidden>
       <div class="boardroom-login-copy">
-        <span>BOARDROOM SOLISS</span>
-        <h3>Área reservada para revisión de P0</h3>
-        <p>Introduce las credenciales facilitadas por Keedio.</p>
+        <span id="loginAreaLabel">BOARDROOM SOLISS</span>
+        <h3 id="loginAreaTitle">Área reservada para revisión de P0</h3>
+        <p id="loginAreaText">Introduce las credenciales facilitadas por Keedio.</p>
       </div>
       <div id="authReadiness" class="auth-readiness">Acceso Boardroom Keedio → Soliss</div>
       <div class="simple-login-grid">
@@ -74,7 +83,7 @@
 
 <header class="topbar">
   <div class="shell navrow">
-    <a class="brand brand-lockup" href="#hero" aria-label="Keedio presenta a Soliss"><img src="assets/brand/keedio-logo.png" alt="Keedio"><span class="brand-arrow">→</span><img class="soliss-wordmark" src="assets/brand/soliss-logo.png" alt="Soliss Seguros desde 1933"><small id="brandModeText">AI/RPA Factory · V6.2</small></a>
+    <a class="brand brand-lockup" href="#hero" aria-label="Keedio presenta a Soliss"><img src="assets/brand/keedio-logo.png" alt="Keedio"><span class="brand-arrow">→</span><img class="soliss-wordmark" src="assets/brand/soliss-logo.png" alt="Soliss Seguros desde 1933"><small id="brandModeText">AI/RPA Factory · V7.0</small></a>
     <nav id="nav" aria-label="Principal">
       <a href="#why">Contexto</a><a href="#decision">Decisiones</a><a href="#twin">Arquitectura</a><a href="#factory">P0 + Casos de uso</a><a href="#economics">Economics</a><a href="#governance">Governance</a><a href="#assurance">Assurance</a><a href="#delivery">Delivery</a><a href="#documents">Docs</a>
     </nav>
@@ -137,7 +146,107 @@
   </div>
 </aside>
 
+
+<aside id="tenderSidebar" class="tender-sidebar tender-only" aria-label="Navegación Licitación P0">
+  <div class="tender-sidebar-inner">
+    <span class="sidebar-eyebrow">LICITACIÓN P0 · V7</span>
+    <nav class="side-nav">
+      <a href="#tender-summary"><i>01</i><span>Ficha contractual</span></a>
+      <a href="#tender-technical"><i>02</i><span>Condiciones técnicas</span></a>
+      <a href="#tender-economic"><i>03</i><span>Condiciones económicas</span></a>
+      <a href="#tender-compliance"><i>04</i><span>Cumplimiento PPT</span></a>
+      <a href="#tender-evaluation"><i>05</i><span>Valoración propuesta</span></a>
+      <a href="#tender-delivery"><i>06</i><span>Entrega y aceptación</span></a>
+      <a href="#tender-readiness"><i>07</i><span>Readiness del pliego</span></a>
+    </nav>
+    <div class="sidebar-help"><b>Fuente base</b><span>Redacción proyecto(2).docx</span></div>
+  </div>
+</aside>
+
 <main id="main">
+
+<section id="tenderWorkspace" class="tender-workspace tender-only" aria-labelledby="tenderTitle">
+  <div class="tender-hero">
+    <div class="shell">
+      <div class="tender-hero-grid">
+        <div>
+          <span class="tender-kicker">TERCER ESPACIO · LICITACIÓN / PLIEGO</span>
+          <h1 id="tenderTitle">P0 preparado para <em>contratar, comparar y aceptar</em>.</h1>
+          <p>La V7 convierte la redacción de P0 en un espacio de licitación: objeto, alcance, prescripciones técnicas, condiciones económicas, criterios de valoración, evidencias y asuntos pendientes de cierre contractual.</p>
+          <div class="tender-tags"><span>P0 único</span><span>UC1–UC7 derivados</span><span>24 meses base</span><span>12 meses opcionales</span></div>
+        </div>
+        <aside class="tender-hero-card">
+          <span>ESTADO DEL PLIEGO</span>
+          <b id="tenderReadinessHero">—</b>
+          <p id="tenderReadinessHeroText">Cargando condiciones de licitación…</p>
+          <small>No constituye dictamen jurídico ni expediente de contratación definitivo.</small>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <div class="shell tender-shell">
+    <section id="tender-summary" class="tender-section">
+      <header class="tender-section-head"><div><span>01 · FICHA CONTRACTUAL</span><h2>Qué se contrata, durante cuánto tiempo y dónde están los límites.</h2></div><p>Lectura licitable del borrador aportado, manteniendo P0 como único proyecto inicial y los UC como desarrollos derivados.</p></header>
+      <div id="tenderSummaryCards" class="tender-summary-grid"></div>
+      <div id="tenderReconciliation" class="tender-reconciliation"></div>
+      <div class="tender-two-col">
+        <article class="tender-box"><span>INCLUIDO EN P0</span><ul id="tenderIncluded"></ul></article>
+        <article class="tender-box exclusions"><span>NO INCLUIDO / CONTRATACIÓN ADICIONAL</span><ul id="tenderExcluded"></ul></article>
+      </div>
+    </section>
+
+    <section id="tender-technical" class="tender-section">
+      <header class="tender-section-head"><div><span>02 · CONDICIONES TÉCNICAS</span><h2>Prescripciones mínimas para considerar P0 técnicamente conforme.</h2></div><p>Condiciones estructuradas por dominios y trazadas contra las 18 prescripciones PPT del borrador.</p></header>
+      <div id="technicalConditionCards" class="technical-condition-grid"></div>
+      <details class="tender-details" open><summary>Matriz completa PPT-01 → PPT-18 <span>respuesta Keedio + aceptación</span></summary><div class="table-wrap"><table id="technicalPptTable" class="tender-table"></table></div></details>
+    </section>
+
+    <section id="tender-economic" class="tender-section">
+      <header class="tender-section-head"><div><span>03 · CONDICIONES ECONÓMICAS</span><h2>Separar servicios Keedio, infraestructura Soliss, opcionales y condiciones pendientes.</h2></div><p>Los importes del borrador se presentan como base de licitación. Las condiciones no soportadas por el documento quedan expresamente pendientes, no inventadas.</p></header>
+      <div id="economicSummary" class="economic-summary-grid"></div>
+      <div class="tender-two-col economic-layout">
+        <article><h3>Desglose económico del borrador</h3><div class="table-wrap"><table id="tenderPhaseTable" class="tender-table"></table></div></article>
+        <article><h3>Condiciones comerciales</h3><div id="commercialConditions" class="commercial-conditions"></div></article>
+      </div>
+      <details class="tender-details"><summary>Infraestructura a adquirir directamente por Soliss <span>sizing orientativo</span></summary><div class="table-wrap"><table id="tenderInfraTable" class="tender-table"></table></div></details>
+    </section>
+
+    <section id="tender-compliance" class="tender-section">
+      <header class="tender-section-head"><div><span>04 · RESPUESTA DE CUMPLIMIENTO</span><h2>Una licitación debe poder verificarse, no solo describirse.</h2></div><p>La matriz permite revisar prescripción, respuesta Keedio, entregable de aceptación y condición/dependencia.</p></header>
+      <div class="tender-toolbar"><input id="tenderComplianceSearch" type="search" placeholder="Buscar PPT, Rancher, GPU, RAG, DORA…"><div id="tenderComplianceFilters" class="segmented"><button class="active" data-tender-filter="all">Todas</button><button data-tender-filter="cumple">Cumple</button><button data-tender-filter="condicionado">Condicionado</button><button data-tender-filter="gate">Gate/PoC</button></div></div>
+      <div id="tenderComplianceGrid" class="tender-compliance-grid"></div>
+    </section>
+
+    <section id="tender-evaluation" class="tender-section">
+      <header class="tender-section-head"><div><span>05 · MODELO DE VALORACIÓN PROPUESTO</span><h2>Cómo podría puntuarse la licitación sin confundirlo con criterio contractual cerrado.</h2></div><p>Working draft de Keedio para ordenar la evaluación. La ponderación deberá validarse por Soliss/Compras/Legal antes de formar parte de un pliego real.</p></header>
+      <div class="working-banner">PROPUESTA DE TRABAJO · NO PROCEDE DEL DOCUMENTO APORTADO · PENDIENTE DE VALIDACIÓN DE SOLISS</div>
+      <div id="tenderEvaluationGrid" class="evaluation-grid"></div>
+      <div class="evaluation-total"><span>Puntuación simulada</span><b id="evaluationTotal">0 / 100</b><small>Herramienta de workshop, no evaluación oficial.</small></div>
+    </section>
+
+    <section id="tender-delivery" class="tender-section">
+      <header class="tender-section-head"><div><span>06 · ENTREGA Y ACEPTACIÓN</span><h2>Entregables, gates y recursos de Soliss forman parte de la capacidad de aceptación.</h2></div><p>El adjudicatario no termina al instalar componentes: debe dejar evidencia, documentación, transferencia y criterios Go/No-Go.</p></header>
+      <div class="tender-two-col">
+        <article><h3>Gates Go/No-Go</h3><div id="tenderGates" class="tender-gates"></div></article>
+        <article><h3>Dedicación requerida de Soliss</h3><div id="tenderSolissEffort" class="tender-effort"></div></article>
+      </div>
+      <details class="tender-details"><summary>Entregables mínimos y criterio de aceptación <span>F0 → S1</span></summary><div class="table-wrap"><table id="tenderDeliverables" class="tender-table"></table></div></details>
+    </section>
+
+    <section id="tender-readiness" class="tender-section">
+      <header class="tender-section-head"><div><span>07 · TENDER READINESS</span><h2>Qué está listo y qué falta antes de convertir el borrador en expediente formal.</h2></div><p>Checklist contractual/técnico/económico. No sustituye revisión de contratación, legal, fiscal, DPO o auditoría.</p></header>
+      <div id="tenderReadinessGrid" class="tender-readiness-grid"></div>
+      <div class="tender-actions">
+        <button id="downloadTenderTech" type="button">↓ Condiciones técnicas CSV</button>
+        <button id="downloadTenderEconomic" type="button">↓ Condiciones económicas CSV</button>
+        <button id="downloadTenderReadiness" type="button">↓ Readiness CSV</button>
+        <a href="private/documents/23_V7_Borrador_Redaccion_Licitacion_P0.docx" data-private-tender-doc>Documento fuente ↗</a>
+      </div>
+    </section>
+  </div>
+</section>
+
 <section id="hero" class="hero present-step" data-show="board tech compliance">
   <div class="mesh"></div>
   <div class="shell hero-grid">

@@ -195,6 +195,8 @@ window.P0.research = {
     {q:"¿Cómo mediremos valor y no solo actividad?",a:"Cada UC debe arrancar con baseline, KPI, target, owner y fuente de evidencia. La web incluye un Measurement Blueprint sin inventar resultados.",target:"#factory"}
   ],
   changelog:[
+    {version:"V7.0",date:"02 Sep 2026",items:["Tercer acceso Licitación/Pliego","Ficha contractual","Condiciones técnicas","Condiciones económicas","PPT-01→PPT-18","Baremación working draft","Tender Readiness","Control de coherencia económico","Descargables CSV","Documento fuente integrado"]},
+    {version:"V6.2",date:"02 Sep 2026",items:["UX/UI Refinement","Boardroom workspace","Sidebar","Public simplificado","Tipografía mínima 12 px","Login simplificado","Responsive y accesibilidad"]},
     {version:"V6.0",date:"02 Sep 2026",items:["Bundle público/privado físico","Keycloak OIDC + PKCE","P0 Copilot local","Command Palette","Live Decision Board","Decision Readiness","Universal Provenance","Source Freshness","Control Traceability Graph","P0 Capability Contracts","UC→KPI→Evidence","Presentation & Accessibility","QR público","One Page Executive Brief","Version Compare"]},
     {version:"V5.0",date:"02 Sep 2026",items:["Access Hub único","Visión pública + Boardroom en una sola web","Navegación y copy por modo","Story público 6 min + Boardroom 9 min","Consentimiento Boardroom","URLs compartibles por vista","Cambio de acceso persistente por sesión","Modelo de despliegue seguro documentado"]},
     {version:"V4.4",date:"01 Sep 2026",items:["Executive Story Mode","9 escenas Consejo","Autoplay y cronómetros","Notas del presentador","Pausa Q&A","Deep dive + reanudación"]},

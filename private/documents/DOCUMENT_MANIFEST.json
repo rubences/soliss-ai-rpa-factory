@@ -1,8 +1,8 @@
 {
-  "product": "Soliss AI/RPA Factory · V6",
+  "product": "Soliss AI/RPA Factory · V7",
   "proponent": "Keedio",
   "client": "Soliss",
-  "classification": "BOARDROOM",
+  "classification": "BOARDROOM / LICITACION",
   "verified": "2026-09-02",
   "files": [
     {
@@ -124,6 +124,31 @@
       "path": "private/documents/22_V6_Live_Decision_Board_Template.csv",
       "bytes": 298,
       "sha256": "70e1e42920a8f116eff386a7eda50844610bc3bf39aa44c2c385d4ebbe52329e"
+    },
+    {
+      "path": "private/documents/23_V7_Borrador_Redaccion_Licitacion_P0.docx",
+      "bytes": 4610445,
+      "sha256": "30c3dc265982ac0dc123f09f8a9c6d20820e602db112660cf7cf46faa0e68270"
+    },
+    {
+      "path": "private/documents/24_V7_Condiciones_Tecnicas_P0.csv",
+      "bytes": 2610,
+      "sha256": "b0eff72a01e408978642774b8323c468f37bcbb4f383d61bdd31717214ef9fd3"
+    },
+    {
+      "path": "private/documents/25_V7_Condiciones_Economicas_P0.csv",
+      "bytes": 862,
+      "sha256": "1431c8d289b90dd27e77fa8118150dd21ad62e088270b3ef825febaddfb14434"
+    },
+    {
+      "path": "private/documents/26_V7_Tender_Readiness_Checklist.csv",
+      "bytes": 1339,
+      "sha256": "6817a68308fed1cee1a19f995eb323c9f49fb933e5a965205848bd98a05ad42b"
+    },
+    {
+      "path": "private/documents/27_V7_Criterios_Valoracion_Propuestos.csv",
+      "bytes": 1059,
+      "sha256": "5ade19a6e1ffc5d27ccd2c8aa8eb10d98a8bbdf8b2d6935844ec30c36a024f23"
     }
   ]
 }

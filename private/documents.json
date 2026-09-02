@@ -277,16 +277,56 @@
           "size": "0 KB",
           "sha256": "70e1e42920a8f116eff386a7eda50844610bc3bf39aa44c2c385d4ebbe52329e",
           "preview": false
+        },
+        {
+          "type": "DOCX",
+          "path": "private/documents/23_V7_Borrador_Redaccion_Licitacion_P0.docx",
+          "sizeBytes": 4610445,
+          "size": "4,4 MB",
+          "sha256": "30c3dc265982ac0dc123f09f8a9c6d20820e602db112660cf7cf46faa0e68270",
+          "preview": false
+        },
+        {
+          "type": "CSV",
+          "path": "private/documents/24_V7_Condiciones_Tecnicas_P0.csv",
+          "sizeBytes": 2610,
+          "size": "3 KB",
+          "sha256": "b0eff72a01e408978642774b8323c468f37bcbb4f383d61bdd31717214ef9fd3",
+          "preview": false
+        },
+        {
+          "type": "CSV",
+          "path": "private/documents/25_V7_Condiciones_Economicas_P0.csv",
+          "sizeBytes": 862,
+          "size": "1 KB",
+          "sha256": "1431c8d289b90dd27e77fa8118150dd21ad62e088270b3ef825febaddfb14434",
+          "preview": false
+        },
+        {
+          "type": "CSV",
+          "path": "private/documents/26_V7_Tender_Readiness_Checklist.csv",
+          "sizeBytes": 1339,
+          "size": "1 KB",
+          "sha256": "6817a68308fed1cee1a19f995eb323c9f49fb933e5a965205848bd98a05ad42b",
+          "preview": false
+        },
+        {
+          "type": "CSV",
+          "path": "private/documents/27_V7_Criterios_Valoracion_Propuestos.csv",
+          "sizeBytes": 1059,
+          "size": "1 KB",
+          "sha256": "5ade19a6e1ffc5d27ccd2c8aa8eb10d98a8bbdf8b2d6935844ec30c36a024f23",
+          "preview": false
         }
       ]
     }
   ],
   "pack": {
     "path": "private/documents/Soliss_P0_Document_Pack_Keedio.zip",
-    "size": "22,1 MB",
-    "sizeBytes": 23183841,
-    "sha256": "52f13804eb40806c5b51697f9fbf29b989317b1ce95b81815eb7aa55f67fc3b7",
-    "fileCount": 24
+    "size": "26,2 MB",
+    "sizeBytes": 27517848,
+    "sha256": "1d6eae5cf038d2223fee435120f08bedeb267c0554305dfff3a212472b196ae5",
+    "fileCount": 29
   },
   "manifest": {
     "json": "private/documents/DOCUMENT_MANIFEST.json",

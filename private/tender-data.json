@@ -1,0 +1,718 @@
+{
+  "version": "7.0",
+  "classification": "LICITACION_WORKING_DRAFT",
+  "source": "Redacción proyecto(2).docx",
+  "sourceDate": "Septiembre 2026",
+  "meta": {
+    "object": "Definir, valorar y planificar P0 de Soliss AI/RPA Factory como infraestructura crítica on-premise y plataforma corporativa gobernada para IA/RPA.",
+    "contractScope": "P0 como único proyecto inicial contratado + servicio co-gestionado S1. UC1–UC7 quedan como casos derivados y requieren partidas adicionales.",
+    "baseTerm": "24 meses",
+    "optionalTerm": "12 meses (M25–M36)",
+    "deliveryModel": "Keedio diseña, implanta, prueba y transfiere · Soliss valida, adquiere infraestructura y conserva accountability.",
+    "infraModel": "Hardware, licencias base, CPD y soporte de fabricante se adquieren/contratan directamente por Soliss."
+  },
+  "included": [
+    "Plan de proyecto, gobernanza, calendario, riesgos e hitos de control.",
+    "Inventario AS-IS y diseño TO-BE on-premise federado.",
+    "Blueprint Linux, Rancher/RKE2, Kubernetes, dominios y sizing.",
+    "Identidad, permisos, secretos, cifrado, observabilidad y auditoría.",
+    "Model Gateway, RAG gobernado, vector DB y Model Registry a nivel piloto/controlado.",
+    "PoC Apache Gravitino y estrategia de fallback.",
+    "Patrones de conectividad con core mediante APIs/conectores.",
+    "Pruebas, UAT, criterios de aceptación y matriz de evidencias.",
+    "Manuales, runbooks, documentación, repositorios y transferencia.",
+    "Gestión del cambio, formación y servicio co-gestionado S1."
+  ],
+  "excluded": [
+    "Compra/reventa de hardware, licencias base o soporte fabricante por Keedio.",
+    "Sustitución de ERP, core de siniestros, sistemas actuariales o DMS.",
+    "Construcción funcional profunda de UC1–UC7 salvo pilotos/patrones expresamente pactados.",
+    "Operación 24x7 crítica sin servicio/SLAs específicos.",
+    "Certificación legal/contable final; Keedio aporta evidencias técnicas.",
+    "Migraciones masivas de históricos fuera de datasets piloto."
+  ],
+  "technicalConditions": [
+    {
+      "id": "CT-01",
+      "title": "Arquitectura on-premise soberana",
+      "requirement": "La plataforma debe operar en infraestructura Soliss, sin dependencia obligatoria de cloud externo y con separación clara entre plano de gestión, servicios comunes y dominios.",
+      "acceptance": "Blueprint TO-BE + arquitectura lógica/física aprobada."
+    },
+    {
+      "id": "CT-02",
+      "title": "Linux, Rancher y RKE2",
+      "requirement": "Servidores Linux endurecidos, RKE2 como distribución Kubernetes y Rancher como gestión de flota, con HA y ciclo de vida operativo.",
+      "acceptance": "Clúster de gestión + guía de instalación/hardening + plan operativo."
+    },
+    {
+      "id": "CT-03",
+      "title": "Segregación multiclúster",
+      "requirement": "Aislamiento por empresa/dominio, RBAC/ABAC, namespaces, políticas de red y separación lógica/operativa.",
+      "acceptance": "Matriz de dominios, roles, permisos y pruebas de aislamiento."
+    },
+    {
+      "id": "CT-04",
+      "title": "Cómputo IA y GPU local",
+      "requirement": "Capacidad para LLM, embeddings, OCR, visión y reranking, dimensionada por concurrencia y resiliencia.",
+      "acceptance": "Sizing G2 + pruebas de capacidad; compra directa Soliss."
+    },
+    {
+      "id": "CT-05",
+      "title": "Persistencia, lago y backup",
+      "requirement": "Almacenamiento persistente, objetos/vectorial, snapshots, retención, backup inmutable y restore probado.",
+      "acceptance": "Diseño de persistencia/DR + informe de restore."
+    },
+    {
+      "id": "CT-06",
+      "title": "Identidad, secretos y cifrado",
+      "requirement": "Keycloak/OIDC/LDAP/AD, RBAC/ABAC, TLS, cifrado en reposo, gestión y rotación de secretos.",
+      "acceptance": "Matriz de acceso + modelo de secretos/certificados + evidencias."
+    },
+    {
+      "id": "CT-07",
+      "title": "Model Gateway y RAG gobernado",
+      "requirement": "Control de modelos, cuotas, caché, logs, fallback, fuentes curadas, embeddings, citas y trazabilidad.",
+      "acceptance": "PoC Gateway/RAG con métricas, fuentes y pruebas de permisos."
+    },
+    {
+      "id": "CT-08",
+      "title": "Catálogo federado con fallback",
+      "requirement": "Gravitino se evaluará como PoC no bloqueante; el diseño debe disponer de alternativa de contingencia.",
+      "acceptance": "Informe G3 + benchmark + prueba/documentación de fallback."
+    },
+    {
+      "id": "CT-09",
+      "title": "Integraciones reversibles",
+      "requirement": "ERP, siniestros, DMS, actuarial e IT se integrarán mediante APIs/adaptadores sin sustitución de sistemas core.",
+      "acceptance": "Especificación de conectores, contratos API y pruebas."
+    },
+    {
+      "id": "CT-10",
+      "title": "Observabilidad y auditabilidad",
+      "requirement": "Métricas, logs, trazas, coste/uso, eventos de seguridad y evidencias operativas deben quedar centralizados.",
+      "acceptance": "Dashboard/plan de observabilidad + Evidence Registry."
+    },
+    {
+      "id": "CT-11",
+      "title": "Pruebas, UAT y continuidad",
+      "requirement": "Infra, Kubernetes, seguridad, RAG, Gateway, UAT, backup y DR deben disponer de pruebas y criterios Go/No-Go.",
+      "acceptance": "Plan de pruebas + informes + acta UAT + G4."
+    },
+    {
+      "id": "CT-12",
+      "title": "Documentación, cambio y transferencia",
+      "requirement": "Código/repositorios, manuales, runbooks, formación, cambio y soporte S1 deben permitir internalizar la capacidad.",
+      "acceptance": "Paquete documental, sesiones, acta de transferencia y modelo S1."
+    }
+  ],
+  "ppt": [
+    [
+      "PPT-01",
+      "Plataforma on-premise",
+      "Solución en CPD/infraestructura Soliss sin dependencia obligatoria de cloud externo.",
+      "Blueprint y arquitectura TO-BE aprobada.",
+      "cumple",
+      "P0"
+    ],
+    [
+      "PPT-02",
+      "Base Linux endurecida",
+      "Servidores Linux empresariales con hardening, parches y configuración segura.",
+      "Guía de instalación y checklist de hardening.",
+      "cumple",
+      "P0"
+    ],
+    [
+      "PPT-03",
+      "Rancher/RKE2",
+      "Rancher para flota y RKE2 como Kubernetes seguro.",
+      "Clúster de gestión y plan de operación.",
+      "cumple",
+      "P0"
+    ],
+    [
+      "PPT-04",
+      "Segregación multiclúster",
+      "Clúster de grupo y clústeres por empresa/dominio con aislamiento.",
+      "Diseño multitenant y matriz de dominios.",
+      "cumple",
+      "P0"
+    ],
+    [
+      "PPT-05",
+      "GPU local",
+      "Nodos GPU para LLM, OCR, embeddings, visión y reranking.",
+      "Sizing y propuesta de inversión Soliss.",
+      "condicionado",
+      "Compra Soliss / G2"
+    ],
+    [
+      "PPT-06",
+      "Almacenamiento persistente",
+      "MinIO/Ceph/SAN/NAS, snapshots, retención y backup inmutable.",
+      "Diseño de persistencia y DR.",
+      "condicionado",
+      "Infra Soliss"
+    ],
+    [
+      "PPT-07",
+      "Identidad y permisos",
+      "Keycloak, OIDC/LDAP/AD, RBAC/ABAC y segregación.",
+      "Matriz de roles y permisos.",
+      "cumple",
+      "P0"
+    ],
+    [
+      "PPT-08",
+      "Secretos y cifrado",
+      "Vault o K8s Secrets, rotación, TLS y cifrado.",
+      "Modelo de secretos y certificados.",
+      "cumple",
+      "P0"
+    ],
+    [
+      "PPT-09",
+      "Model Gateway",
+      "Control de modelos, cuotas, logs, caché, fallback, costes y HITL.",
+      "Especificación técnica del gateway.",
+      "cumple",
+      "P0"
+    ],
+    [
+      "PPT-10",
+      "RAG gobernado",
+      "Fuentes curadas, embeddings, vector DB, citas y trazabilidad.",
+      "PoC RAG y criterios de calidad.",
+      "cumple",
+      "P0"
+    ],
+    [
+      "PPT-11",
+      "Catálogo federado",
+      "Gravitino PoC con alternativa de fallback.",
+      "Informe Gate G3 y plan de contingencia.",
+      "gate",
+      "G3"
+    ],
+    [
+      "PPT-12",
+      "Observabilidad",
+      "Métricas, logs, trazas, SLA, costes y auditoría operativa.",
+      "Dashboard y plan de observabilidad.",
+      "cumple",
+      "P0"
+    ],
+    [
+      "PPT-13",
+      "Integraciones core",
+      "Conectores con ERP, siniestros, DMS y bases actuariales sin sustituir core.",
+      "Especificaciones API/conectores.",
+      "condicionado",
+      "Accesos Soliss"
+    ],
+    [
+      "PPT-14",
+      "Cumplimiento",
+      "Evidencias de apoyo a DORA, AI Act, auditoría, exit plan y terceros TIC.",
+      "Matriz normativa y evidencias.",
+      "condicionado",
+      "Validación Soliss Legal/Compliance"
+    ],
+    [
+      "PPT-15",
+      "Pruebas y UAT",
+      "Casos de prueba, aceptación, cobertura y criterios Go/No-Go.",
+      "Plan de pruebas e informe UAT.",
+      "cumple",
+      "P0"
+    ],
+    [
+      "PPT-16",
+      "Documentación",
+      "Manuales, runbooks, código, repositorios y transferencia.",
+      "Paquete documental y repositorios.",
+      "cumple",
+      "P0"
+    ],
+    [
+      "PPT-17",
+      "Gestión del cambio",
+      "Workshops, formación, comunicaciones y adopción.",
+      "Plan de cambio y materiales.",
+      "cumple",
+      "P0"
+    ],
+    [
+      "PPT-18",
+      "Servicio co-gestionado",
+      "Soporte N2/N3, gobierno, observabilidad y mejora continua.",
+      "Modelo S1 y cuadro de seguimiento.",
+      "cumple",
+      "S1"
+    ]
+  ],
+  "economics": {
+    "construction": 105786.2,
+    "service": 77000.0,
+    "base24": 182786.2,
+    "optional": 42000.0,
+    "infraLow": 180000,
+    "infraHigh": 280000,
+    "tcoMid": 412786.2,
+    "phases": [
+      [
+        "F0 Activación inicial",
+        "M1–M2",
+        223,
+        20000,
+        89.69,
+        "Alcance, discovery, AS-IS, TO-BE, gobierno inicial y backlog."
+      ],
+      [
+        "F1 Blueprint infraestructura",
+        "M1–M3",
+        285,
+        25500,
+        89.47,
+        "Linux, Rancher/RKE2, sizing, red, seguridad, arquitectura y compras Soliss."
+      ],
+      [
+        "F2 Data Mesh y Gravitino PoC",
+        "M2–M4",
+        240,
+        21900,
+        91.25,
+        "Catálogo federado, metadatos, linaje, dominios y fallback."
+      ],
+      [
+        "F3 Model Gateway y RAG",
+        "M3–M5",
+        279,
+        25886.2,
+        92.78,
+        "Gateway, vector DB, registry, RAG y patrones IA/RPA."
+      ],
+      [
+        "F4 Seguridad, UAT y cierre",
+        "M4–M6",
+        145,
+        12500,
+        86.21,
+        "DORA/AI Act, pruebas, runbooks, transferencia y paso a S1."
+      ],
+      [
+        "Subtotal construcción P0",
+        "M1–M6",
+        1172,
+        105786.2,
+        90.26,
+        "Incluye F0; no sumar F0 de nuevo."
+      ],
+      [
+        "S1 soporte co-gestionado",
+        "M3–M24",
+        880,
+        77000,
+        87.5,
+        "Soporte N2/N3, gobierno, observabilidad y evolución controlada."
+      ],
+      [
+        "Total Keedio M1–M24",
+        "M1–M24",
+        2052,
+        182786.2,
+        89.08,
+        "Construcción P0 + servicio S1."
+      ],
+      [
+        "S2 opcional",
+        "M25–M36",
+        480,
+        42000,
+        87.5,
+        "Madurez, continuidad y evolución opcional."
+      ]
+    ],
+    "infra": [
+      [
+        "Clúster gestión Rancher",
+        "3 nodos control plane/quórum y gestión",
+        "18.000–30.000 €"
+      ],
+      [
+        "Clúster gobierno",
+        "Keycloak, Gravitino PoC, PostgreSQL y servicios comunes",
+        "25.000–45.000 €"
+      ],
+      [
+        "Clúster dominios",
+        "Nodos por empresa/dominio, conectores y pipelines",
+        "45.000–90.000 €"
+      ],
+      [
+        "Cómputo GPU local",
+        "LLM, embeddings, OCR, visión y reranking",
+        "60.000–80.000 € recomendado P0"
+      ],
+      [
+        "Almacenamiento y lago",
+        "Ceph/MinIO/SAN/NAS, 20–100 TB",
+        "35.000–90.000 €"
+      ],
+      [
+        "Backup y resiliencia",
+        "Copia inmutable, retención y recuperación",
+        "20.000–60.000 €"
+      ],
+      [
+        "Red y seguridad",
+        "Firewalls, VPN, balanceo, TLS y CA interna",
+        "15.000–45.000 €"
+      ],
+      [
+        "Licencias y soporte",
+        "Rancher Prime opcional, fabricante, SO",
+        "0–60.000 €/año"
+      ]
+    ],
+    "commercial": [
+      [
+        "IVA",
+        "No incluido salvo indicación expresa",
+        "defined"
+      ],
+      [
+        "Infraestructura física",
+        "Adquisición directa por Soliss; no la compra Keedio",
+        "defined"
+      ],
+      [
+        "UC1–UC7",
+        "Presupuesto adicional por caso tras backlog P0",
+        "defined"
+      ],
+      [
+        "S2 M25–M36",
+        "42.000 € opcionales",
+        "defined"
+      ],
+      [
+        "Operación crítica 24x7",
+        "Excluida salvo contratación de SLA específico",
+        "defined"
+      ],
+      [
+        "Migración masiva histórica",
+        "Excluida fuera de datasets piloto",
+        "defined"
+      ],
+      [
+        "Forma/calendario de pago",
+        "Pendiente de definición contractual",
+        "pending"
+      ],
+      [
+        "Validez de la oferta",
+        "Pendiente de definición",
+        "pending"
+      ],
+      [
+        "Revisión de precios",
+        "Pendiente de definición",
+        "pending"
+      ],
+      [
+        "Garantías / penalizaciones",
+        "Pendiente de definición",
+        "pending"
+      ],
+      [
+        "Propiedad intelectual/licencias de entregables",
+        "Requiere cláusula contractual detallada",
+        "pending"
+      ],
+      [
+        "SLA y niveles de servicio S1",
+        "Requiere cuadro operativo contractual definitivo",
+        "pending"
+      ]
+    ]
+  },
+  "gates": [
+    [
+      "G1",
+      "Semana 2",
+      "Alcance, AS-IS, backlog y responsables",
+      "Acta de alcance, backlog priorizado y riesgos aceptados",
+      "Replanificar antes de seguir consumiendo presupuesto"
+    ],
+    [
+      "G2",
+      "Semana 6",
+      "Blueprint, sizing, red, seguridad e infraestructura",
+      "Aprobación IT/Finanzas y decisión de compras",
+      "Sandbox temporal si hardware se retrasa"
+    ],
+    [
+      "G3",
+      "Semana 9",
+      "Gravitino PoC, Gateway, RAG, vector DB y gobierno",
+      "Latencia, estabilidad, permisos, trazabilidad y fallback",
+      "Fallback metastore/Polaris/PostgreSQL"
+    ],
+    [
+      "G4",
+      "Semana 12",
+      "UAT, seguridad, runbooks, transferencia y S1",
+      "Aceptación ejecutiva/técnica y cierre de críticos",
+      "Bloquear S1 o acotar remediación"
+    ]
+  ],
+  "solissEffort": [
+    [
+      "Sponsor ejecutivo",
+      "1–2 h/mes + gates",
+      "Decisiones de alcance, presupuesto y priorización"
+    ],
+    [
+      "Responsable interno transversal",
+      "50% F0–F4; 20–30% S1",
+      "Coordinar negocio, IT, seguridad, datos, finanzas y aceptación"
+    ],
+    [
+      "IT infraestructura",
+      "mín. 12 h/semana F1–F3",
+      "Linux/RKE2, CPD, red, almacenamiento, backup y seguridad"
+    ],
+    [
+      "Seguridad/Riesgos/DPO/Legal",
+      "2–4 h/semana según fase",
+      "DORA, AI Act, privacidad, logs, evidencias y contratos"
+    ],
+    [
+      "Data owners / áreas",
+      "sesiones por sprint y UAT",
+      "Fuentes, permisos, calidad, reglas y aceptación"
+    ],
+    [
+      "Líder de cambio",
+      "10–20% F0–F4",
+      "Comunicación, formación y adopción"
+    ]
+  ],
+  "deliverables": [
+    [
+      "Plan de proyecto",
+      "General",
+      "F0",
+      "Cronograma, recursos, riesgos, metodología, RACI y reporting",
+      "Aprobado en G1"
+    ],
+    [
+      "Especificación funcional",
+      "Funcional",
+      "F0–F3",
+      "Procesos, roles, UC1–UC7, historias, criterios y límites",
+      "Validación de responsables de área"
+    ],
+    [
+      "Especificación técnica",
+      "Técnico",
+      "F1–F3",
+      "Arquitectura, APIs, datos, integraciones, seguridad y operación",
+      "Aprobación IT/Security"
+    ],
+    [
+      "Diseño de solución",
+      "Técnico",
+      "F1–F3",
+      "Diagramas, flujos, arquitectura lógica/física y patrones",
+      "Sin huecos críticos antes de G3"
+    ],
+    [
+      "Plan de pruebas",
+      "Calidad",
+      "F3–F4",
+      "Casos, cobertura, UAT, rendimiento, seguridad y trazabilidad",
+      "Aprobado antes de UAT"
+    ],
+    [
+      "Informes de avance",
+      "General",
+      "Todas",
+      "Estado, riesgos, desviaciones, decisiones y acciones",
+      "Periodicidad/comité acordados"
+    ],
+    [
+      "Código y repositorios",
+      "Técnico",
+      "F2–F4",
+      "Repos, pipelines, versionado, documentación y despliegues",
+      "Entrega trazable y reproducible"
+    ],
+    [
+      "Manual de usuario",
+      "Usuario",
+      "F4",
+      "Uso de capacidades piloto, límites y escalado",
+      "Aceptación por usuarios clave"
+    ],
+    [
+      "Manual técnico",
+      "Técnico",
+      "F4",
+      "Instalación, configuración, mantenimiento y troubleshooting",
+      "Aceptación IT"
+    ],
+    [
+      "Runbooks operativos",
+      "Operación",
+      "F4/S1",
+      "Backup, DR, incidentes, secretos, parches",
+      "Validación en simulacro"
+    ],
+    [
+      "Informe de cierre",
+      "General",
+      "F4",
+      "Evaluación final, lecciones, objetivos y pendientes",
+      "Aprobación G4"
+    ],
+    [
+      "Roadmap UC1–UC7",
+      "Negocio",
+      "F4/S1",
+      "Priorización, estimaciones y activación",
+      "Aprobación comité"
+    ]
+  ],
+  "evaluation": [
+    {
+      "id": "T1",
+      "group": "Técnica",
+      "criterion": "Arquitectura, escalabilidad y soberanía on-premise",
+      "max": 15
+    },
+    {
+      "id": "T2",
+      "group": "Técnica",
+      "criterion": "Seguridad, DORA, AI Act, continuidad y evidencias",
+      "max": 12
+    },
+    {
+      "id": "T3",
+      "group": "Técnica",
+      "criterion": "Gobierno del dato, RAG y Model Gateway",
+      "max": 10
+    },
+    {
+      "id": "T4",
+      "group": "Técnica",
+      "criterion": "Migración, integración con core y reversibilidad",
+      "max": 10
+    },
+    {
+      "id": "T5",
+      "group": "Técnica",
+      "criterion": "Pruebas, UAT, calidad y criterios de aceptación",
+      "max": 8
+    },
+    {
+      "id": "T6",
+      "group": "Técnica",
+      "criterion": "Operación, cambio, documentación y transferencia",
+      "max": 8
+    },
+    {
+      "id": "T7",
+      "group": "Técnica",
+      "criterion": "Equipo, roles y capacidad de ejecución",
+      "max": 7
+    },
+    {
+      "id": "E1",
+      "group": "Económica",
+      "criterion": "Oferta económica de servicios P0 + S1",
+      "max": 20
+    },
+    {
+      "id": "E2",
+      "group": "Económica",
+      "criterion": "Transparencia TCO / infraestructura / costes variables",
+      "max": 5
+    },
+    {
+      "id": "E3",
+      "group": "Económica",
+      "criterion": "Opcionales, escalabilidad económica y condiciones comerciales",
+      "max": 5
+    }
+  ],
+  "readiness": [
+    [
+      "Objeto y alcance P0",
+      "ready",
+      "Objeto, incluido/excluido y UC derivados están definidos."
+    ],
+    [
+      "Prescripciones técnicas",
+      "ready",
+      "18 PPT con respuesta y entregable verificable."
+    ],
+    [
+      "Gates y aceptación",
+      "ready",
+      "G1–G4 y criterios Go/No-Go definidos."
+    ],
+    [
+      "Entregables",
+      "ready",
+      "Paquete mínimo y criterios de aceptación descritos."
+    ],
+    [
+      "Modelo de responsabilidades",
+      "ready",
+      "Keedio/Soliss y dedicaciones principales descritas."
+    ],
+    [
+      "Baseline económico por fases",
+      "warning",
+      "Existe discrepancia entre el borrador de licitación (1.172 h F0–F4) y el baseline Boardroom Final Cerrado (955 h)."
+    ],
+    [
+      "S1 en horas",
+      "warning",
+      "El borrador fija 880 h; el baseline Boardroom anterior no consolidaba horas S1."
+    ],
+    [
+      "Forma de pago e hitos de facturación",
+      "missing",
+      "No está especificada en el documento aportado."
+    ],
+    [
+      "Validez de oferta / revisión de precios",
+      "missing",
+      "No está especificada."
+    ],
+    [
+      "Garantías, penalizaciones y SLAs contractuales",
+      "missing",
+      "Necesitan clausulado contractual."
+    ],
+    [
+      "Propiedad intelectual y derechos de uso",
+      "warning",
+      "Se entregan repositorios/código, pero falta clausulado detallado de titularidad/licencias."
+    ],
+    [
+      "Procedimiento/CPV/solvencia administrativa",
+      "missing",
+      "Requiere definición por Compras/Legal; no se infiere en V7."
+    ],
+    [
+      "Cláusulas protección de datos/subencargados",
+      "warning",
+      "Hay controles técnicos, pero el clausulado jurídico debe cerrarse con Soliss."
+    ]
+  ]
+}

@@ -1,0 +1,13 @@
+﻿Condición,Valor/Regla,Estado
+IVA,No incluido salvo indicación expresa,defined
+Infraestructura física,Adquisición directa por Soliss; no la compra Keedio,defined
+UC1–UC7,Presupuesto adicional por caso tras backlog P0,defined
+S2 M25–M36,42.000 € opcionales,defined
+Operación crítica 24x7,Excluida salvo contratación de SLA específico,defined
+Migración masiva histórica,Excluida fuera de datasets piloto,defined
+Forma/calendario de pago,Pendiente de definición contractual,pending
+Validez de la oferta,Pendiente de definición,pending
+Revisión de precios,Pendiente de definición,pending
+Garantías / penalizaciones,Pendiente de definición,pending
+Propiedad intelectual/licencias de entregables,Requiere cláusula contractual detallada,pending
+SLA y niveles de servicio S1,Requiere cuadro operativo contractual definitivo,pending

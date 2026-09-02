@@ -226,3 +226,12 @@ V6.2 no añade nuevas capacidades funcionales: reorganiza V6.1 para mejorar lect
 - controles de al menos 40 px en desktop y 44 px en móvil;
 - etiquetas principales traducidas a español;
 - progressive disclosure en contenidos avanzados.
+
+
+## V7.0 — Tender Workspace
+
+La aplicación pasa a tener tres experiencias: Public, Boardroom y Licitación/Pliego. La tercera organiza el borrador `Redacción proyecto(2).docx` como espacio de contratación con condiciones técnicas y económicas, cumplimiento, valoración propuesta y readiness. Los importes y matrices permanecen bajo `/private`.
+
+
+### Arranque local V7
+Use `start_v7_windows.bat` o `python -m http.server 8000`. El tercer acceso está en `?view=tender`.

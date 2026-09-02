@@ -1,0 +1,13 @@
+﻿ID,Condición técnica,Requisito,Criterio de aceptación
+CT-01,Arquitectura on-premise soberana,"La plataforma debe operar en infraestructura Soliss, sin dependencia obligatoria de cloud externo y con separación clara entre plano de gestión, servicios comunes y dominios.",Blueprint TO-BE + arquitectura lógica/física aprobada.
+CT-02,"Linux, Rancher y RKE2","Servidores Linux endurecidos, RKE2 como distribución Kubernetes y Rancher como gestión de flota, con HA y ciclo de vida operativo.",Clúster de gestión + guía de instalación/hardening + plan operativo.
+CT-03,Segregación multiclúster,"Aislamiento por empresa/dominio, RBAC/ABAC, namespaces, políticas de red y separación lógica/operativa.","Matriz de dominios, roles, permisos y pruebas de aislamiento."
+CT-04,Cómputo IA y GPU local,"Capacidad para LLM, embeddings, OCR, visión y reranking, dimensionada por concurrencia y resiliencia.",Sizing G2 + pruebas de capacidad; compra directa Soliss.
+CT-05,"Persistencia, lago y backup","Almacenamiento persistente, objetos/vectorial, snapshots, retención, backup inmutable y restore probado.",Diseño de persistencia/DR + informe de restore.
+CT-06,"Identidad, secretos y cifrado","Keycloak/OIDC/LDAP/AD, RBAC/ABAC, TLS, cifrado en reposo, gestión y rotación de secretos.",Matriz de acceso + modelo de secretos/certificados + evidencias.
+CT-07,Model Gateway y RAG gobernado,"Control de modelos, cuotas, caché, logs, fallback, fuentes curadas, embeddings, citas y trazabilidad.","PoC Gateway/RAG con métricas, fuentes y pruebas de permisos."
+CT-08,Catálogo federado con fallback,Gravitino se evaluará como PoC no bloqueante; el diseño debe disponer de alternativa de contingencia.,Informe G3 + benchmark + prueba/documentación de fallback.
+CT-09,Integraciones reversibles,"ERP, siniestros, DMS, actuarial e IT se integrarán mediante APIs/adaptadores sin sustitución de sistemas core.","Especificación de conectores, contratos API y pruebas."
+CT-10,Observabilidad y auditabilidad,"Métricas, logs, trazas, coste/uso, eventos de seguridad y evidencias operativas deben quedar centralizados.",Dashboard/plan de observabilidad + Evidence Registry.
+CT-11,"Pruebas, UAT y continuidad","Infra, Kubernetes, seguridad, RAG, Gateway, UAT, backup y DR deben disponer de pruebas y criterios Go/No-Go.",Plan de pruebas + informes + acta UAT + G4.
+CT-12,"Documentación, cambio y transferencia","Código/repositorios, manuales, runbooks, formación, cambio y soporte S1 deben permitir internalizar la capacidad.","Paquete documental, sesiones, acta de transferencia y modelo S1."

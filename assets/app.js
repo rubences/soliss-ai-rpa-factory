@@ -392,7 +392,8 @@ Keedio propone, diseña e integra el patrón P0. Soliss decide, valida, adquiere
   // V5 · Unified Access Hub
   const ACCESS_NAV={
     public:[['Contexto','#why'],['P0 y casos','#factory'],['Confianza','#assurance']],
-    boardroom:[['Resumen','#hero'],['P0 y casos','#factory'],['Gobierno','#governance'],['Documentación','#documents']]
+    boardroom:[['Resumen','#hero'],['P0 y casos','#factory'],['Gobierno','#governance'],['Documentación','#documents']],
+    tender:[['Ficha','#tender-summary'],['Condiciones técnicas','#tender-technical'],['Condiciones económicas','#tender-economic'],['Cumplimiento','#tender-compliance'],['Valoración','#tender-evaluation'],['Aceptación','#tender-delivery'],['Readiness','#tender-readiness']]
   };
   const ACCESS_COPY={
     public:{
@@ -413,13 +414,26 @@ Keedio propone, diseña e integra el patrón P0. Soliss decide, valida, adquiere
       ribbon:'Boardroom Keedio → Soliss · economics, arquitectura, gobierno, delivery, evidencias y documentación de propuesta.',
       brand:'P0 · Boardroom Soliss',
       switchLabel:'Boardroom',
-      title:'Keedio → Soliss · P0 Boardroom V5',
+      title:'Keedio → Soliss · P0 Boardroom V7',
       scope:'P0 · Infraestructura crítica',
       status:'FINAL CERRADO',
       closeTitle:'P0 construye la capacidad. Soliss conserva el control. Los casos de uso capturan el valor.',
       closeText:'La siguiente decisión no es comprar siete soluciones. Es aprobar la base que permite desplegarlas con gobierno, seguridad, trazabilidad y un modelo operativo transferible.',
       closeHref:'#decision',
       closeCta:'Volver a decisiones'
+    },
+    tender:{
+      badge:'LICITACIÓN',
+      ribbon:'Licitación P0 · objeto, prescripciones técnicas, condiciones económicas, cumplimiento, valoración y readiness contractual.',
+      brand:'P0 · Licitación / Pliego V7',
+      switchLabel:'Licitación',
+      title:'Keedio → Soliss · Licitación P0 V7',
+      scope:'P0 · Licitación / Pliego',
+      status:'WORKING DRAFT',
+      closeTitle:'P0 dimensionado para contratar y aceptar.',
+      closeText:'La V7 separa condiciones técnicas, condiciones económicas, evidencias de aceptación y asuntos pendientes antes de un pliego formal.',
+      closeHref:'#tender-summary',
+      closeCta:'Volver a ficha contractual'
     }
   };
 
@@ -459,11 +473,9 @@ Keedio propone, diseña e integra el patrón P0. Soliss decide, valida, adquiere
     buildAccessNav(mode);
 
     if(mode==='boardroom'){
-      const a=['board','tech','compliance'].includes(document.body.dataset.audience)?document.body.dataset.audience:'board';
-      setAudience(a);
-    }else{
-      document.body.dataset.audience='all';
-    }
+      const a=['board','tech','compliance'].includes(document.body.dataset.audience)?document.body.dataset.audience:'board';setAudience(a);
+    }else{document.body.dataset.audience='all'}
+    if(mode==='tender'){window.V7Tender?.load?.().catch(e=>console.error(e));}
     updateExecutiveStoryForAccess(mode);
     if(remember)sessionStorage.setItem('soliss-p0-access',mode);
     if(updateUrl){
@@ -476,16 +488,18 @@ Keedio propone, diseña e integra el patrón P0. Soliss decide, valida, adquiere
     setTimeout(()=>{navSpyUpdate();$$('.reveal').forEach(el=>{if(getComputedStyle(el).display!=='none')el.classList.add('visible')})},40);
   }
 
+  let pendingPrivateMode='boardroom';
+  function configurePrivateLogin(mode){pendingPrivateMode=mode==='tender'?'tender':'boardroom';const tender=pendingPrivateMode==='tender';$('#loginAreaLabel').textContent=tender?'LICITACIÓN / PLIEGO P0':'BOARDROOM SOLISS';$('#loginAreaTitle').textContent=tender?'Área reservada de contratación':'Área reservada para revisión de P0';$('#loginAreaText').textContent=tender?'Introduce las credenciales para consultar condiciones técnicas y económicas.':'Introduce las credenciales facilitadas por Keedio.';}
   function showAccessPortal(preselect=null){
     document.body.dataset.access='portal';
     $('#accessPortal').hidden=false;
     $('#accessRibbon').hidden=true;
     $('#nav').classList.remove('open');
     $('#boardroomConsent').hidden=true;
-    $('#boardroomAck').checked=false;
-    $('#boardroomEnter').disabled=true;
-    if(preselect==='boardroom'){
-      $('#boardroomConsent').hidden=false;
+    $('#boardroomAck').checked=true;
+    $('#boardroomEnter').disabled=false;
+    if(preselect==='boardroom'||preselect==='tender'){
+      configurePrivateLogin(preselect);$('#boardroomConsent').hidden=false;
       setTimeout(()=>$('#boardroomConsent').scrollIntoView({behavior:'smooth',block:'nearest'}),50);
     }
   }
@@ -496,8 +510,10 @@ Keedio propone, diseña e integra el patrón P0. Soliss decide, valida, adquiere
     const remembered=sessionStorage.getItem('soliss-p0-access');
     if(requested==='public') return applyAccessMode('public',{updateUrl:false});
     if(requested==='boardroom')return showAccessPortal('boardroom');
+    if(requested==='tender')return showAccessPortal('tender');
     if(remembered==='public')return applyAccessMode('public',{updateUrl:true,remember:false});
     if(remembered==='boardroom')return showAccessPortal('boardroom');
+    if(remembered==='tender')return showAccessPortal('tender');
     showAccessPortal();
   }
 
@@ -505,41 +521,30 @@ Keedio propone, diseña e integra el patrón P0. Soliss decide, valida, adquiere
     const mode=b.dataset.accessChoice;
     if(mode==='public')applyAccessMode('public');
     else{
-      $('#boardroomConsent').hidden=false;
+      configurePrivateLogin(mode);$('#boardroomConsent').hidden=false;
       setTimeout(()=>$('#boardroomConsent').scrollIntoView({behavior:'smooth',block:'nearest'}),40);
     }
   }));
-  function updateBoardroomSubmitState(){
-    $('#boardroomEnter').disabled=false;
-  }
-
-  $('#boardroomUser').addEventListener('input',updateBoardroomSubmitState);
-  $('#boardroomPassword').addEventListener('input',updateBoardroomSubmitState);
-  $('#boardroomAck').addEventListener('change',updateBoardroomSubmitState);
-  updateBoardroomSubmitState();
   $('#boardroomEnter').addEventListener('click',async()=>{
     const err=$('#boardroomLoginError');
     if(err)err.hidden=true;
     const username=$('#boardroomUser')?.value?.trim()||'';
     const password=$('#boardroomPassword')?.value||'';
-    if(!$('#boardroomAck')?.checked){
-      if(err){err.textContent='Confirme el acceso Keedio → Soliss antes de continuar.';err.hidden=false}
-      return;
-    }
     try{
       const ok=window.V6Auth?await V6Auth.ensureBoardroom({username,password}):false;
       if(!ok){
         if(err){err.textContent='Usuario o contraseña incorrectos.';err.hidden=false}
         return;
       }
-      applyAccessMode('boardroom');
+      if(pendingPrivateMode==='tender')await window.V7Tender?.load?.();
+      applyAccessMode(pendingPrivateMode);
       if($('#boardroomPassword'))$('#boardroomPassword').value='';
     }catch(e){
       console.error(e);
       if(err){err.textContent=e.message;err.hidden=false}
     }
   });
-  $('#boardroomCancel').addEventListener('click',()=>{$('#boardroomConsent').hidden=true;$('#boardroomAck').checked=false;$('#boardroomEnter').disabled=true});
+  $('#boardroomCancel').addEventListener('click',()=>{$('#boardroomConsent').hidden=true;$('#boardroomAck').checked=true;$('#boardroomEnter').disabled=false});
   $('#accessSwitchBtn').addEventListener('click',()=>showAccessPortal());
   $('#accessRibbonSwitch').addEventListener('click',()=>showAccessPortal());
   $('#copyAccessLink').addEventListener('click',async()=>{const u=new URL(location.href);u.searchParams.set('view',document.body.dataset.access);u.hash='';try{await navigator.clipboard.writeText(u.toString());$('#copyAccessLink').textContent='Enlace copiado ✓';setTimeout(()=>$('#copyAccessLink').textContent='Copiar enlace',1400)}catch{$('#copyAccessLink').textContent='No disponible'}});
@@ -569,10 +574,8 @@ Keedio propone, diseña e integra el patrón P0. Soliss decide, valida, adquiere
   function exitPresent(){document.body.classList.remove('presentation-mode');$('#presentationHUD').hidden=true;if(document.fullscreenElement)document.exitFullscreen?.()}
   $('#presentBtn').addEventListener('click',enterPresent);$('#exitPresent').addEventListener('click',exitPresent);$('#prevStep').addEventListener('click',()=>goStep(presentIndex-1));$('#nextStep').addEventListener('click',()=>goStep(presentIndex+1));addEventListener('keydown',e=>{if(!document.body.classList.contains('presentation-mode'))return;if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();goStep(presentIndex+1)}if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();goStep(presentIndex-1)}if(e.key==='Escape')exitPresent()});
 
-  // Service worker disabled for this demo to avoid stale cached JS blocking the fixed Boardroom login flow.
-  if('serviceWorker' in navigator && location.protocol.startsWith('http')){
-    navigator.serviceWorker.getRegistrations().then(regs=>regs.forEach(r=>r.unregister())).catch(()=>{});
-  }
+  // Service worker. No external runtime dependencies.
+  if('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js').catch(()=>{});
   setAudience('board');
   initAccessPortal();
 })();

@@ -16,11 +16,11 @@
     const st=V6Auth.status(),r=$('#authReadiness'),chip=$('#authStatusChip'),logout=$('#logoutBoardroom');
     if(r)r.textContent=V6Auth.readinessText();
     if(chip){
-      chip.hidden=document.body.dataset.access!=='boardroom';
+      chip.hidden=!['boardroom','tender'].includes(document.body.dataset.access);
       chip.textContent=st.label;
       chip.className=`auth-status-chip ${st.mode==='oidc'?'sso':st.mode==='simple'?'demo':st.mode==='local-demo'?'demo':''}`;
     }
-    if(logout)logout.hidden=document.body.dataset.access!=='boardroom'||!st.authenticated;
+    if(logout)logout.hidden=!['boardroom','tender'].includes(document.body.dataset.access)||!st.authenticated;
   }
   function rebuildEconomics(){
     const e=D.economics;if(!e?.base24)return;
@@ -128,6 +128,9 @@
     if(document.body.dataset.access==='boardroom')COMMANDS.push(
       ['Decision Room','#decision','Boardroom'],['Digital Twin','#twin','Boardroom'],['Economics','#economics','Boardroom'],['Governance','#governance','Boardroom'],['Delivery','#delivery','Boardroom'],['Document Center','#documents','Boardroom'],
       ...((window.P0_DOCUMENTS?.groups)||[]).map(g=>[g.title,'#documents','Documento'])
+    );
+    if(document.body.dataset.access==='tender')COMMANDS.push(
+      ['Ficha contractual','#tender-summary','Licitación'],['Condiciones técnicas','#tender-technical','Licitación'],['Condiciones económicas','#tender-economic','Licitación'],['Cumplimiento PPT','#tender-compliance','Licitación'],['Valoración propuesta','#tender-evaluation','Licitación'],['Entrega y aceptación','#tender-delivery','Licitación'],['Tender Readiness','#tender-readiness','Licitación']
     );
   }
   function renderCommands(q=''){
