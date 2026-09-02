@@ -510,11 +510,7 @@ Keedio propone, diseña e integra el patrón P0. Soliss decide, valida, adquiere
     }
   }));
   function updateBoardroomSubmitState(){
-    const username=($('#boardroomUser')?.value||'').trim();
-    const password=$('#boardroomPassword')?.value||'';
-    const checked=$('#boardroomAck')?.checked;
-    const canSubmit=!!checked && username.length>0 && password.length>0;
-    $('#boardroomEnter').disabled=!canSubmit;
+    $('#boardroomEnter').disabled=false;
   }
 
   $('#boardroomUser').addEventListener('input',updateBoardroomSubmitState);
