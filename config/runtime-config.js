@@ -7,7 +7,13 @@ window.V6_CONFIG={
     redirectUri:null,
     scope:"openid profile email",
     privateBaseUrl:"private",
-    allowLocalDemo:true
+    allowLocalDemo:true,
+    simpleLogin:{
+      enabled:true,
+      username:"soliss",
+      password:"soliss",
+      sessionKey:"soliss-v61-boardroom"
+    }
   },
   sourceFreshnessDays:90
 };

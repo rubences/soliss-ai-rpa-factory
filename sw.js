@@ -1,4 +1,4 @@
-const CACHE='soliss-ai-rpa-factory-v6-2';
+const CACHE='soliss-ai-rpa-factory-v6-3';
 const CORE=[
   './','./index.html','./assets/styles.css','./config/runtime-config.js',
   './assets/data.js','./assets/documents.js','./assets/v6-data.js','./assets/v6-auth.js','./assets/app.js','./assets/v6-features.js','./assets/v62-ui.js','./assets/v7-tender.js','./assets/v62-ui.js',
