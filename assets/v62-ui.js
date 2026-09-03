@@ -29,7 +29,7 @@
   sideLinks.forEach(a=>a.addEventListener('click',()=>setTimeout(updateSideNav,300)));
 
   // Accessible focus management for custom dialogs/drawers.
-  const layers=['copilotDrawer','commandPalette','shareModal','briefModal','displayPanel'];
+  const layers=['copilotDrawer','commandPalette','shareModal','briefModal','displayPanel','execStory'];
   const focusables=el=>$$('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])',el).filter(x=>!x.hidden && x.offsetParent!==null);
   function onLayerOpen(el){modalReturnFocus.set(el,document.activeElement);const fs=focusables(el);setTimeout(()=>fs[0]?.focus(),0)}
   function onLayerClose(el){modalReturnFocus.get(el)?.focus?.()}

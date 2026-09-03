@@ -48,6 +48,7 @@ body[data-audience="board"] [data-show]:not([data-show~="board"]),body[data-audi
 .integrity-panel{margin-top:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:13px 15px}.integrity-panel summary{cursor:pointer;font-size:.75rem;font-weight:850}.integrity-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}.integrity-grid>div{padding:13px;border-radius:13px;background:var(--bg)}.integrity-grid b{display:block;font-size:.75rem;margin:4px 0}.integrity-grid p{font-size:.75rem;color:var(--muted)}.integrity-grid a{color:var(--blue)}
 @media(max-width:1120px){.document-grid{grid-template-columns:repeat(2,1fr)}.meeting-tools{grid-template-columns:1fr}.meeting-actions{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:760px){.document-pack,.document-toolbar{display:block}.pack-actions{display:block;margin-top:14px}.pack-actions>div{text-align:left;margin-bottom:9px}.document-search{max-width:none;min-width:0;margin-bottom:9px}.document-grid,.integrity-grid{grid-template-columns:1fr}.meeting-actions{grid-template-columns:1fr}.document-card{min-height:0}}
+@media(max-width:900px) and (min-width:761px){.document-toolbar{align-items:stretch;flex-direction:column}.document-search{max-width:none;width:100%}.document-filters{align-self:flex-start;max-width:100%}}
 @media print{.document-toolbar,.meeting-tools,.pack-actions .btn,.doc-actions{display:none!important}.document-grid{grid-template-columns:repeat(2,1fr)}}
 
 
@@ -375,7 +376,7 @@ body[data-access="public"] .section{padding:68px 0}.public-depth-note{display:fl
 .segmented button,.aud,.doc-filter{min-height:40px;border-radius:8px;padding-inline:11px}.aud{font-size:.8125rem}.audience-row>span,.audience-row em{font-size:.75rem}.detail-hint{float:right;font-size:.75rem!important;color:var(--muted);font-weight:600;margin-left:12px}details>summary{min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:10px}
 
 /* Contrast in normal mode should already be usable */
-body:not(.dark){--muted:#536771}.benchmark strong{color:#08766d}.source-reg-card a,.copilot-result a{color:#175daf}
+html[data-theme="light"] body{--muted:#536771}.benchmark strong{color:#08766d}.source-reg-card a,.copilot-result a{color:#175daf}
 
 /* Mobile: functional parity; tools do not disappear */
 @media(max-width:1199px){.boardroom-sidebar{display:none!important}}
