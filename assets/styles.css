@@ -385,6 +385,13 @@ html[data-theme="light"] body{--muted:#536771}.benchmark strong{color:#08766d}.s
  .shell{width:calc(100% - 28px)}.section{padding:58px 0}.navrow{height:62px}.brand small{display:none}.brand img:first-child{max-width:72px}.soliss-wordmark{max-width:85px}.top-search span{font-size:0}.top-search span:after{content:'⌕';font-size:1rem}.top-search{width:40px;padding:0;justify-content:center}.access-switch-btn{width:40px;justify-content:center;padding:0}.tools-panel{position:fixed;inset:70px 10px auto;width:auto;max-height:calc(100dvh - 82px);overflow:auto}.tools-panel-grid{grid-template-columns:1fr}.tools-panel-grid>button{min-height:62px}.access-options{grid-template-columns:1fr}.access-card{min-height:235px}.access-portal{padding:20px 13px}.access-portal-head h1{font-size:2.5rem}.access-portal-foot{display:none}.simple-login-grid{grid-template-columns:1fr}.audience-bar{top:64px}.audience-row{overflow:auto}.hero{padding:72px 0 52px}.hero h1{font-size:clamp(2.6rem,12vw,3.9rem)}.hero-facts span{font-size:.75rem}.public-depth-note{align-items:flex-start;flex-direction:column}.public-depth-note button{min-height:36px}.benchmark-grid{grid-template-columns:1fr 1fr}.context-band{display:block}.section-head{display:block}.section-head>p{margin-top:12px}.live-decision-grid,.source-registry,.uc-evidence-grid{grid-template-columns:1fr}
  button,a.btn,input,select,textarea{min-height:44px}
 }
+img{max-width:100%;height:auto}.shell>*,.section-head>*,.twin-shell>*,.factory-layout>*,.governance-grid>*,.meeting-tools>*{min-width:0}
+@media(max-width:900px) and (min-width:761px){
+ .architecture-map{grid-template-columns:repeat(2,minmax(0,1fr));min-height:0}
+ .architecture-map>.node,.architecture-map>.arrow{grid-column:auto!important;grid-row:auto!important}
+ .architecture-map>.arrow{display:grid;place-items:center}
+ .architecture-map>.node.lake{grid-column:1/-1!important}
+}
 @media(max-width:520px){.benchmark-grid{grid-template-columns:1fr}.hero-panel{padding:16px}.kpis{grid-template-columns:1fr 1fr}.access-card h2{font-size:1.5rem}}
 
 
