@@ -24,20 +24,18 @@
   }
   function rebuildEconomics(){
     const e=D.economics;if(!e?.base24)return;
-    $('#heroBuildValue') && ($('#heroBuildValue').textContent=eur(e.build));
-    $('#heroServiceValue') && ($('#heroServiceValue').textContent=eur(e.service));
-    $('#heroBase24Value') && ($('#heroBase24Value').textContent=eur(e.base24));
-    const rec=e.scenarios?.find(x=>x.id==='recommended');
-    $('#heroInfraValue') && ($('#heroInfraValue').textContent=rec?`${compact(rec.low)} – ${compact(rec.high)}`:'Sizing G2');
-    $('#econBuildValue') && ($('#econBuildValue').textContent=eur(e.build));
-    $('#econServiceValue') && ($('#econServiceValue').textContent=eur(e.service));
+    $('#heroBuildValue') && ($('#heroBuildValue').textContent='No publicado');
+    $('#heroServiceValue') && ($('#heroServiceValue').textContent='No publicado');
+    $('#heroBase24Value') && ($('#heroBase24Value').textContent='No publicado');
+    $('#heroInfraValue') && ($('#heroInfraValue').textContent='Pendiente de sizing');
+    $('#econBuildValue') && ($('#econBuildValue').textContent='No publicado');
+    $('#econServiceValue') && ($('#econServiceValue').textContent='No publicado');
     const phase=$('#phaseBars');
     if(phase&&e.phases?.length){
-      const max=Math.max(...e.phases.map(x=>x.cost),1);
-      phase.innerHTML=e.phases.map(p=>`<div class="phase-row"><b>${p.id}</b><div class="bar-track"><div class="bar-fill" style="width:${Math.max(7,p.cost/max*100)}%">${p.hours} h</div></div><span>${eur(p.cost)}</span><small>${p.period}</small></div>`).join('');
+      phase.innerHTML=e.phases.map(p=>`<div class="phase-row"><b>${safe(p.id)}</b><div class="bar-track"><div class="bar-fill" style="width:35%">Reservado</div></div><span>Reservado</span><small>Según alcance aprobado</small></div>`).join('');
     }
     const infra=$('#infraTable');
-    if(infra&&e.infraBlocks?.length)infra.innerHTML=`<thead><tr><th>Bloque</th><th>Mínimo</th><th>Base</th><th>Escalable</th></tr></thead><tbody>${e.infraBlocks.map(r=>`<tr><td><b>${safe(r[0])}</b><small>${safe(r[1])}</small></td><td>${eur(r[2])}</td><td>${eur(r[3])}</td><td>${eur(r[4])}</td></tr>`).join('')}</tbody>`;
+    if(infra&&e.infraBlocks?.length)infra.innerHTML=`<thead><tr><th>Bloque</th><th>Descripción</th><th>Estado</th></tr></thead><tbody>${e.infraBlocks.map(r=>`<tr><td><b>${safe(r[0])}</b></td><td>${safe(r[1])}</td><td>Según sizing aprobado</td></tr>`).join('')}</tbody>`;
     try{window.V6Hooks?.updateEconomics?.()}catch{}
     tagProvenance();
   }

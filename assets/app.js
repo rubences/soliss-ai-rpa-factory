@@ -155,15 +155,12 @@
   let econScenario='recommended';
   $('#econScenarios').innerHTML=D.economics.scenarios.map(s=>`<button class="${s.id==='recommended'?'active':''}" data-econ="${s.id}">${s.label}</button>`).join('');
   function updateEconomics(){
-    const s=D.economics.scenarios.find(x=>x.id===econScenario), optional=$('#optionalToggle').checked?D.economics.optional:0;
-    const low=D.economics.base24+s.low+optional, high=D.economics.base24+s.high+optional, mid=(low+high)/2;
-    $('#infraRange').textContent=`${compact(s.low)} – ${compact(s.high)}`; $('#tcoRange').textContent=`${compact(low)} – ${compact(high)}`; $('#tcoMid').textContent=`Punto central orientativo: ${eur(mid)}`;
+    $('#infraRange').textContent='Pendiente de sizing'; $('#tcoRange').textContent='No publicado'; $('#tcoMid').textContent='Disponible solo en documentación autorizada';
     $$('#econScenarios button').forEach(b=>b.classList.toggle('active',b.dataset.econ===econScenario));
   }
   $('#econScenarios').addEventListener('click',e=>{const b=e.target.closest('[data-econ]');if(b){econScenario=b.dataset.econ;updateEconomics()}}); $('#optionalToggle').addEventListener('change',updateEconomics); updateEconomics();
-  const maxCost=Math.max(...D.economics.phases.map(p=>p.cost));
-  $('#phaseBars').innerHTML=D.economics.phases.map(p=>`<div class="phase-row"><b>${p.id}</b><div class="bar-track"><div class="bar-fill" style="width:${Math.max(7,p.cost/maxCost*100)}%">${p.hours} h</div></div><span>${eur(p.cost)}</span><small>${p.period}</small></div>`).join('');
-  $('#infraTable').innerHTML=`<thead><tr><th>Bloque</th><th>Mínimo</th><th>Base</th><th>Escalable</th></tr></thead><tbody>${D.economics.infraBlocks.map(r=>`<tr><td><b>${safe(r[0])}</b><small>${safe(r[1])}</small></td><td>${eur(r[2])}</td><td>${eur(r[3])}</td><td>${eur(r[4])}</td></tr>`).join('')}</tbody>`;
+  $('#phaseBars').innerHTML=D.economics.phases.map(p=>`<div class="phase-row"><b>${safe(p.id)}</b><div class="bar-track"><div class="bar-fill" style="width:35%">Reservado</div></div><span>Reservado</span><small>Según alcance aprobado</small></div>`).join('');
+  $('#infraTable').innerHTML=`<thead><tr><th>Bloque</th><th>Descripción</th><th>Estado</th></tr></thead><tbody>${D.economics.infraBlocks.map(r=>`<tr><td><b>${safe(r[0])}</b></td><td>${safe(r[1])}</td><td>Según sizing aprobado</td></tr>`).join('')}</tbody>`;
 
   // Evidence Cockpit
   const evidenceKey='soliss-p0-evidence-v3';
