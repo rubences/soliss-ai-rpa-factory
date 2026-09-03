@@ -92,7 +92,7 @@
       ...(V.sources||[]).map(s=>({title:s.title,body:s.supports,target:'#assurance',type:'external'}))
     ];
     if(V6Auth?.isPrivateLoaded?.()&&D.economics.base24){
-      KNOW.push({title:'Economics P0 · baseline Boardroom',body:`Construcción P0: ${eur(D.economics.build)}. Servicio M3-M24: ${eur(D.economics.service)}. Total servicios Keedio 24M: ${eur(D.economics.base24)}. Infraestructura: inversión directa Soliss, sujeta a sizing G2 y cotización.`,target:'#economics',type:'contractual'});
+      KNOW.push({title:'Economics P0 · baseline Boardroom',body:'El detalle económico está reservado y sujeto a aprobación. La infraestructura se adquiere directamente por Soliss y requiere sizing y cotización autorizados.',target:'#economics',type:'contractual'});
     }
   }
   function searchKnowledge(q){

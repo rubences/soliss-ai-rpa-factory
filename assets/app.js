@@ -253,9 +253,8 @@
   // Committee toolkit: local-only export of the current working session
   const isoStamp=()=>new Date().toISOString();
   function currentEconomics(){
-    const s=D.economics.scenarios.find(x=>x.id===econScenario), optional=$('#optionalToggle').checked?D.economics.optional:0;
-    const low=D.economics.base24+s.low+optional, high=D.economics.base24+s.high+optional;
-    return {scenario:s.label,infra:{low:s.low,high:s.high},includeS2:Boolean($('#optionalToggle').checked),keedio24:D.economics.base24,tco:{low,high,mid:(low+high)/2}};
+    const s=D.economics.scenarios.find(x=>x.id===econScenario);
+    return {scenario:s.label,includeOptional:Boolean($('#optionalToggle').checked),visibility:'Reservado'};
   }
   function ucSnapshot(){
     return D.useCases.map(u=>({id:u.id,name:u.name,score:score(ucValues[u.id]),values:{...ucValues[u.id]}})).sort((a,b)=>b.score-a.score);
@@ -297,11 +296,8 @@
 
 ## Escenario económico
 - Escenario de infraestructura: ${e.scenario}
-- Infraestructura Soliss: ${eur(e.infra.low)} – ${eur(e.infra.high)}
-- Servicios Keedio M1–M24: ${eur(e.keedio24)}
-- S2 M25–M36: ${e.includeS2?'Incluido':'No incluido'}
-- TCO orientativo: ${eur(e.tco.low)} – ${eur(e.tco.high)}
-- Punto central: ${eur(e.tco.mid)}
+- Detalle económico: ${e.visibility}
+- Opcionales: ${e.includeOptional?'Seleccionados':'No seleccionados'}
 
 ## Digital Twin
 - Escenario: ${D.architecture.scenarios.find(x=>x.id===s.digitalTwin.scenario)?.label||s.digitalTwin.scenario}
@@ -348,7 +344,7 @@ Keedio propone, diseña e integra el patrón P0. Soliss decide, valida, adquiere
     if(scene.visual==='stories')return `<div class="exec-visual exec-story-cards"><div class="exec-story-card"><span>UC2 + UC3</span><b>Un siniestro entra</b><p>Documentos → contexto → señales → profesional Soliss → evidencia.</p><div class="reuse"><i>Identidad</i><i>Datos</i><i>Gateway</i><i>HITL</i></div></div><div class="exec-story-card"><span>UC1</span><b>Empleado consulta</b><p>Identidad → RAG → modelo autorizado → respuesta → escalado.</p><div class="reuse"><i>RAG</i><i>Gateway</i><i>Logging</i><i>Fuentes</i></div></div><div class="exec-story-card"><span>UC2 + UC5</span><b>Llega una factura</b><p>Extracción → reglas → excepción → aprobación → auditoría.</p><div class="reuse"><i>OCR</i><i>Policies</i><i>Integración</i><i>Audit</i></div></div></div>`;
     if(scene.visual==='effect')return `<div class="exec-visual exec-compare"><div class="left"><span class="exec-scene-label">VERTICAL AISLADO</span><h3>Reconstruye la base</h3><ul><li>Identidad / permisos</li><li>Integraciones y fuentes</li><li>Acceso a modelos</li><li>Logging y observabilidad</li><li>Controles y soporte</li></ul></div><div class="mid">→</div><div class="right"><span class="exec-scene-label">CON P0</span><h3>Se concentra en el diferencial</h3><ul><li>Business case</li><li>Datos concretos</li><li>Reglas / modelo / workflow</li><li>UX y canales</li><li>UAT + KPI de negocio</li></ul></div></div>`;
     if(scene.visual==='architecture')return `<div class="exec-visual"><div class="exec-arch"><div><span>GESTIÓN</span><b>Rancher / RKE2</b><small>Flota y ciclo de vida.</small></div><div><span>GRUPO</span><b>Servicios transversales</b><small>Identidad, catálogo, PostgreSQL.</small></div><div><span>DOMINIOS</span><b>RKE2 por empresa</b><small>Aislamiento y ownership.</small></div><div><span>IA</span><b>Model Gateway</b><small>Modelos, cuotas, logs y fallback.</small></div></div><div class="exec-fallback">↺ Gravitino = PoC no bloqueante · retraso GPU = sandbox provisional · producción exige HA/backup/DR</div></div>`;
-    if(scene.visual==='economics'){const available=econ.base24>0;return `<div class="exec-visual exec-econ-grid"><div class="exec-econ"><span>CONSTRUCCIÓN P0</span><b>${available?eur(econ.build):'Boardroom'}</b><small>Baseline Final Cerrado.</small></div><div class="exec-econ"><span>SERVICIO M3–M24</span><b>${available?eur(econ.service):'Boardroom'}</b><small>Operación co-gestionada.</small></div><div class="exec-econ"><span>INFRA SOLISS</span><b>${available?(()=>{const r=econ.scenarios.find(x=>x.id==='recommended');return r?`${compact(r.low)} – ${compact(r.high)}`:'Sizing G2'})():'Sizing G2'}</b><small>Compra directa · sujeto a sizing/cotización.</small></div></div>`}
+    if(scene.visual==='economics')return `<div class="exec-visual exec-econ-grid"><div class="exec-econ"><span>CONSTRUCCIÓN P0</span><b>Reservado</b><small>Detalle disponible en documentación autorizada.</small></div><div class="exec-econ"><span>SERVICIO CO-GESTIONADO</span><b>Reservado</b><small>Condiciones sujetas a aprobación.</small></div><div class="exec-econ"><span>INFRA SOLISS</span><b>Pendiente de sizing</b><small>Compra directa · requiere validación.</small></div></div>`
     if(scene.visual==='governance')return `<div class="exec-visual exec-gate-grid">${D.gates.map(g=>`<div class="exec-gate"><span>${g.id} · ${g.when}</span><b>${safe(g.title)}</b><p>${safe(g.criteria||g.checks?.[0]||'Validación por evidencia.')}</p></div>`).join('')}</div>`;
     if(scene.visual==='publicTrust')return `<div class="exec-visual exec-story-cards"><div class="exec-story-card"><span>DATA</span><b>Fuentes autorizadas</b><p>Ownership, clasificación y provenance antes de utilizar información corporativa.</p><div class="reuse"><i>Data governance</i><i>RAG</i></div></div><div class="exec-story-card"><span>AI</span><b>Modelos controlados</b><p>Gateway, allowlist, logging y fallback como patrón corporativo.</p><div class="reuse"><i>Gateway</i><i>Logging</i></div></div><div class="exec-story-card"><span>HUMAN</span><b>Supervisión efectiva</b><p>La automatización mantiene escalado, revisión y accountability de Soliss.</p><div class="reuse"><i>HITL</i><i>Evidence</i></div></div></div>`;
     if(scene.visual==='decision')return `<div class="exec-visual exec-decision-grid"><div class="exec-decision-card"><span>AHORA</span><b>Aprobar P0 + F0</b></div><div class="exec-decision-card"><span>G2 / G3 / G4</span><b>Validar inversión, PoC/fallback y transferencia</b></div><div class="exec-decision-card"><span>DESPUÉS</span><b>Activar UC por business case</b></div></div>`;
